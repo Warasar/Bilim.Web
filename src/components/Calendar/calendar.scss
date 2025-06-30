@@ -1,0 +1,253 @@
+@import "../../styles/variables.scss";
+
+.calendar {
+  background-color: $colorDefault;
+  display: flex;
+  justify-content: center;
+
+  &-block {
+    margin: auto;
+    max-width: 1200px;
+    width: 100%;
+    padding: 12px 24px;
+  }
+
+  &-title {
+    padding-top: 6px;
+    text-align: center;
+    color: $colorDark;
+    font-family: $fontBold;
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  &-main {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.4);
+    background-color: $colorWhite;
+  }
+
+  &-header {
+    background-color: $colorDark;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    padding: 6px 12px;
+    align-items: center;
+
+    &-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      transition: 0.2s;
+      border-radius: 6px;
+      padding: 6px;
+
+      &:hover {
+        background-color: $colorDefault;
+        cursor: pointer;
+      }
+
+      &-left {
+        width: 100%;
+        height: 100%;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("../../assets/icons/default/chevron-left.svg");
+      }
+
+      &-right {
+        width: 100%;
+        height: 100%;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("../../assets/icons/default/chevron-right.svg");
+      }
+    }
+
+    &-text {
+      text-align: center;
+      color: $colorWhite;
+      font-size: 18px;
+      font-family: $fontMedium;
+      transition-property: all;
+      transition-duration: 200ms;
+      transition-timing-function: ease-in-out;
+    }
+  }
+
+  &-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: $colorGray;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      color: $colorDark;
+      font-size: 14px;
+      font-family: $fontMedium;
+
+      &-red {
+        color: $colorRed;
+      }
+    }
+  }
+
+  &-rows {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    transition-property: all;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+  }
+
+  &-cell {
+    min-height: 90px;
+    margin: -1px 0 0 -1px;
+    border: 1px solid $colorBorder;
+    cursor: pointer;
+    transition: 0.2s;
+    background-color: $colorWhite;
+    padding: 4px;
+
+    &-disabled {
+      min-height: 90px;
+      margin: -1px 0 0 -1px;
+      border: 1px solid $colorBorder;
+      transition: 0.2s;
+      background-color: $colorWhite;
+      padding: 4px;
+      background-color: $colorDisabled;
+    }
+
+    &:hover {
+      background-color: $colorDisabled;
+    }
+
+    &-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+
+      &-text {
+        font-family: $fontMedium;
+        color: $colorDark;
+        font-size: 14px;
+
+        &-red {
+          color: $colorRed;
+        }
+
+        &-disabled {
+          color: $colorBorder;
+        }
+      }
+
+      &-icon {
+        &-blue {
+          width: 16px;
+          height: 16px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/brandIcon/star-blue.png");
+        }
+
+        &-red {
+          width: 16px;
+          height: 16px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/brandIcon/star-red.png");
+        }
+      }
+    }
+
+    &-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    &-item {
+      font-size: 13px;
+      color: $colorDark;
+      text-align: end;
+    }
+  }
+
+  &-legend {
+    margin-top: 24px;
+    border-radius: 12px;
+    padding: 12px;
+    background-color: $colorWhite;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 16px;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.4);
+    margin-bottom: 16px;
+
+    &-title {
+      font-family: $fontMedium;
+      font-size: 18px;
+      color: $colorDark;
+    }
+
+    &-items {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    &-item {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+
+      &-icon {
+        &-starblue {
+          width: 24px;
+          height: 24px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/brandIcon/star-blue.png");
+        }
+
+        &-starred {
+          width: 24px;
+          height: 24px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/brandIcon/star-red.png");
+        }
+      }
+
+      &-text {
+        font-size: 14px;
+        color: $colorDark;
+        font-family: $fontMediumItalic;
+      }
+
+      &-event {
+        background-color: $colorYellow;
+        padding: 2px 4px;
+        border-radius: 4px;
+        color: $colorDark;
+        font-size: 18px;
+        font-family: $fontCormorantMedium;
+      }
+    }
+  }
+}

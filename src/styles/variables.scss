@@ -1,0 +1,112 @@
+// cormorant
+@font-face {
+  font-family: "Cormorant-BoldItalic";
+  src: url("../assets/fonts/Cormorant/Cormorant-BoldItalic.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Cormorant-Bold";
+  src: url("../assets/fonts/Cormorant/Cormorant-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Cormorant-MediumItalic";
+  src: url("../assets/fonts/Cormorant/Cormorant-MediumItalic.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Cormorant-Medium";
+  src: url("../assets/fonts/Cormorant/Cormorant-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Cormorant-RegularItalic";
+  src: url("../assets/fonts/Cormorant/Cormorant-Italic.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Cormorant-Regular";
+  src: url("../assets/fonts/Cormorant/Cormorant-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+// roboto
+@font-face {
+  font-family: "Roboto-Regular";
+  src: url("../assets/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Roboto-Medium";
+  src: url("../assets/fonts/Roboto/Roboto-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Roboto-Italic";
+  src: url("../assets/fonts/Roboto/Roboto-Italic.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Roboto-MediumItalic";
+  src: url("../assets/fonts/Roboto/Roboto-MediumItalic.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Roboto-Bold";
+  src: url("../assets/fonts/Roboto/Roboto-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Roboto-BoldItalic";
+  src: url("../assets/fonts/Roboto/Roboto-BoldItalic.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+// fontCormorant
+$fontCormorantBold: "Cormorant-Bold";
+$fontCormorantBoldItalic: "Cormorant-BoldItalic";
+$fontCormorantRegular: "Cormorant-Regular";
+$fontCormorantRegularItalic: "Cormorant-RegularItalic";
+$fontCormorantMedium: "Cormorant-Medium";
+$fontCormorantMediumItalic: "Cormorant-MediumItalic";
+
+// fontRoboto
+$fontRegular: "Roboto-Regular";
+$fontItalic: "Roboto-Italic";
+$fontMedium: "Roboto-Medium";
+$fontMediumItalic: "Roboto-MediumItalic";
+$fontBold: "Roboto-Bold";
+$fontBoldItalic: "Roboto-BoldItalic";
+
+// color
+$colorWhite: #fff;
+$colorDefault: #a3cae5;
+$colorDark: #0a304b;
+$colorCream: #fbf4eb;
+$colorRed: #b10114;
+$colorYellow: #fee97d;
+
+$activeColor: #3b82f6;
+$colorGray: #f3f4f6;
+
+$colorScrollBar: #9f9f9f;
+$bgScrollbar: #2c2c2c;
+
+$colorDisabled: #f9fafb;
+$colorBorder: #ddd;
+$colorSubtext: #94a3b8;
+$colorPreDark: #294e6a;
+
+// size

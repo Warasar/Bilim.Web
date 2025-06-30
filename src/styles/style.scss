@@ -1,0 +1,32 @@
+@import "./variables.scss";
+
+body {
+  &::-webkit-scrollbar {
+    width: 8px !important;
+    background-color: $colorDefault;
+  }
+  &::-webkit-scrollbar-thumb {
+    padding: 2px;
+    background-color: $colorDark !important;
+    border-radius: 4px !important;
+    transition: 0.2s;
+  }
+
+  font-family: $fontRegular;
+}
+
+.error {
+  height: 100vh;
+  background-color: #fafafa;
+  overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: $fontMedium;
+  font-size: 1.2vw;
+}
+
+.app {
+  position: relative;
+}

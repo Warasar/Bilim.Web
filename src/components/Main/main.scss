@@ -1,0 +1,210 @@
+@import "../../styles/variables.scss";
+
+.main {
+  background-color: $colorDefault;
+  display: flex;
+  justify-content: center;
+
+  &-main {
+    margin: auto;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+    padding: 12px 24px;
+    position: relative;
+    min-height: calc(100dvh - 86px);
+
+    &-tizer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+      padding-top: 20px;
+
+      &-title {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        &-text {
+          color: $colorDark;
+          font-size: 62px;
+          color: #fff;
+          font-family: $fontBold;
+          text-align: start;
+          margin-bottom: -28px;
+
+          &-colored {
+            color: $colorDark;
+            font-family: $fontBoldItalic;
+          }
+        }
+
+        &-welcome {
+          margin-top: 16px;
+          color: $colorDark;
+          font-size: 32px;
+          font-family: $fontMedium;
+          text-align: start;
+          margin-bottom: -12px;
+        }
+
+        &-subtext {
+          color: $colorDark;
+          font-size: 26px;
+          text-align: start;
+        }
+      }
+
+      &-block {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &-colorFullBg {
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          position: absolute;
+          background-color: $colorDark;
+          transform: rotate(4deg);
+          z-index: 2;
+          border-radius: 16px;
+        }
+      }
+
+      &-img {
+        position: relative;
+        z-index: 3;
+        height: 100%;
+        width: 100%;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("../../assets/icons/photos/mainPhoto.png");
+        border-radius: 24px;
+        overflow: hidden;
+      }
+    }
+
+    &-service {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 60px;
+
+      &-title {
+        color: $colorWhite;
+        font-family: $fontBold;
+        font-size: 36px;
+        margin-bottom: 6px;
+      }
+
+      &-subtitle {
+        color: $colorDark;
+        font-family: $fontMedium;
+        font-size: 20px;
+        margin-bottom: 18px;
+      }
+
+      &-buttons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        justify-content: center;
+
+        &-item {
+          border-radius: 8px;
+          background-color: $colorWhite;
+          padding: 24px;
+          transition: 0.2s;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+          height: auto;
+
+          &:hover {
+            cursor: pointer;
+            box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.4);
+          }
+
+          &:hover &-icon {
+            transform: scale(1.1);
+          }
+
+          &-icon {
+            padding: 12px;
+            background-color: $colorDefault;
+            width: fit-content;
+            border-radius: 12px;
+            width: 24px;
+            height: 24px;
+            transition: ease-in-out 0.2s;
+
+            &-users {
+              width: 100%;
+              height: 100%;
+              background-position: 50%;
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-image: url("../../assets/icons/default/users.svg");
+            }
+
+            &-message {
+              width: 100%;
+              height: 100%;
+              background-position: 50%;
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-image: url("../../assets/icons/default/message.svg");
+            }
+
+            &-cup {
+              width: 100%;
+              height: 100%;
+              background-position: 50%;
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-image: url("../../assets/icons/default/cup.svg");
+            }
+          }
+
+          &-name {
+            color: $colorDark;
+            font-family: $fontBold;
+            font-size: 24px;
+            text-align: center;
+          }
+
+          &-text {
+            font-family: $fontItalic;
+            font-size: 16px;
+            color: $colorDark;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    &-mouse {
+      position: absolute;
+      color: #fff;
+      transition: 0.2s;
+      left: calc(50% - 16px);
+      bottom: 2%;
+
+      &:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+      }
+    }
+  }
+}
