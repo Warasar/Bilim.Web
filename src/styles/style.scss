@@ -1,9 +1,11 @@
 @import "./variables.scss";
 
 body {
+  background-color: $colorDefault;
+
   &::-webkit-scrollbar {
     width: 8px !important;
-    background-color: $colorDefault;
+    background-color: transparent;
   }
   &::-webkit-scrollbar-thumb {
     padding: 2px;
@@ -13,18 +15,6 @@ body {
   }
 
   font-family: $fontRegular;
-}
-
-.error {
-  height: 100vh;
-  background-color: #fafafa;
-  overflow-y: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-family: $fontMedium;
-  font-size: 1.2vw;
 }
 
 .app {

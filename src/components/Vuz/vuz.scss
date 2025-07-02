@@ -1,6 +1,6 @@
 @import "../../styles/variables.scss";
 
-.main {
+.vuz {
   background-color: $colorDefault;
   display: flex;
   justify-content: center;
@@ -130,7 +130,6 @@
           align-items: center;
           gap: 12px;
           height: auto;
-          text-decoration: none;
 
           &:hover {
             cursor: pointer;

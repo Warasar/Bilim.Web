@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Main from "./Main";
 import "./main.scss";
 import HeaderContainer from "../Header/HeaderContainer";
@@ -17,21 +17,21 @@ export default function MainContainer() {
       {
         code: "1",
         name: "Онлайн-профтур",
-        link: "",
+        link: "vuz",
         icon: "users",
         text: "Виртуальные экскурсии по университетам и знакомство с программами обучения",
       },
       {
         code: "2",
         name: "Мотивационное письмо",
-        link: "",
+        link: "motivation_letter",
         icon: "message",
         text: "Помощь в написании убедительных мотивационных писем для поступления",
       },
       {
         code: "3",
         name: "Подготовка к олимпиадам",
-        link: "",
+        link: "olimp",
         icon: "cup",
         text: "Интенсивная подготовка к предметным олимпиадам и конкурсам",
       },
@@ -39,12 +39,12 @@ export default function MainContainer() {
   };
 
   return (
-    <Fragment>
+    <div>
       <HeaderContainer />
       <Main data={data} />
       <CalendarContainer />
       <CarouselContainer />
       <FooterContainer />
-    </Fragment>
+    </div>
   );
 }

@@ -1,23 +1,14 @@
 import React, { useRef, useState } from "react";
 import dayjs from "dayjs";
 import dayLocaleData from "dayjs/plugin/localeData";
+import { CalendarDay, CalendarType } from "./calendarType";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import _ from "lodash";
 
+dayjs.extend(customParseFormat);
 dayjs.extend(dayLocaleData);
 require("dayjs/locale/ru");
 dayjs.locale("ru");
-
-interface CalendarEvent {
-  id: string;
-  title: string;
-  type: "consultation" | "lesson" | "test" | "meeting" | "deadline";
-}
-interface CalendarDay {
-  date: number;
-  isCurrentMonth: boolean;
-  events: CalendarEvent[];
-  hasSpecialMark?: boolean;
-  specialMarkType?: "star" | "snowflake";
-}
 
 const className = "calendar";
 const MONTHS_RU = [
@@ -35,33 +26,23 @@ const MONTHS_RU = [
   "ДЕКАБРЬ",
 ];
 const DAYS_RU = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
+const formatDate = "DD-MM-YYYYTHH:mm:ss";
 
-// Sample events data
-const sampleEvents: Record<string, CalendarEvent[]> = {
-  "2025-2-3": [{ id: "1", title: "Профориентация: индивидуальные консультации", type: "consultation" }],
-  "2025-2-6": [{ id: "2", title: "Англ.яз: тест на определение уровня языка", type: "test" }],
-  "2025-2-7": [{ id: "3", title: "Открытие сайта Англ.язык: пробный урок", type: "lesson" }],
-  "2025-2-10": [{ id: "4", title: "Англ.язык: асинхронный урок мотивационное письмо", type: "lesson" }],
-  "2025-2-15": [{ id: "5", title: "Англ.язык: zoom-встреча урок мотивационное письмо", type: "lesson" }],
-  "2025-2-21": [{ id: "6", title: "Zoom-встреча с представителями университета SDU 19:30ч", type: "meeting" }],
-  "2025-2-23": [{ id: "7", title: "Мотивационное письмо: тест на определение уровня языка", type: "test" }],
-  "2025-2-24": [{ id: "8", title: "Индивидуальные консультации", type: "consultation" }],
-  "2025-2-27": [{ id: "9", title: "Крайний срок подачи заявки в Назарбаев Университет", type: "deadline" }],
-  "2025-2-28": [{ id: "10", title: "Тесты части по англ.яз. олимпиады SDU (ISPT)", type: "test" }],
-  "2025-2-29": [{ id: "11", title: "Zoom-встреча: даты олимпиад в конкурсов на гранты/скидки", type: "meeting" }],
+type Props = {
+  data: CalendarType[];
+  mainDate: string;
 };
 
-export default function Calendar() {
+export default function Calendar({ data, mainDate }: Props) {
   const ref: any = useRef(null);
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 1)); // February 2025
-  const [selectedDay, setSelectedDay] = useState<number | null>(null);
+  const [currentDate, setCurrentDate] = useState<any>(dayjs(mainDate, formatDate));
   const [isAnimating, setIsAnimating] = useState(false);
   const [isAnimatingEnd, setIsAnimatingEnd] = useState(false);
   const [animationDirection, setAnimationDirection] = useState<"left" | "right">("right");
 
-  const getCalendarDays = (): CalendarDay[] => {
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
+  const getCalendarDays = () => {
+    const year = currentDate.toDate().getFullYear();
+    const month = currentDate.toDate().getMonth();
 
     const firstDay = new Date(year, month, 1);
     const startDate = new Date(firstDay);
@@ -75,18 +56,18 @@ export default function Calendar() {
 
     // Generate 42 days (6 weeks)
     for (let i = 0; i < 42; i++) {
-      const dateKey = `${currentDateIterator.getFullYear()}-${
-        currentDateIterator.getMonth() + 1
-      }-${currentDateIterator.getDate()}`;
-      const events = sampleEvents[dateKey] || [];
+      const date = dayjs(currentDateIterator).format(formatDate);
+      let events: CalendarType[] = [];
+
+      if (data.some((f) => f.date.split("T")[0] === date.split("T")[0])) {
+        events = _.cloneDeep(data).filter((f) => f.date.split("T")[0] === date.split("T")[0]);
+      }
 
       days.push({
+        stringDate: date,
         date: currentDateIterator.getDate(),
         isCurrentMonth: currentDateIterator.getMonth() === month,
         events,
-        hasSpecialMark:
-          [7, 21, 27, 29].includes(currentDateIterator.getDate()) && currentDateIterator.getMonth() === month,
-        specialMarkType: currentDateIterator.getDate() === 27 ? "star" : "snowflake",
       });
 
       currentDateIterator.setDate(currentDateIterator.getDate() + 1);
@@ -94,6 +75,7 @@ export default function Calendar() {
 
     return days;
   };
+  const calendarDays: CalendarDay[] = getCalendarDays();
 
   const navigateMonth = (direction: "prev" | "next") => {
     if (isAnimating) return;
@@ -102,16 +84,15 @@ export default function Calendar() {
     setAnimationDirection(direction === "prev" ? "left" : "right");
 
     setTimeout(() => {
-      setCurrentDate((prev) => {
+      setCurrentDate((prev: any) => {
         const newDate = new Date(prev);
         if (direction === "prev") {
           newDate.setMonth(newDate.getMonth() - 1);
         } else {
           newDate.setMonth(newDate.getMonth() + 1);
         }
-        return newDate;
+        return dayjs(newDate);
       });
-      setSelectedDay(null);
 
       setTimeout(() => {
         setIsAnimatingEnd(true);
@@ -128,13 +109,75 @@ export default function Calendar() {
     }, 200);
   };
 
-  const handleDayClick = (day: CalendarDay) => {
-    if (day.isCurrentMonth && !isAnimating) {
-      setSelectedDay(selectedDay === day.date ? null : day.date);
-    }
+  const getStyleHeaderCell = (day: CalendarDay) => {
+    const style: React.CSSProperties = {};
+    let isChanged: boolean = false;
+
+    data.forEach((item) => {
+      if (item.dates.some((f) => f.split("T")[0] === day.stringDate.split("T")[0]) && !isChanged) {
+        style.backgroundColor = "#FEE97D77"; //colorYellow
+        isChanged = true;
+
+        const index = item.dates.findIndex((f) => f.split("T")[0] === day.stringDate.split("T")[0]);
+        if (index === item.dates.length - 1) {
+          style.borderRight = "6px solid #0A304B";
+        }
+        if (index === 0) {
+          style.borderLeft = "5px solid #0A304B";
+        }
+      }
+    });
+
+    return style;
   };
 
-  const calendarDays = getCalendarDays();
+  const getStyleRowCell = (day: CalendarDay) => {
+    const style: React.CSSProperties = {};
+
+    if (day.events.some((f) => f.type === "events")) {
+      style.backgroundColor = "#FEE97D77"; //colorYellow
+    }
+
+    return style;
+  };
+
+  const getStyleItemCell = (event: CalendarType, length: number) => {
+    const style: React.CSSProperties = {};
+
+    if (event.important) {
+      style.color = "#B20115";
+    }
+
+    if (length > 1) {
+      style.display = "grid";
+      style.gridTemplateColumns = "auto 1fr";
+      style.alignItems = "start";
+      style.justifyContent = "end";
+    }
+
+    return style;
+  };
+
+  const renderIcon = (event: CalendarType, cmd: "type" | "moretype") => {
+    let jsx: any = null;
+
+    if (event[cmd] === "deadline") {
+      jsx = <div className={`${className}-cell-header-icon-text`}>(дедлайн)</div>;
+    } else if (event[cmd] === "parents") {
+      jsx = <div className={`${className}-cell-header-icon-text`}>(родители)</div>;
+    } else if (event[cmd] === "info") {
+      jsx = <div className={`${className}-cell-header-icon-red`} />;
+    } else if (event[cmd] === "meeting") {
+      jsx = <div className={`${className}-cell-header-icon-blue`} />;
+    }
+
+    return (
+      <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+        {jsx}
+        {event.moretype && cmd !== "moretype" && renderIcon(event, "moretype")}
+      </div>
+    );
+  };
 
   return (
     <div className={className} ref={ref}>
@@ -166,7 +209,7 @@ export default function Calendar() {
                     }
               }
             >
-              {MONTHS_RU[currentDate.getMonth()]} {currentDate.getFullYear()}
+              {MONTHS_RU[currentDate.toDate().getMonth()]} {currentDate.toDate().getFullYear()}
             </div>
 
             <div className={`${className}-header-button`} onClick={() => navigateMonth("next")}>
@@ -201,7 +244,7 @@ export default function Calendar() {
                   }
             }
           >
-            {calendarDays.map((day, index) => (
+            {calendarDays.map((day: any, index: number) => (
               <div
                 key={index}
                 className={!day.isCurrentMonth ? `${className}-cell-disabled` : `${className}-cell `}
@@ -212,9 +255,8 @@ export default function Calendar() {
                       }
                     : {}
                 }
-                onClick={() => handleDayClick(day)}
               >
-                <div className={`${className}-cell-header`}>
+                <div className={`${className}-cell-header`} style={getStyleHeaderCell(day)}>
                   <span
                     className={`${className}-cell-header-text ${
                       !day.isCurrentMonth ? `${className}-cell-header-text-disabled` : ""
@@ -222,19 +264,22 @@ export default function Calendar() {
                   >
                     {day.date}
                   </span>
-                  {day.hasSpecialMark && (
-                    <div
-                      className={`${className}-cell-header-icon${day.specialMarkType === "star" ? "-blue" : "-red"}`}
-                    />
-                  )}
+                  {day.events.length === 1 && renderIcon(day.events[0], "type")}
                 </div>
 
-                <div className={`${className}-cell-rows`}>
-                  {day.events.map((event) => (
-                    <div key={event.id} className={`${className}-cell-item`}>
-                      {event.title}
-                    </div>
-                  ))}
+                <div className={`${className}-cell-rows`} style={getStyleRowCell(day)}>
+                  {day.events.map((event: CalendarType) => {
+                    return (
+                      <div
+                        key={event.id}
+                        className={`${className}-cell-item`}
+                        style={getStyleItemCell(event, day.events.length)}
+                      >
+                        {day.events.length > 1 && renderIcon(event, "type")}
+                        {event.text}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             ))}

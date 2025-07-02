@@ -116,16 +116,13 @@
     cursor: pointer;
     transition: 0.2s;
     background-color: $colorWhite;
-    padding: 4px;
-
     &-disabled {
       min-height: 90px;
       margin: -1px 0 0 -1px;
       border: 1px solid $colorBorder;
       transition: 0.2s;
-      background-color: $colorWhite;
-      padding: 4px;
       background-color: $colorDisabled;
+      grid-template-rows: auto 1fr;
     }
 
     &:hover {
@@ -136,7 +133,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 6px;
+      padding: 2px 4px;
 
       &-text {
         font-family: $fontMedium;
@@ -148,7 +145,7 @@
         }
 
         &-disabled {
-          color: $colorBorder;
+          color: $colorPreDark;
         }
       }
 
@@ -170,19 +167,32 @@
           background-size: cover;
           background-image: url("../../assets/icons/brandIcon/star-red.png");
         }
+
+        &-text {
+          font-size: 12px;
+          font-family: $fontItalic;
+          color: $colorDark;
+        }
       }
     }
 
     &-rows {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      padding: 2px 4px;
+      gap: 2px;
     }
 
     &-item {
       font-size: 13px;
       color: $colorDark;
       text-align: end;
+      border-bottom: 1px solid $colorBorder;
+      padding-bottom: 2px;
+
+      &:last-child {
+        border-bottom: none;
+      }
     }
   }
 
@@ -241,7 +251,7 @@
       }
 
       &-event {
-        background-color: $colorYellow;
+        background-color: rgba($color: $colorYellow, $alpha: 0.6);
         padding: 2px 4px;
         border-radius: 4px;
         color: $colorDark;

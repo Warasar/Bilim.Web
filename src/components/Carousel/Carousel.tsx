@@ -324,10 +324,10 @@ export default function Carousel() {
               <div className={`${className}-item8-bignumber`}>5</div>
               <div className={`${className}-item8-main`}>
                 <div className={`${className}-item8-main-text`}>
-                  На компьютере/ноутбуке можно скачать Microsoft Office, спиздив у цыган.
+                  На компьютере/ноутбуке можно скачать Microsoft Office, купив подписку.
                   <br />
                   <br />
-                  Если не получается спиздить, то можно использовать приложения Google. Смотрите на следующем слайде.
+                  Если не получается установить, то можно использовать приложения Google. Смотрите на следующем слайде.
                 </div>
 
                 {/* хвостик */}

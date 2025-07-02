@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 
 const className = "main";
@@ -53,13 +54,13 @@ export default function Main({ data }: Props) {
           <div className={`${className}-main-service-buttons`}>
             {data.buttons.map((item: any) => {
               return (
-                <div className={`${className}-main-service-buttons-item`}>
+                <NavLink className={`${className}-main-service-buttons-item`} to={`/${item.link}`}>
                   <div className={`${className}-main-service-buttons-item-icon`}>
                     <div className={`${className}-main-service-buttons-item-icon-${item.icon}`} />
                   </div>
                   <div className={`${className}-main-service-buttons-item-name`}>{item.name}</div>
                   <div className={`${className}-main-service-buttons-item-text`}>{item.text}</div>
-                </div>
+                </NavLink>
               );
             })}
           </div>
