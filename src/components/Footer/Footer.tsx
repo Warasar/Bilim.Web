@@ -25,9 +25,14 @@ export default function Footer({ data }: Props) {
                 {[
                   data.icons.map((item) => {
                     return (
-                      <div className={`${footerClassName}-icons-${item.code}`}>
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={`${footerClassName}-icons-${item.code}`}
+                      >
                         <div className={`${footerClassName}-icons-${item.code}-icon`} />
-                      </div>
+                      </a>
                     );
                   }),
                 ]}
@@ -43,7 +48,14 @@ export default function Footer({ data }: Props) {
                         return (
                           <div className={`${footerClassName}-item-flex`}>
                             <div className={`${footerClassName}-item-dot`} />
-                            <div className={`${footerClassName}-item-text`}>{child.name}</div>
+                            <a
+                              href={child.link}
+                              target="_blank"
+                              rel="noreferrer"
+                              className={`${footerClassName}-item-text`}
+                            >
+                              {child.name}
+                            </a>
                           </div>
                         );
                       })}

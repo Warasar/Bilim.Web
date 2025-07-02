@@ -9,15 +9,15 @@ export default function FooterContainer() {
     icons: [
       {
         code: "phone",
-        link: "",
+        link: "tel:8(996)-316-31-49",
       },
       {
         code: "mail",
-        link: "",
+        link: "mailto:bilimsakhakz@gmail.com",
       },
       {
         code: "telegram",
-        link: "",
+        link: "https://t.me/bilim_sakha_kz",
       },
     ],
     data: [
@@ -28,19 +28,19 @@ export default function FooterContainer() {
           {
             code: "proftur",
             name: "Онлайн-профтур",
-            link: "",
+            link: "vuz",
             icon: null,
           },
           {
             code: "letter",
             name: "Мотивационное письмо",
-            link: "",
+            link: "motivation_letter",
             icon: null,
           },
           {
             code: "olimp",
             name: "Подготовка к олимпиадам",
-            link: "",
+            link: "olimp",
             icon: null,
           },
         ],
@@ -52,19 +52,19 @@ export default function FooterContainer() {
           {
             code: "address",
             name: "Ленина 17, 3 этаж, 317 кабинет",
-            link: "",
+            link: "https://go.2gis.com/aF3vy",
             icon: null,
           },
           {
             code: "mail",
             name: "bilimsakhakz@gmail.com",
-            link: "",
+            link: "mailto:bilimsakhakz@gmail.com",
             icon: null,
           },
           {
             code: "phone",
             name: "+7(996)-316-31-49",
-            link: "",
+            link: "tel:8(996)-316-31-49",
             icon: null,
           },
         ],
