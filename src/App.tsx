@@ -6,6 +6,7 @@ import { createBrowserRouter } from "react-router-dom";
 import "./styles/style.scss";
 import VuzContainer from "./components/Vuz/VuzContainer";
 import OlimpContainer from "./components/Olimp/OlimpContainer";
+import UniversityContainer from "./components/University/UniversityContainer";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -21,6 +22,11 @@ export default function App() {
     {
       path: `/vuz`,
       element: <VuzContainer />, // онлайн профтур
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: `/vuz/:code`,
+      element: <UniversityContainer />, // отдельные страницы для каждого вуза
       errorElement: <ErrorPage />,
     },
     {

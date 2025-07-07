@@ -20,3 +20,7 @@ body {
 .app {
   position: relative;
 }
+
+.loading {
+  min-height: calc(100dvh - 62px);
+}

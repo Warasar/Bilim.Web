@@ -200,6 +200,10 @@
       color: $colorWhite;
     }
 
+    &-colored {
+      color: $colorRed;
+    }
+
     &-subtitle {
       text-align: center;
       font-family: $fontCormorantBold;
@@ -1256,6 +1260,10 @@
         letter-spacing: 0.5px;
         line-height: 130%;
       }
+    }
+
+    &-colored {
+      color: $colorRed;
     }
   }
 }

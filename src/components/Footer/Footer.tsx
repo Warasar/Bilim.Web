@@ -39,7 +39,7 @@ export default function Footer({ data }: Props) {
               </div>
             </div>
             <div className={`${footerClassName}-second`}>
-              {data.data.map((item) => {
+              {data.data.map((item, index) => {
                 return (
                   <div className={`${footerClassName}-item`}>
                     <div className={`${footerClassName}-item-title`}>{item.name}</div>
@@ -50,7 +50,7 @@ export default function Footer({ data }: Props) {
                             <div className={`${footerClassName}-item-dot`} />
                             <a
                               href={child.link}
-                              target="_blank"
+                              target={index === 0 ? "_self" : "_blank"}
                               rel="noreferrer"
                               className={`${footerClassName}-item-text`}
                             >

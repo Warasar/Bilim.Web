@@ -69,6 +69,16 @@ export default function Header({ data, whiteBg }: Props) {
         {/* кнопки */}
         <div className={`${headerClassName}-flex`}>
           {data.buttons.map((item: any) => {
+            if (item.scroll) {
+              return (
+                <div
+                  className={`${headerClassName}-flex-item${location.pathname === `/${item.link}` ? "-active" : ""}`}
+                >
+                  {item.name}
+                </div>
+              );
+            }
+
             return (
               <NavLink
                 to={`/${item.link}`}

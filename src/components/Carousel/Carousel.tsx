@@ -40,12 +40,13 @@ export default function Carousel() {
         content: (
           <div className={`${className}-item0`}>
             <div className={`${className}-item0-title`}>
-              Какие приложения* вам <br /> понадобятся во время <br /> Сопровождения?
+              Какие приложения<span className={`${className}-item0-title ${className}-item0-colored`}>*</span> вам{" "}
+              <br /> понадобятся во время <br /> Сопровождения?
             </div>
             <div className={`${className}-item0-subtitle`}>И правила, которые необходимо учитывать</div>
             <div className={`${className}-item0-description`}>
-              *все приложения можно скачать на телефон <br /> на Android через Google Market <br /> на iOS через App
-              Store
+              <span className={`${className}-item0-colored`}>*</span> все приложения можно скачать на телефон <br /> на
+              Android через Google Market <br /> на iOS через App Store
             </div>
           </div>
         ),
@@ -63,7 +64,8 @@ export default function Carousel() {
               <div className={`${className}-item1-bignumber`}>1</div>
               <div className={`${className}-item1-main`}>
                 <div className={`${className}-item1-main-text`}>
-                  Необходим для связи с нами, Билим, также для группы Сопровождения, где будет вся необходимая
+                  Необходим для связи с нами, Билим, также для группы{" "}
+                  <span className={`${className}-item1-main-colored`}>Сопровождения</span>, где будет вся необходимая
                   информация. После прочтения сообщений, принятия всех заданий просим реагировать на них, так мы поймем,
                   что вы прочитали и приняли информацию.
                 </div>
@@ -418,7 +420,7 @@ export default function Carousel() {
                   Вы можете обращаться к нам в рабочее время:
                   <br /> <br />
                   <div style={{ textAlign: "center" }}>
-                    ПН-СБ: 11:00-19:00ч <br /> ВС: выходной
+                    ПН-СБ: 11:00-19:00ч <br /> <span className={`${className}-item11-colored`}>ВС: выходной</span>
                   </div>
                   <br />
                   Благодарим за понимание!

@@ -4,27 +4,30 @@ import "./header.scss";
 
 type Props = {
   whiteBg?: boolean;
+  buttons?: any;
 };
 
-export default function HeaderContainer({ whiteBg }: Props) {
+export default function HeaderContainer({ whiteBg, buttons }: Props) {
   const data = {
-    buttons: [
-      {
-        name: "Главное",
-        code: "1",
-        link: "",
-      },
-      {
-        name: "Онлайн-профтур",
-        code: "2",
-        link: "vuz",
-      },
-      {
-        name: "Подготовка к олимпиадам",
-        code: "3",
-        link: "olimp",
-      },
-    ],
+    buttons: buttons
+      ? buttons
+      : [
+          {
+            name: "Главное",
+            code: "1",
+            link: "",
+          },
+          {
+            name: "Онлайн-профтур",
+            code: "2",
+            link: "vuz",
+          },
+          {
+            name: "Подготовка к олимпиадам",
+            code: "3",
+            link: "olimp",
+          },
+        ],
     phoneLink: "https://wa.me/79963163149?text=",
     user: {
       role: "admin",

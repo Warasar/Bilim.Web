@@ -29,9 +29,8 @@
         gap: 12px;
 
         &-text {
-          color: $colorDark;
+          color: $colorWhite;
           font-size: 62px;
-          color: #fff;
           font-family: $fontBold;
           text-align: start;
           margin-bottom: -28px;
@@ -141,6 +140,10 @@
             transform: scale(1.1);
           }
 
+          &:hover &-text {
+            color: $colorRed;
+          }
+
           &-icon {
             padding: 12px;
             background-color: $colorDefault;
@@ -190,6 +193,7 @@
             font-size: 16px;
             color: $colorDark;
             text-align: center;
+            transition: 0.2s;
           }
         }
       }
@@ -197,12 +201,13 @@
 
     &-mouse {
       position: absolute;
-      color: #fff;
+      color: $colorWhite;
       transition: 0.2s;
       left: calc(50% - 16px);
       bottom: 2%;
 
       &:hover {
+        color: $colorRed;
         transform: scale(1.1);
         cursor: pointer;
       }

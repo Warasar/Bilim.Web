@@ -69,7 +69,7 @@
     gap: 24px;
 
     &-button {
-      background-color: $activeColor;
+      background-color: $colorCream;
       color: $colorWhite;
       padding: 12px 24px;
       border-radius: 12px;
@@ -80,13 +80,18 @@
       gap: 6px;
 
       &:hover {
-        background-color: #2563eb;
+        background-color: #fd3d01;
+      }
+
+      &:hover &-text {
+        color: $colorCream;
       }
 
       &-text {
         font-size: 22px;
-        color: $colorWhite;
+        color: #fd3d01;
         font-family: $fontMedium;
+        transition: 0.2s;
       }
     }
 
