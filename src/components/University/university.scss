@@ -55,7 +55,7 @@
   }
 
   &-fakultet {
-    margin-top: 60px;
+    margin-top: 40px;
     display: grid;
     width: 100%;
     border-radius: 24px;
@@ -79,10 +79,14 @@
     }
 
     &-item {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      padding: 6px 12px;
-      align-items: center;
+      border-bottom: 1px solid #eee;
+
+      &-grid {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        padding: 6px 12px;
+      }
 
       &-name {
         font-size: 32px;
@@ -133,179 +137,87 @@
         flex-direction: column;
       }
     }
-  }
 
-  &-collapse {
-    margin-top: 24px;
-    position: relative;
-    width: 70%;
-    border-radius: 12px;
-    overflow: hidden;
-
-    &-header {
+    &-child {
       display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 6px;
-      align-items: center;
-      padding: 12px;
-      background-color: $colorDark;
+      grid-template-columns: 40% 1fr;
 
-      &-text {
-        color: $colorWhite;
-        font-size: 16px;
-        font-family: $fontMedium;
-      }
+      &-header {
+        padding: 12px;
+        border-top: 1px solid #eee;
 
-      &-icon {
-        color: $colorWhite;
-      }
-
-      &-arrow {
-        width: 24px;
-        height: 24px;
-        background-position: 50%;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-image: url("../../assets/icons/default/chevron-right.svg");
-        transition: 0.2s;
-
-        &:hover {
-          background-image: url("../../assets/icons/default/chevron-right_active.svg");
-          cursor: pointer;
+        &-grid {
+          display: grid;
+          grid-template-columns: 1fr auto;
+          gap: 12px;
+          align-items: center;
         }
 
-        &-active {
-          width: 24px;
-          height: 24px;
+        &-text {
+          color: $colorDark;
+          font-size: 18px;
+          font-family: $fontMediumItalic;
+        }
+
+        &-plus {
+          width: 36px;
+          height: 36px;
           background-position: 50%;
           background-repeat: no-repeat;
           background-size: cover;
-          background-image: url("../../assets/icons/default/chevron-right.svg");
-          transition: 0.2s;
-          transform: rotate(90deg);
+          background-image: url("../../assets/icons/default/plus.svg");
+          transition: 0.3s;
 
           &:hover {
-            background-image: url("../../assets/icons/default/chevron-right_active.svg");
+            background-image: url("../../assets/icons/default/plus_active.svg");
             cursor: pointer;
+          }
+
+          &-active {
+            width: 36px;
+            height: 36px;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url("../../assets/icons/default/plus.svg");
+            transition: 0.3s;
+            transform: rotate(-45deg);
+
+            &:hover {
+              background-image: url("../../assets/icons/default/plus_active.svg");
+              transform: rotate(-45deg);
+              cursor: pointer;
+            }
           }
         }
       }
-    }
 
-    &-items {
-      background-color: $colorWhite;
-      overflow: hidden;
-      animation: closeAnimation 0.3s ease-out forwards;
-
-      &-active {
-        background-color: $colorWhite;
+      &-content {
         overflow: hidden;
-        animation: openAnimation 0.3s ease-out forwards;
-        display: flex;
-        flex-direction: column;
-      }
-    }
+        animation: closeAnimation 0.3s ease-out forwards;
 
-    &-item {
-      color: $colorDark;
-      font-size: 16px;
-      font-family: $fontRegular;
-      padding: 4px 12px;
-      transition: 0.2s;
+        &-active {
+          overflow: hidden;
+          animation: openAnimation 0.3s ease-out forwards;
+          display: flex;
+          flex-direction: column;
+        }
 
-      &:hover {
-        background-color: $colorDark;
-        color: $colorWhite;
-        cursor: pointer;
-      }
+        &-text {
+          margin-top: 10px;
+          font-size: 16px;
+          font-family: $fontRegular;
+          color: $colorDark;
+          line-height: 150%;
+        }
 
-      &-bold {
-        font-family: $fontBold;
-      }
-    }
-  }
-
-  &-text {
-    margin-top: 40px;
-    font-size: 14px;
-    font-family: $fontItalic;
-    color: $colorDark;
-    max-width: 860px;
-    text-align: center;
-  }
-
-  &-vuzes {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-bottom: 40px;
-
-    &-item {
-      border-radius: 12px;
-      display: grid;
-      grid-template-rows: 1fr auto;
-      gap: 6px;
-      position: relative;
-      padding: 12px;
-      overflow: hidden;
-      align-items: end;
-      height: 180px;
-      text-decoration: none;
-
-      &:hover {
-        cursor: pointer;
-      }
-
-      &:hover &-photo {
-        transform: scale(1.1);
-      }
-
-      &-container {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      &-photo {
-        width: auto; /* или конкретное значение, например 100px */
-        height: auto; /* сохраняет пропорции */
-        max-width: 100%; /* предотвращает выход за границы контейнера */
-        z-index: 2;
-        object-fit: contain;
-        transition: 0.2s;
-      }
-
-      &-bg {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 2;
-        background-color: rgba($color: #000, $alpha: 0.5);
-      }
-
-      &-shortname {
-        position: relative;
-        z-index: 3;
-        color: $colorWhite;
-        font-size: 32px;
-        font-family: $fontCormorantMediumItalic;
-      }
-
-      &-name {
-        position: relative;
-        z-index: 3;
-        color: $colorWhite;
-        font-size: 16px;
-        font-family: $fontMediumItalic;
+        &-price {
+          margin-top: 20px;
+          font-size: 16px;
+          font-family: $fontMedium;
+          color: $colorDark;
+          margin-bottom: -10px;
+        }
       }
     }
   }

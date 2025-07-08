@@ -73,24 +73,33 @@ export default function Vuz({ data }: Props) {
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
-            <div className={`${className}-collapse-header-text`}>Тайминг видео обзора:</div>
+            <div className={`${className}-collapse-header-text`}>
+              Тайминг видео обзора:
+            </div>
             <div
-              className={`${className}-collapse-header-arrow${opened ? "-active" : ""}`}
+              className={`${className}-collapse-header-arrow${
+                opened ? "-active" : ""
+              }`}
               title={opened ? "Скрыть" : "Раскрыть"}
               onClick={() => setOpened(!opened)}
             />
           </div>
 
-          <div className={`${className}-collapse-items${opened ? `-active` : ""}`}>
+          <div
+            className={`${className}-collapse-items${opened ? `-active` : ""}`}
+          >
             {data.timings.map((item, index) => {
               return (
                 <div
-                  className={`${className}-collapse-item ${item.bold ? `${className}-collapse-item-bold` : ""}`}
+                  className={`${className}-collapse-item ${
+                    item.bold ? `${className}-collapse-item-bold` : ""
+                  }`}
                   key={`${className}-collapse-item_${item.id}`}
                   onClick={() => seekTo(item.second)}
                   style={{
                     paddingTop: index === 0 ? "8px" : "4px",
-                    paddingBottom: index === data.timings.length - 1 ? "8px" : "4px",
+                    paddingBottom:
+                      index === data.timings.length - 1 ? "8px" : "4px",
                   }}
                 >
                   {item.time}&nbsp;{item.text}
@@ -109,13 +118,27 @@ export default function Vuz({ data }: Props) {
                 className={`${className}-vuzes-item`}
                 key={`${className}-vuzes-item_${item.code}`}
                 to={`${item.code}`}
+                onClick={() => {
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth", // для плавной прокрутки
+                  });
+                }}
               >
                 <div className={`${className}-vuzes-item-container`}>
-                  <img src={`/assets/vuzes/${item.photo}`} alt="" className={`${className}-vuzes-item-photo`} />
+                  <img
+                    src={`/assets/vuzes/${item.photo}`}
+                    alt=""
+                    className={`${className}-vuzes-item-photo`}
+                  />
                 </div>
                 <div className={`${className}-vuzes-item-bg`} />
-                <div className={`${className}-vuzes-item-shortname`}>{item.nameShort}</div>
-                <div className={`${className}-vuzes-item-name`}>{item.name}</div>
+                <div className={`${className}-vuzes-item-shortname`}>
+                  {item.nameShort}
+                </div>
+                <div className={`${className}-vuzes-item-name`}>
+                  {item.name}
+                </div>
               </NavLink>
             );
           })}
