@@ -38,7 +38,7 @@
         color: $colorDark;
         font-size: 16px;
         font-family: $fontRegular;
-        line-height: 150%;
+        line-height: 140%;
       }
 
       &-italic {
@@ -80,7 +80,11 @@
     }
 
     &-item {
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid $colorDark;
+
+      &:last-child {
+        border-bottom: none;
+      }
 
       &-grid {
         display: grid;
@@ -90,9 +94,9 @@
       }
 
       &-name {
-        font-size: 32px;
+        font-size: 22px;
         color: $colorDark;
-        font-family: $fontCormorantBoldItalic;
+        font-family: $fontMedium;
       }
 
       &-arrow {
@@ -143,9 +147,13 @@
       display: grid;
       grid-template-columns: 40% 1fr;
 
+      &:first-child &-header {
+        border-top: none;
+      }
+
       &-header {
         padding: 12px;
-        border-top: 1px solid #eee;
+        border-top: 1px solid $colorDark;
 
         &-grid {
           display: grid;
@@ -223,6 +231,75 @@
     }
   }
 
+  &-prices {
+    margin-top: 40px;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+
+    &-title {
+      background-color: $colorDark;
+      padding: 6px 12px;
+      text-align: center;
+      color: $colorWhite;
+      font-size: 38px;
+      font-family: $fontCormorantBoldItalic;
+    }
+
+    &-subtitle {
+      padding: 6px 12px;
+      text-align: center;
+      color: $colorSubtext;
+      font-size: 24px;
+      font-family: $fontCormorantBold;
+    }
+
+    &-content {
+      padding: 12px;
+      display: grid;
+      background-color: $colorWhite;
+      justify-content: center;
+    }
+
+    &-items {
+      margin-top: 20px;
+      margin-left: auto;
+      margin-right: auto;
+      display: grid;
+    }
+
+    &-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: center;
+      padding: 24px 12px;
+      border-bottom: 1px solid $colorDark;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &-names {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        &-text {
+          font-size: 16px;
+          font-family: $fontRegular;
+          color: $colorDark;
+        }
+      }
+
+      &-price {
+        font-size: 16px;
+        font-family: $fontRegular;
+        color: $colorDark;
+      }
+    }
+  }
+
   &-steps {
     margin-top: 40px;
     width: 100%;
@@ -248,6 +325,7 @@
       display: grid;
       gap: 12px;
       position: relative;
+      margin-top: 12px;
     }
 
     &-tab {
@@ -437,6 +515,159 @@
       height: 360px;
       border: none;
       border-radius: 12px;
+    }
+
+    &-carousel {
+      margin-top: 20px;
+      position: relative;
+      min-height: 400px;
+      background-color: $colorDark;
+      border-radius: 12px;
+      overflow: hidden;
+      display: grid;
+    }
+
+    &-button {
+      &-left {
+        position: absolute;
+        left: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: $colorWhite;
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        transition: background-color 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        &-icon {
+          width: 18px;
+          height: 18px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/chevron-left.svg");
+        }
+      }
+
+      &-right {
+        position: absolute;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        transition: background-color 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        &-icon {
+          width: 18px;
+          height: 18px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/chevron-right.svg");
+        }
+      }
+    }
+
+    &-slide {
+      transition: all 0.3s ease-in-out;
+
+      &-animate {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      &-nonAnimate {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      &-title {
+        text-align: center;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+
+        &-text {
+          font-size: 24px;
+          font-family: $fontMedium;
+          color: $colorWhite;
+        }
+      }
+
+      &-content {
+        margin-top: 12px;
+        margin-bottom: 8px;
+        width: 100%; /* или конкретное значение, например 100px */
+        height: 100%; /* сохраняет пропорции */
+        max-width: 640px; /* предотвращает выход за границы контейнера */
+        max-height: 400px;
+        z-index: 2;
+        object-fit: contain;
+        transition: 0.2s;
+        border-radius: 12px;
+      }
+    }
+
+    &-dots {
+      position: absolute;
+      bottom: 10px;
+      display: flex;
+      justify-content: center;
+      left: 0;
+      right: 0;
+      gap: 6px;
+      padding: 24px;
+
+      &-button {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        transition-property: all;
+        transition-duration: 200ms;
+        cursor: pointer;
+
+        &-current {
+          background-color: #000;
+          transform: scale(1.25);
+        }
+
+        &-nocurrent {
+          background-color: rgba(0, 0, 0, 0.5);
+          transition: all 0.2s ease;
+
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            transform: scale(1.1);
+          }
+        }
+      }
     }
   }
 

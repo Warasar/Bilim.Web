@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import _ from "lodash";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 type Props = {
   findData: any;
@@ -10,6 +10,8 @@ type Props = {
 export default function University({ findData, className }: Props) {
   const [data, setData] = useState<any>(null);
   const [activeTab, setActiveTab] = useState<number>(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     if (findData) {
@@ -42,7 +44,7 @@ export default function University({ findData, className }: Props) {
         <div className={`${className}-steps-item-subtitle`}>{activeItem.subtitle}</div>
         <div className={`${className}-steps-item-grid`}>
           {activeItem.items.map((item: any) => {
-            return renderBlockItem(item);
+            return item.content ? renderBlockItem(item) : null;
           })}
         </div>
       </div>
@@ -85,9 +87,46 @@ export default function University({ findData, className }: Props) {
     } else if (length === 4) {
       style.left = `12%`;
       style.right = `12%`;
+    } else if (length === 6) {
+      style.left = `7%`;
+      style.right = `7%`;
+    } else if (length === 7) {
+      style.left = `5%`;
+      style.right = `5%`;
     }
 
     return style;
+  };
+
+  const goToSlide = (index: number) => {
+    if (isAnimating || index === currentSlide) return;
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentSlide(index);
+      setIsAnimating(false);
+    }, 150);
+  };
+
+  const nextSlide = () => {
+    if (isAnimating) return;
+
+    setIsAnimating(true);
+
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev + 1) % data.dormitory.imgs.length);
+      setIsAnimating(false);
+    }, 150);
+  };
+
+  const prevSlide = () => {
+    if (isAnimating) return;
+
+    setIsAnimating(true);
+
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev - 1 + data.dormitory.imgs.length) % data.dormitory.imgs.length);
+      setIsAnimating(false);
+    }, 150);
   };
 
   return (
@@ -147,8 +186,12 @@ export default function University({ findData, className }: Props) {
 
                                 <div className={`${className}-fakultet-child-content${child.opened ? "-active" : ""}`}>
                                   <div className={`${className}-fakultet-child-content-text`}>{child.text}</div>
-                                  <div className={`${className}-fakultet-child-content-price`}>СТОИМОСТЬ</div>
-                                  <div className={`${className}-fakultet-child-content-text`}>{child.price}</div>
+                                  {child.price?.length ? (
+                                    <Fragment>
+                                      <div className={`${className}-fakultet-child-content-price`}>СТОИМОСТЬ</div>
+                                      <div className={`${className}-fakultet-child-content-text`}>{child.price}</div>
+                                    </Fragment>
+                                  ) : null}
                                 </div>
                               </div>
                             </div>
@@ -158,6 +201,33 @@ export default function University({ findData, className }: Props) {
                     </div>
                   );
                 })}
+              </div>
+            </div>
+          ) : null}
+
+          {data.prices ? (
+            <div className={`${className}-prices`} id={"vuz_prices"}>
+              <div className={`${className}-prices-title`}>
+                {data.prices.title}
+                {data.prices.subtitle?.length ? (
+                  <div className={`${className}-prices-subtitle`}>{data.prices.subtitle}</div>
+                ) : null}
+              </div>
+              <div className={`${className}-prices-content`}>
+                <div className={`${className}-prices-items`}>
+                  {data.prices.items.map((item: any) => {
+                    return (
+                      <div className={`${className}-prices-item`}>
+                        <div className={`${className}-prices-item-names`}>
+                          {item.names.map((name: string) => {
+                            return <div className={`${className}-prices-item-names-text`}>{name}</div>;
+                          })}
+                        </div>
+                        <div className={`${className}-prices-item-price`}>{item.price}</div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           ) : null}
@@ -194,6 +264,19 @@ export default function University({ findData, className }: Props) {
             </div>
           ) : null}
 
+          {data.criteria ? (
+            <div className={`${className}-dormitory`} id={data.steps ? "vuz_criteria" : "vuz_steps"}>
+              <div className={`${className}-dormitory-title`}>{data.criteria.title}</div>
+              <div className={`${className}-dormitory-content`}>
+                <div className={`${className}-dormitory-items`}>
+                  {data.criteria.items.map((item: any) => {
+                    return renderBlockItem(item);
+                  })}
+                </div>
+              </div>
+            </div>
+          ) : null}
+
           {data.dormitory ? (
             <div className={`${className}-dormitory`} id={"vuz_dormitory"}>
               <div className={`${className}-dormitory-title`}>
@@ -219,6 +302,56 @@ export default function University({ findData, className }: Props) {
                     return renderBlockItem(item);
                   })}
                 </div>
+                {data.dormitory.imgs?.length ? (
+                  <Fragment>
+                    <div className={`${className}-dormitory-carousel`}>
+                      {/* влево вправо кнопки */}
+                      <div
+                        className={`${className}-dormitory-button-left`}
+                        onClick={() => (isAnimating ? null : prevSlide())}
+                      >
+                        <div className={`${className}-dormitory-button-left-icon`} />
+                      </div>
+
+                      <div
+                        className={`${className}-dormitory-button-right`}
+                        onClick={() => (isAnimating ? null : nextSlide())}
+                      >
+                        <div className={`${className}-dormitory-button-right-icon`} />
+                      </div>
+
+                      {/* контент */}
+                      <div
+                        className={`${className}-dormitory-slide ${
+                          isAnimating
+                            ? `${className}-dormitory-slide-animate`
+                            : `${className}-dormitory-slide-nonAnimate`
+                        }`}
+                      >
+                        <img
+                          src={`/assets/caspianuniversity/${data.dormitory.imgs[currentSlide].link}`}
+                          alt=""
+                          className={`${className}-dormitory-slide-content`}
+                        />
+                      </div>
+
+                      {/* точки */}
+                      <div className={`${className}-dormitory-dots`}>
+                        {data.dormitory.imgs.map((img: any, index: number) => (
+                          <div
+                            key={index}
+                            onClick={() => (isAnimating ? null : goToSlide(index))}
+                            className={`${className}-dormitory-dots-button ${
+                              index === currentSlide
+                                ? `${className}-dormitory-dots-button-current`
+                                : `${className}-dormitory-dots-button-nocurrent`
+                            } ${isAnimating ? "pointer-events-none" : ""}`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </Fragment>
+                ) : null}
               </div>
             </div>
           ) : null}
