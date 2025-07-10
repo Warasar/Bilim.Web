@@ -303,54 +303,50 @@ export default function University({ findData, className }: Props) {
                   })}
                 </div>
                 {data.dormitory.imgs?.length ? (
-                  <Fragment>
-                    <div className={`${className}-dormitory-carousel`}>
-                      {/* влево вправо кнопки */}
-                      <div
-                        className={`${className}-dormitory-button-left`}
-                        onClick={() => (isAnimating ? null : prevSlide())}
-                      >
-                        <div className={`${className}-dormitory-button-left-icon`} />
-                      </div>
-
-                      <div
-                        className={`${className}-dormitory-button-right`}
-                        onClick={() => (isAnimating ? null : nextSlide())}
-                      >
-                        <div className={`${className}-dormitory-button-right-icon`} />
-                      </div>
-
-                      {/* контент */}
-                      <div
-                        className={`${className}-dormitory-slide ${
-                          isAnimating
-                            ? `${className}-dormitory-slide-animate`
-                            : `${className}-dormitory-slide-nonAnimate`
-                        }`}
-                      >
-                        <img
-                          src={`/assets/caspianuniversity/${data.dormitory.imgs[currentSlide].link}`}
-                          alt=""
-                          className={`${className}-dormitory-slide-content`}
-                        />
-                      </div>
-
-                      {/* точки */}
-                      <div className={`${className}-dormitory-dots`}>
-                        {data.dormitory.imgs.map((img: any, index: number) => (
-                          <div
-                            key={index}
-                            onClick={() => (isAnimating ? null : goToSlide(index))}
-                            className={`${className}-dormitory-dots-button ${
-                              index === currentSlide
-                                ? `${className}-dormitory-dots-button-current`
-                                : `${className}-dormitory-dots-button-nocurrent`
-                            } ${isAnimating ? "pointer-events-none" : ""}`}
-                          />
-                        ))}
-                      </div>
+                  <div className={`${className}-dormitory-carousel`}>
+                    {/* влево вправо кнопки */}
+                    <div
+                      className={`${className}-dormitory-button-left`}
+                      onClick={() => (isAnimating ? null : prevSlide())}
+                    >
+                      <div className={`${className}-dormitory-button-left-icon`} />
                     </div>
-                  </Fragment>
+
+                    <div
+                      className={`${className}-dormitory-button-right`}
+                      onClick={() => (isAnimating ? null : nextSlide())}
+                    >
+                      <div className={`${className}-dormitory-button-right-icon`} />
+                    </div>
+
+                    {/* контент */}
+                    <div
+                      className={`${className}-dormitory-slide ${
+                        isAnimating ? `${className}-dormitory-slide-animate` : `${className}-dormitory-slide-nonAnimate`
+                      }`}
+                    >
+                      <img
+                        src={`/assets/caspianuniversity/${data.dormitory.imgs[currentSlide].link}`}
+                        alt=""
+                        className={`${className}-dormitory-slide-content`}
+                      />
+                    </div>
+
+                    {/* точки */}
+                    <div className={`${className}-dormitory-dots`}>
+                      {data.dormitory.imgs.map((img: any, index: number) => (
+                        <div
+                          key={index}
+                          onClick={() => (isAnimating ? null : goToSlide(index))}
+                          className={`${className}-dormitory-dots-button ${
+                            index === currentSlide
+                              ? `${className}-dormitory-dots-button-current`
+                              : `${className}-dormitory-dots-button-nocurrent`
+                          } ${isAnimating ? "pointer-events-none" : ""}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 ) : null}
               </div>
             </div>

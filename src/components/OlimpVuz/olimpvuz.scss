@@ -1,6 +1,6 @@
 @import "../../styles/variables.scss";
 
-.olimp {
+.olimpvuz {
   background-color: $colorDefault;
   display: flex;
   justify-content: center;
@@ -14,44 +14,208 @@
     position: relative;
     width: 100%;
     align-items: center;
+    margin-bottom: 40px;
+  }
+
+  &-dop {
+    margin-top: 20px;
+    background-color: $colorDark;
+    padding: 24px;
+    border-radius: 24px;
+    margin-bottom: 40px;
+
+    &-title {
+      width: 100%;
+      color: $colorWhite;
+      font-family: $fontCormorantBoldItalic;
+      font-size: 38px;
+      text-align: center;
+    }
+
+    &-subtitle {
+      margin-top: 20px;
+      width: 100%;
+      color: $colorCream;
+      font-family: $fontItalic;
+      font-size: 16px;
+      max-width: 640px;
+      line-height: 140%;
+      text-align: center;
+    }
   }
 
   &-title {
+    margin-top: 20px;
     width: 100%;
-    color: $colorDark;
-    font-family: $fontCormorantBold;
-    font-size: 64px;
+    color: $colorWhite;
+    font-family: $fontCormorantBoldItalic;
+    font-size: 48px;
     text-align: center;
   }
 
-  &-spisok {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+  &-subtitle {
+    margin-top: 20px;
+    width: 100%;
+    color: $colorDark;
+    font-family: $fontRegular;
+    text-align: center;
+    font-size: 18px;
+    max-width: 680px;
+    line-height: 140%;
+  }
+
+  &-docs {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
     column-gap: 24px;
     row-gap: 12px;
-    width: 100%;
 
     &-item {
       padding: 12px;
-      border-radius: 16px;
-      color: $colorWhite;
-      background-color: $colorDark;
-      font-size: 24px;
-      font-family: $fontItalic;
+      border-radius: 12px;
+      background-color: $colorCream;
       transition: 0.2s;
       box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.4);
       text-decoration: none;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
 
       &:hover {
         cursor: pointer;
-        background-color: $colorRed;
+      }
+
+      &:hover &-text {
+        color: $colorRed;
+      }
+
+      &:hover &-icon {
+        background-image: url("../../assets/icons/default/download_file_active.svg");
+        cursor: pointer;
+      }
+
+      &-text {
+        font-size: 16px;
+        font-family: $fontRegular;
+        color: $colorDark;
+        transition: 0.2s;
+      }
+
+      &-icon {
+        width: 24px;
+        height: 24px;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("../../assets/icons/default/download_file.svg");
+        transition: 0.2s;
       }
     }
   }
 
+  &-video {
+    margin-top: 60px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    width: 100%;
+
+    &-header {
+      background-color: rgba($color: $colorDark, $alpha: 0.8);
+      padding: 12px;
+
+      &-title {
+        font-size: 32px;
+        font-family: $fontCormorantBold;
+        color: $colorWhite;
+        text-align: center;
+      }
+    }
+
+    &-tabs {
+      justify-content: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+
+      &-item {
+        border-radius: 12px;
+        padding: 12px;
+        color: $colorDark;
+        font-size: 16px;
+        font-family: $fontMediumItalic;
+        background-color: $colorCream;
+        transition: 0.2s;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $colorRed;
+          color: $colorWhite;
+        }
+
+        &-active {
+          border-radius: 12px;
+          padding: 12px;
+          font-size: 16px;
+          font-family: $fontMediumItalic;
+          transition: 0.2s;
+          background-color: $colorRed;
+          color: $colorWhite;
+          cursor: pointer;
+        }
+      }
+    }
+
+    &-content {
+      background-color: $colorDark;
+      display: flex;
+      flex-direction: column;
+      padding: 12px;
+      align-items: center;
+      padding-bottom: 24px;
+    }
+
+    &-title {
+      margin-top: 6px;
+      font-size: 24px;
+      font-family: $fontMedium;
+      color: $colorWhite;
+      text-align: center;
+    }
+
+    &-subtitle {
+      margin-top: 6px;
+      font-size: 32px;
+      font-family: $fontCormorantBoldItalic;
+      color: $colorDefault;
+      text-align: center;
+    }
+
+    &-iframe {
+      margin-top: 40px;
+      height: 100%;
+      width: 100%;
+      max-width: 640px;
+      min-height: 360px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.4);
+    }
+
+    &-docs {
+      margin-top: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      column-gap: 24px;
+      row-gap: 12px;
+    }
+  }
+
   &-carousel {
-    margin-top: 40px;
+    margin-top: 60px;
     position: relative;
     border-radius: 12px;
     overflow: hidden;
@@ -220,144 +384,41 @@
     }
   }
 
-  &-video {
-    margin-top: 40px;
-    border-radius: 12px;
-    overflow: hidden;
-    display: grid;
-    grid-template-rows: auto 1fr;
-    width: 100%;
-
-    &-tabs {
-      background-color: rgba($color: $colorDark, $alpha: 0.8);
-      padding: 12px;
-      display: grid;
-      grid-template-rows: auto 1fr;
-      justify-content: center;
-      display: flex;
-      gap: 24px;
-
-      &-item {
-        border-radius: 12px;
-        padding: 6px 12px;
-        color: $colorDark;
-        font-size: 24px;
-        font-family: $fontCormorantBold;
-        background-color: $colorCream;
-        transition: 0.2s;
-
-        &:hover {
-          cursor: pointer;
-          background-color: $colorRed;
-          color: $colorWhite;
-        }
-
-        &-active {
-          border-radius: 12px;
-          padding: 6px 12px;
-          font-size: 24px;
-          font-family: $fontCormorantBold;
-          transition: 0.2s;
-          background-color: $colorRed;
-          color: $colorWhite;
-          cursor: pointer;
-        }
-      }
-    }
-
-    &-content {
-      background-color: $colorDark;
-      display: flex;
-      flex-direction: column;
-      padding: 12px;
-      align-items: center;
-    }
-
-    &-title {
-      font-size: 24px;
-      font-family: $fontMedium;
-      color: $colorWhite;
-      text-align: center;
-    }
-
-    &-subtitle {
-      margin-top: 6px;
-      font-size: 32px;
-      font-family: $fontCormorantBoldItalic;
-      color: $colorDefault;
-      text-align: center;
-    }
+  &-empty {
+    min-height: calc(100dvh - 620px);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
 
     &-text {
-      margin-top: 20px;
-      font-size: 16px;
-      font-family: $fontItalic;
       color: $colorCream;
-      display: flex;
-      justify-content: center;
-      line-height: 140%;
+      font-size: 48px;
+      font-family: $fontCormorantBold;
     }
 
-    &-iframe {
-      margin-top: 20px;
-      height: 100%;
-      width: 100%;
-      max-width: 768px;
-      min-height: 432px;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.4);
-    }
-  }
-
-  &-docs {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 24px;
-    row-gap: 12px;
-    width: 100%;
-    margin-bottom: 40px;
-
-    &-item {
-      padding: 12px;
-      border-radius: 12px;
+    &-button {
       background-color: $colorCream;
-      transition: 0.2s;
-      box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.4);
+      color: $colorWhite;
+      padding: 12px 24px;
+      border-radius: 12px;
+      transition: background-color 0.2s ease;
+      width: fit-content;
       text-decoration: none;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      align-items: center;
 
       &:hover {
-        cursor: pointer;
+        background-color: #fd3d01;
       }
 
       &:hover &-text {
-        color: $colorRed;
-      }
-
-      &:hover &-icon {
-        background-image: url("../../assets/icons/default/download_file_active.svg");
-        cursor: pointer;
+        color: $colorCream;
       }
 
       &-text {
-        font-size: 16px;
-        font-family: $fontRegular;
-        color: $colorDark;
-        transition: 0.2s;
-      }
-
-      &-icon {
-        width: 24px;
-        height: 24px;
-        background-position: 50%;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-image: url("../../assets/icons/default/download_file.svg");
+        font-size: 22px;
+        color: #fd3d01;
+        font-family: $fontMedium;
         transition: 0.2s;
       }
     }

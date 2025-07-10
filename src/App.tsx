@@ -7,6 +7,7 @@ import "./styles/style.scss";
 import VuzContainer from "./components/Vuz/VuzContainer";
 import OlimpContainer from "./components/Olimp/OlimpContainer";
 import UniversityContainer from "./components/University/UniversityContainer";
+import OlimpVuzContainer from "./components/OlimpVuz/OlimpVuzContainer";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -32,6 +33,11 @@ export default function App() {
     {
       path: `/olimp`,
       element: <OlimpContainer />, // подготовка к олимпиадам
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: `/olimp/:code`,
+      element: <OlimpVuzContainer />, // подготовка к олимпиадам
       errorElement: <ErrorPage />,
     },
   ]);
