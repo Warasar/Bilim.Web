@@ -5,12 +5,17 @@ import HeaderContainer from "../Header/HeaderContainer";
 import CalendarContainer from "../Calendar/CalendarContainer";
 import CarouselContainer from "../Carousel/CarouselContainer";
 import FooterContainer from "../Footer/FooterContainer";
-import { getCurrentUser } from "../../constants/constants";
+import { requestGet } from "../../actions/actions";
 
 export default function MainContainer() {
   useEffect(() => {
     getCurrentUser();
   }, []);
+
+  const getCurrentUser = async () => {
+    const currentUser = await requestGet(`currentUser`);
+    console.log(currentUser);
+  };
 
   const data = {
     title1: "Сопровождение",

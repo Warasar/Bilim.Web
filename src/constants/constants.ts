@@ -1,3 +1,1 @@
-export const url = "https://sc.sakha.gov.ru/";
-
-export const getCurrentUser = async () => {};
+export const url = "http://158.160.182.53/apibilim";

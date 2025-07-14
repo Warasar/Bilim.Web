@@ -24,45 +24,22 @@ instance.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status === 401) {
-      return instance
-        .get(`${url}apiusers/main/refresh-token`)
-        .then((res) => {
-          const config = error.config;
-          cookie.set("token", res.data.token);
-          cookie.set("user", res.data.name);
-
-          config.headers["Authorization"] = "Bearer " + res.data.token;
-
-          return new Promise((resolve, reject) => {
-            axios
-              .request(config)
-              .then((response) => {
-                resolve(response);
-              })
-              .catch((error) => {
-                reject(error);
-              });
-          });
-        })
-        .catch((err) => {
-          const win: Window = window;
-          debugger;
-          win.location = `${url}auth`;
-        });
-    }
+    // if (error.status === 401) {
+    //   const win: Window = window;
+    //   win.location = `${window.location.origin}/auth`;
+    // }
   }
 );
 
 export const api = {
   login(login: string, password: string) {
     return instance
-      .post(`users/auth`, {
-        login: login,
+      .post(`login`, {
+        username: login,
         password: password,
       })
       .then((res) => {
-        return res.data;
+        return res;
       })
       .catch((err) => {
         console.log(err);
@@ -71,7 +48,7 @@ export const api = {
   get(str: string) {
     return instance
       .get(`${str}`)
-      .then((res) => res.data)
+      .then((res) => res)
       .catch((err) => console.log(err));
   },
 };

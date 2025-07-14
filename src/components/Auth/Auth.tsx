@@ -1,19 +1,37 @@
 import React, { useState } from "react";
 import "./auth.scss";
+import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
+import { requestLogin } from "../../actions/actions";
+import cookie from "js-cookie";
 
 export default function Auth() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loader, setLoader] = useState<boolean>(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const auth = async () => {};
+  const auth = async () => {
+    setLoader(true);
+
+    const login: any = await requestLogin(email, password);
+
+    debugger;
+    if (login) {
+      cookie.set("token", login.token);
+      const win: Window = window;
+      win.location = `${window.location.origin}/auth`;
+    }
+
+    setLoader(false);
+  };
 
   return (
     <div className="auth-container">
+      {loader ? <Loader absolute /> : null}
       <div className="auth-card">
         <div className="auth-header">
           <div className="auth-icon">
@@ -25,34 +43,18 @@ export default function Auth() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
-              <circle
-                cx="12"
-                cy="7"
-                r="4"
-                stroke="currentColor"
-                strokeWidth="2"
-              />
+              <circle cx="12" cy="7" r="4" stroke="currentColor" strokeWidth="2" />
             </svg>
           </div>
           <h1 className="auth-title">Авторизация</h1>
-          <p className="auth-description">
-            Введите ваши данные для входа в систему "Билим"
-          </p>
+          <p className="auth-description">Введите ваши данные для входа в систему "Билим"</p>
         </div>
 
         <form className="auth-form" onSubmit={auth}>
           <div className="auth-form-group">
-            <label htmlFor="email" className="auth-form-label">
-              Email
-            </label>
+            <label className="auth-form-label">Логин</label>
             <div className="input-wrapper">
-              <svg
-                className="input-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
+              <svg className="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
                 <path
                   d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
                   stroke="currentColor"
@@ -70,8 +72,7 @@ export default function Auth() {
               </svg>
               <input
                 id="email"
-                type="email"
-                placeholder="Введите email"
+                placeholder="Введите логин"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="auth-form-input"
@@ -84,23 +85,8 @@ export default function Auth() {
               Пароль
             </label>
             <div className="input-wrapper">
-              <svg
-                className="input-icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <rect
-                  x="3"
-                  y="11"
-                  width="18"
-                  height="11"
-                  rx="2"
-                  ry="2"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
+              <svg className="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor" strokeWidth="2" />
                 <circle cx="12" cy="16" r="1" fill="currentColor" />
                 <path
                   d="M7 11V7a5 5 0 0 1 10 0v4"
@@ -118,11 +104,7 @@ export default function Auth() {
                 onChange={(e) => setPassword(e.target.value)}
                 className="auth-form-input"
               />
-              <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                className="auth-form-input-toggle"
-              >
+              <button type="button" onClick={togglePasswordVisibility} className="auth-form-input-toggle">
                 {showPassword ? (
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                     <path
@@ -152,13 +134,7 @@ export default function Auth() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="3"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    />
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" />
                   </svg>
                 )}
               </button>
