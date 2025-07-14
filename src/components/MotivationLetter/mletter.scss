@@ -1,0 +1,271 @@
+@import "../../styles/variables.scss";
+
+.mletter {
+  background-color: $colorDefault;
+  display: flex;
+  justify-content: center;
+
+  &-main {
+    margin: auto;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 24px;
+    position: relative;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+
+  &-title {
+    margin-top: 20px;
+    width: 100%;
+    color: $colorDark;
+    font-family: $fontCormorantBoldItalic;
+    font-size: 38px;
+    text-align: center;
+  }
+
+  &-text {
+    margin-top: 20px;
+    color: $colorDark;
+    font-family: $fontItalic;
+    font-size: 18px;
+    max-width: 640px;
+  }
+
+  &-iframe {
+    margin-top: 20px;
+    height: 100%;
+    width: 100%;
+    max-width: 832px;
+    min-height: 468px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.4);
+  }
+
+  &-docs {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 12px;
+    max-width: 640px;
+    justify-content: center;
+    margin-bottom: 40px;
+
+    &-item {
+      padding: 12px;
+      border-radius: 12px;
+      background-color: $colorCream;
+      transition: 0.2s;
+      box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.4);
+      text-decoration: none;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:hover &-text {
+        color: $colorRed;
+      }
+
+      &:hover &-icon {
+        background-image: url("../../assets/icons/default/download_file_active.svg");
+        cursor: pointer;
+      }
+
+      &-text {
+        font-size: 16px;
+        font-family: $fontRegular;
+        color: $colorDark;
+        transition: 0.2s;
+      }
+
+      &-icon {
+        width: 24px;
+        height: 24px;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("../../assets/icons/default/download_file.svg");
+        transition: 0.2s;
+      }
+    }
+  }
+
+  &-carousel {
+    margin-top: 60px;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.4);
+
+    &-header {
+      background-color: rgba($color: $colorDark, $alpha: 0.8);
+      padding: 12px;
+      text-align: center;
+
+      &-title {
+        font-size: 32px;
+        font-family: $fontCormorantBold;
+        color: #fff;
+      }
+    }
+
+    &-button {
+      &-left {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: $colorWhite;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: background-color 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        &-icon {
+          width: 18px;
+          height: 18px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/chevron-left.svg");
+        }
+      }
+
+      &-right {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: background-color 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        &-icon {
+          width: 18px;
+          height: 18px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/chevron-right.svg");
+        }
+      }
+    }
+
+    &-block {
+      background-color: $colorDark;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-slide {
+      transition: all 0.3s ease-in-out;
+
+      &-animate {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      &-nonAnimate {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      &-title {
+        text-align: center;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+
+        &-text {
+          font-size: 24px;
+          font-family: $fontMedium;
+          color: $colorWhite;
+        }
+      }
+
+      &-content {
+        margin-top: 12px;
+        margin-bottom: 8px;
+        width: 100%; /* или конкретное значение, например 100px */
+        height: 100%; /* сохраняет пропорции */
+        max-width: 1040px; /* предотвращает выход за границы контейнера */
+        max-height: 540px;
+        z-index: 2;
+        object-fit: contain;
+        transition: 0.2s;
+        border-radius: 12px;
+      }
+    }
+
+    &-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 24px;
+      background-color: rgba($color: $colorDark, $alpha: 0.8);
+
+      &-button {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        transition-property: all;
+        transition-duration: 200ms;
+        cursor: pointer;
+
+        &-current {
+          background-color: #ffffff;
+          transform: scale(1.25);
+        }
+
+        &-nocurrent {
+          background-color: rgba(255, 255, 255, 0.4);
+          transition: all 0.2s ease;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.6);
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
+}

@@ -8,7 +8,11 @@ import VuzContainer from "./components/Vuz/VuzContainer";
 import OlimpContainer from "./components/Olimp/OlimpContainer";
 import UniversityContainer from "./components/University/UniversityContainer";
 import OlimpVuzContainer from "./components/OlimpVuz/OlimpVuzContainer";
+<<<<<<< Updated upstream
 import Auth from "./components/Auth/Auth";
+=======
+import MotivationLetterContainer from "./components/MotivationLetter/MotivationLetterContainer";
+>>>>>>> Stashed changes
 
 export default function App() {
   const router = createBrowserRouter([
@@ -38,7 +42,12 @@ export default function App() {
     },
     {
       path: `/olimp/:code`,
-      element: <OlimpVuzContainer />, // подготовка к олимпиадам
+      element: <OlimpVuzContainer />, // подготовка к олимпиадам по вузам
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: `/motivation_letter`,
+      element: <MotivationLetterContainer />, // мотивационное письмо
       errorElement: <ErrorPage />,
     },
     {

@@ -54,7 +54,16 @@ export default function Main({ data }: Props) {
           <div className={`${className}-main-service-buttons`}>
             {data.buttons.map((item: any) => {
               return (
-                <NavLink className={`${className}-main-service-buttons-item`} to={`/${item.link}`}>
+                <NavLink
+                  className={`${className}-main-service-buttons-item`}
+                  to={`/${item.link}`}
+                  onClick={() =>
+                    window.scrollTo({
+                      top: 0,
+                      behavior: "smooth", // для плавной прокрутки
+                    })
+                  }
+                >
                   <div className={`${className}-main-service-buttons-item-icon`}>
                     <div className={`${className}-main-service-buttons-item-icon-${item.icon}`} />
                   </div>
