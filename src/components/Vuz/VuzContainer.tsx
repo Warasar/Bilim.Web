@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Vuz from "./Vuz";
 import "./vuz.scss";
 import HeaderContainer from "../Header/HeaderContainer";
 import FooterContainer from "../Footer/FooterContainer";
+import { getCurrentUser } from "../../constants/constants";
 
 export default function VuzContainer() {
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
   const data = {
-    iframe: "https://rutube.ru/embed/f447f39ac48444442bdf436c9a9c2eb0?p=AYHTgIum8M0TdfM23jtYpg?api=1",
+    iframe:
+      "https://rutube.ru/embed/f447f39ac48444442bdf436c9a9c2eb0?p=AYHTgIum8M0TdfM23jtYpg?api=1",
     timings: [
       {
         id: 0,

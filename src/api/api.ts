@@ -1,16 +1,9 @@
 import axios from "axios";
-import { url, apiusers, apidashboardv8, urlWithPort } from "../constants/constants";
+import { url } from "../constants/constants";
 import cookie from "js-cookie";
-
-let hash = "" + cookie.get("hash");
-
-if (window.location.href.includes("localhost:300")) {
-  hash = "B9B0EE9F312CEAA2C147EB943CA0C9BE";
-}
 
 const instance = axios.create({
   baseURL: url,
-  headers: { hash: hash },
 });
 
 instance.interceptors.request.use(
@@ -54,21 +47,17 @@ instance.interceptors.response.use(
         })
         .catch((err) => {
           const win: Window = window;
-          win.location = `${url}auth?logout`;
+          debugger;
+          win.location = `${url}auth`;
         });
     }
   }
 );
 
-const instanceWithPort = axios.create({
-  baseURL: urlWithPort,
-  headers: { hash: hash },
-});
-
 export const api = {
   login(login: string, password: string) {
     return instance
-      .post(`${apiusers}users/auth`, {
+      .post(`users/auth`, {
         login: login,
         password: password,
       })
@@ -79,39 +68,8 @@ export const api = {
         console.log(err);
       });
   },
-  getName() {
-    return instance
-      .get(`${apiusers}/main/currentuser`)
-      .then((res) => res.data)
-      .catch((err) => console.log(err));
-  },
-  getOutsideMenu() {
-    return instance
-      .get(`${apiusers}/menu/main/`)
-      .then((res) => res.data)
-      .catch((err) => console.log(err));
-  },
-  getMenu() {
-    return instance
-      .get(`${apidashboardv8}/lk/menu/`)
-      .then((res) => res.data)
-      .catch((err) => console.log(err));
-  },
-  getAccess() {
-    return instance
-      .get(`${apidashboardv8}/lk/access/`)
-      .then((res) => res.data)
-      .catch((err) => console.log(err));
-  },
-  //----------
   get(str: string) {
     return instance
-      .get(`${str}`)
-      .then((res) => res.data)
-      .catch((err) => console.log(err));
-  },
-  getWithPort(str: string) {
-    return instanceWithPort
       .get(`${str}`)
       .then((res) => res.data)
       .catch((err) => console.log(err));

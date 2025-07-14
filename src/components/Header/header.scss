@@ -365,6 +365,7 @@
       padding: 6px 10px;
       transition: 0.1s;
       border-radius: 6px;
+      text-decoration: none;
 
       &:hover {
         background-color: #fef2f2;
@@ -377,6 +378,7 @@
       }
 
       &-text {
+        text-decoration: none;
         font-size: 14px;
         font-family: $fontMedium;
         user-select: none;

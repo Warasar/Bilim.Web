@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Main from "./Main";
 import "./main.scss";
 import HeaderContainer from "../Header/HeaderContainer";
 import CalendarContainer from "../Calendar/CalendarContainer";
 import CarouselContainer from "../Carousel/CarouselContainer";
 import FooterContainer from "../Footer/FooterContainer";
+import { getCurrentUser } from "../../constants/constants";
 
 export default function MainContainer() {
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
   const data = {
     title1: "Сопровождение",
     title2: "по поступлению",
