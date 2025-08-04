@@ -24,10 +24,10 @@ instance.interceptors.response.use(
     return response;
   },
   (error) => {
-    // if (error.status === 401) {
-    //   const win: Window = window;
-    //   win.location = `${window.location.origin}/auth`;
-    // }
+    if (error.status === 401) {
+      const win: Window = window;
+      win.location = `${window.location.origin}/auth`;
+    }
   }
 );
 
@@ -39,7 +39,7 @@ export const api = {
         password: password,
       })
       .then((res) => {
-        return res;
+        return res.data;
       })
       .catch((err) => {
         console.log(err);
@@ -48,7 +48,7 @@ export const api = {
   get(str: string) {
     return instance
       .get(`${str}`)
-      .then((res) => res)
+      .then((res) => res.data)
       .catch((err) => console.log(err));
   },
 };
