@@ -22,21 +22,29 @@ export default function Main({ data }: Props) {
         {/* башка */}
         <div className={`${className}-main-tizer`}>
           <div className={`${className}-main-tizer-title`}>
-            <div className={`${className}-main-tizer-title-text`}>{data.title1.toUpperCase()}</div>
-            <div className={`${className}-main-tizer-title-text ${className}-main-tizer-title-text-colored`}>
-              {data.title2.toUpperCase()}
+            <div className={`${className}-main-tizer-title-text`}>
+              {data.title1.text.toUpperCase()}
             </div>
-            <div className={`${className}-main-tizer-title-text`}>{data.title3.toUpperCase()}</div>
+            <div
+              className={`${className}-main-tizer-title-text ${className}-main-tizer-title-text-colored`}
+            >
+              {data.title2.text.toUpperCase()}
+            </div>
+            <div className={`${className}-main-tizer-title-text`}>
+              {data.title3.text.toUpperCase()}
+            </div>
             <div className={`${className}-main-tizer-title-welcome`}>
               <Typewriter
                 options={{
-                  strings: data.welcome,
+                  strings: data.welcome.text,
                   autoStart: true,
                   loop: false,
                 }}
               />
             </div>
-            <div className={`${className}-main-tizer-title-subtext`}>{data.text}</div>
+            <div className={`${className}-main-tizer-title-subtext`}>
+              {data.text.text}
+            </div>
           </div>
 
           <div className={`${className}-main-tizer-block`}>
@@ -47,9 +55,11 @@ export default function Main({ data }: Props) {
 
         {/* кнопки */}
         <div className={`${className}-main-service`}>
-          <div className={`${className}-main-service-title`}>Наши услуги</div>
+          <div className={`${className}-main-service-title`}>
+            {data.buttonsTitle.title}
+          </div>
           <div className={`${className}-main-service-subtitle`}>
-            Комплексная поддержка на всех этапах поступления в университеты Казахстана
+            {data.buttonsTitle.subtitle}
           </div>
           <div className={`${className}-main-service-buttons`}>
             {data.buttons.map((item: any) => {
@@ -64,11 +74,23 @@ export default function Main({ data }: Props) {
                     })
                   }
                 >
-                  <div className={`${className}-main-service-buttons-item-icon`}>
-                    <div className={`${className}-main-service-buttons-item-icon-${item.icon}`} />
+                  <div
+                    className={`${className}-main-service-buttons-item-icon`}
+                  >
+                    <div
+                      className={`${className}-main-service-buttons-item-icon-${item.icon}`}
+                    />
                   </div>
-                  <div className={`${className}-main-service-buttons-item-name`}>{item.name}</div>
-                  <div className={`${className}-main-service-buttons-item-text`}>{item.text}</div>
+                  <div
+                    className={`${className}-main-service-buttons-item-name`}
+                  >
+                    {item.name}
+                  </div>
+                  <div
+                    className={`${className}-main-service-buttons-item-text`}
+                  >
+                    {item.text}
+                  </div>
                 </NavLink>
               );
             })}
@@ -90,8 +112,8 @@ export default function Main({ data }: Props) {
             className="lucide lucide-mouse hidden h-7 w-7 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110 xl:block"
             aria-hidden="true"
           >
-            <rect x="5" y="2" width="14" height="20" rx="7"></rect>
-            <path d="M12 6v4"></path>
+            <rect x="5" y="2" width="14" height="20" rx="7" />
+            <path d="M12 6v4" />
           </svg>
         </div>
       </div>

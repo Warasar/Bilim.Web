@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Main from "./Main";
 import "./main.scss";
 import HeaderContainer from "../Header/HeaderContainer";
@@ -8,50 +8,33 @@ import FooterContainer from "../Footer/FooterContainer";
 import { requestGet } from "../../actions/actions";
 
 export default function MainContainer() {
+  const [data, setData] = useState<any>(null);
+
   useEffect(() => {
     getCurrentUser();
+    getData();
   }, []);
 
   const getCurrentUser = async () => {
     const currentUser = await requestGet(`currentUser`);
-    console.log(currentUser);
+
+    if (!currentUser.hasPassedSurvey) {
+      const win: Window = window;
+      win.location = `${window.location.origin}/survey`;
+    }
   };
 
-  const data = {
-    title1: "Сопровождение",
-    title2: "по поступлению",
-    title3: "в казахстан",
-    text: "Здесь вы найдёте все важные уроки, которые помогут с поступлением — от выбора вуза до подготовки к экзаменам",
-    welcome: "Добро пожаловать на сайт «Билим»",
-    buttons: [
-      {
-        code: "1",
-        name: "Онлайн-профтур",
-        link: "vuz",
-        icon: "users",
-        text: "Виртуальные экскурсии по университетам и знакомство с программами обучения",
-      },
-      {
-        code: "2",
-        name: "Мотивационное письмо",
-        link: "motivation_letter",
-        icon: "message",
-        text: "Помощь в написании убедительных мотивационных писем для поступления",
-      },
-      {
-        code: "3",
-        name: "Подготовка к олимпиадам",
-        link: "olimp",
-        icon: "cup",
-        text: "Интенсивная подготовка к предметным олимпиадам и конкурсам",
-      },
-    ],
+  const getData = async () => {
+    const newData = await requestGet(`container/greeting`);
+    if (newData) {
+      setData(newData.items);
+    }
   };
 
   return (
     <div>
       <HeaderContainer />
-      <Main data={data} />
+      {data ? <Main data={data} /> : null}
       <CalendarContainer />
       <CarouselContainer />
       <FooterContainer />

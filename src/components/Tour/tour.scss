@@ -1,0 +1,829 @@
+@import "../../styles/variables.scss";
+
+.tour {
+  background-color: $colorDefault;
+  display: flex;
+  justify-content: center;
+
+  &-container {
+    margin: auto;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 24px;
+    position: relative;
+    width: 100%;
+    align-items: center;
+  }
+
+  &-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 12px);
+    position: relative;
+  }
+
+  &-main {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 24px;
+    width: 100%;
+    margin-bottom: 40px;
+
+    &-item {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 48px;
+    }
+
+    &-dates {
+      background-color: $colorDark;
+      border-radius: 16px;
+      padding: 12px;
+      color: $colorWhite;
+      font-size: 24px;
+      font-family: $fontMedium;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-texts {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-text {
+      color: $colorWhite;
+      font-family: $fontCormorantBoldItalic;
+      font-size: 36px;
+    }
+
+    &-block {
+      position: relative;
+      height: 370px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &-colorFullBg {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        background-color: $colorDark;
+        transform: rotate(4deg);
+        z-index: 2;
+        border-radius: 16px;
+      }
+    }
+
+    &-img {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      width: 100%;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-image: url("../../assets/icons/photos/tour.png");
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    &-title {
+      color: $colorDark;
+      font-family: $fontBold;
+      font-size: 72px;
+      line-height: 100%;
+    }
+
+    &-subtitle {
+      color: $colorWhite;
+      font-family: $fontBoldItalic;
+      font-size: 72px;
+      line-height: 100%;
+    }
+
+    &-grid {
+      display: grid;
+      grid-template-rows: 1fr auto;
+    }
+
+    &-button {
+      background-color: $colorDark;
+      transition: 0.2s;
+      padding: 12px 24px;
+      border-radius: 16px;
+      font-size: 24px;
+      color: $colorWhite;
+      font-family: $fontMedium;
+      height: 48px;
+      width: fit-content;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        background-color: $colorPreDark;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-need {
+    margin-top: 48px;
+    background-color: $colorWhite;
+    border-radius: 16px;
+    padding: 12px 24px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 24px;
+
+    &-title {
+      font-size: 44px;
+      font-family: $fontBold;
+      color: $colorDark;
+      text-transform: uppercase;
+    }
+
+    &-items {
+      gap: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      &-grid {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+      }
+
+      &-number {
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $colorRed;
+        font-size: 24px;
+        font-family: $fontBold;
+        color: $colorWhite;
+      }
+
+      &-text {
+        font-size: 20px;
+        font-family: $fontMediumItalic;
+        color: $colorDark;
+      }
+
+      &-subtext {
+        font-size: 16px;
+        font-family: $fontRegular;
+        color: $colorDark;
+      }
+
+      &-icon {
+        &-school {
+          width: 64px;
+          height: 64px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/school_boy.png");
+        }
+
+        &-parents {
+          width: 64px;
+          height: 64px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/parents.png");
+        }
+
+        &-graduated {
+          width: 64px;
+          height: 64px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/graduated.png");
+        }
+      }
+    }
+  }
+
+  &-about {
+    margin-top: 48px;
+    background-color: $colorDark;
+    border-radius: 16px;
+    padding: 24px;
+    width: 100%;
+
+    &-grid {
+      padding-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    &-block {
+      position: relative;
+      height: 370px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &-colorFullBg {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        background-color: $colorCream;
+        transform: rotate(4deg);
+        z-index: 2;
+        border-radius: 16px;
+      }
+    }
+
+    &-img {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      width: 100%;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-image: url("../../assets/icons/photos/aboutimg.jpg");
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    &-texts {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &-title {
+        font-size: 42px;
+        font-family: $fontBold;
+        color: $colorWhite;
+      }
+
+      &-text {
+        font-size: 24px;
+        font-family: $fontCormorantMedium;
+        color: $colorCream;
+      }
+
+      &-mission {
+        padding-top: 72px;
+        font-size: 28px;
+        font-family: $fontBoldItalic;
+        color: $activeColor;
+      }
+    }
+
+    &-items {
+      margin-top: 72px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid $colorBorder;
+      border-radius: 16px;
+      padding: 12px 24px;
+      background-color: $colorCream;
+
+      &-title {
+        color: $activeColor;
+        font-size: 48px;
+        font-family: $fontBoldItalic;
+      }
+
+      &-text {
+        font-size: 24px;
+        font-family: $fontMedium;
+        color: $colorDark;
+      }
+
+      &-last {
+        margin-top: 24px;
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+      }
+    }
+  }
+
+  &-wait {
+    margin-top: 48px;
+    width: 100%;
+
+    &-title {
+      font-size: 48px;
+      font-family: $fontBold;
+      color: $colorDark;
+      text-align: center;
+    }
+
+    &-subtitle {
+      margin-top: 12px;
+      font-size: 24px;
+      font-family: $fontMediumItalic;
+      color: $colorPreDark;
+      text-align: center;
+    }
+
+    &-block {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    &-flex {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    &-item {
+      background-color: $colorCream;
+      box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.4);
+      padding: 12px 24px;
+      border-radius: 16px;
+      font-size: 18px;
+      font-family: $fontMedium;
+      color: $colorDark;
+    }
+
+    &-gridRow {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 12px;
+    }
+
+    &-gridColumn {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    &-vip {
+      background-color: $colorDark;
+      box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.4);
+      padding: 12px 24px;
+      border-radius: 16px;
+
+      &-text {
+        font-size: 18px;
+        font-family: $fontMedium;
+        color: $colorWhite;
+      }
+
+      &-subtext {
+        padding-top: 12px;
+        font-size: 16px;
+        font-family: $fontMediumItalic;
+        color: $colorWhite;
+      }
+    }
+
+    &-img {
+      position: relative;
+      z-index: 3;
+      height: 100px;
+      width: 100%;
+      background-position: 50%;
+      background-position-y: 65%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-image: url("../../assets/icons/photos/waitimg.jpg");
+      border-radius: 24px;
+      overflow: hidden;
+    }
+  }
+
+  &-education {
+    margin-top: 48px;
+    background-color: $colorWhite;
+    border-radius: 16px;
+    padding: 24px;
+    display: grid;
+    width: 100%;
+    grid-template-rows: auto 1fr;
+
+    &-title {
+      font-size: 48px;
+      font-family: $fontBold;
+      color: $colorDark;
+      text-align: center;
+    }
+
+    &-items {
+      padding-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+
+      &-number {
+        font-size: 48px;
+        font-family: $fontBoldItalic;
+        color: $activeColor;
+      }
+
+      &-text {
+        font-size: 24px;
+        font-family: $fontMedium;
+        color: $colorDark;
+      }
+
+      &-subtext {
+        font-size: 16px;
+        font-family: $fontRegular;
+        color: $colorDark;
+        text-align: center;
+      }
+    }
+  }
+
+  &-itog {
+    margin-top: 48px;
+    width: 100%;
+
+    &-title {
+      font-size: 48px;
+      font-family: $fontBold;
+      color: $colorDark;
+      text-align: center;
+    }
+
+    &-items {
+      padding-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    &-block {
+      position: relative;
+      height: 400px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &-colorFullBg {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+        background-color: $colorDark;
+        transform: rotate(4deg);
+        z-index: 2;
+        border-radius: 16px;
+      }
+    }
+
+    &-img {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      width: 100%;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-image: url("../../assets/icons/photos/itogimg.jpg");
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    &-gridRow {
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    &-item {
+      padding: 12px 24px;
+      background-color: $colorWhite;
+      border-radius: 16px;
+      font-family: $fontMedium;
+      font-size: 18px;
+      color: $colorDark;
+      display: flex;
+      align-items: center;
+    }
+
+    &-vip {
+      padding: 12px 24px;
+      background-color: $colorDark;
+      border-radius: 16px;
+      font-family: $fontMedium;
+      font-size: 18px;
+      color: $colorWhite;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &-enjoy {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 36px;
+    margin-top: 48px;
+    border-radius: 16px;
+    background-color: $colorDark;
+    padding: 24px;
+
+    &-title {
+      font-size: 36px;
+      font-family: $fontBold;
+      color: $colorWhite;
+      text-align: center;
+    }
+
+    &-items {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    &-imgs {
+      &-turan {
+        position: relative;
+        z-index: 3;
+        height: 200px;
+        width: 100%;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("../../assets/icons/photos/enjoy/turan.jpg");
+        border-radius: 24px;
+        overflow: hidden;
+      }
+
+      &-vuz {
+        position: relative;
+        z-index: 3;
+        height: 200px;
+        width: 100%;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("../../assets/icons/photos/enjoy/vuz.png");
+        border-radius: 24px;
+        overflow: hidden;
+      }
+
+      &-caspian {
+        position: relative;
+        z-index: 3;
+        height: 200px;
+        width: 100%;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("../../assets/icons/photos/enjoy/caspian.png");
+        border-radius: 24px;
+        overflow: hidden;
+      }
+
+      &-sdu {
+        position: relative;
+        z-index: 3;
+        height: 200px;
+        width: 100%;
+        background-position: 50%;
+        background-position-x: 0%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("../../assets/icons/photos/enjoy/sdu.png");
+        border-radius: 24px;
+        overflow: hidden;
+      }
+    }
+  }
+
+  &-price {
+    margin-top: 48px;
+    width: 100%;
+
+    &-title {
+      font-size: 48px;
+      font-family: $fontBold;
+      color: $colorDark;
+      text-align: center;
+    }
+
+    &-items {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 24px;
+    }
+
+    &-block {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      border-radius: 16px;
+      overflow: hidden;
+
+      &-header {
+        padding: 24px;
+        font-size: 36px;
+        font-family: $fontBold;
+        color: $colorWhite;
+        text-align: center;
+        background-color: $colorDark;
+      }
+
+      &-main {
+        background-color: $colorWhite;
+        padding: 24px;
+      }
+
+      &-item {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+
+      &-text {
+        font-size: 18px;
+        font-family: $fontMedium;
+        color: $colorDark;
+      }
+
+      &-subtext {
+        font-size: 16px;
+        font-family: $fontRegular;
+        color: $colorDark;
+      }
+
+      &-lineNumber {
+        font-size: 36px;
+        font-family: $fontBoldItalic;
+        color: $colorPreDark;
+        text-align: center;
+        text-decoration: line-through;
+      }
+
+      &-number {
+        font-size: 36px;
+        font-family: $fontBoldItalic;
+        color: $activeColor;
+        text-align: center;
+      }
+
+      &-container {
+        margin-top: 24px;
+        display: grid;
+        align-items: center;
+      }
+
+      &-button {
+        padding: 12px 24px;
+        font-size: 18px;
+        font-family: $fontMedium;
+        text-align: center;
+        color: $colorWhite;
+        border-radius: 16px;
+        background-color: $colorDark;
+        transition: 0.2s;
+        text-decoration: none;
+
+        &:hover {
+          background-color: $colorPreDark;
+          cursor: pointer;
+        }
+      }
+
+      &-standart {
+        background-color: $colorPreDark;
+        padding: 12px;
+        border-radius: 16px;
+        margin-bottom: 24px;
+        padding-bottom: 1px;
+
+        &-text {
+          font-size: 18px;
+          font-family: $fontMedium;
+          color: $colorWhite;
+        }
+
+        &-subtext {
+          font-size: 16px;
+          font-family: $fontRegular;
+          color: $colorWhite;
+        }
+      }
+
+      &-limit {
+        font-size: 18px;
+        font-family: $fontRegular;
+        color: $colorPreDark;
+        text-align: center;
+        margin-top: 16px;
+      }
+
+      &-vip {
+        background-color: $colorDark;
+        padding: 12px;
+        border-radius: 16px;
+        margin-bottom: 24px;
+
+        &-text {
+          font-size: 20px;
+          font-family: $fontBoldItalic;
+          color: $colorWhite;
+          text-transform: uppercase;
+          text-align: center;
+        }
+
+        &-subtext {
+          margin-top: 12px;
+          text-align: center;
+          font-size: 16px;
+          font-family: $fontRegular;
+          color: $colorWhite;
+        }
+      }
+    }
+  }
+
+  &-question {
+    margin-top: 48px;
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    margin-bottom: 48px;
+
+    &-title {
+      font-size: 48px;
+      font-family: $fontBold;
+      color: $colorDark;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    &-button {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 6px;
+      border-radius: 16px;
+      background-color: $colorDark;
+      width: fit-content;
+      align-items: center;
+      padding: 12px 24px;
+      transition: 0.2s;
+      text-decoration: none;
+
+      &:hover {
+        background-color: $colorPreDark;
+        cursor: pointer;
+      }
+
+      &-text {
+        font-size: 18px;
+        font-family: $fontBold;
+        text-transform: uppercase;
+        color: $colorWhite;
+      }
+
+      &-whatsapp {
+        width: 36px;
+        height: 36px;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("../../assets/icons/default/whatsapp.svg");
+      }
+    }
+  }
+}

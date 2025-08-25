@@ -12,7 +12,11 @@ export default function OlimpContainer() {
 
   const getCurrentUser = async () => {
     const currentUser = await requestGet(`currentUser`);
-    console.log(currentUser);
+
+    if (!currentUser.hasPassedSurvey) {
+      const win: Window = window;
+      win.location = `${window.location.origin}/survey`;
+    }
   };
 
   const data = {
@@ -103,7 +107,8 @@ export default function OlimpContainer() {
             <br />● условия конкурсов
           </span>
         ),
-        iframe: "https://rutube.ru/embed/d433723b7c4217d3467fb64445f3d66c?p=opwCjfR8au6uYrQ_yEXWNQ",
+        iframe:
+          "https://rutube.ru/embed/d433723b7c4217d3467fb64445f3d66c?p=opwCjfR8au6uYrQ_yEXWNQ",
       },
       {
         id: 1,
@@ -112,11 +117,13 @@ export default function OlimpContainer() {
         name: "Стипендиальная программа",
         text: (
           <span>
-            Стипендиальная программа болонского процесса - большой <br /> правительственный конкурс на 100% гранты для
-            всех иностранцев. <br /> Участвует множество вузов-партнеров.
+            Стипендиальная программа болонского процесса - большой <br />{" "}
+            правительственный конкурс на 100% гранты для всех иностранцев.{" "}
+            <br /> Участвует множество вузов-партнеров.
           </span>
         ),
-        iframe: "https://rutube.ru/embed/3b89bce4688529abd5f9211940bb4298?p=VBedb5mjM26RUVpykjSxpg",
+        iframe:
+          "https://rutube.ru/embed/3b89bce4688529abd5f9211940bb4298?p=VBedb5mjM26RUVpykjSxpg",
       },
       {
         id: 2,
@@ -132,7 +139,8 @@ export default function OlimpContainer() {
             (не обращайте внимание на дз в видео/презентации)
           </span>
         ),
-        iframe: "https://rutube.ru/embed/171d13992ad1ff9a23e2075a14622212?p=JdZ9Fp3SAD6XpkGod_whQg",
+        iframe:
+          "https://rutube.ru/embed/171d13992ad1ff9a23e2075a14622212?p=JdZ9Fp3SAD6XpkGod_whQg",
       },
     ],
     docs: [

@@ -10,6 +10,8 @@ import UniversityContainer from "./components/University/UniversityContainer";
 import OlimpVuzContainer from "./components/OlimpVuz/OlimpVuzContainer";
 import Auth from "./components/Auth/Auth";
 import MotivationLetterContainer from "./components/MotivationLetter/MotivationLetterContainer";
+import Survey from "./components/Survey/Survey";
+import TourContainer from "./components/Tour/TourContainer";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -50,6 +52,16 @@ export default function App() {
     {
       path: `/auth`,
       element: <Auth />, // авторизация
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: `/survey`,
+      element: <Survey />, // опросник страница
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: `/tour`,
+      element: <TourContainer />, // страница с прайсами
       errorElement: <ErrorPage />,
     },
   ]);
