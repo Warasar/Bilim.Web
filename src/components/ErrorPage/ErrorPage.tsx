@@ -35,7 +35,7 @@ export default function ErrorPage() {
                 Ссылка, по которой вы перешли, возможно, сломана или страница была удалена.
               </div>
 
-              <NavLink to="/" className={`${classNameError}-right-button`}>
+              <NavLink to="/accompaniment" className={`${classNameError}-right-button`}>
                 <div className={`${classNameError}-right-home`} />
                 <div className={`${classNameError}-right-button-text`}>Вернуться на главную</div>
               </NavLink>

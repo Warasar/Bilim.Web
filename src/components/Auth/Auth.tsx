@@ -23,7 +23,7 @@ export default function Auth() {
     if (login) {
       cookie.set("token", login.token);
       const win: Window = window;
-      win.location = `${window.location.origin}`;
+      win.location = `${window.location.origin}/accompaniment`;
     } else {
       message.error("Неправильный логин или пароль");
     }

@@ -74,6 +74,14 @@
   font-weight: normal;
 }
 
+// manrope
+@font-face {
+  font-family: "Manrope";
+  src: url("../assets/fonts/Manrope/Manrope.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
 // fontCormorant
 $fontCormorantBold: "Cormorant-Bold";
 $fontCormorantBoldItalic: "Cormorant-BoldItalic";
@@ -89,6 +97,9 @@ $fontMedium: "Roboto-Medium";
 $fontMediumItalic: "Roboto-MediumItalic";
 $fontBold: "Roboto-Bold";
 $fontBoldItalic: "Roboto-BoldItalic";
+
+// fontRoboto
+$fontManrope: "Manrope";
 
 // color
 $colorWhite: #fff;

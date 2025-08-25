@@ -16,7 +16,7 @@ import TourContainer from "./components/Tour/TourContainer";
 export default function App() {
   const router = createBrowserRouter([
     {
-      path: ``,
+      path: `/accompaniment`,
       element: <MainContainer />, // основная страница(сопровождение 2025)
       errorElement: <ErrorPage />,
     },
@@ -60,7 +60,7 @@ export default function App() {
       errorElement: <ErrorPage />,
     },
     {
-      path: `/tour`,
+      path: ``,
       element: <TourContainer />, // страница с прайсами
       errorElement: <ErrorPage />,
     },
