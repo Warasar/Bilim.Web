@@ -1,1 +1,1 @@
-export const url = "http://158.160.182.53/apibilim";
+export const url = "http://84.201.151.201/apibilim";
