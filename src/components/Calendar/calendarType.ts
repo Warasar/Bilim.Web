@@ -1,14 +1,21 @@
 export type CalendarType = {
+  dataType: string;
   id: string;
-  date: string;
-  type: CalendarTypes;
-  text: string;
+  eventDate: string;
+  eventType: CalendarTypes;
+  eventText: string;
   dates: string[];
   moretype?: CalendarTypes;
-  important?: boolean;
+  isImportant?: boolean | null;
 };
 
-export type CalendarTypes = "events" | "meeting" | "info" | "deadline" | "parents" | null;
+export type CalendarTypes =
+  | "events"
+  | "meeting"
+  | "info"
+  | "deadline"
+  | "parents"
+  | null;
 
 export type CalendarDay = {
   stringDate: string;

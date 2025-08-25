@@ -45,9 +45,17 @@ export const api = {
         console.log(err);
       });
   },
+
   get(str: string) {
     return instance
       .get(`${str}`)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  },
+
+  post(str: string, obj: any) {
+    return instance
+      .post(`${str}`, obj)
       .then((res) => res.data)
       .catch((err) => console.log(err));
   },

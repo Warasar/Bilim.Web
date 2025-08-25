@@ -98,7 +98,6 @@ export default function Header({ data, whiteBg }: Props) {
             });
           }}
         />
-        {/* <div className={`${headerClassName}-logo`} /> */}
 
         {/* кнопки */}
         <div className={`${headerClassName}-flex`}>
@@ -158,15 +157,18 @@ export default function Header({ data, whiteBg }: Props) {
 
         {/* связаться и пользователь */}
         <div className={`${headerClassName}-flex`}>
-          <a
-            className={`${headerClassName}-button`}
-            href={data.phoneLink}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <div className={`${headerClassName}-button-mail`} />
-            Связаться
-          </a>
+          {data.phoneLink.isVisible ? (
+            <a
+              className={`${headerClassName}-button`}
+              href={data.phoneLink.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <div className={`${headerClassName}-button-mail`} />
+              Связаться
+            </a>
+          ) : null}
+
           <div className={`header-popoverParent`} ref={popoverRef}>
             <div
               className={`${headerClassName}-user`}
@@ -178,7 +180,7 @@ export default function Header({ data, whiteBg }: Props) {
                   <div className={`header-popover-user-icon`} />
                   <div className="header-popover-user-item">
                     <div className="header-popover-user-item-name">
-                      {data.user.name}
+                      {data.user.fullName}
                     </div>
                     <div className="header-popover-user-item-mail">
                       {data.user.mail}

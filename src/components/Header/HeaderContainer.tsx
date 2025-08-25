@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import "./header.scss";
+import { requestGet } from "../../actions/actions";
+import _ from "lodash";
 
 type Props = {
   whiteBg?: boolean;
@@ -8,55 +10,29 @@ type Props = {
 };
 
 export default function HeaderContainer({ whiteBg, buttons }: Props) {
-  const data = {
-    buttons: buttons
-      ? buttons
-      : [
-          {
-            name: "Главное",
-            code: "1",
-            link: "",
-          },
-          {
-            name: "Онлайн-профтур",
-            code: "2",
-            link: "vuz",
-          },
-          {
-            name: "Подготовка к олимпиадам",
-            code: "3",
-            link: "olimp",
-          },
-        ],
-    phoneLink: "https://wa.me/79963163149?text=",
-    user: {
-      role: "admin",
-      name: "admin",
-      mail: "admin.test@mail.ru",
-    },
-    groups: [
-      {
-        code: "sopr2025",
-        name: "Сопровождение 2025",
-        link: "",
-      },
-      {
-        code: "group1",
-        name: "1 группа",
-        link: "group1",
-      },
-      {
-        code: "group2",
-        name: "2 группа",
-        link: "group2",
-      },
-      {
-        code: "intensive",
-        name: "Группа ИНТЕНСИВ",
-        link: "intensive",
-      },
-    ],
+  const [data, setData] = useState<any>(null);
+
+  useEffect(() => {
+    getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [buttons]);
+
+  const getData = async () => {
+    const headerData = await requestGet(`container/header`);
+    const userData = await requestGet(`container/user`);
+
+    if (headerData && userData) {
+      const newData = _.cloneDeep(headerData?.items);
+
+      if (buttons) {
+        newData.buttons = buttons;
+      }
+
+      newData.user = userData;
+
+      setData(newData);
+    }
   };
 
-  return <Header data={data} whiteBg={whiteBg} />;
+  return !data ? null : <Header data={data} whiteBg={whiteBg} />;
 }

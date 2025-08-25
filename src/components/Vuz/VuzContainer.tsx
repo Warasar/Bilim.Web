@@ -12,11 +12,16 @@ export default function VuzContainer() {
 
   const getCurrentUser = async () => {
     const currentUser = await requestGet(`currentUser`);
-    console.log(currentUser);
+
+    if (!currentUser.hasPassedSurvey) {
+      const win: Window = window;
+      win.location = `${window.location.origin}/survey`;
+    }
   };
 
   const data = {
-    iframe: "https://rutube.ru/embed/f447f39ac48444442bdf436c9a9c2eb0?p=AYHTgIum8M0TdfM23jtYpg?api=1",
+    iframe:
+      "https://rutube.ru/embed/f447f39ac48444442bdf436c9a9c2eb0?p=AYHTgIum8M0TdfM23jtYpg?api=1",
     timings: [
       {
         id: 0,
