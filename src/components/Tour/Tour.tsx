@@ -18,6 +18,9 @@ export default function Tour({ data, dataFooter }: Props) {
   const [name, setName] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [mail, setMail] = useState<string>("");
+  const [name1, setName1] = useState<string>("");
+  const [phone1, setPhone1] = useState<string>("");
+  const [mail1, setMail1] = useState<string>("");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -34,6 +37,17 @@ export default function Tour({ data, dataFooter }: Props) {
       setPhone(e.target.value);
     } else {
       setName(e.target.value);
+    }
+  };
+
+  // меняет input1
+  const changedString1 = (e: any, code: string) => {
+    if (code === "mail") {
+      setMail1(e.target.value);
+    } else if (code === "phone") {
+      setPhone1(e.target.value);
+    } else {
+      setName1(e.target.value);
     }
   };
 
@@ -377,8 +391,8 @@ export default function Tour({ data, dataFooter }: Props) {
               <div className="tour-header-modal-item" key={`survey-item-name`}>
                 <div className="tour-header-modal-item-text">Имя*</div>
                 <Input
-                  value={name}
-                  onValueChanged={(e: any) => changedString(e, "name")}
+                  value={name1}
+                  onValueChanged={(e: any) => changedString1(e, "name")}
                   type={"string"}
                   size="big"
                   placeholder="Иван Иванов"
@@ -387,8 +401,8 @@ export default function Tour({ data, dataFooter }: Props) {
               <div className="tour-header-modal-item" key={`survey-item-name`}>
                 <div className="tour-header-modal-item-text">Телефон*</div>
                 <Input
-                  value={phone}
-                  onValueChanged={(e: any) => changedString(e, "phone")}
+                  value={phone1}
+                  onValueChanged={(e: any) => changedString1(e, "phone")}
                   type={"phone"}
                   size="big"
                   placeholder="+ 7 (914) 999-99-99"
@@ -397,14 +411,14 @@ export default function Tour({ data, dataFooter }: Props) {
               <div className="tour-header-modal-item" key={`survey-item-name`}>
                 <div className="tour-header-modal-item-text">Электронная почта</div>
                 <Input
-                  value={mail}
-                  onValueChanged={(e: any) => changedString(e, "mail")}
+                  value={mail1}
+                  onValueChanged={(e: any) => changedString1(e, "mail")}
                   type={"mail"}
                   size="big"
                   placeholder="example@mail.com"
                 />
               </div>
-              <div className={`tour-header-modal-button${name.length && phone.length ? "" : "-disabled"}`}>
+              <div className={`tour-header-modal-button${name1.length && phone1.length ? "" : "-disabled"}`}>
                 Оставить заявку
               </div>
             </div>

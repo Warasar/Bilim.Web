@@ -141,15 +141,33 @@ export default function TourHeader() {
             </div>
             <div className="tour-header-modal-item" key={`survey-item-name`}>
               <div className="tour-header-modal-item-text">Имя*</div>
-              <Input value={name} onValueChanged={(e: any) => changedString(e, "name")} type={"string"} size="big" />
+              <Input
+                value={name}
+                onValueChanged={(e: any) => changedString(e, "name")}
+                type={"string"}
+                size="big"
+                placeholder="Иван Иванов"
+              />
             </div>
             <div className="tour-header-modal-item" key={`survey-item-name`}>
               <div className="tour-header-modal-item-text">Телефон*</div>
-              <Input value={phone} onValueChanged={(e: any) => changedString(e, "phone")} type={"phone"} size="big" />
+              <Input
+                value={phone}
+                onValueChanged={(e: any) => changedString(e, "phone")}
+                type={"phone"}
+                size="big"
+                placeholder="+7 (914) 999-99-99"
+              />
             </div>
             <div className="tour-header-modal-item" key={`survey-item-name`}>
               <div className="tour-header-modal-item-text">Электронная почта</div>
-              <Input value={mail} onValueChanged={(e: any) => changedString(e, "mail")} type={"mail"} size="big" />
+              <Input
+                value={mail}
+                onValueChanged={(e: any) => changedString(e, "mail")}
+                type={"mail"}
+                size="big"
+                placeholder="example@mail.com"
+              />
             </div>
             <div className="tour-header-modal-subtitle" style={{ paddingTop: "12px" }}>
               * - обязательные поля для заполнения

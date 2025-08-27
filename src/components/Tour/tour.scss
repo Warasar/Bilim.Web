@@ -527,7 +527,7 @@
   }
 
   &-otziv {
-    margin-top: 96px;
+    padding-top: 96px;
     width: 100%;
 
     &-header {
@@ -554,6 +554,7 @@
 
     &-arrows {
       display: flex;
+      align-items: center;
       gap: 24px;
 
       &-left {
