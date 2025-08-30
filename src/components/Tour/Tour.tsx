@@ -91,9 +91,9 @@ export default function Tour({ data, dataFooter }: Props) {
             <div className="tour-otziv-item">
               <div className="tour-otziv-item-header">
                 <div className="tour-otziv-item-header-icon">Э</div>
-                <div className="tour-otziv-item-header-name">Эльвира А.</div>
+                <div className="tour-text-medium">Эльвира А.</div>
               </div>
-              <div className="tour-otziv-item-text">
+              <div className="tour-text-default">
                 Доброе утро! Хочу выразить благодарность руководителям Bilim Sakha Kazakhstan за предоставление
                 возможности получить международный диплом, организацию очень познавательного, актуального проекта. Сын
                 под большим впечатлением, многое для себя узнал, с ребятами подружился. В общем использовал каникулы
@@ -104,9 +104,9 @@ export default function Tour({ data, dataFooter }: Props) {
             <div className="tour-otziv-item">
               <div className="tour-otziv-item-header">
                 <div className="tour-otziv-item-header-icon">С</div>
-                <div className="tour-otziv-item-header-name">Саргылаана Ефимова</div>
+                <div className="tour-text-medium">Саргылаана Ефимова</div>
               </div>
-              <div className="tour-otziv-item-text">
+              <div className="tour-text-default">
                 Добрый день. Мы родители Сандала, хотим выразить благодарность коллективу "Билим" за организацию
                 увлекательного, познавательного профтура. Сын не был уверен в выборе будущей профессии, появилась цель и
                 мечта 🙌 которого мы как родители добивались много лет а вы за неделю помогли ему в выборе. Желаю вам
@@ -123,9 +123,9 @@ export default function Tour({ data, dataFooter }: Props) {
             <div className="tour-otziv-item">
               <div className="tour-otziv-item-header">
                 <div className="tour-otziv-item-header-icon">L</div>
-                <div className="tour-otziv-item-header-name">~Liza</div>
+                <div className="tour-text-medium">~Liza</div>
               </div>
-              <div className="tour-otziv-item-text">
+              <div className="tour-text-default">
                 Хочу выразить огромную благодарность вашей компании за отлично организованную поездку в
                 Казахстан!👋👋😍😍😍😍 Дети очень довольны и в полном восторге от путешествия 👍 Все было продумано до
                 мелочей 🥳 дружелюбная атмосфера, экскурсии все 👍 особенно было самое главное ходили по вузам. Желаем
@@ -135,9 +135,9 @@ export default function Tour({ data, dataFooter }: Props) {
             <div className="tour-otziv-item">
               <div className="tour-otziv-item-header">
                 <div className="tour-otziv-item-header-icon">😃</div>
-                <div className="tour-otziv-item-header-name"></div>
+                <div className="tour-text-medium"></div>
               </div>
-              <div className="tour-otziv-item-text">
+              <div className="tour-text-default">
                 Здраствуйте👋 Огромная благодарность за такие впечатления Билим Саха и сопровождающим🤗 Сын просто в
                 восторге, сказал что точно будет поступать в Алматы👍 Желаем удачи и процветания вашей организации👍🤗☺️
               </div>
@@ -156,27 +156,24 @@ export default function Tour({ data, dataFooter }: Props) {
       <div className="tour-relative">
         {/* главная плашка */}
         <div className="tour-bg">
-          <div className={`tour-container`}>
+          <div className="tour-container">
             <div className="tour-main">
               <div className="tour-main-item">
-                <div className="tour-main-title">
-                  Поступайте за <span className="tour-main-subtitle-red">границу</span> вместе с{" "}
-                  <span className="tour-main-subtitle-colored">BILIM</span>
-                </div>
+                <div className="tour-text-title">Профтуры и поступление в университеты</div>
 
-                <div className="tour-main-subtitle">
-                  Раньше мы помогали поступать только в <span className="tour-main-subtitle-colored">Казахстан.</span>{" "}
+                <div className="tour-text-medium tour-text-white">
+                  Раньше мы помогали поступать только в Казахстан.
                   <br /> А сейчас помогаем школьникам из Якутии найти свой путь в университетах{" "}
-                  <span className="tour-main-subtitle-colored">России, Казахстана, </span>а также открываем
-                  <span className="tour-main-subtitle-red"> Китай</span>
+                  <span className="tour-text-dark">России, Казахстана, </span>а также открываем
+                  <span className="tour-text-red"> Китай</span>
                 </div>
               </div>
 
               <div className="tour-main-block">
-                <div className="tour-main-block-title">Заявка на бесплатную консультацию</div>
+                <div className="tour-text-medium">Заявка на бесплатную консультацию</div>
 
                 <div className="tour-header-modal-item" key={`survey-item-name`}>
-                  <div className="tour-header-modal-item-text">Имя*</div>
+                  <div className="tour-text-default">Имя*</div>
                   <Input
                     value={name}
                     onValueChanged={(e: any) => changedString(e, "name")}
@@ -186,7 +183,7 @@ export default function Tour({ data, dataFooter }: Props) {
                   />
                 </div>
                 <div className="tour-header-modal-item" key={`survey-item-name`}>
-                  <div className="tour-header-modal-item-text">Телефон*</div>
+                  <div className="tour-text-default">Телефон*</div>
                   <Input
                     value={phone}
                     onValueChanged={(e: any) => changedString(e, "phone")}
@@ -196,7 +193,7 @@ export default function Tour({ data, dataFooter }: Props) {
                   />
                 </div>
                 <div className="tour-header-modal-item" key={`survey-item-name`}>
-                  <div className="tour-header-modal-item-text">Электронная почта</div>
+                  <div className="tour-text-default">Электронная почта</div>
                   <Input
                     value={mail}
                     onValueChanged={(e: any) => changedString(e, "mail")}
@@ -214,72 +211,70 @@ export default function Tour({ data, dataFooter }: Props) {
         </div>
 
         {/* о нас */}
-        <div className={`tour-container`} id={"tour_about"}>
+        <div className="tour-container" id="tour_about">
           <div className="tour-about">
             <div className="tour-about-item">
-              <div className="tour-about-title">О нас</div>
+              <div className="tour-text-semiTitle">О нас</div>
             </div>
             <div className="tour-about-item">
-              <div className="tour-about-subtitle">
+              <div className="tour-text-medium">
                 Мы прошли путь, который вам только предстоит. Мы тоже когда-то были студентами за границей и на
                 собственном опыте знаем, что значит — справляться со сложностями и преодолевать страх неизвестности.
               </div>
 
               <div className="tour-about-grid">
-                <div className="tour-about-text">
+                <div className="tour-text-default">
                   С 2022 года являемся экспертами на рынке образования. Наша работа — это сотни довольных студентов,
                   которые учатся в престижных ВУЗах благодаря нашему сопровождению.
                 </div>
-                <div className="tour-about-text">
+                <div className="tour-text-default">
                   Мы предлагаем не просто услуги, а проверенные и надежные решения, которые избавят вас от стресса и
                   гарантируют результат.
                 </div>
               </div>
             </div>
           </div>
+
           <div className="tour-number">
-            <div className="tour-number-title">В цифрах</div>
+            <div className="tour-text-semiTitle tour-text-white">
+              Миссия - Развивать Якутию через <span className="tour-text-red">образование</span>
+            </div>
             <div className="tour-number-items" ref={ref}>
               <div className="tour-number-item">
-                <div className="tour-number-item-title">
+                <div className="tour-text-title tour-text-red">
                   <CountUp duration={3} end={inView ? 250 : 0} />+
                 </div>
-                <div className="tour-number-item-text">Поступили в учебные заведения Казахстана</div>
-                <div className="tour-number-item-subtext"></div>
+                <div className="tour-text-default tour-text-white">Поступили в учебные заведения Казахстана</div>
               </div>
               <div className="tour-number-item">
-                <div className="tour-number-item-title">
+                <div className="tour-text-title tour-text-red">
                   <CountUp end={inView ? 300 : 0} duration={3} />+
                 </div>
-                <div className="tour-number-item-text">Посетили профтуры БИЛИМ</div>
-                <div className="tour-number-item-subtext"></div>
+                <div className="tour-text-default tour-text-white">Посетили профтуры БИЛИМ</div>
               </div>
               <div className="tour-number-item">
-                <div className="tour-number-item-title">
+                <div className="tour-text-title tour-text-red">
                   <CountUp end={inView ? 30 : 0} duration={3} />%
                 </div>
-                <div className="tour-number-item-text">Ребят с сопровождения получили 100% гранты и скидки</div>
-                <div className="tour-number-item-subtext"></div>
+                <div className="tour-text-default tour-text-white">
+                  Ребят с сопровождения получили 100% гранты и скидки
+                </div>
               </div>
               <div className="tour-number-item">
-                <div className="tour-number-item-title">
+                <div className="tour-text-title tour-text-red">
                   ~<CountUp end={inView ? 73000 : 0} duration={7} separator=" " />
                 </div>
-                <div className="tour-number-item-text">Человек узнали об образовании в Казахстане</div>
-                <div className="tour-number-item-subtext"></div>
+                <div className="tour-text-default tour-text-white">Человек узнали об образовании в Казахстане</div>
               </div>
-            </div>
-            <div className="tour-number-titleSecond" style={{ textAlign: "center" }}>
-              Миссия - Развивать Якутию через <span className="tour-number-colored">образование</span>
             </div>
           </div>
         </div>
 
         {/* видеообзор */}
-        <div className="tour-bg" id={"tour_video"}>
+        <div className="tour-bg" id="tour_video">
           <div className={`tour-container`}>
             <div className="tour-videos">
-              <div className="tour-videos-title">Видеообзоры университетов Казахстана</div>
+              <div className="tour-text-semiTitle tour-text-white">Видеообзоры университетов Казахстана</div>
 
               <div className="tour-videos-centered">
                 <iframe
@@ -303,27 +298,26 @@ export default function Tour({ data, dataFooter }: Props) {
           </div>
         </div>
 
-        <div className={`tour-container`}>
+        <div className="tour-container" id="tour_products">
           {/* наши продукты */}
-          <div className={`tour-products`} id={"tour_products"}>
-            <div className={`tour-products-title`}>Наши продукты</div>
+          <div className="tour-products">
+            <div className="tour-text-semiTitle">Наши продукты</div>
             <div className="tour-products-items">тут должны быть продукты...</div>
           </div>
 
           {/* отзывы */}
-          <div className="tour-otziv" id={"tour_otziv"}>
+          <div className="tour-otziv" id="tour_otziv">
             <div className="tour-otziv-header">
-              <div>
-                <div className="tour-otziv-title">Отзывы наших клиентов</div>
-                <div className="tour-otziv-subtitle">Положительные впечатления — одна из наших главных задач 😊</div>
+              <div className="tour-otziv-header-item">
+                <div className="tour-text-semiTitle">Отзывы наших клиентов</div>
+                <div className="tour-text-medium">Положительные впечатления — одна из наших главных задач</div>
               </div>
               <div className="tour-otziv-arrows">
-                <div className={`tour-otziv-arrows-left`} onClick={() => (isAnimating ? null : prevSlide())}>
-                  <div className={`tour-otziv-arrows-left-icon`} />
+                <div className="tour-otziv-arrows-left" onClick={() => (isAnimating ? null : prevSlide())}>
+                  <div className="tour-otziv-arrows-left-icon" />
                 </div>
-
-                <div className={`tour-otziv-arrows-right`} onClick={() => (isAnimating ? null : nextSlide())}>
-                  <div className={`tour-otziv-arrows-right-icon`} />
+                <div className="tour-otziv-arrows-right" onClick={() => (isAnimating ? null : nextSlide())}>
+                  <div className="tour-otziv-arrows-right-icon" />
                 </div>
               </div>
             </div>
@@ -354,32 +348,35 @@ export default function Tour({ data, dataFooter }: Props) {
           {/* оставить заявку */}
           <div className="tour-zayavka">
             <div className="tour-zayavka-item">
-              <div className="tour-zayavka-title">
-                Остались вопросы? <br /> Напишите нам!
-              </div>
-              <div className="tour-zayavka-subtitle">
-                Задавайте любые интересующие вас вопросы и получите профессиональную консультацию от нашего специалиста!
+              <div className="tour-zayavka-item-flex">
+                <div className="tour-text-semiTitle tour-text-white">
+                  Остались вопросы? <br /> Напишите нам!
+                </div>
+                <div className="tour-text-medium tour-text-white">
+                  Задавайте любые интересующие вас вопросы и получите профессиональную консультацию от нашего
+                  специалиста!
+                </div>
               </div>
 
               <div className="tour-zayavka-block">
                 <div className="tour-zayavka-block-item">
-                  <div className="tour-zayavka-block-text">Телефон:</div>
+                  <div className="tour-text-medium tour-text-white">Телефон:</div>
                   <a
                     href={"tel:8(996)-316-31-49"}
                     target={"_blank"}
                     rel="noreferrer"
-                    className="tour-zayavka-block-value"
+                    className="tour-text-medium tour-text-white tour-zayavka-block-item-text"
                   >
                     +7 (996) 316-31-49
                   </a>
                 </div>
                 <div className="tour-zayavka-block-item">
-                  <div className="tour-zayavka-block-text">Почта:</div>
+                  <div className="tour-text-medium tour-text-white">Почта:</div>
                   <a
                     href={"mailto:bilimsakhakz@gmail.com"}
                     target={"_blank"}
                     rel="noreferrer"
-                    className="tour-zayavka-block-value"
+                    className="tour-text-medium tour-text-white tour-zayavka-block-item-text"
                   >
                     bilimsakhakz@gmail.com
                   </a>
@@ -389,7 +386,7 @@ export default function Tour({ data, dataFooter }: Props) {
 
             <div className="tour-main-block">
               <div className="tour-header-modal-item" key={`survey-item-name`}>
-                <div className="tour-header-modal-item-text">Имя*</div>
+                <div className="tour-text-default">Имя*</div>
                 <Input
                   value={name1}
                   onValueChanged={(e: any) => changedString1(e, "name")}
@@ -399,7 +396,7 @@ export default function Tour({ data, dataFooter }: Props) {
                 />
               </div>
               <div className="tour-header-modal-item" key={`survey-item-name`}>
-                <div className="tour-header-modal-item-text">Телефон*</div>
+                <div className="tour-text-default">Телефон*</div>
                 <Input
                   value={phone1}
                   onValueChanged={(e: any) => changedString1(e, "phone")}
@@ -409,7 +406,7 @@ export default function Tour({ data, dataFooter }: Props) {
                 />
               </div>
               <div className="tour-header-modal-item" key={`survey-item-name`}>
-                <div className="tour-header-modal-item-text">Электронная почта</div>
+                <div className="tour-text-default">Электронная почта</div>
                 <Input
                   value={mail1}
                   onValueChanged={(e: any) => changedString1(e, "mail")}
@@ -428,17 +425,19 @@ export default function Tour({ data, dataFooter }: Props) {
 
       {/* футер */}
       {dataFooter ? (
-        <div className={`tour-footer`}>
+        <div className="tour-footer">
           <div className="tour-container">
-            <div className={`tour-footer-container`}>
-              <div className={`tour-footer-first`}>
-                <div className={`tour-footer-item-header`}>
-                  <div className={`tour-footer-item-flexColumn`}>
-                    <div className={`tour-footer-logo`} />
-                    <div className={`tour-footer-subtitle`}>{dataFooter.subtitle.text}</div>
+            <div className="tour-footer-container">
+              <div className="tour-footer-first">
+                <div className="tour-footer-item-header">
+                  <div className="tour-footer-item-flexColumn">
+                    <div className="tour-footer-logo" />
+                    <div className="tour-text-default tour-text-white tour-footer-subtitle">
+                      {dataFooter.subtitle.text}
+                    </div>
                   </div>
                 </div>
-                <div className={`tour-footer-icons`}>
+                <div className="tour-footer-icons">
                   {dataFooter.icons.map((item: any, index: number) => {
                     return (
                       <a
@@ -453,24 +452,24 @@ export default function Tour({ data, dataFooter }: Props) {
                     );
                   })}
                 </div>
-                <div className={`tour-footer-second`}>
+                <div className="tour-footer-second">
                   {dataFooter.data.map((item: any, index: number) => {
                     return (
-                      <div className={`tour-footer-item`} key={`tour-footer-item_${index}`}>
-                        <div className={`tour-footer-item-title`}>{item.name}</div>
-                        <div className={`tour-footer-item-flexColumn`}>
+                      <div className="tour-footer-item" key={`tour-footer-item_${index}`}>
+                        <div className="tour-text-medium tour-text-white">{item.name}</div>
+                        <div className="tour-footer-item-flexColumn">
                           {item.items.map((child: any) => {
                             return (
                               <div
-                                className={`tour-footer-item-flex`}
+                                className="tour-footer-item-flex"
                                 key={`tour-footer-item-flex_${index}_${child.code}`}
                               >
-                                <div className={`tour-footer-item-dot`} />
+                                <div className={`tour-footer-item-icon-${child.icon}`} />
                                 <a
                                   href={child.link}
                                   target={index === 0 ? "_self" : "_blank"}
                                   rel="noreferrer"
-                                  className={`tour-footer-item-text`}
+                                  className="tour-text-default tour-text-white tour-footer-item-text"
                                 >
                                   {child.name}
                                 </a>
@@ -484,24 +483,24 @@ export default function Tour({ data, dataFooter }: Props) {
                 </div>
               </div>
 
-              <iframe src={dataFooter.map.link} className={`tour-footer-map`} />
+              <iframe src={dataFooter.map.link} className="tour-footer-map" />
             </div>
 
-            <div className={`tour-footer-end`}>
-              <div className={`tour-footer-end-grid`}>
-                <div className={`tour-footer-end-flexColumn`}>
-                  <div className={`tour-footer-end-title`}>{dataFooter.end.title}</div>
-                  <div className={`tour-footer-end-flex`}>
+            <div className="tour-footer-end">
+              <div className="tour-footer-end-grid">
+                <div className="tour-footer-end-flexColumn">
+                  <div className="tour-text-small tour-text-sub">{dataFooter.end.title}</div>
+                  <div className="tour-footer-end-flex">
                     {dataFooter.end.items.map((item: any, index: number) => {
                       return (
-                        <div className={`tour-footer-end-text`} key={`tour-footer-end-text_${index}`}>
+                        <div className="tour-text-small tour-text-sub" key={`tour-footer-end-text_${index}`}>
                           {item.text}
                         </div>
                       );
                     })}
                   </div>
                 </div>
-                <div className={`tour-footer-end-text`}>{dataFooter.end.text}</div>
+                <div className="tour-text-small tour-text-sub">{dataFooter.end.text}</div>
               </div>
             </div>
           </div>

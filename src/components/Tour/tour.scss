@@ -1,16 +1,14 @@
 @import "../../styles/variables.scss";
 
+$textSuperBig: 72px;
+$textBig: 40px;
+$textMeduim: 24px;
+$textRegular: 16px;
+
 .tour {
   display: flex;
   justify-content: center;
   flex-direction: column;
-
-  &-relative {
-    background-color: $colorWhite;
-    position: relative;
-    z-index: 3;
-    margin-bottom: 550px;
-  }
 
   &-header {
     padding: 12px 24px;
@@ -55,11 +53,10 @@
       justify-content: center;
 
       &-item {
-        font-size: 16px;
+        font-size: $textRegular;
         transition: 0.2s;
         color: $colorWhite;
         font-family: $fontManrope;
-        font-weight: 600;
         text-decoration: none;
 
         &:hover {
@@ -68,10 +65,9 @@
         }
 
         &-active {
-          font-size: 16px;
+          font-size: $textRegular;
           color: $colorDark;
           font-family: $fontManrope;
-          font-weight: 600;
           text-decoration: none;
           cursor: pointer;
         }
@@ -79,25 +75,23 @@
     }
 
     &-button {
-      border-radius: 12px;
-      background-color: $colorDefault;
+      border-radius: 8px;
+      background-color: $colorDark;
       color: $colorWhite;
-      font-size: 16px;
-      padding: 8px 16px;
+      font-size: $textRegular;
+      padding: 10px 18px;
       transition: 0.2s;
       font-family: $fontManrope;
-      font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      border: 2px solid $colorWhite;
+      gap: 10px;
       text-decoration: none;
       letter-spacing: 0.5px;
 
       &-mail {
-        width: 26px;
-        height: 26px;
+        width: 24px;
+        height: 24px;
         background-repeat: no-repeat;
         background-position: 50%;
         background-size: cover;
@@ -106,8 +100,7 @@
       }
 
       &:hover {
-        background-color: $colorDark;
-        border: 2px solid $colorDark;
+        background-color: $colorRed;
         cursor: pointer;
         color: $colorWhite;
       }
@@ -156,11 +149,10 @@
         justify-content: center;
 
         &-item {
-          font-size: 16px;
+          font-size: $textRegular;
           transition: 0.2s;
           color: $colorDark;
           font-family: $fontManrope;
-          font-weight: 600;
           text-decoration: none;
 
           &:hover {
@@ -169,35 +161,32 @@
           }
 
           &-active {
-            font-size: 16px;
+            font-size: $textRegular;
             color: $activeColor;
             font-family: $fontManrope;
-            font-weight: 600;
             text-decoration: none;
           }
         }
       }
 
       &-button {
-        border-radius: 12px;
-        background-color: $colorDefault;
+        border-radius: 8px;
+        background-color: $colorDark;
         color: $colorWhite;
-        font-size: 16px;
-        padding: 8px 16px;
+        font-size: $textRegular;
+        padding: 10px 18px;
         transition: 0.2s;
         font-family: $fontManrope;
-        font-weight: 600;
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 2px solid $colorDefault;
-        gap: 6px;
+        gap: 10px;
         text-decoration: none;
         letter-spacing: 0.5px;
 
         &-mail {
-          width: 26px;
-          height: 26px;
+          width: 24px;
+          height: 24px;
           background-repeat: no-repeat;
           background-position: 50%;
           background-size: cover;
@@ -206,8 +195,7 @@
         }
 
         &:hover {
-          border: 2px solid $colorDark;
-          background-color: $colorDark;
+          background-color: $colorRed;
           cursor: pointer;
           color: $colorWhite;
         }
@@ -219,44 +207,26 @@
 
       &-title {
         max-width: 400px;
-        font-size: 28px;
-        font-weight: 600;
-        color: $colorDark;
-        font-family: $fontManrope;
-      }
-
-      &-subtitle {
-        max-width: 500px;
-        font-size: 16px;
-        font-weight: 400;
-        color: $colorPreDark;
-        font-family: $fontManrope;
+        font-weight: 600 !important;
       }
 
       &-item {
         margin-top: 16px;
         display: grid;
-        gap: 6px;
+        gap: 8px;
         width: 100%;
-
-        &-text {
-          font-size: 16px;
-          font-family: $fontManrope;
-          color: $colorDark;
-        }
       }
 
       &-button {
-        margin-top: 36px;
+        margin-top: 24px;
         margin-bottom: 24px;
         text-align: center;
         padding: 12px 16px;
-        font-size: 18px;
+        font-size: $fontRegular;
         font-family: $fontManrope;
-        font-weight: 600;
         color: $colorWhite;
         background-color: $colorDark;
-        border-radius: 12px;
+        border-radius: 8px;
         letter-spacing: 0.5px;
         transition: 0.2s;
 
@@ -270,11 +240,10 @@
           margin-bottom: 24px;
           text-align: center;
           padding: 12px 16px;
-          font-size: 18px;
+          font-size: $fontRegular;
           font-family: $fontManrope;
-          font-weight: 600;
           color: $colorWhite;
-          border-radius: 12px;
+          border-radius: 8px;
           letter-spacing: 0.5px;
           transition: 0.2s;
           background-color: $colorScrollBar;
@@ -282,6 +251,13 @@
         }
       }
     }
+  }
+
+  &-relative {
+    background-color: $colorWhite;
+    position: relative;
+    z-index: 3;
+    margin-bottom: 552px;
   }
 
   &-bg {
@@ -293,7 +269,7 @@
     max-width: 1200px;
     display: flex;
     flex-direction: column;
-    padding: 12px 24px;
+    padding: 0px 24px;
     width: 100%;
     align-items: center;
   }
@@ -306,184 +282,143 @@
     background-color: $colorDefault;
   }
 
+  &-text {
+    &-title {
+      color: $colorDark;
+      font-family: $fontManrope;
+      font-weight: 600;
+      font-size: $textSuperBig;
+      letter-spacing: 2px;
+      line-height: 110%;
+      text-decoration: none;
+    }
+
+    &-semiTitle {
+      font-size: $textBig;
+      font-family: $fontManrope;
+      font-weight: 600;
+      color: $colorRed;
+      letter-spacing: 1px;
+      text-decoration: none;
+      line-height: 110%;
+    }
+
+    &-medium {
+      color: $colorDark;
+      font-family: $fontManrope;
+      letter-spacing: 0px;
+      font-size: $textMeduim;
+      line-height: 130%;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    &-default {
+      font-size: $textRegular;
+      font-family: $fontManrope;
+      color: $colorPreDark;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-decoration: none;
+    }
+
+    &-small {
+      font-size: 14px;
+      font-family: $fontManrope;
+      color: $colorPreDark;
+      letter-spacing: 0px;
+      text-decoration: none;
+      line-height: 140%;
+    }
+
+    &-dark {
+      color: $colorDark;
+    }
+
+    &-red {
+      color: $colorRed;
+    }
+
+    &-white {
+      color: $colorWhite;
+    }
+
+    &-sub {
+      color: $colorSubtext;
+    }
+  }
+
   &-main {
-    margin-top: 120px;
+    margin: 72px 0px;
     display: grid;
     grid-template-columns: 1.5fr 1fr;
-    gap: 24px;
+    gap: 72px;
     width: 100%;
-    margin-bottom: 40px;
+    align-items: center;
 
     &-item {
       display: flex;
       flex-direction: column;
       gap: 24px;
-    }
-
-    &-title {
-      color: $colorWhite;
-      font-family: $fontManrope;
-      font-weight: 600;
-      font-size: 72px;
-      letter-spacing: 2px;
-      line-height: 110%;
-    }
-
-    &-subtitle {
-      color: $colorWhite;
-      font-family: $fontManrope;
-      letter-spacing: 0.5px;
-      font-style: italic;
-      font-size: 24px;
-      line-height: 130%;
-
-      &-colored {
-        color: $colorDark;
-      }
-
-      &-red {
-        color: $colorRed;
-      }
     }
 
     &-block {
       border-radius: 18px;
       background-color: $colorWhite;
       padding: 24px 36px;
-
-      &-title {
-        font-size: 28px;
-        color: $colorDark;
-        font-family: $fontManrope;
-        font-weight: 600;
-        letter-spacing: 1px;
-      }
+      padding-bottom: 8px;
     }
   }
 
   &-about {
-    margin-top: 72px;
+    margin: 72px 0px 72px 0px;
     width: 100%;
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 48px;
-
-    &-title {
-      font-size: 38px;
-      font-family: $fontManrope;
-      font-weight: 600;
-      color: $colorDark;
-      letter-spacing: 1px;
-    }
-
-    &-subtitle {
-      padding-top: 6px;
-      font-size: 18px;
-      font-family: $fontManrope;
-      letter-spacing: 0.5px;
-      color: $colorDark;
-    }
-
-    &-text {
-      font-size: 16px;
-      font-family: $fontManrope;
-      color: $colorPreDark;
-      line-height: 120%;
-    }
+    gap: 72px;
 
     &-item {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 24px;
+      gap: 40px;
     }
 
     &-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 48px;
+      gap: 16px;
     }
   }
 
   &-number {
-    margin-top: 72px;
     display: grid;
+    justify-items: center;
     grid-template-rows: auto 1fr;
-    gap: 48px;
-    border-top: 1px solid $colorBorder;
+    gap: 40px;
     width: 100%;
-    margin-bottom: 48px;
-
-    &-title {
-      padding-top: 48px;
-      font-size: 38px;
-      font-family: $fontManrope;
-      font-weight: 600;
-      color: $colorDark;
-      letter-spacing: 1px;
-      font-style: italic;
-    }
-
-    &-titleSecond {
-      padding-top: 24px;
-      font-size: 38px;
-      font-family: $fontManrope;
-      font-weight: 600;
-      color: $colorDark;
-      letter-spacing: 1px;
-    }
+    background-color: $colorDefault;
+    padding: 72px;
+    border-radius: 24px;
+    margin-bottom: 72px;
 
     &-items {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-    }
-
-    &-colored {
-      color: $colorRed;
+      grid-template-columns: 1fr 1fr 1fr 300px;
+      gap: 40px;
     }
 
     &-item {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-
-      &-title {
-        color: $colorRed;
-        font-size: 72px;
-        font-family: $fontManrope;
-        font-weight: 600;
-      }
-
-      &-text {
-        color: $colorDark;
-        font-size: 24px;
-        font-family: $fontManrope;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-      }
-
-      &-subtext {
-        color: $colorPreDark;
-        font-size: 18px;
-        font-family: $fontManrope;
-        line-height: 120%;
-      }
+      gap: 16px;
+      text-align: center;
     }
   }
 
   &-videos {
-    margin-top: 48px;
+    margin: 72px 0px;
     width: 100%;
-    margin-bottom: 48px;
-
-    &-title {
-      font-size: 32px;
-      font-family: $fontManrope;
-      font-weight: 600;
-      color: $colorWhite;
-      letter-spacing: 1px;
-    }
 
     &-centered {
       display: flex;
@@ -493,7 +428,7 @@
     }
 
     &-iframe {
-      margin-top: 48px;
+      margin-top: 40px;
       height: 100%;
       width: 100%;
       min-height: 318px;
@@ -503,11 +438,11 @@
   }
 
   &-products {
-    margin-top: 48px;
+    margin: 72px 0px;
     width: 100%;
 
     &-title {
-      padding-top: 48px;
+      padding-top: 40px;
       font-size: 38px;
       font-family: $fontManrope;
       font-weight: 600;
@@ -516,7 +451,7 @@
     }
 
     &-items {
-      margin-top: 48px;
+      margin-top: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -527,52 +462,39 @@
   }
 
   &-otziv {
-    padding-top: 96px;
+    padding: 72px 0px;
     width: 100%;
 
     &-header {
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 24px;
-    }
+      gap: 16px;
 
-    &-title {
-      font-size: 38px;
-      font-family: $fontManrope;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: $colorDark;
-    }
-
-    &-subtitle {
-      font-size: 18px;
-      font-family: $fontManrope;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: $colorPreDark;
+      &-item {
+        display: grid;
+        gap: 6px;
+      }
     }
 
     &-arrows {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 16px;
 
       &-left {
         z-index: 10;
         width: 48px;
         height: 48px;
         border-radius: 50%;
-        background-color: rgba(0, 0, 0, 0.7);
-        color: $colorDark;
-        border: 1px solid rgba(0, 0, 0, 0.2);
-        transition: background-color 0.2s ease;
+        background-color: $colorDefault;
+        transition: 0.2s;
         display: flex;
         align-items: center;
         justify-content: center;
 
         &:hover {
           cursor: pointer;
-          background-color: rgba(0, 0, 0, 0.9);
+          opacity: 0.9;
         }
 
         &-icon {
@@ -590,9 +512,7 @@
         width: 48px;
         height: 48px;
         border-radius: 50%;
-        background-color: rgba(0, 0, 0, 0.7);
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background-color: $colorDefault;
         transition: background-color 0.2s ease;
         display: flex;
         align-items: center;
@@ -600,7 +520,7 @@
 
         &:hover {
           cursor: pointer;
-          background-color: rgba(0, 0, 0, 0.9);
+          opacity: 0.9;
         }
 
         &-icon {
@@ -618,7 +538,7 @@
       display: flex;
       justify-content: center;
       gap: 6px;
-      padding: 24px;
+      padding-top: 40px;
 
       &-button {
         width: 10px;
@@ -629,7 +549,7 @@
         cursor: pointer;
 
         &-current {
-          background-color: $colorDark;
+          background-color: $colorDefault;
           transform: scale(1.25);
         }
 
@@ -646,7 +566,7 @@
     }
 
     &-slide {
-      margin-top: 72px;
+      margin-top: 40px;
       transition: all 0.3s ease-in-out;
 
       &-animate {
@@ -668,7 +588,7 @@
     &-items {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 48px;
+      gap: 40px;
     }
 
     &-item {
@@ -688,71 +608,44 @@
         &-icon {
           border-radius: 50%;
           background-color: $colorWhite;
-          width: 60px;
-          height: 60px;
+          width: 50px;
+          height: 50px;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 32px;
+          font-size: 24px;
           font-family: $fontManrope;
           font-weight: 600;
           color: $colorDark;
         }
-
-        &-name {
-          font-family: $fontManrope;
-          letter-spacing: 0.5px;
-          font-size: 24px;
-          color: $colorDark;
-        }
-      }
-
-      &-text {
-        font-family: $fontManrope;
-        font-size: 16px;
-        color: $colorDark;
       }
     }
   }
 
   &-zayavka {
-    margin-top: 72px;
-    padding: 48px;
+    padding: 72px;
     border-radius: 24px;
     background-color: $colorDefault;
     width: 100%;
     display: grid;
     grid-template-columns: 1.2fr 1fr;
-    gap: 48px;
-    margin-bottom: 48px;
+    gap: 40px;
+    margin-bottom: 72px;
 
     &-item {
       display: flex;
       flex-direction: column;
-      gap: 24px;
-    }
+      justify-content: space-between;
 
-    &-title {
-      font-size: 46px;
-      font-family: $fontManrope;
-      font-weight: 600;
-      letter-spacing: 2px;
-      color: $colorWhite;
-      line-height: 120%;
-    }
-
-    &-subtitle {
-      margin-top: 24px;
-      font-size: 22px;
-      font-family: $fontManrope;
-      font-weight: 400;
-      letter-spacing: 1px;
-      color: $colorWhite;
-      line-height: 100%;
+      &-flex {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
     }
 
     &-block {
-      padding-top: 96px;
+      padding-top: 72px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 24px;
@@ -760,26 +653,14 @@
       &-item {
         display: flex;
         flex-direction: column;
-        gap: 12px;
-      }
+        gap: 6px;
 
-      &-text {
-        font-family: $fontManrope;
-        font-size: 18px;
-        color: $colorWhite;
-      }
+        &-text {
+          transition: 0.2s;
 
-      &-value {
-        font-family: $fontManrope;
-        font-size: 24px;
-        color: $colorWhite;
-        font-weight: 600;
-        text-decoration: none;
-        transition: 0.2s;
-
-        &:hover {
-          cursor: pointer;
-          color: $colorDark;
+          &:hover {
+            color: $colorDark;
+          }
         }
       }
     }
@@ -791,13 +672,13 @@
     position: fixed;
     bottom: 0px;
     z-index: 2;
+    padding-top: 72px;
 
     &-container {
       display: grid;
       grid-template-columns: 1fr 2fr;
       gap: 24px;
       width: 100%;
-      padding-top: 48px;
     }
 
     &-logo {
@@ -813,10 +694,6 @@
     }
 
     &-subtitle {
-      font-size: 16px;
-      font-family: $fontManrope;
-      color: $colorWhite;
-      line-height: 110%;
       position: relative;
       top: -40px;
     }
@@ -824,8 +701,7 @@
     &-first {
       display: flex;
       flex-direction: column;
-      gap: 24px;
-      justify-content: center;
+      gap: 40px;
     }
 
     &-second {
@@ -838,7 +714,7 @@
     &-item {
       display: grid;
       grid-template-rows: auto 1fr;
-      gap: 12px;
+      gap: 24px;
 
       &-header {
         display: flex;
@@ -848,7 +724,7 @@
 
       &-flex {
         display: flex;
-        gap: 6px;
+        gap: 12px;
         align-items: center;
       }
 
@@ -858,27 +734,37 @@
         gap: 12px;
       }
 
-      &-title {
-        font-size: 24px;
-        font-family: $fontMedium;
-        border-bottom: 1px solid #ccc;
-        padding-bottom: 6px;
-        color: $colorWhite;
-      }
+      &-icon {
+        &-locationFooter {
+          width: 18px;
+          height: 18px;
+          background-repeat: no-repeat;
+          background-position: 50%;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/locationFooter.svg");
+        }
 
-      &-dot {
-        width: 12px;
-        height: 12px;
-        background-color: $colorWhite;
-        border-radius: 50%;
+        &-mailFooter {
+          width: 18px;
+          height: 18px;
+          background-repeat: no-repeat;
+          background-position: 50%;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/mailFooter.svg");
+        }
+
+        &-phoneFooter {
+          width: 18px;
+          height: 18px;
+          background-repeat: no-repeat;
+          background-position: 50%;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/phoneFooter.svg");
+        }
       }
 
       &-text {
-        font-size: 16px;
-        font-family: $fontRegular;
-        color: $colorWhite;
         transition: 0.2s;
-        text-decoration: none;
 
         &:hover {
           color: $activeColor;
@@ -890,8 +776,7 @@
     &-icons {
       display: flex;
       gap: 12px;
-      margin-top: -36px;
-      align-items: center;
+      margin-top: -56px;
 
       &-footer_phone {
         background-color: $colorDefault;
@@ -960,27 +845,26 @@
     &-map {
       border-radius: 12px;
       width: 100%;
-      height: 400px;
+      height: 100%;
       border: none;
     }
 
     &-end {
       width: 100%;
-      padding-top: 12px;
+      padding-top: 24px;
 
       &-grid {
         display: grid;
         grid-template-columns: 1fr auto;
         margin: auto;
         max-width: 1200px;
-        padding: 24px 0px;
+        padding: 40px 0px;
         align-items: center;
       }
 
       &-flexColumn {
         display: flex;
         flex-direction: column;
-        gap: 4px;
       }
 
       &-title {
@@ -991,7 +875,7 @@
 
       &-flex {
         display: flex;
-        gap: 6px;
+        gap: 12px;
       }
 
       &-text {

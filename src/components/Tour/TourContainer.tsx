@@ -63,6 +63,7 @@ export default function TourContainer() {
               name: "Ленина 17, 3 этаж, 317 кабинет",
               link: "https://go.2gis.com/aF3vy",
               parentId: 12,
+              icon: "locationFooter",
             },
             {
               id: 14,
@@ -73,6 +74,7 @@ export default function TourContainer() {
               name: "bilimsakhakz@gmail.com",
               link: "mailto:bilimsakhakz@gmail.com",
               parentId: 12,
+              icon: "mailFooter",
             },
             {
               id: 15,
@@ -83,6 +85,7 @@ export default function TourContainer() {
               name: "+7(996)-316-31-49",
               link: "tel:8(996)-316-31-49",
               parentId: 12,
+              icon: "phoneFooter",
             },
           ],
         },
@@ -127,7 +130,7 @@ export default function TourContainer() {
         dataType: "object",
         ord: 10,
         isVisible: true,
-        text: "Профориентационные туры и поступления в университет",
+        text: "Профориентационные туры и поступления в университеты",
       },
     };
 

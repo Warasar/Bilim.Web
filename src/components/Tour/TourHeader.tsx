@@ -132,15 +132,17 @@ export default function TourHeader() {
           onCancel={() => {
             setModalVisible(false);
           }}
-          title={<div className={`tour-header-modal-title`}>Получите консультацию от наших специалистов</div>}
+          title={
+            <div className="tour-text-medium tour-header-modal-title">Получите консультацию от наших специалистов</div>
+          }
         >
           <div className="tour-header-modal">
-            <div className="tour-header-modal-subtitle">
+            <div className="tour-text-default">
               Мы свяжемся с вами в ближайшее время, проконсультируем по всем вопросам и поможем подобрать наиболее
               подходящее вам решение.
             </div>
             <div className="tour-header-modal-item" key={`survey-item-name`}>
-              <div className="tour-header-modal-item-text">Имя*</div>
+              <div className="tour-text-default">Имя*</div>
               <Input
                 value={name}
                 onValueChanged={(e: any) => changedString(e, "name")}
@@ -150,7 +152,7 @@ export default function TourHeader() {
               />
             </div>
             <div className="tour-header-modal-item" key={`survey-item-name`}>
-              <div className="tour-header-modal-item-text">Телефон*</div>
+              <div className="tour-text-default">Телефон*</div>
               <Input
                 value={phone}
                 onValueChanged={(e: any) => changedString(e, "phone")}
@@ -160,7 +162,7 @@ export default function TourHeader() {
               />
             </div>
             <div className="tour-header-modal-item" key={`survey-item-name`}>
-              <div className="tour-header-modal-item-text">Электронная почта</div>
+              <div className="tour-text-default">Электронная почта</div>
               <Input
                 value={mail}
                 onValueChanged={(e: any) => changedString(e, "mail")}
@@ -169,7 +171,7 @@ export default function TourHeader() {
                 placeholder="example@mail.com"
               />
             </div>
-            <div className="tour-header-modal-subtitle" style={{ paddingTop: "12px" }}>
+            <div className="tour-text-default" style={{ paddingTop: "16px" }}>
               * - обязательные поля для заполнения
             </div>
             <div className={`tour-header-modal-button${name.length && phone.length ? "" : "-disabled"}`}>
