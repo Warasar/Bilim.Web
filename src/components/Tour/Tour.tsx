@@ -236,7 +236,7 @@ export default function Tour({ data, dataFooter }: Props) {
           </div>
 
           <div className="tour-number">
-            <div className="tour-text-semiTitle tour-text-white">
+            <div className="tour-text-semiTitle tour-text-white tour-number-title">
               Миссия - Развивать Якутию через <span className="tour-text-red">образование</span>
             </div>
             <div className="tour-number-items" ref={ref}>
@@ -302,7 +302,123 @@ export default function Tour({ data, dataFooter }: Props) {
           {/* наши продукты */}
           <div className="tour-products">
             <div className="tour-text-semiTitle">Наши продукты</div>
-            <div className="tour-products-items">тут должны быть продукты...</div>
+
+            {/* верхняя часть */}
+            <div className="tour-products-items">
+              {/* КЗ */}
+              <div className="tour-products-item">
+                <div className="tour-products-item-header">
+                  <div className="tour-products-item-header-title">
+                    <div className="tour-text-medium tour-text-white">Профтур в Казахстан</div>
+                    <div className="tour-text-medium tour-text-white">Алматы, Астана и Два города</div>
+                  </div>
+                  <div className="tour-products-icon-kz" />
+                </div>
+                <div className="tour-text-default tour-text-white tour-products-item-text">
+                  Уже этой осенью мы летим в профтур по вузам Казахстана — сразу в два города: Алматы и Астану
+                  <ol className="tour-products-ol">
+                    <li>Астана: 25 октября — 1 ноября</li>
+                    <li>Алматы: 27 октября — 2 ноября</li>
+                    <li>Астана + Алматы: 25 октября — 1 ноября</li>
+                  </ol>
+                  <br />
+                  Вас ждет:
+                  <ol className="tour-products-ol">
+                    <li>Посещение и знакомство с лучшими университетами Казахстана</li>
+                    <li>Яркая туристическая и культурная программа </li>
+                    <li>
+                      Ребят будут сопровождать вожатые саха - студенты: от первых уст вы узнаете о том, как поступить,
+                      готовиться к вступительным испытаниям, а также как можно выиграть грант, либо скидку
+                    </li>
+                    <li>Посещение офисов международных компаний</li>
+                  </ol>
+                </div>
+              </div>
+
+              {/* китай */}
+              <div className="tour-products-item">
+                <div className="tour-products-item-header">
+                  <div className="tour-products-item-header-title">
+                    <div className="tour-text-medium tour-text-white">Профтур в Китай</div>
+                    <div className="tour-text-medium tour-text-white">Город Харбин</div>
+                  </div>
+                  <div className="tour-products-icon-china" />
+                </div>
+                <div className="tour-text-default tour-text-white tour-products-item-text">
+                  Мы открываем новые горизонты - приглашаем на наш осенний профтур в Китае
+                  <ol className="tour-products-ol">
+                    <li>Харбин: 23 октября — 30 октября </li>
+                  </ol>
+                  <br />
+                  Вас ждет:
+                  <ol className="tour-products-ol">
+                    <li>
+                      Знакомство с двумя ведущими университетами Харбина — почувствуй себя студентом и узнай, как живут
+                      и учатся китайские студенты
+                    </li>
+                    <li>Атмосфера современного мегаполиса покорит тебя своими контрастами и красотой</li>
+                    <li>Яркая туристическая и культурная программа</li>
+                    <li>Шоппинг, сафари - парк с тиграми, океанариум, день спа и многое другое</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+
+            {/* нижняя часть */}
+            <div className="tour-products-itemsTriple">
+              {/* полное сопровождение */}
+              <div className="tour-products-item">
+                <div className="tour-products-item-header">
+                  <div className="tour-products-item-header-title">
+                    <div className="tour-text-medium tour-text-white">Сопровождение по поступлению</div>
+                  </div>
+
+                  <div className="tour-products-icon-accopointment" />
+                </div>
+                <div className="tour-text-default tour-text-white tour-products-item-text">
+                  Мы поможем поступить в университет Казахстана и осуществить мечту об учебе за границей:
+                  <ol className="tour-products-ol">
+                    <li>Подберем университет и программу, которая тебе подходит</li>
+                    <li>Поможем с написанием мотивационного письма</li>
+                    <li>Поможем подготовить все необходимые документы</li>
+                    <li>Подготовим тебя к собеседованию</li>
+                    <li>И самое главное - поможем получить грант на обучение</li>
+                  </ol>
+                </div>
+              </div>
+
+              {/* профориентация */}
+              <div className="tour-products-item">
+                <div className="tour-products-item-header">
+                  <div className="tour-products-item-header-title">
+                    <div className="tour-text-medium tour-text-white">Профориентация</div>
+                  </div>
+                  <div className="tour-products-icon-proforient" />
+                </div>
+                <div className="tour-text-default tour-text-white tour-products-item-text">
+                  Это услуга для ребят, которые не могут определиться со своей будущей профессией и направлением
+                  обучения
+                  <br />
+                  <br />
+                  Наш эксперт поможет вам разобраться в себе, определить сильные стороны и создать траекторию будущего
+                  развития
+                </div>
+              </div>
+
+              {/* подбор рф */}
+              <div className="tour-products-item">
+                <div className="tour-products-item-header">
+                  <div className="tour-products-item-header-title">
+                    <div className="tour-text-medium tour-text-white">Подбор РФ</div>
+                  </div>
+                  <div className="tour-products-icon-russia" />
+                </div>
+                <div className="tour-text-default tour-text-white tour-products-item-text">
+                  Если вы хотите поступить в ведущие университеты России, мы подберем для вас наиболее подходящие
+                  университеты по вашим направлениям. С учетом вашего бюджета и личных предпочтений
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* отзывы */}
