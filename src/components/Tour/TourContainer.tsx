@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import Tour from "./Tour";
 import "./tour.scss";
 import TourHeader from "./TourHeader";
+import { requestPost } from "../../actions/actions";
+import { message } from "antd";
+import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
 
 export default function TourContainer() {
   const [data, setData] = useState<any>(null);
   const [dataFooter, setDataFooter] = useState<any>(null);
+  const [loader, setLoader] = useState<boolean>(false);
 
   useEffect(() => {
     getData();
@@ -137,10 +141,31 @@ export default function TourContainer() {
     setDataFooter(newDataFooter);
   };
 
+  const sendMessage = async (name: string, phone: string, mail: string) => {
+    setLoader(true);
+
+    const newMessage: any = await requestPost("application", {
+      name,
+      phoneNumber: phone,
+      email: mail,
+    });
+
+    if (newMessage) {
+      message.success("Успешно отправлено!");
+    } else {
+      message.error(
+        "Произошла ошибка при отправке заявки, пожайлуста попробуйте позже."
+      );
+    }
+
+    setLoader(false);
+  };
+
   return data ? (
     <div>
-      <TourHeader />
-      <Tour data={data} dataFooter={dataFooter} />
+      {loader ? <Loader absolute /> : null}
+      <TourHeader sendMessage={sendMessage} />
+      <Tour data={data} dataFooter={dataFooter} sendMessage={sendMessage} />
     </div>
   ) : null;
 }

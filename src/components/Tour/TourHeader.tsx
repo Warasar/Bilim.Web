@@ -2,6 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import Modal from "../../modules/YaKIT.WEB.KIT/components/Modal/Modal";
 import Input from "../../modules/YaKIT.WEB.KIT/components/Input/Input";
 
+type Props = {
+  sendMessage: (name: string, phone: string, mail: string) => void;
+};
+
 export const useClickOutside = (handler: () => void) => {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -21,7 +25,7 @@ export const useClickOutside = (handler: () => void) => {
   return ref;
 };
 
-export default function TourHeader() {
+export default function TourHeader({ sendMessage }: Props) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -41,7 +45,10 @@ export default function TourHeader() {
         if (element) {
           const offsetTop = element.offsetTop;
           const offsetHeight = element.offsetHeight;
-          if (scrollPosition + 100 >= offsetTop && scrollPosition + 100 < offsetTop + offsetHeight) {
+          if (
+            scrollPosition + 100 >= offsetTop &&
+            scrollPosition + 100 < offsetTop + offsetHeight
+          ) {
             setActiveSection(element.id);
           } else if (scrollPosition < 100) {
             setActiveSection(null);
@@ -97,25 +104,33 @@ export default function TourHeader() {
           {/* кнопки */}
           <div className={`${headerClassName}-flex`}>
             <div
-              className={`${headerClassName}-flex-item${activeSection === `tour_about` ? "-active" : ""}`}
+              className={`${headerClassName}-flex-item${
+                activeSection === `tour_about` ? "-active" : ""
+              }`}
               onClick={() => clickScrollIntoDiv("about")}
             >
               О нас
             </div>
             <div
-              className={`${headerClassName}-flex-item${activeSection === `tour_video` ? "-active" : ""}`}
+              className={`${headerClassName}-flex-item${
+                activeSection === `tour_video` ? "-active" : ""
+              }`}
               onClick={() => clickScrollIntoDiv("video")}
             >
               Видеообзоры
             </div>
             <div
-              className={`${headerClassName}-flex-item${activeSection === `tour_products` ? "-active" : ""}`}
+              className={`${headerClassName}-flex-item${
+                activeSection === `tour_products` ? "-active" : ""
+              }`}
               onClick={() => clickScrollIntoDiv("products")}
             >
               Наши продукты
             </div>
             <div
-              className={`${headerClassName}-flex-item${activeSection === `tour_otziv` ? "-active" : ""}`}
+              className={`${headerClassName}-flex-item${
+                activeSection === `tour_otziv` ? "-active" : ""
+              }`}
               onClick={() => clickScrollIntoDiv("otziv")}
             >
               Отзывы
@@ -124,14 +139,20 @@ export default function TourHeader() {
 
           {/* Оставить заявку */}
           <div className={`${headerClassName}-flex`}>
-            <div className={`${headerClassName}-button`} onClick={() => setModalVisible(true)}>
+            <div
+              className={`${headerClassName}-button`}
+              onClick={() => setModalVisible(true)}
+            >
               <div className={`${headerClassName}-button-mail`} />
               Оставить заявку
             </div>
           </div>
 
           {/* Мобильное меню кнопка */}
-          <div className={`mobile-menu-button${isScrolled ? "-scrolled" : ""}`} onClick={() => setMobileMenuOpen(true)}>
+          <div
+            className={`mobile-menu-button${isScrolled ? "-scrolled" : ""}`}
+            onClick={() => setMobileMenuOpen(true)}
+          >
             <span></span>
             <span></span>
             <span></span>
@@ -141,23 +162,41 @@ export default function TourHeader() {
 
       {/* Мобильное меню */}
       <div className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}>
-        <button className="mobile-menu-close" onClick={() => setMobileMenuOpen(false)}>
+        <button
+          className="mobile-menu-close"
+          onClick={() => setMobileMenuOpen(false)}
+        >
           ×
         </button>
         <div className="mobile-menu-items">
-          <div className="mobile-menu-item" onClick={() => clickScrollIntoDiv("about")}>
+          <div
+            className="mobile-menu-item"
+            onClick={() => clickScrollIntoDiv("about")}
+          >
             О нас
           </div>
-          <div className="mobile-menu-item" onClick={() => clickScrollIntoDiv("video")}>
+          <div
+            className="mobile-menu-item"
+            onClick={() => clickScrollIntoDiv("video")}
+          >
             Видеообзоры
           </div>
-          <div className="mobile-menu-item" onClick={() => clickScrollIntoDiv("products")}>
+          <div
+            className="mobile-menu-item"
+            onClick={() => clickScrollIntoDiv("products")}
+          >
             Наши продукты
           </div>
-          <div className="mobile-menu-item" onClick={() => clickScrollIntoDiv("otziv")}>
+          <div
+            className="mobile-menu-item"
+            onClick={() => clickScrollIntoDiv("otziv")}
+          >
             Отзывы
           </div>
-          <div className="mobile-menu-item" onClick={() => setModalVisible(true)}>
+          <div
+            className="mobile-menu-item"
+            onClick={() => setModalVisible(true)}
+          >
             Оставить заявку
           </div>
         </div>
@@ -169,13 +208,15 @@ export default function TourHeader() {
           setModalVisible(false);
         }}
         title={
-          <div className="tour-text-medium tour-header-modal-title">Получите консультацию от наших специалистов</div>
+          <div className="tour-text-medium tour-header-modal-title">
+            Получите консультацию от наших специалистов
+          </div>
         }
       >
         <div className="tour-header-modal">
           <div className="tour-text-default">
-            Мы свяжемся с вами в ближайшее время, проконсультируем по всем вопросам и поможем подобрать наиболее
-            подходящее вам решение.
+            Мы свяжемся с вами в ближайшее время, проконсультируем по всем
+            вопросам и поможем подобрать наиболее подходящее вам решение.
           </div>
           <div className="tour-header-modal-item" key={`survey-item-name`}>
             <div className="tour-text-default">Имя*</div>
@@ -210,7 +251,14 @@ export default function TourHeader() {
           <div className="tour-text-default" style={{ paddingTop: "16px" }}>
             * - обязательные поля для заполнения
           </div>
-          <div className={`tour-header-modal-button${name.length && phone.length ? "" : "-disabled"}`}>
+          <div
+            className={`tour-header-modal-button${
+              name.length && phone.length ? "" : "-disabled"
+            }`}
+            onClick={() => {
+              sendMessage(name, phone, mail);
+            }}
+          >
             Оставить заявку
           </div>
         </div>
