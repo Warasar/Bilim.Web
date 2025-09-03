@@ -106,7 +106,7 @@ export default function TourContainer() {
         dataType: "object",
         ord: 10,
         isVisible: true,
-        title: "ИНДИВИДУАЛЬНЫЙ ПРЕДПРИНИМАТЕЛЬ КУЗЬМИНА ДАЙАНА ВИКТОРОВНА",
+        title: "ИНДИВИДУАЛЬНЫЙ ПРЕДПРИНИМАТЕЛЬ КУЗЬМИНА ДАЙААНА ВИКТОРОВНА",
         text: "© 2025 BILIM. Все права защищены.",
         items: [
           {
@@ -153,9 +153,7 @@ export default function TourContainer() {
     if (newMessage) {
       message.success("Успешно отправлено!");
     } else {
-      message.error(
-        "Произошла ошибка при отправке заявки, пожайлуста попробуйте позже."
-      );
+      message.error("Произошла ошибка при отправке заявки, пожайлуста попробуйте позже.");
     }
 
     setLoader(false);

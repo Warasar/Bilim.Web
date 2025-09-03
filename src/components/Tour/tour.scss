@@ -57,8 +57,12 @@ $textRegular: 16px;
       }
     }
 
+    @media (max-width: 460px) {
+      padding: 6px;
+    }
+
     &-bg {
-      background-color: $colorDefault;
+      background-color: $colorDark;
       top: 0;
       position: sticky;
       z-index: 12;
@@ -112,8 +116,8 @@ $textRegular: 16px;
 
     &-button {
       border-radius: 8px;
-      background-color: $colorDark;
-      color: $colorWhite;
+      background-color: $colorDefault;
+      color: $colorDark;
       font-size: $textRegular;
       padding: 10px 18px;
       transition: 0.2s;
@@ -131,7 +135,7 @@ $textRegular: 16px;
         background-repeat: no-repeat;
         background-position: 50%;
         background-size: cover;
-        background-image: url("../../assets/icons/default/mail.svg");
+        background-image: url("../../assets/icons/default/mail_dark.svg");
         transition: 0.2s;
       }
 
@@ -139,6 +143,10 @@ $textRegular: 16px;
         background-color: $colorRed;
         cursor: pointer;
         color: $colorWhite;
+      }
+
+      &:hover &-mail {
+        background-image: url("../../assets/icons/default/mail.svg");
       }
     }
 
@@ -189,11 +197,15 @@ $textRegular: 16px;
         }
       }
 
+      @media (max-width: 460px) {
+        padding: 6px;
+      }
+
       &-bg {
         top: 0;
         position: sticky;
         z-index: 15;
-        background-color: rgba($color: $colorWhite, $alpha: 0.95);
+        background-color: rgba($color: $colorDefault, $alpha: 0.98);
         transition: 0.2s;
       }
 
@@ -302,6 +314,11 @@ $textRegular: 16px;
         letter-spacing: 0.5px;
         transition: 0.2s;
 
+        @media (max-width: 460px) {
+          margin-top: 24px;
+          margin-bottom: 0px;
+        }
+
         &:hover {
           background-color: $colorPreDark;
           cursor: pointer;
@@ -326,7 +343,7 @@ $textRegular: 16px;
   }
 
   &-relative {
-    background-color: $colorWhite;
+    background-color: $colorDefault;
     position: relative;
     z-index: 3;
     margin-bottom: 552px;
@@ -337,7 +354,7 @@ $textRegular: 16px;
   }
 
   &-bg {
-    background-color: $colorDefault;
+    background-color: $colorDark;
   }
 
   &-container {
@@ -360,7 +377,7 @@ $textRegular: 16px;
 
   &-text {
     &-title {
-      color: $colorDark;
+      color: $colorWhite;
       font-family: $fontManrope;
       font-weight: 600;
       font-size: $textSuperBig;
@@ -422,6 +439,10 @@ $textRegular: 16px;
     &-sub {
       color: $colorSubtext;
     }
+
+    &-main {
+      color: $colorDefault;
+    }
   }
 
   &-main {
@@ -443,6 +464,11 @@ $textRegular: 16px;
       margin: 32px 0px;
     }
 
+    @media (max-width: 460px) {
+      gap: 24px;
+      margin: 24px 0px;
+    }
+
     &-item {
       display: flex;
       flex-direction: column;
@@ -454,6 +480,10 @@ $textRegular: 16px;
       background-color: $colorWhite;
       padding: 24px 36px;
       padding-bottom: 8px;
+
+      @media (max-width: 460px) {
+        padding: 24px 16px;
+      }
     }
   }
 
@@ -475,11 +505,20 @@ $textRegular: 16px;
       margin: 32px 0px;
     }
 
+    @media (max-width: 460px) {
+      gap: 24px;
+      margin: 24px 0px;
+    }
+
     &-item {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       gap: 40px;
+
+      @media (max-width: 460px) {
+        gap: 24px;
+      }
     }
 
     &-grid {
@@ -495,7 +534,7 @@ $textRegular: 16px;
     grid-template-rows: auto 1fr;
     gap: 40px;
     width: 100%;
-    background-color: $colorDefault;
+    background-color: $colorDark;
     padding: 72px;
     border-radius: 24px;
     margin-bottom: 72px;
@@ -511,6 +550,12 @@ $textRegular: 16px;
       gap: 24px;
     }
 
+    @media (max-width: 460px) {
+      padding: 24px 16px;
+      margin-bottom: 24px;
+      gap: 12px;
+    }
+
     &-items {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 300px;
@@ -522,8 +567,14 @@ $textRegular: 16px;
       }
 
       @media (max-width: 767px) {
+        padding-top: 24px;
         grid-template-columns: 1fr;
         gap: 24px;
+      }
+
+      @media (max-width: 460px) {
+        padding-top: 24px;
+        gap: 12px;
       }
     }
 
@@ -532,6 +583,10 @@ $textRegular: 16px;
       flex-direction: column;
       gap: 16px;
       text-align: center;
+
+      @media (max-width: 460px) {
+        gap: 8px;
+      }
     }
 
     &-title {
@@ -560,6 +615,10 @@ $textRegular: 16px;
       @media (max-width: 1024px) {
         flex-direction: column;
         gap: 16px;
+      }
+
+      @media (max-width: 460px) {
+        gap: 0px;
       }
     }
 
@@ -614,6 +673,10 @@ $textRegular: 16px;
         margin-top: 24px;
         gap: 16px;
       }
+
+      @media (max-width: 460px) {
+        gap: 12px;
+      }
     }
 
     &-itemsTriple {
@@ -628,20 +691,31 @@ $textRegular: 16px;
       @media (max-width: 1024px) {
         grid-template-columns: 1fr 1fr;
         gap: 20px;
+        margin-top: 20px;
       }
 
       @media (max-width: 767px) {
         grid-template-columns: 1fr;
         gap: 16px;
+        margin-top: 16px;
+      }
+
+      @media (max-width: 460px) {
+        margin-top: 12px;
+        gap: 12px;
       }
     }
 
     &-item {
       display: flex;
       flex-direction: column;
-      background-color: $colorDefault;
+      background-color: $colorDark;
       border-radius: 16px;
       padding: 24px;
+
+      @media (max-width: 460px) {
+        padding: 24px 16px;
+      }
 
       &-header {
         display: grid;
@@ -755,7 +829,7 @@ $textRegular: 16px;
         width: 48px;
         height: 48px;
         border-radius: 50%;
-        background-color: $colorDefault;
+        background-color: $colorDark;
         transition: 0.2s;
         display: flex;
         align-items: center;
@@ -781,7 +855,7 @@ $textRegular: 16px;
         width: 48px;
         height: 48px;
         border-radius: 50%;
-        background-color: $colorDefault;
+        background-color: $colorDark;
         transition: background-color 0.2s ease;
         display: flex;
         align-items: center;
@@ -818,7 +892,7 @@ $textRegular: 16px;
         cursor: pointer;
 
         &-current {
-          background-color: $colorDefault;
+          background-color: $colorDark;
           transform: scale(1.25);
         }
 
@@ -837,6 +911,18 @@ $textRegular: 16px;
     &-slide {
       margin-top: 40px;
       transition: all 0.3s ease-in-out;
+
+      @media (max-width: 1024px) {
+        margin-top: 32px;
+      }
+
+      @media (max-width: 767px) {
+        margin-top: 24px;
+      }
+
+      @media (max-width: 767px) {
+        margin-top: 16px;
+      }
 
       &-animate {
         opacity: 0;
@@ -867,15 +953,28 @@ $textRegular: 16px;
       @media (max-width: 767px) {
         gap: 16px;
       }
+
+      @media (max-width: 460px) {
+        gap: 12px;
+      }
     }
 
     &-item {
       padding: 24px;
       border-radius: 16px;
-      background-color: #f5f5f5;
+      background-color: $colorDark;
       display: grid;
       grid-template-rows: auto 1fr;
       gap: 24px;
+
+      @media (max-width: 767px) {
+        gap: 20px;
+      }
+
+      @media (max-width: 460px) {
+        padding: 24px 16px;
+        gap: 16px;
+      }
 
       &-header {
         display: grid;
@@ -903,7 +1002,7 @@ $textRegular: 16px;
   &-zayavka {
     padding: 72px;
     border-radius: 24px;
-    background-color: $colorDefault;
+    background-color: $colorDark;
     width: 100%;
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -921,6 +1020,12 @@ $textRegular: 16px;
       padding: 24px;
       gap: 24px;
       margin-bottom: 32px;
+    }
+
+    @media (max-width: 460px) {
+      padding: 24px 16px;
+      gap: 24px;
+      margin-bottom: 24px;
     }
 
     &-item {
@@ -951,13 +1056,26 @@ $textRegular: 16px;
       }
 
       @media (max-width: 767px) {
+        padding-top: 64px;
         grid-template-columns: 1fr 1fr;
+      }
+
+      @media (max-width: 460px) {
+        padding-top: 40px;
+        gap: 12px;
+        grid-template-columns: 1fr;
       }
 
       &-item {
         display: flex;
         flex-direction: column;
         gap: 6px;
+
+        &-middle {
+          @media (max-width: 460px) {
+            font-size: 16px !important;
+          }
+        }
 
         &-text {
           transition: 0.2s;
@@ -993,6 +1111,10 @@ $textRegular: 16px;
         grid-template-columns: 1fr;
         gap: 32px;
       }
+
+      @media (max-width: 460px) {
+        gap: 24px;
+      }
     }
 
     &-logo {
@@ -1016,6 +1138,10 @@ $textRegular: 16px;
       display: flex;
       flex-direction: column;
       gap: 40px;
+
+      @media (max-width: 767px) {
+        gap: 24px;
+      }
     }
 
     &-second {
@@ -1029,6 +1155,10 @@ $textRegular: 16px;
       display: grid;
       grid-template-rows: auto 1fr;
       gap: 24px;
+
+      @media (max-width: 767px) {
+        gap: 12px;
+      }
 
       &-header {
         display: flex;
@@ -1167,6 +1297,10 @@ $textRegular: 16px;
       width: 100%;
       padding-top: 24px;
 
+      @media (max-width: 767px) {
+        padding-top: 0px;
+      }
+
       &-grid {
         display: grid;
         grid-template-columns: 1fr auto;
@@ -1177,6 +1311,7 @@ $textRegular: 16px;
 
         @media (max-width: 767px) {
           grid-template-columns: 1fr;
+          padding: 24px 0px;
         }
       }
 
@@ -1221,7 +1356,7 @@ $textRegular: 16px;
       left: 0;
       width: 100%;
       height: 100vh;
-      background-color: $colorDefault;
+      background-color: $colorDark;
       z-index: 100;
       padding: 20px;
       transform: translateX(-100%);
@@ -1259,7 +1394,7 @@ $textRegular: 16px;
 
         &:hover {
           cursor: pointer;
-          color: $colorDark;
+          color: $colorRed;
         }
       }
     }
@@ -1352,5 +1487,29 @@ $textRegular: 16px;
 
   .tour-container {
     padding: 0px 16px;
+  }
+}
+@media (max-width: 460px) {
+  .tour-text {
+    &-title {
+      font-size: 32px;
+      letter-spacing: 1px;
+    }
+
+    &-semiTitle {
+      font-size: 20px;
+    }
+
+    &-medium {
+      font-size: 18px;
+    }
+
+    &-default {
+      font-size: 14px;
+    }
+  }
+
+  .tour-container {
+    padding: 0px 12px;
   }
 }
