@@ -113,6 +113,12 @@ export default function TourHeader({ sendMessage }: Props) {
               Видеообзоры
             </div>
             <div
+              className={`${headerClassName}-flex-item${activeSection === `tour_stage` ? "-active" : ""}`}
+              onClick={() => clickScrollIntoDiv("stage")}
+            >
+              Новый этап
+            </div>
+            <div
               className={`${headerClassName}-flex-item${activeSection === `tour_products` ? "-active" : ""}`}
               onClick={() => clickScrollIntoDiv("products")}
             >
@@ -126,11 +132,11 @@ export default function TourHeader({ sendMessage }: Props) {
             </div>
           </div>
 
-          {/* Оставить заявку */}
+          {/* Записаться на консультацию */}
           <div className={`${headerClassName}-flex`}>
             <div className={`${headerClassName}-button`} onClick={() => setModalVisible(true)}>
               <div className={`${headerClassName}-button-mail`} />
-              Оставить заявку
+              Записаться
             </div>
           </div>
 
@@ -154,6 +160,9 @@ export default function TourHeader({ sendMessage }: Props) {
           </div>
           <div className="mobile-menu-item" onClick={() => clickScrollIntoDiv("video")}>
             Видеообзоры
+          </div>
+          <div className="mobile-menu-item" onClick={() => clickScrollIntoDiv("stage")}>
+            Новый этап
           </div>
           <div className="mobile-menu-item" onClick={() => clickScrollIntoDiv("products")}>
             Наши продукты
@@ -182,13 +191,13 @@ export default function TourHeader({ sendMessage }: Props) {
             подходящее вам решение.
           </div>
           <div className="tour-header-modal-item" key={`survey-item-name`}>
-            <div className="tour-text-default">Имя*</div>
+            <div className="tour-text-default">ФИО*</div>
             <Input
               value={name}
               onValueChanged={(e: any) => changedString(e, "name")}
               type={"string"}
               size="big"
-              placeholder="Иван Иванов"
+              placeholder="Иван Иванов Иванович"
             />
           </div>
           <div className="tour-header-modal-item" key={`survey-item-name`}>
@@ -202,13 +211,13 @@ export default function TourHeader({ sendMessage }: Props) {
             />
           </div>
           <div className="tour-header-modal-item" key={`survey-item-name`}>
-            <div className="tour-text-default">Электронная почта</div>
+            <div className="tour-text-default">Школа, класс (учебное заведение)</div>
             <Input
               value={mail}
               onValueChanged={(e: any) => changedString(e, "mail")}
               type={"mail"}
               size="big"
-              placeholder="example@mail.com"
+              placeholder="99-ая школа, 10 класс"
             />
           </div>
           <div className="tour-text-default" style={{ paddingTop: "16px" }}>
@@ -220,7 +229,7 @@ export default function TourHeader({ sendMessage }: Props) {
               sendMessage(name, phone, mail);
             }}
           >
-            Оставить заявку
+            Записаться на консультацию
           </div>
         </div>
       </Modal>

@@ -134,7 +134,7 @@ export default function TourContainer() {
         dataType: "object",
         ord: 10,
         isVisible: true,
-        text: "Профориентационные туры и поступления в университеты",
+        text: "Профориентационные туры и поступление в университеты",
       },
     };
 

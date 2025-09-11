@@ -81,6 +81,12 @@
   font-style: normal;
   font-weight: normal;
 }
+@font-face {
+  font-family: "Manrope-ExtraBold";
+  src: url("../assets/fonts/Manrope/Manrope-ExtraBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
 
 // fontCormorant
 $fontCormorantBold: "Cormorant-Bold";
@@ -98,8 +104,9 @@ $fontMediumItalic: "Roboto-MediumItalic";
 $fontBold: "Roboto-Bold";
 $fontBoldItalic: "Roboto-BoldItalic";
 
-// fontRoboto
+// fontManrope
 $fontManrope: "Manrope";
+$fontManropeBold: "Manrope-ExtraBold";
 
 // color
 $colorWhite: #fff;

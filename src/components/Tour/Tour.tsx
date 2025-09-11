@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Input from "../../modules/YaKIT.WEB.KIT/components/Input/Input";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import _ from "lodash";
 
 type Props = {
   data: any;
@@ -24,6 +25,13 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
   const [mail1, setMail1] = useState<string>("");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [productItems, setProductItems] = useState<{ code: string; opened: boolean }[]>([
+    { code: "kz", opened: false },
+    { code: "china", opened: false },
+    { code: "sopr", opened: false },
+    { code: "prof", opened: false },
+    { code: "rf", opened: false },
+  ]);
 
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -152,6 +160,14 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
 
   const current = slides[currentSlide];
 
+  const clickOpened = (code: string) => {
+    const newProductItems = _.cloneDeep(productItems);
+
+    newProductItems.find((f) => f.code === code)!.opened = !newProductItems.find((f) => f.code === code)!.opened;
+
+    setProductItems(newProductItems);
+  };
+
   return (
     <div className="tour">
       <div className="tour-relative">
@@ -160,27 +176,24 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
           <div className="tour-container">
             <div className="tour-main">
               <div className="tour-main-item">
-                <div className="tour-text-title">Профтуры и поступление в университеты</div>
+                <div className="tour-text-title">БИЛИМ САХА</div>
 
                 <div className="tour-text-medium tour-text-white">
-                  Раньше мы помогали поступать только в Казахстан.
-                  <br /> А сейчас помогаем школьникам из Якутии найти свой путь в университетах{" "}
-                  <span className="tour-text-main">России, Казахстана, </span>а также открываем
-                  <span className="tour-text-red"> Китай</span>
+                  Профориентационные туры, лагеря {window.innerWidth > 1024 ? <br /> : ""} и поступление в университеты
                 </div>
               </div>
 
               <div className="tour-main-block">
-                <div className="tour-text-medium">Заявка на бесплатную консультацию</div>
+                <div className="tour-text-medium">Записаться на консультацию</div>
 
                 <div className="tour-header-modal-item" key={`survey-item-name`}>
-                  <div className="tour-text-default">Имя*</div>
+                  <div className="tour-text-default">ФИО*</div>
                   <Input
                     value={name}
                     onValueChanged={(e: any) => changedString(e, "name")}
                     type={"string"}
                     size="big"
-                    placeholder="Иван Иванов"
+                    placeholder="Иван Иванов Иванович"
                   />
                 </div>
                 <div className="tour-header-modal-item" key={`survey-item-name`}>
@@ -194,13 +207,13 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                   />
                 </div>
                 <div className="tour-header-modal-item" key={`survey-item-name`}>
-                  <div className="tour-text-default">Электронная почта</div>
+                  <div className="tour-text-default">Класс, школа (учебное заведение)</div>
                   <Input
                     value={mail}
                     onValueChanged={(e: any) => changedString(e, "mail")}
                     type={"mail"}
                     size="big"
-                    placeholder="example@mail.com"
+                    placeholder="99-ая школа, 10 класс"
                   />
                 </div>
                 <div
@@ -209,7 +222,7 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                     sendMessage(name, phone, mail);
                   }}
                 >
-                  Оставить заявку
+                  Записаться
                 </div>
               </div>
             </div>
@@ -224,11 +237,11 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
             </div>
             <div className="tour-about-item">
               <div className="tour-text-medium">
-                Мы прошли путь, который вам только предстоит. Мы тоже когда-то были студентами за границей и на
-                собственном опыте знаем, что значит — справляться со сложностями и преодолевать страх неизвестности.
+                Начиная с 2022 года мы организовали и провели более 10 профтуров и 6 лагерей для 700+ школьников со всей
+                Якутии. Также помогли поступить более 250 абитуриентам в желаемые вузы Казахстана и России
               </div>
 
-              <div className="tour-about-grid">
+              {/* <div className="tour-about-grid">
                 <div className="tour-text-default">
                   С 2022 года являемся экспертами на рынке образования. Наша работа — это сотни довольных студентов,
                   которые учатся в престижных ВУЗах благодаря нашему сопровождению.
@@ -237,29 +250,29 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                   Мы предлагаем не просто услуги, а проверенные и надежные решения, которые избавят вас от стресса и
                   гарантируют результат.
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 
           <div className="tour-number">
             <div className="tour-text-semiTitle tour-text-white tour-number-title">
-              Миссия - Развивать Якутию через <span className="tour-text-red">образование</span>
+              Наша миссия - развивать Якутию через <span className="tour-text-yellow">образование</span>
             </div>
             <div className="tour-number-items" ref={ref}>
               <div className="tour-number-item">
-                <div className="tour-text-title tour-text-red">
+                <div className="tour-text-title tour-text-yellow">
                   <CountUp duration={3} end={inView ? 250 : 0} />+
                 </div>
                 <div className="tour-text-default tour-text-white">Поступили в учебные заведения Казахстана</div>
               </div>
               <div className="tour-number-item">
-                <div className="tour-text-title tour-text-red">
-                  <CountUp end={inView ? 300 : 0} duration={3} />+
+                <div className="tour-text-title tour-text-yellow">
+                  <CountUp end={inView ? 700 : 0} duration={3} />+
                 </div>
-                <div className="tour-text-default tour-text-white">Посетили профтуры БИЛИМ</div>
+                <div className="tour-text-default tour-text-white">Посетили профтуры и лагеря БИЛИМ</div>
               </div>
               <div className="tour-number-item">
-                <div className="tour-text-title tour-text-red">
+                <div className="tour-text-title tour-text-yellow">
                   <CountUp end={inView ? 30 : 0} duration={3} />%
                 </div>
                 <div className="tour-text-default tour-text-white">
@@ -267,11 +280,13 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                 </div>
               </div>
               <div className="tour-number-item">
-                <div className="tour-text-title tour-text-red">
+                <div className="tour-text-title tour-text-yellow">
                   ~
                   <CountUp end={inView ? 73000 : 0} duration={7} separator=" " />
                 </div>
-                <div className="tour-text-default tour-text-white">Человек узнали об образовании в Казахстане</div>
+                <div className="tour-text-default tour-text-white">
+                  Человек узнали об образовании {window.innerWidth > 1024 ? <br /> : ""} в Казахстане
+                </div>
               </div>
             </div>
           </div>
@@ -305,15 +320,42 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
           </div>
         </div>
 
-        <div className="tour-container" id="tour_products">
+        {/* новый этап */}
+        <div className="tour-container" id="tour_stage">
+          <div className="tour-stage">
+            <div className="tour-text-semiTitle">Новый этап</div>
+            <div className="tour-stage-block">
+              <ol className="tour-stage-ol tour-text-medium tour-text-white">
+                <li>
+                  Мы открыли <b>офис в Якутске</b> - теперь мы ближе к вам
+                </li>
+                <li>
+                  Начали делать подборы в <b>российские вузы</b>
+                </li>
+                <li>
+                  Добавили <b>профориентацию и психологическую подготовку</b>
+                </li>
+                <li>
+                  Открыли <b>новые горизонты - Астана</b> в Казахстане и <b>Китай</b>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div className="tour-container">
           {/* наши продукты */}
-          <div className="tour-products">
+          <div className="tour-products" id="tour_products">
             <div className="tour-text-semiTitle">Наши продукты</div>
 
             {/* верхняя часть */}
             <div className="tour-products-items">
               {/* КЗ */}
-              <div className="tour-products-item">
+              <div
+                className={`tour-products-item ${
+                  productItems.find((f) => f.code === "kz")?.opened ? "tour-products-item-active" : ""
+                }`}
+              >
                 <div className="tour-products-item-header">
                   <div className="tour-products-item-header-title">
                     <div className="tour-text-medium tour-text-white">Профтур в Казахстан</div>
@@ -321,7 +363,11 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                   </div>
                   <div className="tour-products-icon-kz" />
                 </div>
-                <div className="tour-text-default tour-text-white tour-products-item-text">
+                <div
+                  className={`tour-text-default tour-text-white tour-products-item-text ${
+                    productItems.find((f) => f.code === "kz")?.opened ? "" : "hidden"
+                  }`}
+                >
                   Уже этой осенью мы летим в профтур по вузам Казахстана — сразу в два города: Алматы и Астану
                   <ol className="tour-products-ol">
                     <li>Астана: 25 октября — 1 ноября</li>
@@ -340,10 +386,42 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                     <li>Посещение офисов международных компаний</li>
                   </ol>
                 </div>
+                <div
+                  className={`tour-products-item-buttons ${
+                    productItems.find((f) => f.code === "kz")?.opened ? "" : "hidden"
+                  }`}
+                >
+                  <a
+                    className="tour-products-item-button tour-text-default"
+                    href={`https://wa.me/79963163149?text=${encodeURIComponent("Здраствуйте! ")}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Узнать подробнее
+                  </a>
+                </div>
+                <div
+                  className={`tour-products-item-arrow${
+                    productItems.find((f) => f.code === "kz")?.opened ? "-active" : ""
+                  }`}
+                  onClick={() => {
+                    clickOpened("kz");
+                  }}
+                >
+                  <div
+                    className={`tour-products-item-arrow-${
+                      productItems.find((f) => f.code === "kz")?.opened ? "close" : "open"
+                    }`}
+                  />
+                </div>
               </div>
 
               {/* китай */}
-              <div className="tour-products-item">
+              <div
+                className={`tour-products-item ${
+                  productItems.find((f) => f.code === "china")?.opened ? "tour-products-item-active" : ""
+                }`}
+              >
                 <div className="tour-products-item-header">
                   <div className="tour-products-item-header-title">
                     <div className="tour-text-medium tour-text-white">Профтур в Китай</div>
@@ -351,7 +429,11 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                   </div>
                   <div className="tour-products-icon-china" />
                 </div>
-                <div className="tour-text-default tour-text-white tour-products-item-text">
+                <div
+                  className={`tour-text-default tour-text-white tour-products-item-text ${
+                    productItems.find((f) => f.code === "china")?.opened ? "" : "hidden"
+                  }`}
+                >
                   Мы открываем новые горизонты - приглашаем на наш осенний профтур в Китае
                   <ol className="tour-products-ol">
                     <li>Харбин: 23 октября — 30 октября </li>
@@ -368,13 +450,45 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                     <li>Шоппинг, сафари - парк с тиграми, океанариум, день спа и многое другое</li>
                   </ol>
                 </div>
+                <div
+                  className={`tour-products-item-buttons ${
+                    productItems.find((f) => f.code === "china")?.opened ? "" : "hidden"
+                  }`}
+                >
+                  <a
+                    className="tour-products-item-button tour-text-default"
+                    href={`https://wa.me/79963163149?text=${encodeURIComponent("Здраствуйте! ")}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Узнать подробнее
+                  </a>
+                </div>
+                <div
+                  className={`tour-products-item-arrow${
+                    productItems.find((f) => f.code === "china")?.opened ? "-active" : ""
+                  }`}
+                  onClick={() => {
+                    clickOpened("china");
+                  }}
+                >
+                  <div
+                    className={`tour-products-item-arrow-${
+                      productItems.find((f) => f.code === "china")?.opened ? "close" : "open"
+                    }`}
+                  />
+                </div>
               </div>
             </div>
 
             {/* нижняя часть */}
             <div className="tour-products-itemsTriple">
               {/* полное сопровождение */}
-              <div className="tour-products-item">
+              <div
+                className={`tour-products-item ${
+                  productItems.find((f) => f.code === "sopr")?.opened ? "tour-products-item-active" : ""
+                }`}
+              >
                 <div className="tour-products-item-header">
                   <div className="tour-products-item-header-title">
                     <div className="tour-text-medium tour-text-white">Сопровождение по поступлению</div>
@@ -382,7 +496,11 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
 
                   <div className="tour-products-icon-accopointment" />
                 </div>
-                <div className="tour-text-default tour-text-white tour-products-item-text">
+                <div
+                  className={`tour-text-default tour-text-white tour-products-item-text ${
+                    productItems.find((f) => f.code === "sopr")?.opened ? "" : "hidden"
+                  }`}
+                >
                   Мы поможем поступить в университет Казахстана и осуществить мечту об учебе за границей:
                   <ol className="tour-products-ol">
                     <li>Подберем университет и программу, которая тебе подходит</li>
@@ -392,17 +510,53 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                     <li>И самое главное - поможем получить грант на обучение</li>
                   </ol>
                 </div>
+                <div
+                  className={`tour-products-item-buttons ${
+                    productItems.find((f) => f.code === "sopr")?.opened ? "" : "hidden"
+                  }`}
+                >
+                  <a
+                    className="tour-products-item-button tour-text-default"
+                    href={`https://wa.me/79963163149?text=${encodeURIComponent("Здраствуйте! ")}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Узнать подробнее
+                  </a>
+                </div>
+                <div
+                  className={`tour-products-item-arrow${
+                    productItems.find((f) => f.code === "sopr")?.opened ? "-active" : ""
+                  }`}
+                  onClick={() => {
+                    clickOpened("sopr");
+                  }}
+                >
+                  <div
+                    className={`tour-products-item-arrow-${
+                      productItems.find((f) => f.code === "sopr")?.opened ? "close" : "open"
+                    }`}
+                  />
+                </div>
               </div>
 
               {/* профориентация */}
-              <div className="tour-products-item">
+              <div
+                className={`tour-products-item ${
+                  productItems.find((f) => f.code === "prof")?.opened ? "tour-products-item-active" : ""
+                }`}
+              >
                 <div className="tour-products-item-header">
                   <div className="tour-products-item-header-title">
                     <div className="tour-text-medium tour-text-white">Профориентация</div>
                   </div>
                   <div className="tour-products-icon-proforient" />
                 </div>
-                <div className="tour-text-default tour-text-white tour-products-item-text">
+                <div
+                  className={`tour-text-default tour-text-white tour-products-item-text ${
+                    productItems.find((f) => f.code === "prof")?.opened ? "" : "hidden"
+                  }`}
+                >
                   Это услуга для ребят, которые не могут определиться со своей будущей профессией и направлением
                   обучения
                   <br />
@@ -410,19 +564,83 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                   Наш эксперт поможет вам разобраться в себе, определить сильные стороны и создать траекторию будущего
                   развития
                 </div>
+                <div
+                  className={`tour-products-item-buttons ${
+                    productItems.find((f) => f.code === "prof")?.opened ? "" : "hidden"
+                  }`}
+                >
+                  <a
+                    className="tour-products-item-button tour-text-default"
+                    href={`https://wa.me/79963163149?text=${encodeURIComponent("Здраствуйте! ")}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Узнать подробнее
+                  </a>
+                </div>
+                <div
+                  className={`tour-products-item-arrow${
+                    productItems.find((f) => f.code === "prof")?.opened ? "-active" : ""
+                  }`}
+                  onClick={() => {
+                    clickOpened("prof");
+                  }}
+                >
+                  <div
+                    className={`tour-products-item-arrow-${
+                      productItems.find((f) => f.code === "prof")?.opened ? "close" : "open"
+                    }`}
+                  />
+                </div>
               </div>
 
               {/* подбор рф */}
-              <div className="tour-products-item">
+              <div
+                className={`tour-products-item ${
+                  productItems.find((f) => f.code === "rf")?.opened ? "tour-products-item-active" : ""
+                }`}
+              >
                 <div className="tour-products-item-header">
                   <div className="tour-products-item-header-title">
                     <div className="tour-text-medium tour-text-white">Подбор РФ</div>
                   </div>
                   <div className="tour-products-icon-russia" />
                 </div>
-                <div className="tour-text-default tour-text-white tour-products-item-text">
+                <div
+                  className={`tour-text-default tour-text-white tour-products-item-text ${
+                    productItems.find((f) => f.code === "rf")?.opened ? "" : "hidden"
+                  }`}
+                >
                   Если вы хотите поступить в ведущие университеты России, мы подберем для вас наиболее подходящие
                   университеты по вашим направлениям. С учетом вашего бюджета и личных предпочтений
+                </div>
+                <div
+                  className={`tour-products-item-buttons ${
+                    productItems.find((f) => f.code === "rf")?.opened ? "" : "hidden"
+                  }`}
+                >
+                  <a
+                    className="tour-products-item-button tour-text-default"
+                    href={`https://wa.me/79963163149?text=${encodeURIComponent("Здраствуйте! ")}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Узнать подробнее
+                  </a>
+                </div>
+                <div
+                  className={`tour-products-item-arrow${
+                    productItems.find((f) => f.code === "rf")?.opened ? "-active" : ""
+                  }`}
+                  onClick={() => {
+                    clickOpened("rf");
+                  }}
+                >
+                  <div
+                    className={`tour-products-item-arrow-${
+                      productItems.find((f) => f.code === "rf")?.opened ? "close" : "open"
+                    }`}
+                  />
                 </div>
               </div>
             </div>
@@ -473,35 +691,45 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
             <div className="tour-zayavka-item">
               <div className="tour-zayavka-item-flex">
                 <div className="tour-text-semiTitle tour-text-white">
-                  Остались вопросы? <br /> Напишите нам!
+                  Остались вопросы? {window.innerWidth > 1024 ? <br /> : ""} Напишите нам!
                 </div>
                 <div className="tour-text-medium tour-text-white tour-zayavka-block-item-middle">
-                  Задавайте любые интересующие вас вопросы и получите профессиональную консультацию от нашего
-                  специалиста!
+                  Задайте любые интересующие вас вопросы и получите профессиональную консультацию от нашего специалиста
                 </div>
               </div>
 
-              <div className="tour-zayavka-block">
+              <div className="tour-zayavka-flex">
                 <div className="tour-zayavka-block-item">
-                  <div className="tour-text-medium tour-text-white tour-zayavka-block-item-middle">Телефон:</div>
+                  <div className="tour-text-default tour-text-white tour-zayavka-block-item-middle">Телефон:</div>
                   <a
                     href={"tel:8(996)-316-31-49"}
                     target={"_blank"}
                     rel="noreferrer"
-                    className="tour-text-medium tour-text-white tour-zayavka-block-item-text tour-zayavka-block-item-middle"
+                    className="tour-text-default tour-text-white tour-zayavka-block-item-text tour-zayavka-block-item-middle"
                   >
                     +7 (996) 316-31-49
                   </a>
                 </div>
                 <div className="tour-zayavka-block-item">
-                  <div className="tour-text-medium tour-text-white tour-zayavka-block-item-middle">Почта:</div>
+                  <div className="tour-text-default tour-text-white tour-zayavka-block-item-middle">Почта:</div>
                   <a
                     href={"mailto:bilimsakhakz@gmail.com"}
                     target={"_blank"}
                     rel="noreferrer"
-                    className="tour-text-medium tour-text-white tour-zayavka-block-item-text tour-zayavka-block-item-middle"
+                    className="tour-text-default tour-text-white tour-zayavka-block-item-text tour-zayavka-block-item-middle"
                   >
                     bilimsakhakz@gmail.com
+                  </a>
+                </div>
+                <div className="tour-zayavka-block-item">
+                  <div className="tour-text-default tour-text-white tour-zayavka-block-item-middle">Телеграм:</div>
+                  <a
+                    href={"https://t.me/bilim_sakha_kz"}
+                    target={"_blank"}
+                    rel="noreferrer"
+                    className="tour-text-default tour-text-white tour-zayavka-block-item-text tour-zayavka-block-item-middle"
+                  >
+                    https://t.me/bilim_sakha_kz
                   </a>
                 </div>
               </div>
@@ -509,13 +737,13 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
 
             <div className="tour-main-block">
               <div className="tour-header-modal-item" key={`survey-item-name`}>
-                <div className="tour-text-default">Имя*</div>
+                <div className="tour-text-default">ФИО*</div>
                 <Input
                   value={name1}
                   onValueChanged={(e: any) => changedString1(e, "name")}
                   type={"string"}
                   size="big"
-                  placeholder="Иван Иванов"
+                  placeholder="Иван Иванов Иванович"
                 />
               </div>
               <div className="tour-header-modal-item" key={`survey-item-name`}>
@@ -529,13 +757,13 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                 />
               </div>
               <div className="tour-header-modal-item" key={`survey-item-name`}>
-                <div className="tour-text-default">Электронная почта</div>
+                <div className="tour-text-default">Школа, класс (учебное заведение)</div>
                 <Input
                   value={mail1}
                   onValueChanged={(e: any) => changedString1(e, "mail")}
                   type={"mail"}
                   size="big"
-                  placeholder="example@mail.com"
+                  placeholder="99-ая школа, 10 класс"
                 />
               </div>
               <div
@@ -561,7 +789,7 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                   <div className="tour-footer-item-flexColumn">
                     <div className="tour-footer-logo" />
                     <div className="tour-text-default tour-text-white tour-footer-subtitle">
-                      {dataFooter.subtitle.text}
+                      Профориентационные туры и поступление {window.innerWidth > 1024 ? <br /> : ""} в университеты
                     </div>
                   </div>
                 </div>
