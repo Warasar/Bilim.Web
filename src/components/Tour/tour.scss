@@ -397,6 +397,16 @@ $textRegular: 16px;
       line-height: 110%;
     }
 
+    &-semiText {
+      font-size: $textBig;
+      font-family: $fontManrope;
+      font-weight: 600;
+      color: $colorRed;
+      letter-spacing: 1px;
+      text-decoration: none;
+      line-height: 110%;
+    }
+
     &-medium {
       color: $colorDark;
       font-family: $fontManrope;
@@ -478,6 +488,10 @@ $textRegular: 16px;
       display: flex;
       flex-direction: column;
       gap: 24px;
+
+      @media (max-width: 767px) {
+        gap: 16px;
+      }
     }
 
     &-block {
@@ -733,11 +747,20 @@ $textRegular: 16px;
         gap: 12px;
         align-items: center;
 
+        @media (max-width: 767px) {
+          direction: rtl;
+        }
+
         &-title {
           display: flex;
           flex-direction: column;
           justify-content: start;
           height: 100%;
+
+          @media (max-width: 767px) {
+            align-items: end;
+            text-align: left;
+          }
         }
       }
 
@@ -1147,7 +1170,7 @@ $textRegular: 16px;
         gap: 6px;
 
         &-middle {
-          @media (max-width: 460px) {
+          @media (max-width: 767px) {
             font-size: 16px !important;
           }
         }
@@ -1170,6 +1193,23 @@ $textRegular: 16px;
       row-gap: 20px;
 
       @media (max-width: 1024px) {
+        display: none;
+        gap: 24px;
+      }
+
+      @media (max-width: 767px) {
+        gap: 16px;
+      }
+    }
+
+    &-flexMobile {
+      display: none;
+      flex-wrap: wrap;
+      gap: 32px;
+      row-gap: 20px;
+
+      @media (max-width: 1024px) {
+        display: flex;
         gap: 24px;
       }
 
@@ -1595,6 +1635,10 @@ $textRegular: 16px;
       font-size: 32px;
     }
 
+    &-semiText {
+      font-size: 32px;
+    }
+
     &-medium {
       font-size: 20px;
     }
@@ -1603,11 +1647,15 @@ $textRegular: 16px;
 @media (max-width: 767px) {
   .tour-text {
     &-title {
-      font-size: 36px;
+      font-size: 40px;
       letter-spacing: 1px;
     }
 
     &-semiTitle {
+      font-size: 32px;
+    }
+
+    &-semiText {
       font-size: 24px;
     }
 
@@ -1625,25 +1673,6 @@ $textRegular: 16px;
   }
 }
 @media (max-width: 460px) {
-  .tour-text {
-    &-title {
-      font-size: 32px;
-      letter-spacing: 1px;
-    }
-
-    &-semiTitle {
-      font-size: 20px;
-    }
-
-    &-medium {
-      font-size: 18px;
-    }
-
-    &-default {
-      font-size: 14px;
-    }
-  }
-
   .tour-container {
     padding: 0px 12px;
   }

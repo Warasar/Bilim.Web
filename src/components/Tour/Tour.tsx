@@ -218,11 +218,9 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                 </div>
                 <div
                   className={`tour-header-modal-button${name.length && phone.length ? "" : "-disabled"}`}
-                  onClick={() => {
-                    sendMessage(name, phone, mail);
-                  }}
+                  onClick={() => (name.length && phone.length ? sendMessage(name, phone, mail) : null)}
                 >
-                  Записаться
+                  Оставить заявку
                 </div>
               </div>
             </div>
@@ -255,7 +253,7 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
           </div>
 
           <div className="tour-number">
-            <div className="tour-text-semiTitle tour-text-white tour-number-title">
+            <div className="tour-text-semiText tour-text-white tour-number-title">
               Наша миссия - развивать Якутию через <span className="tour-text-yellow">образование</span>
             </div>
             <div className="tour-number-items" ref={ref}>
@@ -768,11 +766,45 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
               </div>
               <div
                 className={`tour-header-modal-button${name1.length && phone1.length ? "" : "-disabled"}`}
-                onClick={() => {
-                  sendMessage(name1, phone1, mail1);
-                }}
+                onClick={() => (name1.length && phone1.length ? sendMessage(name1, phone1, mail1) : null)}
               >
                 Оставить заявку
+              </div>
+            </div>
+
+            <div className="tour-zayavka-flexMobile">
+              <div className="tour-zayavka-block-item">
+                <div className="tour-text-default tour-text-white tour-zayavka-block-item-middle">Телефон:</div>
+                <a
+                  href={"tel:8(996)-316-31-49"}
+                  target={"_blank"}
+                  rel="noreferrer"
+                  className="tour-text-default tour-text-white tour-zayavka-block-item-text tour-zayavka-block-item-middle"
+                >
+                  +7 (996) 316-31-49
+                </a>
+              </div>
+              <div className="tour-zayavka-block-item">
+                <div className="tour-text-default tour-text-white tour-zayavka-block-item-middle">Почта:</div>
+                <a
+                  href={"mailto:bilimsakhakz@gmail.com"}
+                  target={"_blank"}
+                  rel="noreferrer"
+                  className="tour-text-default tour-text-white tour-zayavka-block-item-text tour-zayavka-block-item-middle"
+                >
+                  bilimsakhakz@gmail.com
+                </a>
+              </div>
+              <div className="tour-zayavka-block-item">
+                <div className="tour-text-default tour-text-white tour-zayavka-block-item-middle">Телеграм:</div>
+                <a
+                  href={"https://t.me/bilim_sakha_kz"}
+                  target={"_blank"}
+                  rel="noreferrer"
+                  className="tour-text-default tour-text-white tour-zayavka-block-item-text tour-zayavka-block-item-middle"
+                >
+                  https://t.me/bilim_sakha_kz
+                </a>
               </div>
             </div>
           </div>
