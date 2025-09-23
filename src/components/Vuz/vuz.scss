@@ -140,6 +140,41 @@
     text-align: center;
   }
 
+  &-search {
+    margin-top: 40px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto 1fr auto auto;
+    gap: 32px;
+    margin-bottom: -30px;
+    align-items: end;
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      &-text {
+        font-size: 16px;
+        color: $colorDark;
+      }
+    }
+
+    &-button {
+      padding: 8px 12px;
+      border-radius: 8px;
+      background-color: $colorDark;
+      font-size: 16px;
+      color: $colorWhite;
+      transition: 0.2s;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $colorRed;
+      }
+    }
+  }
+
   &-vuzes {
     margin-top: 40px;
     display: grid;
@@ -212,6 +247,90 @@
         color: $colorWhite;
         font-size: 16px;
         font-family: $fontMediumItalic;
+      }
+    }
+  }
+
+  &-list {
+    margin-top: 40px;
+    display: grid;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 40px;
+
+    &-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+
+      &-header {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        gap: 12px;
+        background-color: $colorDark;
+        padding: 12px 24px;
+
+        &-photo {
+          width: 64px; /* или конкретное значение, например 100px */
+          height: 64px; /* сохраняет пропорции */
+          max-width: 100%; /* предотвращает выход за границы контейнера */
+          z-index: 2;
+          object-fit: cover;
+          transition: 0.2s;
+          border-radius: 50%;
+        }
+
+        &-column {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        &-text {
+          color: $colorWhite;
+          font-size: 24px;
+          font-family: $fontMedium;
+          text-decoration: none;
+          transition: 0.2s;
+          width: fit-content;
+
+          &:hover {
+            color: $colorRed;
+            cursor: pointer;
+          }
+        }
+
+        &-arrow {
+          width: 36px;
+          height: 36px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/chevron-right.svg");
+          transition: 0.2s;
+
+          &:hover {
+            background-image: url("../../assets/icons/default/chevron-right_active.svg");
+            cursor: pointer;
+          }
+
+          &-active {
+            width: 36px;
+            height: 36px;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url("../../assets/icons/default/chevron-right.svg");
+            transition: 0.2s;
+            transform: rotate(90deg);
+
+            &:hover {
+              background-image: url("../../assets/icons/default/chevron-right_active.svg");
+              cursor: pointer;
+            }
+          }
+        }
       }
     }
   }

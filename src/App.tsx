@@ -12,6 +12,7 @@ import Auth from "./components/Auth/Auth";
 import MotivationLetterContainer from "./components/MotivationLetter/MotivationLetterContainer";
 import Survey from "./components/Survey/Survey";
 import TourContainer from "./components/Tour/TourContainer";
+import Profile from "./components/Profile/Profile";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -57,6 +58,11 @@ export default function App() {
     {
       path: `/survey`,
       element: <Survey />, // опросник страница
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: `/profile`,
+      element: <Profile />, // страница пользователя
       errorElement: <ErrorPage />,
     },
     {

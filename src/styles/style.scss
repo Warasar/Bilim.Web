@@ -24,3 +24,26 @@ body {
 .loading {
   min-height: calc(100dvh - 62px);
 }
+
+h1 {
+  margin: 0px;
+  color: $colorWhite;
+  font-size: 54px;
+  font-family: $fontBold;
+  text-align: center;
+  line-height: 100%;
+  padding-top: 20px;
+}
+
+h2 {
+  margin: 0px;
+  color: $colorDark;
+  font-size: 44px;
+  text-align: center;
+  font-family: $fontBoldItalic;
+  line-height: 100%;
+}
+
+p {
+  margin: 0px;
+}
