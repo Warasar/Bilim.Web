@@ -1,22 +1,13 @@
 @import "../../styles/variables.scss";
 
-.survey {
-  min-height: 100vh;
-  background: linear-gradient(
-    135deg,
-    $colorDefault 0%,
-    #8bb8db 50%,
-    #73a6d1 100%
-  );
+.profile {
+  background-color: $colorDefault;
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 1rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   &-container {
     width: 100%;
-    max-width: 800px;
+    max-width: 1152px;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     border-radius: 16px;
@@ -31,90 +22,22 @@
     font-size: 24px;
     padding: 12px 24px;
     border-bottom: 1px solid $colorBorder;
-    text-align: center;
   }
 
-  &-items {
+  &-user {
     padding: 12px 24px;
     display: grid;
-    gap: 12px;
-    max-height: 600px;
-    overflow-y: auto;
+    grid-template-columns: auto 1fr;
+    gap: 48px;
 
-    &::-webkit-scrollbar {
-      width: 8px !important;
-      background-color: transparent;
+    &-avatar {
     }
-    &::-webkit-scrollbar-thumb {
-      padding: 2px;
-      background-color: $colorDark !important;
-      border-radius: 4px !important;
-      transition: 0.2s;
-    }
-  }
 
-  &-item {
-    display: grid;
-    gap: 3px;
-
-    &-text {
-      font-size: 16px;
-      font-family: $fontMedium;
-      color: $colorDark;
-    }
-  }
-
-  &-modal {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    min-width: 600px;
-
-    &-header {
-      padding: 12px 24px;
+    &-items {
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 6px;
-      border-bottom: 1px solid $colorBorder;
-
-      &-text {
-        font-size: 24px;
-        font-family: $fontMedium;
-        color: $colorDark;
-      }
-    }
-
-    &-acceptTerms {
-      padding: 12px 24px;
-      display: grid;
-      gap: 6px;
-
-      &-text {
-        font-size: 14px;
-        font-family: $fontRegular;
-        color: $colorDark;
-      }
-    }
-
-    &-footer {
-      padding: 12px 24px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-
-      &-button {
-        font-size: 16px;
-        font-family: $fontRegular;
-        color: $colorWhite;
-        background-color: $colorDefault;
-        padding: 6px 12px;
-        border-radius: 8px;
-        width: fit-content;
-        transition: 0.2s;
-
-        &:hover {
-          background-color: $colorDark;
-          cursor: pointer;
-        }
-      }
+      grid-template-columns: 1fr 1fr;
+      column-gap: 24px;
+      row-gap: 12px;
     }
   }
 }

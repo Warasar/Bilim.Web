@@ -10,6 +10,7 @@ import Select from "../../modules/YaKIT.WEB.KIT/components/Select/Select";
 import { DatePicker, ConfigProvider } from "antd";
 import dayjs from "dayjs";
 import locale from "antd/locale/ru_RU";
+import HeaderContainer from "../Header/HeaderContainer";
 
 dayjs.locale("ru");
 const dateFormat = "DD MMMM YYYY"; // "7 августа 2000"
@@ -19,6 +20,7 @@ export default function Profile() {
   const [showTermsModal, setShowTermsModal] = useState<boolean>(false);
   const [terms, setTerms] = useState<any>(null);
   const [data, setData] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<any>(null);
 
   const customFormatDate: DatePickerProps["format"] = (value) => {
     return dayjs(value).format(dateFormat);
@@ -31,18 +33,7 @@ export default function Profile() {
   const getData = async () => {
     const currentUser = await requestGet(`currentUser`);
 
-    if (!currentUser.hasAcceptedTerms) {
-      const terms = await requestGet(`container/terms`);
-
-      setTerms(terms);
-      setShowTermsModal(true);
-    }
-
-    const surveyData = await requestGet(`register/survey/${currentUser.role}`);
-    if (surveyData) {
-      setData(surveyData);
-    }
-
+    setCurrentUser(currentUser);
     setLoader(false);
   };
 
@@ -64,8 +55,7 @@ export default function Profile() {
   const changedString = (code: string, e: any) => {
     const newData: any = _.cloneDeep(data);
 
-    newData.data.find((f: any) => f.questionCode === code).value =
-      e.target.value;
+    newData.data.find((f: any) => f.questionCode === code).value = e.target.value;
 
     setData(newData);
   };
@@ -115,111 +105,52 @@ export default function Profile() {
         win.location = `${window.location.origin}`;
       }, 2000);
     } else {
-      message.error(
-        "Произошла ошибка, пожайлуста попробуйте позже или обратитесь к администратору"
-      );
+      message.error("Произошла ошибка, пожайлуста попробуйте позже или обратитесь к администратору");
     }
 
     setLoader(false);
   };
 
   return (
-    <div className="survey">
+    <div>
       {loader ? <Loader absolute /> : null}
-      <div className="survey-container">
-        <div className="survey-title">Профиль пользователя</div>
+      <HeaderContainer />
 
-        <div className="survey-items">
-          {data?.data?.map((item: any) => {
-            return item.answerType === "string" ||
-              item.answerType === "phone" ||
-              item.answerType === "email" ? (
-              <div
-                className="survey-item"
-                key={`survey-item-${item.questionCode}`}
-              >
-                <div className="survey-item-text">{item.questionName}:</div>
-                <Input
-                  value={item.value}
-                  style={{ height: "30px" }}
-                  onValueChanged={(e: any) =>
-                    changedString(item.questionCode, e)
-                  }
-                  type={item.answerType}
-                />
-              </div>
-            ) : item.answerType === "object" ? (
-              <div
-                className="survey-item"
-                key={`survey-item-${item.questionCode}`}
-              >
-                <div className="survey-item-text">{item.questionName}:</div>
-                <Select
-                  data={data.objects[item.answersSpr]}
-                  value={item.value}
-                  onValueChanged={(e: any) =>
-                    changedObject(item.questionCode, e)
-                  }
-                  dontShowClear
-                />
-              </div>
-            ) : item.answerType === "date" ? (
-              <div
-                className="survey-item"
-                key={`survey-item-${item.questionCode}`}
-              >
-                <div className="survey-item-text">{item.questionName}:</div>
-                <ConfigProvider locale={locale}>
-                  <DatePicker
-                    onChange={(value: any) =>
-                      changedDate(item.questionCode, value)
-                    }
-                    value={item.value ? item.value : null}
-                    picker="date"
-                    format={customFormatDate}
-                    allowClear={false}
-                  />
-                </ConfigProvider>
-              </div>
-            ) : (
-              <div>{item.answerType}</div>
-            );
-          })}
-        </div>
+      <div className="profile">
+        <div className="profile-container">
+          <div className="profile-title">Профиль</div>
 
-        <div className="survey-modal-footer">
-          <div />
-          <div
-            className="survey-modal-footer-button"
-            onClick={() => sendSurvey()}
-          >
-            Отправить
-          </div>
-        </div>
-      </div>
+          <div className="profile-user">
+            <div className="profile-user-avatar">avatar aang</div>
 
-      {/* пользовательское соглашение */}
-      <Modal open={showTermsModal} onCancel={() => {}}>
-        <div className="survey-modal">
-          <div className="survey-modal-header">
-            <div className="survey-modal-header-text">Условия пользования</div>
-          </div>
-          <div className="survey-modal-acceptTerms">
-            <div className="survey-modal-acceptTerms-text">{terms?.text1}</div>
-            <div className="survey-modal-acceptTerms-text">{terms?.text2}</div>
-            <div className="survey-modal-acceptTerms-text">{terms?.text3}</div>
-          </div>
-          <div className="survey-modal-footer">
-            <div />
-            <div
-              className="survey-modal-footer-button"
-              onClick={() => acceptTerms()}
-            >
-              Принять
+            <div className="profile-user-items">
+              <div className="profile-user-item">
+                <div className="profile-user-item-text">Имя:</div>
+              </div>
             </div>
           </div>
         </div>
-      </Modal>
+
+        {/* пользовательское соглашение */}
+        <Modal open={showTermsModal} onCancel={() => {}}>
+          <div className="survey-modal">
+            <div className="survey-modal-header">
+              <div className="survey-modal-header-text">Условия пользования</div>
+            </div>
+            <div className="survey-modal-acceptTerms">
+              <div className="survey-modal-acceptTerms-text">{terms?.text1}</div>
+              <div className="survey-modal-acceptTerms-text">{terms?.text2}</div>
+              <div className="survey-modal-acceptTerms-text">{terms?.text3}</div>
+            </div>
+            <div className="survey-modal-footer">
+              <div />
+              <div className="survey-modal-footer-button" onClick={() => acceptTerms()}>
+                Принять
+              </div>
+            </div>
+          </div>
+        </Modal>
+      </div>
     </div>
   );
 }

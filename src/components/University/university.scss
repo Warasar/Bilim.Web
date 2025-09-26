@@ -143,6 +143,18 @@
       }
     }
 
+    &-items1 {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+
+      &-active {
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
     &-child {
       display: grid;
       grid-template-columns: 40% 1fr;
@@ -198,6 +210,18 @@
               cursor: pointer;
             }
           }
+        }
+      }
+
+      &-content1 {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+
+        &-active {
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
         }
       }
 

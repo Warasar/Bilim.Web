@@ -145,14 +145,14 @@
     width: 100%;
     display: grid;
     grid-template-columns: auto auto 1fr auto auto;
-    gap: 32px;
+    gap: 24px;
     margin-bottom: -30px;
-    align-items: end;
+    align-items: center;
 
     &-item {
       display: flex;
-      flex-direction: column;
-      gap: 6px;
+      gap: 12px;
+      align-items: center;
 
       &-text {
         font-size: 16px;
@@ -171,6 +171,31 @@
       &:hover {
         cursor: pointer;
         background-color: $colorRed;
+      }
+    }
+
+    &-checkbox {
+      width: 24px;
+      height: 24px;
+      background-color: $colorDark;
+      border-radius: 6px;
+      transition: 0.2s;
+
+      &:hover {
+        background-color: $colorRed;
+        cursor: pointer;
+      }
+
+      &-active {
+        background-image: url("../../assets/icons/default/check.svg");
+        width: 24px;
+        height: 24px;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: $colorRed;
+        border-radius: 6px;
+        transition: 0.2s;
       }
     }
   }
@@ -332,6 +357,11 @@
           }
         }
       }
+    }
+
+    &-block {
+      display: grid;
+      background-color: $colorWhite;
     }
   }
 }
