@@ -8,36 +8,155 @@
   &-container {
     width: 100%;
     max-width: 1152px;
-    background: rgba(255, 255, 255, 0.95);
+    background-color: #fdfdfd;
     backdrop-filter: blur(10px);
     border-radius: 16px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
+    margin-top: 24px;
   }
 
-  &-title {
-    font-family: $fontMedium;
-    color: $colorDark;
-    font-size: 24px;
-    padding: 12px 24px;
-    border-bottom: 1px solid $colorBorder;
+  &-block {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    padding: 24px;
+    gap: 48px;
   }
 
   &-user {
-    padding: 12px 24px;
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 48px;
 
     &-avatar {
+      background-color: #0a304b;
+      width: 72px !important;
+      height: 72px !important;
     }
 
     &-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    &-item {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 24px;
-      row-gap: 12px;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+
+      &-text {
+        font-size: 16px;
+        color: $colorDark;
+        font-family: $fontRegular;
+
+        &-bold {
+          font-family: $fontMedium;
+        }
+      }
+    }
+  }
+
+  &-sider {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    &-item {
+      padding: 8px 12px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 8px;
+      transition: 0.2s;
+      border: 1px solid #fff;
+      align-items: center;
+
+      &:hover {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 8px;
+        padding: 8px 12px;
+        border: 1px solid $colorBorder;
+        border-radius: 12px;
+        box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
+        background-color: $colorWhite;
+        cursor: pointer;
+        color: $colorRed !important;
+        align-items: center;
+      }
+
+      &-active {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 8px;
+        padding: 8px 12px;
+        border: 1px solid $colorBorder;
+        border-radius: 12px;
+        box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
+        background-color: $colorWhite;
+        color: $colorRed !important;
+        align-items: center;
+      }
+
+      &:hover &-text {
+        color: $colorRed !important;
+      }
+
+      &-text {
+        font-size: 16px;
+        font-family: $fontMedium;
+        color: $colorDark;
+        transition: 0.2s;
+
+        &-active {
+          font-size: 16px;
+          font-family: $fontMedium;
+          color: $colorRed;
+        }
+      }
+
+      &-icon {
+        &-profile {
+          width: 24px;
+          height: 24px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/profile.svg");
+          transition: 0.2s;
+        }
+
+        &-docs {
+          width: 24px;
+          height: 24px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/docs.svg");
+          transition: 0.2s;
+        }
+
+        &-notification {
+          width: 24px;
+          height: 24px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/notification.svg");
+          transition: 0.2s;
+        }
+
+        &-homework {
+          width: 24px;
+          height: 24px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/homework.svg");
+          transition: 0.2s;
+        }
+      }
     }
   }
 }
