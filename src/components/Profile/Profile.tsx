@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import HeaderContainer from "../Header/HeaderContainer";
 import { Image } from "antd";
 import userIcon from "../../assets/icons/default/user.svg";
+import _ from "lodash";
 
 dayjs.locale("ru");
 
@@ -14,25 +15,25 @@ export default function Profile() {
   const [data, setData] = useState<any>(null);
   const [sider, setSider] = useState<any>([
     {
-      code: "0",
+      code: "profile",
       name: "Профиль",
       icon: "profile",
       active: true,
     },
     {
-      code: "1",
+      code: "docs",
       name: "Документы",
       icon: "docs",
       active: false,
     },
     {
-      code: "2",
+      code: "notification",
       name: "Уведомления",
       icon: "notification",
       active: false,
     },
     {
-      code: "3",
+      code: "homework",
       name: "Домашние задания",
       icon: "homework",
       active: false,
@@ -45,9 +46,30 @@ export default function Profile() {
   }, []);
   const getData = async () => {
     const newData: any = await requestGet(`container/user`);
+    const currentUser = await requestGet(`currentUser`);
+
+    const surveyData = await requestGet(`register/survey/${currentUser.role}`);
+    if (surveyData) {
+      debugger;
+      // setData(surveyData);
+    }
 
     setData(newData);
     setLoader(false);
+  };
+
+  const handleClickSider = (clickItem: any) => {
+    const newSider: any = _.cloneDeep(sider);
+
+    newSider.forEach((item: any) => {
+      if (item.code === clickItem.code) {
+        item.active = true;
+      } else {
+        item.active = false;
+      }
+    });
+
+    setSider(newSider);
   };
 
   return (
@@ -62,41 +84,65 @@ export default function Profile() {
               <div className="profile-sider">
                 {sider.map((item: any) => {
                   return (
-                    <div className={"profile-sider-item" + (item.active ? "-active" : "")}>
+                    <div
+                      className={
+                        "profile-sider-item" + (item.active ? "-active" : "")
+                      }
+                      onClick={() => handleClickSider(item)}
+                    >
                       <div className={`profile-sider-item-icon-${item.icon}`} />
-                      <div className={"profile-sider-item-text" + (item.active ? "-active" : "")}>{item.name}</div>
+                      <div
+                        className={
+                          "profile-sider-item-text" +
+                          (item.active ? "-active" : "")
+                        }
+                      >
+                        {item.name}
+                      </div>
                     </div>
                   );
                 })}
               </div>
-              <div className="profile-user">
-                <Image
-                  className="profile-user-avatar"
-                  // src={`${item.urlImg}`}
-                  style={{
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                    overflow: "hidden",
-                    objectPosition: "top",
-                  }}
-                  preview={{
-                    mask: <>Просмотр</>,
-                  }}
-                  fallback={userIcon}
-                />
 
-                <div className="profile-user-items">
-                  <div className="profile-user-item">
-                    <div className="profile-user-item-text profile-user-item-text-bold">ФИО:</div>
-                    <div className="profile-user-item-text">{data.fullName}</div>
+              {sider?.find((f: any) => f.active === true)?.code ===
+              "profile" ? (
+                <div className="profile-user">
+                  <div>
+                    <Image
+                      className="profile-user-avatar"
+                      // src={`${item.urlImg}`}
+                      style={{
+                        borderRadius: "50%",
+                        objectFit: "cover",
+                        overflow: "hidden",
+                        objectPosition: "top",
+                      }}
+                      preview={{
+                        mask: <>Просмотр</>,
+                      }}
+                      fallback={userIcon}
+                    />
                   </div>
 
-                  <div className="profile-user-item">
-                    <div className="profile-user-item-text profile-user-item-text-bold">Email:</div>
-                    <div className="profile-user-item-text">{data.mail}</div>
+                  <div className="profile-user-items">
+                    <div className="profile-user-item">
+                      <div className="profile-user-item-text profile-user-item-text-bold">
+                        ФИО:
+                      </div>
+                      <div className="profile-user-item-text">
+                        {data.fullName}
+                      </div>
+                    </div>
+
+                    <div className="profile-user-item">
+                      <div className="profile-user-item-text profile-user-item-text-bold">
+                        Email:
+                      </div>
+                      <div className="profile-user-item-text">{data.mail}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : null}
             </div>
           </div>
         ) : null}

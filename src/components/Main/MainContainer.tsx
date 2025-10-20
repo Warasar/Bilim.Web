@@ -6,6 +6,7 @@ import CalendarContainer from "../Calendar/CalendarContainer";
 import CarouselContainer from "../Carousel/CarouselContainer";
 import FooterContainer from "../Footer/FooterContainer";
 import { requestGet } from "../../actions/actions";
+import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
 
 export default function MainContainer() {
   const [data, setData] = useState<any>(null);
@@ -34,7 +35,14 @@ export default function MainContainer() {
   return (
     <div>
       <HeaderContainer />
-      {data ? <Main data={data} /> : null}
+      {data ? (
+        <Main data={data} />
+      ) : (
+        <div>
+          <Loader absolute />
+          <div style={{ height: "calc(100vh)" }} />
+        </div>
+      )}
       <CalendarContainer />
       <CarouselContainer />
       <FooterContainer />

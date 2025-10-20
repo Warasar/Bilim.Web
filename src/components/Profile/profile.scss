@@ -61,10 +61,10 @@
   &-sider {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 4px;
 
     &-item {
-      padding: 8px 12px;
+      padding: 12px;
       display: grid;
       grid-template-columns: auto 1fr;
       gap: 8px;
@@ -76,9 +76,9 @@
         display: grid;
         grid-template-columns: auto 1fr;
         gap: 8px;
-        padding: 8px 12px;
+        padding: 12px;
         border: 1px solid $colorBorder;
-        border-radius: 12px;
+        border-radius: 8px;
         box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
         background-color: $colorWhite;
         cursor: pointer;
@@ -90,9 +90,9 @@
         display: grid;
         grid-template-columns: auto 1fr;
         gap: 8px;
-        padding: 8px 12px;
+        padding: 12px;
         border: 1px solid $colorBorder;
-        border-radius: 12px;
+        border-radius: 8px;
         box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
         background-color: $colorWhite;
         color: $colorRed !important;
