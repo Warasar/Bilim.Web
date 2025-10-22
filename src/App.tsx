@@ -12,7 +12,7 @@ import Auth from "./components/Auth/Auth";
 import MotivationLetterContainer from "./components/MotivationLetter/MotivationLetterContainer";
 import Survey from "./components/Survey/Survey";
 import TourContainer from "./components/Tour/TourContainer";
-import Profile from "./components/Profile/Profile";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -62,7 +62,7 @@ export default function App() {
     },
     {
       path: `/profile`,
-      element: <Profile />, // страница пользователя
+      element: <ProfileContainer />, // страница пользователя
       errorElement: <ErrorPage />,
     },
     {

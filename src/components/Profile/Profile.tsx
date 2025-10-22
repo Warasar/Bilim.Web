@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import "./profile.scss";
-import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
-import { requestGet } from "../../actions/actions";
-import dayjs from "dayjs";
-import HeaderContainer from "../Header/HeaderContainer";
-import { Image } from "antd";
-import userIcon from "../../assets/icons/default/user.svg";
 import _ from "lodash";
+import ProfileUser from "./ProfileItems/ProfileUser";
+import { useSearchParams } from "react-router-dom";
+import ProfileDocs from "./ProfileItems/ProfileDocs";
 
-dayjs.locale("ru");
+type Props = {
+  setLoader: (loader: boolean) => void;
+  userData: any;
+};
 
-export default function Profile() {
-  const [loader, setLoader] = useState<boolean>(true);
-  const [data, setData] = useState<any>(null);
+export default function Profile({ setLoader, userData }: Props) {
+  const [searchParams] = useSearchParams();
   const [sider, setSider] = useState<any>([
     {
       code: "profile",
@@ -40,29 +38,20 @@ export default function Profile() {
     },
   ]);
 
-  // первоначалка
+  // когда меняется ссылка с searchParams
   useEffect(() => {
-    getData();
-  }, []);
-  const getData = async () => {
-    const newData: any = await requestGet(`container/user`);
-    const currentUser = await requestGet(`currentUser`);
-
-    const surveyData = await requestGet(`register/survey/${currentUser.role}`);
-    if (surveyData) {
-      debugger;
-      // setData(surveyData);
+    const code = searchParams.get("code");
+    if (code) {
+      handleClickSider(code);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
-    setData(newData);
-    setLoader(false);
-  };
-
-  const handleClickSider = (clickItem: any) => {
+  const handleClickSider = (clickCode: any) => {
     const newSider: any = _.cloneDeep(sider);
 
     newSider.forEach((item: any) => {
-      if (item.code === clickItem.code) {
+      if (item.code === clickCode) {
         item.active = true;
       } else {
         item.active = false;
@@ -73,78 +62,26 @@ export default function Profile() {
   };
 
   return (
-    <div>
-      {loader ? <Loader absolute /> : null}
-      <HeaderContainer />
-
-      <div className="profile">
-        {data ? (
-          <div className="profile-container">
-            <div className="profile-block">
-              <div className="profile-sider">
-                {sider.map((item: any) => {
-                  return (
-                    <div
-                      className={
-                        "profile-sider-item" + (item.active ? "-active" : "")
-                      }
-                      onClick={() => handleClickSider(item)}
-                    >
-                      <div className={`profile-sider-item-icon-${item.icon}`} />
-                      <div
-                        className={
-                          "profile-sider-item-text" +
-                          (item.active ? "-active" : "")
-                        }
-                      >
-                        {item.name}
-                      </div>
-                    </div>
-                  );
-                })}
+    <div className="profile-container">
+      <div className="profile-block">
+        <div className="profile-sider">
+          {sider.map((item: any) => {
+            return (
+              <div
+                className={"profile-sider-item" + (item.active ? "-active" : "")}
+                onClick={() => handleClickSider(item.code)}
+              >
+                <div className={`profile-sider-item-icon-${item.icon}`} />
+                <div className={"profile-sider-item-text" + (item.active ? "-active" : "")}>{item.name}</div>
               </div>
+            );
+          })}
+        </div>
 
-              {sider?.find((f: any) => f.active === true)?.code ===
-              "profile" ? (
-                <div className="profile-user">
-                  <div>
-                    <Image
-                      className="profile-user-avatar"
-                      // src={`${item.urlImg}`}
-                      style={{
-                        borderRadius: "50%",
-                        objectFit: "cover",
-                        overflow: "hidden",
-                        objectPosition: "top",
-                      }}
-                      preview={{
-                        mask: <>Просмотр</>,
-                      }}
-                      fallback={userIcon}
-                    />
-                  </div>
-
-                  <div className="profile-user-items">
-                    <div className="profile-user-item">
-                      <div className="profile-user-item-text profile-user-item-text-bold">
-                        ФИО:
-                      </div>
-                      <div className="profile-user-item-text">
-                        {data.fullName}
-                      </div>
-                    </div>
-
-                    <div className="profile-user-item">
-                      <div className="profile-user-item-text profile-user-item-text-bold">
-                        Email:
-                      </div>
-                      <div className="profile-user-item-text">{data.mail}</div>
-                    </div>
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          </div>
+        {sider?.find((f: any) => f.active === true)?.code === "profile" ? (
+          <ProfileUser setLoader={setLoader} />
+        ) : sider?.find((f: any) => f.active === true)?.code === "docs" ? (
+          <ProfileDocs userData={userData} setLoader={setLoader} />
         ) : null}
       </div>
     </div>

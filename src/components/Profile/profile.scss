@@ -15,53 +15,21 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
     margin-top: 24px;
+    margin-bottom: 24px;
   }
 
   &-block {
     display: grid;
-    grid-template-columns: 1fr 4fr;
-    padding: 24px;
+    grid-template-columns: 1fr 3.5fr;
+    padding: 24px 0px;
     gap: 48px;
-  }
-
-  &-user {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 48px;
-
-    &-avatar {
-      background-color: #0a304b;
-      width: 72px !important;
-      height: 72px !important;
-    }
-
-    &-items {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    &-item {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 12px;
-
-      &-text {
-        font-size: 16px;
-        color: $colorDark;
-        font-family: $fontRegular;
-
-        &-bold {
-          font-family: $fontMedium;
-        }
-      }
-    }
   }
 
   &-sider {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    padding-left: 24px;
 
     &-item {
       padding: 12px;
@@ -158,5 +126,195 @@
         }
       }
     }
+  }
+
+  &-siderAdmin {
+    display: flex;
+    flex-direction: column;
+    padding-left: 12px;
+    max-height: calc(100vh - 164px);
+    overflow-y: auto;
+    padding-right: 4px;
+
+    &::-webkit-scrollbar {
+      width: 8px !important;
+      background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      padding: 2px;
+      background-color: $colorScrollBar !important;
+      border-radius: 4px !important;
+      transition: 0.2s;
+    }
+
+    &-item {
+      padding: 6px 12px;
+      display: flex;
+      gap: 8px;
+      transition: 0.2s;
+      border: 1px solid #fff;
+      align-items: center;
+
+      &:hover {
+        display: flex;
+        gap: 8px;
+        padding: 6px 12px;
+        border: 1px solid $colorBorder;
+        border-radius: 8px;
+        box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
+        background-color: $colorWhite;
+        cursor: pointer;
+        color: $colorRed !important;
+        align-items: center;
+      }
+
+      &-active {
+        display: flex;
+        gap: 8px;
+        padding: 6px 12px;
+        border: 1px solid $colorBorder;
+        border-radius: 8px;
+        box-shadow: 2px 2px 4px 0px rgba(34, 60, 80, 0.2);
+        background-color: $colorWhite;
+        color: $colorRed !important;
+        align-items: center;
+      }
+
+      &:hover &-text {
+        color: $colorRed !important;
+      }
+
+      &-text {
+        font-size: 14px;
+        font-family: $fontMedium;
+        color: $colorDark;
+        transition: 0.2s;
+
+        &-active {
+          font-size: 14px;
+          font-family: $fontMedium;
+          color: $colorRed;
+        }
+      }
+    }
+  }
+
+  &-user {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 48px;
+    row-gap: 24px;
+
+    &-avatar {
+      background-color: #0a304b;
+      width: 72px !important;
+      height: 72px !important;
+    }
+
+    &-items {
+      padding-right: 12px;
+      display: grid;
+      gap: 12px;
+      overflow-y: auto;
+      margin-right: 6px;
+
+      &::-webkit-scrollbar {
+        width: 8px !important;
+        background-color: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        padding: 2px;
+        background-color: $colorPreDark !important;
+        border-radius: 4px !important;
+        transition: 0.2s;
+      }
+    }
+
+    &-item {
+      display: grid;
+      gap: 3px;
+      align-items: center;
+
+      &-text {
+        font-size: 16px;
+        font-family: $fontMedium;
+        color: $colorDark;
+      }
+    }
+
+    &-itemNoEdit {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      &-text {
+        font-size: 16px;
+        font-family: $fontRegular;
+        color: $colorDark;
+      }
+    }
+
+    &-footer {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 12px;
+      padding-right: 18px;
+
+      &-button {
+        padding: 6px 12px;
+        font-size: 14px;
+        font-family: $fontRegular;
+        color: $colorDark;
+        background-color: $colorDefault;
+        border-radius: 8px;
+        transition: 0.2s;
+        border: 1px solid $colorDefault;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $colorRed;
+          color: $colorWhite;
+        }
+
+        &-decline {
+          padding: 6px 12px;
+          font-size: 14px;
+          font-family: $fontRegular;
+          color: $colorDark;
+          border: 1px solid $colorDefault;
+          background-color: #eee;
+          border-radius: 8px;
+          transition: 0.2s;
+
+          &:hover {
+            cursor: pointer;
+            background-color: $colorRed;
+            color: $colorWhite;
+          }
+        }
+      }
+    }
+  }
+
+  &-docs {
+    display: grid;
+    gap: 24px;
+
+    &-item {
+      display: flex;
+      gap: 6px;
+
+      &-text {
+        font-size: 16px;
+        font-family: $fontMedium;
+        color: $colorDark;
+      }
+    }
+  }
+
+  &-table {
+    padding-right: 12px;
   }
 }
