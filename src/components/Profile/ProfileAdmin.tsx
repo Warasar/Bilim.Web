@@ -5,9 +5,10 @@ import ProfileTable from "./ProfileItems/ProfileTable";
 
 type Props = {
   setLoader: (loader: boolean) => void;
+  loader: boolean;
 };
 
-export default function ProfileAdmin({ setLoader }: Props) {
+export default function ProfileAdmin({ setLoader, loader }: Props) {
   const [sider, setSider] = useState<any[]>([]);
 
   // первоначалка
@@ -54,7 +55,7 @@ export default function ProfileAdmin({ setLoader }: Props) {
     <div className="profile-container">
       <div className="profile-block" style={{ gap: "12px" }}>
         <div className="profile-siderAdmin">
-          {sider.map((item: any) => {
+          {sider?.map((item: any) => {
             return (
               <div
                 className={"profile-siderAdmin-item" + (item.active ? "-active" : "")}
@@ -66,8 +67,8 @@ export default function ProfileAdmin({ setLoader }: Props) {
           })}
         </div>
 
-        {sider.find((f: any) => f.active)?.isTable ? (
-          <ProfileTable setLoader={setLoader} tableItem={sider.find((f: any) => f.active)} />
+        {sider?.find((f: any) => f.active)?.isTable ? (
+          <ProfileTable setLoader={setLoader} tableItem={sider.find((f: any) => f.active)} loader={loader} />
         ) : null}
       </div>
     </div>

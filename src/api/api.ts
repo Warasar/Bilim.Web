@@ -53,6 +53,13 @@ export const api = {
       .catch((err) => console.log(err));
   },
 
+  getResponse(str: string) {
+    return instance
+      .get(`${str}`)
+      .then((res) => res)
+      .catch((err) => console.log(err));
+  },
+
   post(str: string, obj: any) {
     return instance
       .post(`${str}`, obj)

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { ConfigProvider, DatePicker, DatePickerProps, Image, message } from "antd";
+import { ConfigProvider, DatePicker, DatePickerProps, GetProp, Image, message, Upload, UploadProps } from "antd";
 import userIcon from "../../../assets/icons/default/user.svg";
 import _ from "lodash";
 import Input from "../../../modules/YaKIT.WEB.KIT/components/Input/Input";
@@ -7,12 +7,35 @@ import Select from "../../../modules/YaKIT.WEB.KIT/components/Select/Select";
 import dayjs from "dayjs";
 import locale from "antd/locale/ru_RU";
 import { requestGet, requestPost } from "../../../actions/actions";
+import { DeleteOutlined, LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
 dayjs.locale("ru");
 const dateFormat = "DD MMMM YYYY";
 
 const customFormatDate: DatePickerProps["format"] = (value) => {
   return dayjs(value).format(dateFormat);
+};
+
+type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
+
+const getBase64 = (img: FileType, callback: (url: string) => void) => {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => callback(reader.result as string));
+  reader.readAsDataURL(img);
+};
+
+const beforeUpload = (file: FileType) => {
+  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+
+  if (!isJpgOrPng) {
+    message.error("Вы можете загрузить только формат JPG/PNG!");
+  }
+  const isLt2M = file.size / 1024 / 1024 < 2;
+  if (!isLt2M) {
+    message.error("Изображение должно быть меньше 2МБ!");
+  }
+
+  return isJpgOrPng && isLt2M;
 };
 
 type Props = {
@@ -22,6 +45,9 @@ type Props = {
 export default function ProfileUser({ setLoader }: Props) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [surveyData, setSurveyData] = useState<any>(null);
+
+  const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string>();
 
   // первоначалка
   useEffect(() => {
@@ -35,6 +61,10 @@ export default function ProfileUser({ setLoader }: Props) {
 
     if (surveyData) {
       surveyData = addFirstValue(surveyData);
+
+      if (surveyData.value.profilePhoto?.length) {
+        setImageUrl(surveyData.value.profilePhoto);
+      }
     }
 
     setSurveyData(surveyData);
@@ -69,6 +99,21 @@ export default function ProfileUser({ setLoader }: Props) {
 
     setSurveyData(newSurveyData);
     setIsEdit(false);
+  };
+
+  // для изображения
+  const handleChange: UploadProps["onChange"] = (info) => {
+    if (info.file.status === "uploading") {
+      setLoading(true);
+      return;
+    }
+
+    if (info.file.status === "done" || info.file.status === "error") {
+      getBase64(info.file.originFileObj as FileType, (url) => {
+        setLoading(false);
+        setImageUrl(url);
+      });
+    }
   };
 
   // меняет input
@@ -113,6 +158,12 @@ export default function ProfileUser({ setLoader }: Props) {
       }
     });
 
+    if (imageUrl) {
+      sendObj.profilePhoto = imageUrl;
+    } else if (surveyData.value.profilePhoto?.length) {
+      sendObj.profilePhoto = "";
+    }
+
     const sendAnswer = await requestPost(`user/passSurvey`, sendObj);
 
     if (sendAnswer) {
@@ -129,20 +180,63 @@ export default function ProfileUser({ setLoader }: Props) {
   return surveyData ? (
     <div className="profile-user">
       <div>
-        <Image
-          className="profile-user-avatar"
-          // src={`${item.urlImg}`}
-          style={{
-            borderRadius: "50%",
-            objectFit: "cover",
-            overflow: "hidden",
-            objectPosition: "top",
-          }}
-          preview={{
-            mask: <>Просмотр</>,
-          }}
-          fallback={userIcon}
-        />
+        {isEdit ? (
+          imageUrl ? (
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px", alignItems: "center" }}>
+              <Image
+                className="profile-user-avatar-here"
+                src={`${imageUrl}`}
+                style={{
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  overflow: "hidden",
+                  objectPosition: "top",
+                }}
+                preview={{
+                  mask: <>Просмотр</>,
+                }}
+                fallback={userIcon}
+              />
+              <div
+                className="profile-user-avatar-text"
+                onClick={() => {
+                  setImageUrl(undefined);
+                }}
+              >
+                <DeleteOutlined /> Удалить
+              </div>
+            </div>
+          ) : (
+            <Upload
+              name="avatar"
+              listType="picture-circle"
+              className="avatar-uploader"
+              showUploadList={false}
+              beforeUpload={beforeUpload}
+              onChange={handleChange}
+            >
+              <button style={{ border: 0, background: "none" }} type="button">
+                {loading ? <LoadingOutlined /> : <PlusOutlined />}
+                <div style={{ marginTop: 8, color: "#0A304B" }}>Загрузить</div>
+              </button>
+            </Upload>
+          )
+        ) : (
+          <Image
+            className={imageUrl?.length ? "profile-user-avatar-here" : "profile-user-avatar"}
+            src={`${imageUrl}`}
+            style={{
+              borderRadius: "50%",
+              objectFit: "cover",
+              overflow: "hidden",
+              objectPosition: "top",
+            }}
+            preview={{
+              mask: <>Просмотр</>,
+            }}
+            fallback={userIcon}
+          />
+        )}
       </div>
 
       <div className="profile-user-items" style={!isEdit ? { gap: "16px" } : {}}>

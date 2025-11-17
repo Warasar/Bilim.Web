@@ -5,9 +5,11 @@ import HeaderContainer from "../Header/HeaderContainer";
 import FooterContainer from "../Footer/FooterContainer";
 import { requestGet } from "../../actions/actions";
 import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
+import { IFilterData } from "./IVuz";
 
 export default function VuzContainer() {
   const [data, setData] = useState<any>(null);
+  const [filterData, setFilterData] = useState<IFilterData | null>(null);
   const [loader, setLoader] = useState<boolean>(false);
 
   useEffect(() => {
@@ -30,8 +32,23 @@ export default function VuzContainer() {
     setLoader(true);
 
     const newData: any = await requestGet(`/page/proftour`);
+    let filterData = await requestGet("/proftour/filters");
+
+    if (filterData?.filters?.length) {
+      filterData.filters = filterData.filters.map((item: any) => {
+        item.possibleValues = item.possibleValues.map((value: any, index: number) => {
+          return {
+            code: `${index}`,
+            name: value,
+          };
+        });
+
+        return item;
+      });
+    }
 
     setData(newData);
+    setFilterData(filterData);
     setLoader(false);
   };
 
@@ -39,7 +56,7 @@ export default function VuzContainer() {
     <div>
       {loader ? <Loader absolute /> : null}
       <HeaderContainer />
-      {data ? <Vuz data={data} setLoader={setLoader} /> : null}
+      {data ? <Vuz data={data} setLoader={setLoader} filterData={filterData} /> : null}
       <FooterContainer />
     </div>
   );

@@ -156,11 +156,31 @@ export default function Header({ data, whiteBg }: Props) {
           ) : null}
 
           <div className={`header-popoverParent`} ref={popoverRef}>
-            <div className={`${headerClassName}-user`} onClick={() => clickUser()} />
+            {data.user.profilePhoto?.length ? (
+              <img
+                src={data.user.profilePhoto}
+                alt=""
+                className={`${headerClassName}-userImg`}
+                onClick={() => clickUser()}
+              />
+            ) : (
+              <div className={`${headerClassName}-user`} onClick={() => clickUser()} />
+            )}
+
             <div className={`header-popover${showPopover ? "-active" : ""}`}>
               <div className={`header-popover-container`}>
                 <div className={`header-popover-user`}>
-                  <div className={`header-popover-user-icon`} />
+                  {data.user.profilePhoto?.length ? (
+                    <img
+                      src={data.user.profilePhoto}
+                      alt=""
+                      className={`header-popover-user-icon`}
+                      onClick={() => clickUser()}
+                    />
+                  ) : (
+                    <div className={`header-popover-user-icon`} />
+                  )}
+
                   <div className="header-popover-user-item">
                     <div className="header-popover-user-item-name">{data.user.fullName}</div>
                     <div className="header-popover-user-item-mail">{data.user.mail}</div>

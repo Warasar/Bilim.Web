@@ -1,17 +1,89 @@
 import React, { useEffect, useState } from "react";
 import { requestGet } from "../../../actions/actions";
-import DataGrid from "../../../modules/YaKIT.WEB.KIT/components/DataGrid/DataGrid";
-import Export from "../../../modules/YaKIT.WEB.KIT/components/DataGrid/Export/Export";
-import Column from "../../../modules/YaKIT.WEB.KIT/components/DataGrid/Column/Column";
-import FilterRow from "../../../modules/YaKIT.WEB.KIT/components/DataGrid/FilterRow/FilterRow";
-import HeaderFilter from "../../../modules/YaKIT.WEB.KIT/components/DataGrid/HeaderFilter/HeaderFilter";
+import { AgGridReact } from "ag-grid-react";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
 
 type Props = {
   setLoader: (loader: boolean) => void;
   tableItem: any;
+  loader: boolean;
 };
 
-export default function ProfileTable({ setLoader, tableItem }: Props) {
+// Русская локализация
+const RussianLocaleText = {
+  // Тексты пагинации
+  page: "Страница",
+  to: "до",
+  of: "из",
+  nextPage: "Следующая",
+  lastPage: "Последняя",
+  firstPage: "Первая",
+  previousPage: "Предыдущая",
+
+  // Тексты фильтров
+  contains: "Содержит",
+  notContains: "Не содержит",
+  startsWith: "Начинается с",
+  endsWith: "Заканчивается на",
+  equals: "Равно",
+  notEqual: "Не равно",
+  andCondition: "И",
+  orCondition: "ИЛИ",
+  applyFilter: "Применить",
+  clearFilter: "Очистить",
+  filterOoo: "Фильтр...",
+  blanks: "Пустые",
+
+  // Тексты меню колонок
+  pinColumn: "Закрепить колонку",
+  pinLeft: "Закрепить слева",
+  pinRight: "Закрепить справа",
+  noPin: "Не закреплять",
+  autosizeThiscolumn: "Авторазмер этой колонки",
+  autosizeAllColumns: "Авторазмер всех колонок",
+  resetColumns: "Сбросить колонки",
+  copy: "Копировать",
+  copyWithHeaders: "Копировать с заголовками",
+  paste: "Вставить",
+  export: "Экспорт",
+  csvExport: "Экспорт в CSV",
+  excelExport: "Экспорт в Excel",
+
+  // Тексты сортировки
+  sortAscending: "Сортировка по возрастанию",
+  sortDescending: "Сортировка по убыванию",
+  clearSort: "Очистить сортировку",
+
+  // Общие тексты
+  loadingOoo: "Загрузка...",
+  noRowsToShow: "Нет данных для отображения",
+  enabled: "Включено",
+};
+
+const defaultColDef = {
+  // sortable: true,
+  filter: true,
+  resizable: true,
+};
+
+// Более агрессивные настройки против DND попапа
+const gridOptions = {
+  suppressDragLeaveHidesColumns: true,
+  suppressMoveWhenRowDragging: true,
+  suppressColumnMoveAnimation: false,
+  // Отключаем все возможные элементы, которые могут показывать попапы
+  suppressMenuHide: false,
+  // Кастомная обработка событий перетаскивания
+  onColumnMoved: (event: any) => {
+    console.log("Колонка перемещена:", event);
+  },
+  onColumnVisible: (event: any) => {
+    console.log("Видимость колонки изменена:", event);
+  },
+};
+
+export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   const [tableData, setTableData] = useState<any>(null);
   const [tableColumns, setTableColumns] = useState<any>(null);
 
@@ -25,21 +97,28 @@ export default function ProfileTable({ setLoader, tableItem }: Props) {
 
     const table: any = await requestGet(`admin/table?id=${tableItem.id}`);
 
-    setTableData(table?.data);
+    table?.fields?.forEach((item: any) => {
+      item.editable = true;
+    });
+
     setTableColumns(table?.fields);
+    setTableData(table?.data);
+
+    console.log("table", table);
+
     setLoader(false);
   };
 
-  return tableColumns && tableData ? (
-    <div className="profile-table">
-      <DataGrid dataSource={tableData}>
-        <Export fileName={tableItem.tableTitle} />
-        <FilterRow visible={true} />
-        <HeaderFilter visible={true} />
-        {tableColumns.map((column: any) => {
-          return <Column dataField={column.field} caption={column.fieldName} />;
-        })}
-      </DataGrid>
+  return !loader && tableColumns?.length && tableData?.length ? (
+    <div className="ag-theme-alpine profile-table">
+      <AgGridReact
+        rowData={tableData}
+        columnDefs={tableColumns}
+        defaultColDef={defaultColDef}
+        animateRows={true}
+        gridOptions={gridOptions}
+        localeText={RussianLocaleText}
+      />
     </div>
   ) : null;
 }

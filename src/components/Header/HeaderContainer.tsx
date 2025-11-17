@@ -19,7 +19,7 @@ export default function HeaderContainer({ whiteBg, buttons }: Props) {
 
   const getData = async () => {
     const headerData = await requestGet(`container/header`);
-    const userData = await requestGet(`container/user`);
+    const userData = await requestGet(`user/data`);
 
     if (headerData && userData) {
       const newData = _.cloneDeep(headerData?.items);

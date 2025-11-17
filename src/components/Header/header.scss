@@ -98,8 +98,8 @@
   }
 
   &-user {
-    width: 30px;
-    height: 30px;
+    width: 31px;
+    height: 31px;
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url("../../assets/icons/default/user.svg");
@@ -114,6 +114,20 @@
       background-color: $colorDark;
       border: 2px solid $colorDark;
     }
+  }
+
+  &-userImg {
+    position: relative;
+    top: 2px;
+    width: 34px;
+    height: 34px;
+    object-fit: cover;
+    object-position: 0% 0%;
+    transition: 0.2s;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid $colorWhite;
+    transition: 0.2s;
   }
 
   &-scrolled {
@@ -275,6 +289,8 @@
         border-radius: 50%;
         user-select: none;
         border: 2px solid $colorDark;
+        object-fit: cover;
+        object-position: 0% 0%;
       }
 
       &-item {

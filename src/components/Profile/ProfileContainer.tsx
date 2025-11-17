@@ -17,7 +17,7 @@ export default function ProfileContainer() {
   const getData = async () => {
     setLoader(true);
 
-    const userData = await requestGet(`container/user`);
+    const userData = await requestGet(`user/data`);
 
     setUserData(userData);
     setLoader(false);
@@ -31,7 +31,7 @@ export default function ProfileContainer() {
       <div className="profile">
         {userData ? (
           userData.role === "admin" ? (
-            <ProfileAdmin setLoader={setLoader} />
+            <ProfileAdmin setLoader={setLoader} loader={loader} />
           ) : (
             <Profile setLoader={setLoader} userData={userData} />
           )

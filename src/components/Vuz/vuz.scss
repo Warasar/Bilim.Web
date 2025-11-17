@@ -41,6 +41,72 @@
     border-radius: 12px;
   }
 
+  &-collapseFilter {
+    margin-top: 48px;
+    margin-bottom: -24px;
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+    z-index: 5;
+
+    &-header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 6px;
+      align-items: center;
+      padding: 12px;
+      background-color: $colorDark;
+      border-radius: 12px;
+
+      &-active {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 6px;
+        align-items: center;
+        padding: 12px;
+        background-color: $colorDark;
+      }
+    }
+
+    &-items {
+      background-color: $colorWhite;
+      animation: closeAnimation 0.3s ease-out forwards;
+
+      &-active {
+        background-color: $colorWhite;
+        animation: openAnimation 0.3s ease-out forwards;
+        display: flex;
+        flex-direction: column;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        background-color: $colorDisabled;
+      }
+    }
+
+    &-item {
+      padding: 12px 12px;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 12px;
+      align-items: center;
+
+      &-text {
+        font-size: 16px;
+        color: $colorDark;
+        text-align: end;
+      }
+    }
+
+    &-footer {
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 12px;
+    }
+  }
+
   &-collapse {
     margin-top: 24px;
     position: relative;

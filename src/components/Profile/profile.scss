@@ -207,8 +207,27 @@
 
     &-avatar {
       background-color: #0a304b;
-      width: 72px !important;
-      height: 72px !important;
+      width: 100px !important;
+      height: 100px !important;
+
+      &-here {
+        overflow: hidden;
+        border-radius: 50%;
+        width: 100px !important;
+        height: 100px !important;
+        object-fit: cover;
+      }
+
+      &-text {
+        color: $colorDark;
+        font-size: 14px;
+        transition: 0.2s;
+
+        &:hover {
+          color: $colorRed;
+          cursor: pointer;
+        }
+      }
     }
 
     &-items {
@@ -299,8 +318,15 @@
   }
 
   &-docs {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 24px;
+
+    &-flexColumn {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
 
     &-item {
       display: flex;
@@ -312,9 +338,38 @@
         color: $colorDark;
       }
     }
+
+    &-time {
+      color: $colorDark;
+      font-size: 14px;
+      font-family: $fontRegular;
+    }
+
+    &-doc {
+      color: $colorWhite;
+      font-size: 14px;
+      font-family: $fontRegular;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background-color: $colorDefault;
+      transition: 0.2s;
+      width: fit-content;
+      display: flex;
+      gap: 6px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $colorDark;
+      }
+    }
+
+    &-upload {
+      width: fit-content;
+    }
   }
 
   &-table {
+    max-width: 100%;
     padding-right: 12px;
   }
 }

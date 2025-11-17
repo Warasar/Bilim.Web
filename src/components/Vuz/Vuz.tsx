@@ -1,12 +1,14 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import { requestGet } from "../../actions/actions";
+import { requestPost } from "../../actions/actions";
 import _ from "lodash";
 import "../University/university.scss";
+import { IFilterData } from "./IVuz";
+import { Select } from "antd";
 
 const className = "vuz";
 const classNameUniversity = "university";
@@ -14,14 +16,29 @@ const classNameUniversity = "university";
 type Props = {
   data: any;
   setLoader: (e: boolean) => void;
+  filterData: IFilterData | null;
 };
 
-export default function Vuz({ data, setLoader }: Props) {
+export default function Vuz({ data, setLoader, filterData }: Props) {
   const [opened, setOpened] = useState<boolean>(false);
-  const [selectBool, setSelectBool] = useState<any>(null);
+  const [openedFilter, setOpenedFilter] = useState<boolean>(false);
   const [priceRange, setPriceRange] = useState([0, 1000000]);
   const [searchData, setSearchData] = useState<any>(null);
+  const [filterValues, setFilterValues] = useState<any>({});
   const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    if (filterData) {
+      const newFilterValues: any = {};
+
+      filterData.filters?.forEach((item: any) => {
+        newFilterValues[item.field] = [];
+      });
+
+      setFilterValues(newFilterValues);
+      setPriceRange([filterData.minPrice, filterData.maxPrice]);
+    }
+  }, [filterData]);
 
   const seekTo = (seconds: number) => {
     if (iframeRef.current) {
@@ -40,15 +57,22 @@ export default function Vuz({ data, setLoader }: Props) {
   const search = async () => {
     setLoader(true);
 
-    let sendString: string = "";
+    const sendObj: any = {
+      maxPrice: priceRange[1],
+      minPrice: priceRange[0],
+      filters: [],
+    };
 
-    if (selectBool !== null) {
-      sendString += `hasDormitory=${selectBool}`;
-    }
+    Object.keys(filterValues).forEach((key) => {
+      if (filterValues[key]?.length) {
+        sendObj.filters.push({
+          field: key,
+          values: filterValues[key],
+        });
+      }
+    });
 
-    sendString += `&minPrice=${priceRange[0]}&maxPrice=${priceRange[1]}`;
-
-    const newData: any = await requestGet(`/page/proftour/search?${sendString}`);
+    const newData: any = await requestPost(`/proftour/search`, sendObj);
 
     newData?.forEach((item: any) => {
       item.collapse = false;
@@ -67,8 +91,13 @@ export default function Vuz({ data, setLoader }: Props) {
   };
 
   const cancel = () => {
-    setSelectBool(null);
-    setPriceRange([0, 1000000]);
+    const newFilterValues: any = {};
+    filterData!.filters.forEach((item: any) => {
+      newFilterValues[item.field] = [];
+    });
+
+    setFilterValues(newFilterValues);
+    setPriceRange([filterData!.minPrice, filterData!.maxPrice]);
     setSearchData(null);
   };
 
@@ -102,6 +131,14 @@ export default function Vuz({ data, setLoader }: Props) {
       .directions.find((f: any) => f.id === id).opened;
 
     setSearchData(newData);
+  };
+
+  const changeSelect = (fld: string, e: any) => {
+    const newFilterValues: any = _.cloneDeep(filterValues);
+
+    newFilterValues[fld] = e;
+
+    setFilterValues(newFilterValues);
   };
 
   return (
@@ -182,89 +219,124 @@ export default function Vuz({ data, setLoader }: Props) {
           if (item.containerCode === "proftourCards") {
             return (
               <Fragment>
-                <div className={`${className}-search`}>
-                  <div className={`${className}-search-item`}>
-                    <b className={`${className}-search-item-text`}>Есть ли общежитие:</b>
-
-                    <div className={`${className}-search-item-text`}>Да</div>
-                    <div
-                      className={`${className}-search-checkbox${selectBool ? "-active" : ""}`}
-                      style={{ marginLeft: "-6px" }}
-                      onClick={() => {
-                        setSelectBool(selectBool ? null : true);
-                      }}
-                    />
-
-                    <div className={`${className}-search-item-text`}>Нет</div>
-                    <div
-                      className={`${className}-search-checkbox${selectBool === false ? "-active" : ""}`}
-                      style={{ marginLeft: "-6px" }}
-                      onClick={() => {
-                        setSelectBool(selectBool === false ? null : false);
-                      }}
-                    />
-                  </div>
-
-                  <div className={`${className}-search-item`}>
-                    <b className={`${className}-search-item-text`}>
-                      Стоимость обучения: {priceRange[0]?.toLocaleString()}₸ - {priceRange[1]?.toLocaleString()}₸
-                    </b>
-                    <div style={{ width: "300px", marginLeft: "6px" }}>
-                      <Slider
-                        range
-                        min={0}
-                        max={1000000}
-                        value={priceRange}
-                        onChange={(e: any) => {
-                          setPriceRange(e);
-                        }}
-                        trackStyle={[{ backgroundColor: "#294e6a", height: 12, top: -1 }]}
-                        railStyle={{
-                          backgroundColor: "#fff",
-                          height: 12,
-                          top: -1,
-                        }}
-                        handleStyle={[
-                          {
-                            borderColor: "#0a304b",
-                            height: 16,
-                            width: 16,
-                            top: 2,
-                            backgroundColor: "#0a304b",
-                            opacity: 1,
-                          },
-                          {
-                            borderColor: "#0a304b",
-                            height: 16,
-                            width: 16,
-                            top: 2,
-                            backgroundColor: "#0a304b",
-                            opacity: 1,
-                          },
-                        ]}
+                {filterData ? (
+                  <div className={`${className}-collapseFilter`}>
+                    <div className={`${className}-collapseFilter-header${openedFilter ? `-active` : ""}`}>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M2 4.6C2 4.03995 2 3.75992 2.10899 3.54601C2.20487 3.35785 2.35785 3.20487 2.54601 3.10899C2.75992 3 3.03995 3 3.6 3H20.4C20.9601 3 21.2401 3 21.454 3.10899C21.6422 3.20487 21.7951 3.35785 21.891 3.54601C22 3.75992 22 4.03995 22 4.6V5.26939C22 5.53819 22 5.67259 21.9672 5.79756C21.938 5.90831 21.8901 6.01323 21.8255 6.10776C21.7526 6.21443 21.651 6.30245 21.4479 6.4785L15.0521 12.0215C14.849 12.1975 14.7474 12.2856 14.6745 12.3922C14.6099 12.4868 14.562 12.5917 14.5328 12.7024C14.5 12.8274 14.5 12.9618 14.5 13.2306V18.4584C14.5 18.6539 14.5 18.7517 14.4685 18.8363C14.4406 18.911 14.3953 18.9779 14.3363 19.0315C14.2695 19.0922 14.1787 19.1285 13.9971 19.2012L10.5971 20.5612C10.2296 20.7082 10.0458 20.7817 9.89827 20.751C9.76927 20.7242 9.65605 20.6476 9.58325 20.5377C9.5 20.4122 9.5 20.2142 9.5 19.8184V13.2306C9.5 12.9618 9.5 12.8274 9.46715 12.7024C9.43805 12.5917 9.39014 12.4868 9.32551 12.3922C9.25258 12.2856 9.15102 12.1975 8.94789 12.0215L2.55211 6.4785C2.34898 6.30245 2.24742 6.21443 2.17449 6.10776C2.10986 6.01323 2.06195 5.90831 2.03285 5.79756C2 5.67259 2 5.53819 2 5.26939V4.6Z"
+                          stroke="#fff"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                      <div className={`${className}-collapse-header-text`}>Фильтры вузов:</div>
+                      <div
+                        className={`${className}-collapse-header-arrow${openedFilter ? "-active" : ""}`}
+                        title={openedFilter ? "Скрыть" : "Раскрыть"}
+                        onClick={() => setOpenedFilter(!openedFilter)}
                       />
                     </div>
-                  </div>
 
-                  <div />
+                    <div className={`${className}-collapseFilter-items${openedFilter ? `-active` : ""}`}>
+                      {filterData.filters.map((item: any) => {
+                        if (item.field === "educationPrice") {
+                          return (
+                            <div className={`${className}-collapseFilter-item`}>
+                              <b className={`${className}-collapseFilter-item-text`}>Стоимость обучения:</b>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "24px",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    width: "20vw",
+                                    marginLeft: "6px",
+                                  }}
+                                >
+                                  <Slider
+                                    range
+                                    min={filterData.minPrice}
+                                    max={filterData.maxPrice}
+                                    value={priceRange}
+                                    onChange={(e: any) => {
+                                      setPriceRange(e);
+                                    }}
+                                    trackStyle={[{ backgroundColor: "#294e6a", height: 12, top: 1 }]}
+                                    railStyle={{
+                                      backgroundColor: "#ddd",
+                                      height: 12,
+                                      top: 1,
+                                    }}
+                                    handleStyle={[
+                                      {
+                                        borderColor: "#0a304b",
+                                        height: 16,
+                                        width: 16,
+                                        top: 4,
+                                        backgroundColor: "#0a304b",
+                                        opacity: 1,
+                                      },
+                                      {
+                                        borderColor: "#0a304b",
+                                        height: 16,
+                                        width: 16,
+                                        top: 4,
+                                        backgroundColor: "#0a304b",
+                                        opacity: 1,
+                                      },
+                                    ]}
+                                  />
+                                </div>
+                                <b className={`${className}-collapseFilter-item-text`} style={{ textWrap: "nowrap" }}>
+                                  {priceRange[0]?.toLocaleString()}₸ - {priceRange[1]?.toLocaleString()}₸
+                                </b>
+                              </div>
+                            </div>
+                          );
+                        }
 
-                  {searchData ? (
-                    <div className={`${className}-search-button`} onClick={() => cancel()} style={{ marginRight: -16 }}>
-                      Отмена
+                        return (
+                          <div className={`${className}-collapseFilter-item`}>
+                            <b className={`${className}-collapseFilter-item-text`}>{item.field}:</b>
+                            <Select
+                              mode="multiple"
+                              placeholder="Выберите"
+                              onChange={(e: any) => {
+                                changeSelect(item.field, e);
+                              }}
+                              style={{ width: "100%" }}
+                              options={item.possibleValues.map((f: any) => ({
+                                value: f.name,
+                                label: f.name,
+                              }))}
+                              value={filterValues[item.field]}
+                            />
+                          </div>
+                        );
+                      })}
+
+                      <div className={`${className}-collapseFilter-footer`}>
+                        <div />
+                        <div className={`${className}-search-button`} onClick={() => cancel()}>
+                          Отмена
+                        </div>
+                        <div className={`${className}-search-button`} onClick={() => search()}>
+                          Ок
+                        </div>
+                      </div>
                     </div>
-                  ) : (
-                    <div />
-                  )}
-
-                  <div className={`${className}-search-button`} onClick={() => search()}>
-                    Поиск
                   </div>
-                </div>
+                ) : null}
 
                 {searchData ? (
                   <div className={`${className}-list`}>
                     {searchData.map((item: any) => {
-                      return (
+                      return item.faculties?.length ? (
                         <div className={`${className}-list-item`} key={`${className}-list-item_${item.code}`}>
                           <div className={`${className}-list-item-header`}>
                             <img
@@ -376,7 +448,7 @@ export default function Vuz({ data, setLoader }: Props) {
                             </div>
                           ) : null}
                         </div>
-                      );
+                      ) : null;
                     })}
                   </div>
                 ) : (
