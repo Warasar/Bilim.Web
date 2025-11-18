@@ -3,6 +3,8 @@ import _ from "lodash";
 import ProfileUser from "./ProfileItems/ProfileUser";
 import { useSearchParams } from "react-router-dom";
 import ProfileDocs from "./ProfileItems/ProfileDocs";
+import ProfileNotification from "./ProfileItems/ProfileNotification";
+import ProfileHomework from "./ProfileItems/ProfileHomework";
 
 type Props = {
   setLoader: (loader: boolean) => void;
@@ -81,7 +83,11 @@ export default function Profile({ setLoader, userData }: Props) {
         {sider?.find((f: any) => f.active === true)?.code === "profile" ? (
           <ProfileUser setLoader={setLoader} />
         ) : sider?.find((f: any) => f.active === true)?.code === "docs" ? (
-          <ProfileDocs userData={userData} setLoader={setLoader} />
+          <ProfileDocs setLoader={setLoader} />
+        ) : sider?.find((f: any) => f.active === true)?.code === "notification" ? (
+          <ProfileNotification setLoader={setLoader} />
+        ) : sider?.find((f: any) => f.active === true)?.code === "homework" ? (
+          <ProfileHomework setLoader={setLoader} />
         ) : null}
       </div>
     </div>

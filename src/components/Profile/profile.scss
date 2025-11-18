@@ -283,7 +283,7 @@
         padding: 6px 12px;
         font-size: 14px;
         font-family: $fontRegular;
-        color: $colorDark;
+        color: $colorWhite;
         background-color: $colorDefault;
         border-radius: 8px;
         transition: 0.2s;
@@ -293,7 +293,7 @@
 
         &:hover {
           cursor: pointer;
-          background-color: $colorRed;
+          background-color: $colorDark;
           color: $colorWhite;
         }
 
@@ -339,6 +339,11 @@
       }
     }
 
+    &-flex {
+      display: flex;
+      gap: 6px;
+    }
+
     &-time {
       color: $colorDark;
       font-size: 14px;
@@ -356,6 +361,26 @@
       width: fit-content;
       display: flex;
       gap: 6px;
+      align-items: center;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $colorDark;
+      }
+    }
+
+    &-doc1 {
+      color: $colorWhite;
+      font-size: 14px;
+      font-family: $fontRegular;
+      padding: 8.5px 12px;
+      border-radius: 6px;
+      background-color: $colorDefault;
+      transition: 0.2s;
+      width: fit-content;
+      display: flex;
+      gap: 6px;
+      align-items: center;
 
       &:hover {
         cursor: pointer;
@@ -371,5 +396,45 @@
   &-table {
     max-width: 100%;
     padding-right: 12px;
+  }
+
+  &-notification {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-right: 24px;
+
+    &-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 12px;
+      background-color: $colorCream;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: $fontRegular;
+      color: $colorDark;
+      border: 2px solid $colorDefault;
+
+      &-flexColumn {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      &-readed {
+        background-color: $colorWhite;
+      }
+
+      &-title {
+        font-size: 16px;
+        font-family: $fontMedium;
+      }
+
+      &-description {
+        color: $colorSubtext;
+      }
+    }
   }
 }

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import cookie from "js-cookie";
+import { INotification } from "../Profile/ProfileItems/ProfileNotification";
+import { requestGet } from "../../actions/actions";
 
 export const useClickOutside = (handler: () => void) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -30,12 +32,14 @@ export default function Header({ data, whiteBg }: Props) {
   const [isScrolled, setIsScrolled] = useState<boolean>(whiteBg ? true : false);
   const [showPopover, setShowPopover] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [notifications, setNotifications] = useState<INotification[]>([]);
 
   const headerClassName = !isScrolled ? "header" : "header-scrolled";
   const location = useLocation();
   const popoverRef = useClickOutside(() => setShowPopover(false));
 
   useEffect(() => {
+    getNotification();
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 10);
@@ -59,6 +63,14 @@ export default function Header({ data, whiteBg }: Props) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const getNotification = async () => {
+    const notifications: INotification[] = await requestGet(`user/notifications`);
+
+    if (notifications) {
+      setNotifications(notifications);
+    }
+  };
 
   const clickUser = () => {
     setShowPopover(!showPopover);
@@ -262,7 +274,14 @@ export default function Header({ data, whiteBg }: Props) {
                         <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
                         <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
                       </svg>
-                      <div className="header-popover-items-item-text">Уведомления</div>
+                      <div className="header-popover-items-item-text">
+                        Уведомления{" "}
+                        {notifications.filter((f) => !f.isRead).length ? (
+                          <span className="header-popover-items-item-number">
+                            {notifications.filter((f) => f.isRead).length}
+                          </span>
+                        ) : null}
+                      </div>
                     </NavLink>
                     <NavLink
                       className="header-popover-items-item"

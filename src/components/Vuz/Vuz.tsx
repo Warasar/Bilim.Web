@@ -302,7 +302,7 @@ export default function Vuz({ data, setLoader, filterData }: Props) {
 
                         return (
                           <div className={`${className}-collapseFilter-item`}>
-                            <b className={`${className}-collapseFilter-item-text`}>{item.field}:</b>
+                            <b className={`${className}-collapseFilter-item-text`}>{item.name}:</b>
                             <Select
                               mode="multiple"
                               placeholder="Выберите"

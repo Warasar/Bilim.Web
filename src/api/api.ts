@@ -53,9 +53,9 @@ export const api = {
       .catch((err) => console.log(err));
   },
 
-  getResponse(str: string) {
+  getResponse(str: string, obj?: any) {
     return instance
-      .get(`${str}`)
+      .get(`${str}`, obj || {})
       .then((res) => res)
       .catch((err) => console.log(err));
   },
@@ -63,6 +63,13 @@ export const api = {
   post(str: string, obj: any) {
     return instance
       .post(`${str}`, obj)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  },
+
+  patch(str: string) {
+    return instance
+      .patch(`${str}`)
       .then((res) => res.data)
       .catch((err) => console.log(err));
   },
