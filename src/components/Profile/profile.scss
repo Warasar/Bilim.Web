@@ -320,22 +320,37 @@
   &-docs {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 12px;
 
     &-flexColumn {
       display: flex;
       flex-direction: column;
       gap: 6px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid $colorDefault;
     }
 
     &-item {
       display: flex;
       gap: 6px;
+      flex-direction: column;
 
       &-text {
-        font-size: 16px;
+        font-size: 18px;
         font-family: $fontMedium;
         color: $colorDark;
+      }
+
+      &-html {
+        font-size: 14px;
+        color: $colorDark;
+        font-family: $fontRegular !important;
+      }
+
+      &-deadline {
+        font-size: 14px;
+        color: $colorRed;
+        font-family: $fontRegular;
       }
     }
 

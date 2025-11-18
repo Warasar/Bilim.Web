@@ -1,5 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { requestGet, requestGetResponse, requestPost } from "../../../actions/actions";
+import {
+  requestGet,
+  requestGetResponse,
+  requestPost,
+} from "../../../actions/actions";
 import dayjs from "dayjs";
 import { message, Upload } from "antd";
 import { DownloadOutlined, UploadOutlined } from "@ant-design/icons";
@@ -42,8 +46,12 @@ export default function ProfileHomework({ setLoader }: Props) {
 
       if (response) {
         const fileData = response.data;
-        const contentType = response.headers?.["content-type"] || "application/pdf";
-        let fileName = response.headers?.["content-disposition"].split("filename=")[1]?.split(";")[0]?.trim();
+        const contentType =
+          response.headers?.["content-type"] || "application/pdf";
+        let fileName = response.headers?.["content-disposition"]
+          .split("filename=")[1]
+          ?.split(";")[0]
+          ?.trim();
         if (fileName && fileName.startsWith('"') && fileName.endsWith('"')) {
           fileName = fileName.slice(1, -1);
         }
@@ -90,12 +98,17 @@ export default function ProfileHomework({ setLoader }: Props) {
         const formData = new FormData();
         formData.append("file", homeworkList[i].sendFile);
 
-        const sendAnswer = await requestPost(`homework/upload/${homeworkList[i].code}`, formData);
+        const sendAnswer = await requestPost(
+          `homework/upload/${homeworkList[i].code}`,
+          formData
+        );
 
         if (sendAnswer) {
           message.success(`${homeworkList[i].title}: успешно сохранено!`);
         } else {
-          message.error(`Произошла ошибка при загрузке ${homeworkList[i].title}`);
+          message.error(
+            `Произошла ошибка при загрузке ${homeworkList[i].title}`
+          );
         }
       }
     }
@@ -109,23 +122,42 @@ export default function ProfileHomework({ setLoader }: Props) {
 
   return (
     <div className="profile-docs">
-      {homeworkList?.map((item: any) => {
+      {homeworkList?.map((item: any, index: number) => {
         return item.isVisible ? (
-          <div className="profile-docs-flexColumn">
-            <div className="profile-docs-item" key={`profile-docs-item-${item.code}`}>
+          <div
+            className="profile-docs-flexColumn"
+            style={{
+              borderBottom: index === homeworkList.length - 1 ? "none" : "",
+            }}
+          >
+            <div
+              className="profile-docs-item"
+              key={`profile-docs-item-${item.code}`}
+            >
               <div className="profile-docs-item-text">{item.title}:</div>
-              <div className="profile-docs-item-html" dangerouslySetInnerHTML={{ __html: item.textHtml }} />
-              {item.deadline ? <div className="profile-docs-item-html">Дедлайн: {item.deadline}:</div> : null}
+              <div
+                className="profile-docs-item-html"
+                dangerouslySetInnerHTML={{ __html: item.textHtml }}
+              />
+              {item.deadline ? (
+                <div className="profile-docs-item-deadline">
+                  Дедлайн: {dayjs(item.deadline).format(dateFormat)}
+                </div>
+              ) : null}
             </div>
 
             {item.loadedFile ? (
               <Fragment>
                 <div className="profile-docs-time">
-                  Добавлен: {dayjs(item.loadedFile.loadedWhen).format(dateFormat)}
+                  Добавлен:{" "}
+                  {dayjs(item.loadedFile.loadedWhen).format(dateFormat)}
                 </div>
                 <div className="profile-docs-flex">
                   <div>
-                    <div className="profile-docs-doc1" onClick={() => downloadFile(item.code)}>
+                    <div
+                      className="profile-docs-doc1"
+                      onClick={() => downloadFile(item.code)}
+                    >
                       <DownloadOutlined />
                       Скачать файл
                     </div>
