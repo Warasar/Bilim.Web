@@ -52,7 +52,7 @@ export default function ProfileAdmin({ setLoader, loader }: Props) {
   };
 
   return (
-    <div className="profile-container">
+    <div className="profile-admin">
       <div className="profile-block" style={{ gap: "12px" }}>
         <div className="profile-siderAdmin">
           {sider?.map((item: any) => {

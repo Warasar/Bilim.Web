@@ -74,6 +74,8 @@ const gridOptions = {
   suppressColumnMoveAnimation: false,
   // Отключаем все возможные элементы, которые могут показывать попапы
   suppressMenuHide: false,
+  // Отключаем растягивание на всю ширину
+  suppressSizeToFit: false, // Разрешить подгонку размера
   // Кастомная обработка событий перетаскивания
   onColumnMoved: (event: any) => {
     console.log("Колонка перемещена:", event);
@@ -99,6 +101,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
 
     table?.fields?.forEach((item: any) => {
       item.editable = true;
+      item.headerName = item.fieldName || item.field;
     });
 
     setTableColumns(table?.fields);

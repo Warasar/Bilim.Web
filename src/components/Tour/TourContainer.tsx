@@ -2,12 +2,21 @@ import React, { useEffect, useState } from "react";
 import Tour from "./Tour";
 import "./tour.scss";
 import TourHeader from "./TourHeader";
-import { requestPost } from "../../actions/actions";
+import { requestGet, requestPost } from "../../actions/actions";
 import { message } from "antd";
 import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
 
+export type ITerms = {
+  short: string;
+  long: string;
+};
+
 export default function TourContainer() {
   const [data, setData] = useState<any>(null);
+  const [terms, setTerms] = useState<ITerms>({
+    short: "",
+    long: "",
+  });
   const [dataFooter, setDataFooter] = useState<any>(null);
   const [loader, setLoader] = useState<boolean>(false);
 
@@ -16,11 +25,26 @@ export default function TourContainer() {
   }, []);
 
   const getData = async () => {
+    setLoader(true);
+
+    const terms: ITerms = {
+      short: "",
+      long: "",
+    };
+
+    const terms1 = await requestGet(`terms/1`);
+    if (terms1?.items?.data?.length) {
+      terms.short = terms1.items.data;
+    }
+
+    const terms2 = await requestGet(`terms/2`);
+    if (terms2?.items?.data?.length) {
+      terms.long = terms2.items.data;
+    }
+
     const newData = {
       title: "Подготовка к олимпиадам",
     };
-
-    setData(newData);
 
     const newDataFooter = {
       icons: [
@@ -138,7 +162,10 @@ export default function TourContainer() {
       },
     };
 
+    setTerms(terms);
+    setData(newData);
     setDataFooter(newDataFooter);
+    setLoader(false);
   };
 
   const sendMessage = async (name: string, phone: string, mail: string) => {
@@ -162,8 +189,8 @@ export default function TourContainer() {
   return data ? (
     <div>
       {loader ? <Loader absolute /> : null}
-      <TourHeader sendMessage={sendMessage} />
-      <Tour data={data} dataFooter={dataFooter} sendMessage={sendMessage} />
+      <TourHeader sendMessage={sendMessage} terms={terms} />
+      <Tour data={data} dataFooter={dataFooter} sendMessage={sendMessage} terms={terms} />
     </div>
   ) : null;
 }

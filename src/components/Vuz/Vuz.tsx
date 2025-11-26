@@ -144,7 +144,7 @@ export default function Vuz({ data, setLoader, filterData }: Props) {
   return (
     <div className={className}>
       <div className={`${className}-main`}>
-        {data.containers?.map((item: any) => {
+        {data?.map((item: any) => {
           if (item.containerCode === "proftourTitle") {
             return <ReactMarkdown>{item.items.data.markdownText}</ReactMarkdown>;
           }
@@ -153,7 +153,7 @@ export default function Vuz({ data, setLoader, filterData }: Props) {
             return (
               <Fragment>
                 <iframe
-                  src={item.items.data.iframe}
+                  src={item.items.iframe}
                   className={`${className}-video`}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -185,7 +185,7 @@ export default function Vuz({ data, setLoader, filterData }: Props) {
                   </div>
 
                   <div className={`${className}-collapse-items${opened ? `-active` : ""}`}>
-                    {item.items.timings.map((child: any, index: number) => {
+                    {item.data.map((child: any, index: number) => {
                       return (
                         <div
                           className={`${className}-collapse-item ${
@@ -195,7 +195,7 @@ export default function Vuz({ data, setLoader, filterData }: Props) {
                           onClick={() => seekTo(child.timingSecond)}
                           style={{
                             paddingTop: index === 0 ? "8px" : "4px",
-                            paddingBottom: index === item.items.timings.length - 1 ? "8px" : "4px",
+                            paddingBottom: index === item.data.length - 1 ? "8px" : "4px",
                           }}
                         >
                           {child.timing}&nbsp;{child.timingText}
@@ -211,7 +211,7 @@ export default function Vuz({ data, setLoader, filterData }: Props) {
           if (item.containerCode === "proftourText") {
             return (
               <div className={`${className}-text`}>
-                <ReactMarkdown>{item.items.data.markdownText}</ReactMarkdown>
+                <ReactMarkdown>{item.items.text}</ReactMarkdown>
               </div>
             );
           }
@@ -453,7 +453,7 @@ export default function Vuz({ data, setLoader, filterData }: Props) {
                   </div>
                 ) : (
                   <div className={`${className}-vuzes`}>
-                    {item.items.data.map((child: any) => {
+                    {item.data.map((child: any) => {
                       return (
                         <NavLink
                           className={`${className}-vuzes-item`}

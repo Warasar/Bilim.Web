@@ -6,32 +6,25 @@ import FooterContainer from "../Footer/FooterContainer";
 import { requestGet } from "../../actions/actions";
 import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
 import { IFilterData } from "./IVuz";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 
 export default function VuzContainer() {
   const [data, setData] = useState<any>(null);
   const [filterData, setFilterData] = useState<IFilterData | null>(null);
   const [loader, setLoader] = useState<boolean>(false);
 
+  useCurrentUser();
+
   useEffect(() => {
     setLoader(true);
 
-    getCurrentUser();
     getData();
   }, []);
-
-  const getCurrentUser = async () => {
-    const currentUser = await requestGet(`currentUser`);
-
-    if (!currentUser.hasPassedSurvey) {
-      const win: Window = window;
-      win.location = `${window.location.origin}/survey`;
-    }
-  };
 
   const getData = async () => {
     setLoader(true);
 
-    const newData: any = await requestGet(`/page/proftour`);
+    const newData: any = await requestGet(`/proftour`);
     let filterData = await requestGet("/proftour/filters");
 
     if (filterData?.filters?.length) {

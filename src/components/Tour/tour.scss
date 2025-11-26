@@ -435,6 +435,15 @@ $textRegular: 16px;
       line-height: 140%;
     }
 
+    &-sosmall {
+      font-size: 12px;
+      font-family: $fontManrope;
+      color: $colorPreDark;
+      letter-spacing: 0px;
+      text-decoration: none;
+      line-height: 130%;
+    }
+
     &-dark {
       color: $colorDark;
     }

@@ -7,23 +7,16 @@ import CarouselContainer from "../Carousel/CarouselContainer";
 import FooterContainer from "../Footer/FooterContainer";
 import { requestGet } from "../../actions/actions";
 import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 
 export default function MainContainer() {
   const [data, setData] = useState<any>(null);
 
+  useCurrentUser();
+
   useEffect(() => {
-    getCurrentUser();
     getData();
   }, []);
-
-  const getCurrentUser = async () => {
-    const currentUser = await requestGet(`currentUser`);
-
-    if (!currentUser.hasPassedSurvey) {
-      const win: Window = window;
-      win.location = `${window.location.origin}/survey`;
-    }
-  };
 
   const getData = async () => {
     const newData = await requestGet(`container/greeting`);

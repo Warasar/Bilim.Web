@@ -10,6 +10,7 @@ import Select from "../../modules/YaKIT.WEB.KIT/components/Select/Select";
 import { DatePicker, ConfigProvider } from "antd";
 import dayjs from "dayjs";
 import locale from "antd/locale/ru_RU";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 
 dayjs.locale("ru");
 const dateFormat = "DD MMMM YYYY"; // "7 августа 2000"
@@ -24,21 +25,24 @@ export default function Survey() {
     return dayjs(value).format(dateFormat);
   };
 
+  const currentUser = useCurrentUser(true);
+
   // первоначалка
   useEffect(() => {
-    getData();
-  }, []);
+    if (currentUser) {
+      getData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser]);
   const getData = async () => {
-    const currentUser = await requestGet(`currentUser`);
-
-    if (!currentUser.hasAcceptedTerms) {
-      const terms = await requestGet(`container/terms`);
+    if (currentUser && !currentUser.hasAcceptedTerms) {
+      const terms = await requestGet(`terms/3`);
 
       setTerms(terms);
       setShowTermsModal(true);
     }
 
-    const surveyData = await requestGet(`register/survey/${currentUser.role}`);
+    const surveyData = await requestGet(`survey`);
     if (surveyData) {
       setData(surveyData);
     }
@@ -50,7 +54,7 @@ export default function Survey() {
   const acceptTerms = async () => {
     setLoader(true);
 
-    const accept = await requestPost(`register/acceptTerms`, {});
+    const accept = await requestPost(`user/acceptTerms`, {});
 
     if (accept) {
       message.success(accept);
@@ -64,8 +68,7 @@ export default function Survey() {
   const changedString = (code: string, e: any) => {
     const newData: any = _.cloneDeep(data);
 
-    newData.data.find((f: any) => f.questionCode === code).value =
-      e.target.value;
+    newData.data.find((f: any) => f.questionCode === code).value = e.target.value;
 
     setData(newData);
   };
@@ -105,19 +108,17 @@ export default function Survey() {
       }
     });
 
-    const sendAnswer = await requestPost(`register/passSurvey`, sendObj);
+    const sendAnswer = await requestPost(`user/passSurvey`, sendObj);
 
     if (sendAnswer) {
       message.success("Успешно сохранено!");
 
       setTimeout(() => {
         const win: Window = window;
-        win.location = `${window.location.origin}`;
+        win.location = `${window.location.origin}/accompaniment`;
       }, 2000);
     } else {
-      message.error(
-        "Произошла ошибка, пожайлуста попробуйте позже или обратитесь к администратору"
-      );
+      message.error("Произошла ошибка, пожайлуста попробуйте позже или обратитесь к администратору");
     }
 
     setLoader(false);
@@ -131,49 +132,32 @@ export default function Survey() {
 
         <div className="survey-items">
           {data?.data?.map((item: any) => {
-            return item.answerType === "string" ||
-              item.answerType === "phone" ||
-              item.answerType === "email" ? (
-              <div
-                className="survey-item"
-                key={`survey-item-${item.questionCode}`}
-              >
+            return item.answerType === "string" || item.answerType === "phone" || item.answerType === "email" ? (
+              <div className="survey-item" key={`survey-item-${item.questionCode}`}>
                 <div className="survey-item-text">{item.questionName}:</div>
                 <Input
                   value={item.value}
                   style={{ height: "30px" }}
-                  onValueChanged={(e: any) =>
-                    changedString(item.questionCode, e)
-                  }
+                  onValueChanged={(e: any) => changedString(item.questionCode, e)}
                   type={item.answerType}
                 />
               </div>
             ) : item.answerType === "object" ? (
-              <div
-                className="survey-item"
-                key={`survey-item-${item.questionCode}`}
-              >
+              <div className="survey-item" key={`survey-item-${item.questionCode}`}>
                 <div className="survey-item-text">{item.questionName}:</div>
                 <Select
                   data={data.objects[item.answersSpr]}
                   value={item.value}
-                  onValueChanged={(e: any) =>
-                    changedObject(item.questionCode, e)
-                  }
+                  onValueChanged={(e: any) => changedObject(item.questionCode, e)}
                   dontShowClear
                 />
               </div>
             ) : item.answerType === "date" ? (
-              <div
-                className="survey-item"
-                key={`survey-item-${item.questionCode}`}
-              >
+              <div className="survey-item" key={`survey-item-${item.questionCode}`}>
                 <div className="survey-item-text">{item.questionName}:</div>
                 <ConfigProvider locale={locale}>
                   <DatePicker
-                    onChange={(value: any) =>
-                      changedDate(item.questionCode, value)
-                    }
+                    onChange={(value: any) => changedDate(item.questionCode, value)}
                     value={item.value ? item.value : null}
                     picker="date"
                     format={customFormatDate}
@@ -189,32 +173,24 @@ export default function Survey() {
 
         <div className="survey-modal-footer">
           <div />
-          <div
-            className="survey-modal-footer-button"
-            onClick={() => sendSurvey()}
-          >
+          <div className="survey-modal-footer-button" onClick={() => sendSurvey()}>
             Отправить
           </div>
         </div>
       </div>
 
       {/* пользовательское соглашение */}
-      <Modal open={showTermsModal} onCancel={() => {}}>
+      <Modal open={showTermsModal} onCancel={() => {}} maxWidth="700px">
         <div className="survey-modal">
           <div className="survey-modal-header">
             <div className="survey-modal-header-text">Условия пользования</div>
           </div>
           <div className="survey-modal-acceptTerms">
-            <div className="survey-modal-acceptTerms-text">{terms?.text1}</div>
-            <div className="survey-modal-acceptTerms-text">{terms?.text2}</div>
-            <div className="survey-modal-acceptTerms-text">{terms?.text3}</div>
+            <div className="survey-modal-acceptTerms-text" dangerouslySetInnerHTML={{ __html: terms?.items?.data }} />
           </div>
           <div className="survey-modal-footer">
             <div />
-            <div
-              className="survey-modal-footer-button"
-              onClick={() => acceptTerms()}
-            >
+            <div className="survey-modal-footer-button" onClick={() => acceptTerms()}>
               Принять
             </div>
           </div>

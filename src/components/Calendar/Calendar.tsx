@@ -35,14 +35,10 @@ type Props = {
 
 export default function Calendar({ data, mainDate }: Props) {
   const ref: any = useRef(null);
-  const [currentDate, setCurrentDate] = useState<any>(
-    dayjs(mainDate, formatDate)
-  );
+  const [currentDate, setCurrentDate] = useState<any>(dayjs(mainDate, formatDate));
   const [isAnimating, setIsAnimating] = useState(false);
   const [isAnimatingEnd, setIsAnimatingEnd] = useState(false);
-  const [animationDirection, setAnimationDirection] = useState<
-    "left" | "right"
-  >("right");
+  const [animationDirection, setAnimationDirection] = useState<"left" | "right">("right");
 
   const getCalendarDays = () => {
     const year = currentDate.toDate().getFullYear();
@@ -63,12 +59,8 @@ export default function Calendar({ data, mainDate }: Props) {
       const date = dayjs(currentDateIterator).format(formatDate);
       let events: CalendarType[] = [];
 
-      if (
-        data.some((f: any) => f.eventDate.split("T")[0] === date.split("T")[0])
-      ) {
-        events = _.cloneDeep(data).filter(
-          (f: any) => f.eventDate.split("T")[0] === date.split("T")[0]
-        );
+      if (data.some((f: any) => f.eventDate.split("T")[0] === date.split("T")[0])) {
+        events = _.cloneDeep(data).filter((f: any) => f.eventDate.split("T")[0] === date.split("T")[0]);
       }
 
       days.push({
@@ -122,18 +114,11 @@ export default function Calendar({ data, mainDate }: Props) {
     let isChanged: boolean = false;
 
     data.forEach((item: any) => {
-      if (
-        item.dates.some(
-          (f: any) => f.split("T")[0] === day.stringDate.split("T")[0]
-        ) &&
-        !isChanged
-      ) {
+      if (item.dates.some((f: any) => f.split("T")[0] === day.stringDate.split("T")[0]) && !isChanged) {
         style.backgroundColor = "#FEE97D77"; //colorYellow
         isChanged = true;
 
-        const index = item.dates.findIndex(
-          (f: any) => f.split("T")[0] === day.stringDate.split("T")[0]
-        );
+        const index = item.dates.findIndex((f: any) => f.split("T")[0] === day.stringDate.split("T")[0]);
         if (index === item.dates.length - 1) {
           style.borderRight = "6px solid #0A304B";
         }
@@ -177,13 +162,9 @@ export default function Calendar({ data, mainDate }: Props) {
     let jsx: any = null;
 
     if (event[cmd] === "deadline") {
-      jsx = (
-        <div className={`${className}-cell-header-icon-text`}>(дедлайн)</div>
-      );
+      jsx = <div className={`${className}-cell-header-icon-text`}>(дедлайн)</div>;
     } else if (event[cmd] === "parents") {
-      jsx = (
-        <div className={`${className}-cell-header-icon-text`}>(родители)</div>
-      );
+      jsx = <div className={`${className}-cell-header-icon-text`}>(родители)</div>;
     } else if (event[cmd] === "info") {
       jsx = <div className={`${className}-cell-header-icon-red`} />;
     } else if (event[cmd] === "meeting") {
@@ -202,17 +183,14 @@ export default function Calendar({ data, mainDate }: Props) {
     <div className={className} ref={ref}>
       <div className={`${className}-block`}>
         <div className={`${className}-title`}>
-          Календарь встреч и дедлайнов по поступлению в Казахстан 2025 год
+          Календарь встреч и дедлайнов по поступлению в Казахстан {dayjs(currentDate).format("YYYY")} год
         </div>
 
         {/* сам календарь */}
         <div className={`${className}-main`}>
           {/* шапка */}
           <div className={`${className}-header`}>
-            <div
-              className={`${className}-header-button`}
-              onClick={() => navigateMonth("prev")}
-            >
+            <div className={`${className}-header-button`} onClick={() => navigateMonth("prev")}>
               <div className={`${className}-header-button-left`} />
             </div>
 
@@ -233,22 +211,18 @@ export default function Calendar({ data, mainDate }: Props) {
                           transition: "0s",
                         }
                     : animationDirection === "right"
-                    ? { transform: "translateX(-100%)", opacity: 0 }
-                    : { transform: "translateX(100%)", opacity: 0 }
+                      ? { transform: "translateX(-100%)", opacity: 0 }
+                      : { transform: "translateX(100%)", opacity: 0 }
                   : {
                       transform: "translateX(0%)",
                       opacity: 1,
                     }
               }
             >
-              {MONTHS_RU[currentDate.toDate().getMonth()]}{" "}
-              {currentDate.toDate().getFullYear()}
+              {MONTHS_RU[currentDate.toDate().getMonth()]} {currentDate.toDate().getFullYear()}
             </div>
 
-            <div
-              className={`${className}-header-button`}
-              onClick={() => navigateMonth("next")}
-            >
+            <div className={`${className}-header-button`} onClick={() => navigateMonth("next")}>
               <div className={`${className}-header-button-right`} />
             </div>
           </div>
@@ -256,12 +230,7 @@ export default function Calendar({ data, mainDate }: Props) {
           {/* дни в неделе */}
           <div className={`${className}-week`}>
             {DAYS_RU.map((day, index) => (
-              <div
-                key={day}
-                className={`${className}-week-item ${
-                  index === 6 ? `${className}-week-item-red` : ""
-                }`}
-              >
+              <div key={day} className={`${className}-week-item ${index === 6 ? `${className}-week-item-red` : ""}`}>
                 {day}
               </div>
             ))}
@@ -285,8 +254,8 @@ export default function Calendar({ data, mainDate }: Props) {
                         transition: "0s",
                       }
                   : animationDirection === "right"
-                  ? { transform: "translateX(-100%)", opacity: 0 }
-                  : { transform: "translateX(100%)", opacity: 0 }
+                    ? { transform: "translateX(-100%)", opacity: 0 }
+                    : { transform: "translateX(100%)", opacity: 0 }
                 : {
                     transform: "translateX(0%)",
                     opacity: 1,
@@ -296,11 +265,7 @@ export default function Calendar({ data, mainDate }: Props) {
             {calendarDays.map((day: any, index: number) => (
               <div
                 key={index}
-                className={
-                  !day.isCurrentMonth
-                    ? `${className}-cell-disabled`
-                    : `${className}-cell `
-                }
+                className={!day.isCurrentMonth ? `${className}-cell-disabled` : `${className}-cell `}
                 style={
                   index % 7 === 6
                     ? {
@@ -309,29 +274,18 @@ export default function Calendar({ data, mainDate }: Props) {
                     : {}
                 }
               >
-                <div
-                  className={`${className}-cell-header`}
-                  style={getStyleHeaderCell(day)}
-                >
+                <div className={`${className}-cell-header`} style={getStyleHeaderCell(day)}>
                   <span
                     className={`${className}-cell-header-text ${
-                      !day.isCurrentMonth
-                        ? `${className}-cell-header-text-disabled`
-                        : ""
-                    } ${
-                      index % 7 === 6 ? `${className}-cell-header-text-red` : ""
-                    }`}
+                      !day.isCurrentMonth ? `${className}-cell-header-text-disabled` : ""
+                    } ${index % 7 === 6 ? `${className}-cell-header-text-red` : ""}`}
                   >
                     {day.date}
                   </span>
-                  {day.events.length === 1 &&
-                    renderIcon(day.events[0], "eventType")}
+                  {day.events.length === 1 && renderIcon(day.events[0], "eventType")}
                 </div>
 
-                <div
-                  className={`${className}-cell-rows`}
-                  style={getStyleRowCell(day)}
-                >
+                <div className={`${className}-cell-rows`} style={getStyleRowCell(day)}>
                   {day.events.map((event: any) => {
                     return (
                       <div
@@ -339,8 +293,7 @@ export default function Calendar({ data, mainDate }: Props) {
                         className={`${className}-cell-item`}
                         style={getStyleItemCell(event, day.events.length)}
                       >
-                        {day.events.length > 1 &&
-                          renderIcon(event, "eventType")}
+                        {day.events.length > 1 && renderIcon(event, "eventType")}
                         {event.eventText}
                       </div>
                     );
@@ -357,23 +310,17 @@ export default function Calendar({ data, mainDate }: Props) {
           <div className={`${className}-legend-items`}>
             <div className={`${className}-legend-item`}>
               <div className={`${className}-legend-item-icon-starblue`} />
-              <div className={`${className}-legend-item-text`}>
-                общие встречи для 1 и 2 групп
-              </div>
+              <div className={`${className}-legend-item-text`}>общие встречи для 1 и 2 групп</div>
             </div>
 
             <div className={`${className}-legend-item`}>
               <div className={`${className}-legend-item-icon-starred`} />
-              <div className={`${className}-legend-item-text`}>
-                информация по олимпиадам/конкурсам на грант/скидки
-              </div>
+              <div className={`${className}-legend-item-text`}>информация по олимпиадам/конкурсам на грант/скидки</div>
             </div>
 
             <div className={`${className}-legend-item`}>
               <div className={`${className}-legend-item-event`}>*встреча*</div>
-              <div className={`${className}-legend-item-text`}>
-                мероприятие, которое длится определенный срок
-              </div>
+              <div className={`${className}-legend-item-text`}>мероприятие, которое длится определенный срок</div>
             </div>
           </div>
         </div>

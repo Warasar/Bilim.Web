@@ -5,25 +5,17 @@ import FooterContainer from "../Footer/FooterContainer";
 import OlimpVuz from "./OlimpVuz";
 import { useParams } from "react-router";
 import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
-import { requestGet } from "../../actions/actions";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 
 export default function OlimpVuzContainer() {
   const [data, setData] = useState<any>(null);
   const { code } = useParams();
 
+  useCurrentUser();
+
   useEffect(() => {
     getData();
-    getCurrentUser();
   }, []);
-
-  const getCurrentUser = async () => {
-    const currentUser = await requestGet(`currentUser`);
-
-    if (!currentUser.hasPassedSurvey) {
-      const win: Window = window;
-      win.location = `${window.location.origin}/survey`;
-    }
-  };
 
   const getData = async () => {
     const newData: any = [
@@ -33,18 +25,16 @@ export default function OlimpVuzContainer() {
         dop_subtitle: (
           <span>
             На 2025 год неизвестны даты, условия участия в олимпиаде. <br />
-            Как только информация появится, мы вам сообщим. Следите за
-            обновлениями. <br />
-            Ниже вы найдете разбор двух вариантов теста олимпиады ISPT за 2024
-            год, а также запись и презентацию со встречи с представителем
-            университета SDU.
+            Как только информация появится, мы вам сообщим. Следите за обновлениями. <br />
+            Ниже вы найдете разбор двух вариантов теста олимпиады ISPT за 2024 год, а также запись и презентацию со
+            встречи с представителем университета SDU.
           </span>
         ),
         title: "Разбор 2 вариантов теста олимпиады SDU (ISPT) за 2024 год",
         subtitle: (
           <span>
-            Ниже вы найдете записи уроков/встреч, где мы разобрали сразу два
-            варианта тестов, обе части - английский язык и математика-логика.
+            Ниже вы найдете записи уроков/встреч, где мы разобрали сразу два варианта тестов, обе части - английский
+            язык и математика-логика.
             <br />
             Также вы можете скачать файлы с готовыми ответами.
           </span>
@@ -67,8 +57,7 @@ export default function OlimpVuzContainer() {
             title: "Эксперт Зухра - Вариант 390",
             subtitle: "Разбор части по английскому языку",
             name: "Англ. язык - 390 вариант",
-            iframe:
-              "https://rutube.ru/embed/0b7e2f8c1fb6959b74ac84c909111f0e?p=8idRz29y41uqZiNuHEopcQ",
+            iframe: "https://rutube.ru/embed/0b7e2f8c1fb6959b74ac84c909111f0e?p=8idRz29y41uqZiNuHEopcQ",
             docs: [
               {
                 id: 0,
@@ -87,8 +76,7 @@ export default function OlimpVuzContainer() {
             title: "Эксперт Зухра - Вариант 385",
             subtitle: "Разбор части по английскому языку",
             name: "Англ. язык - 385 вариант",
-            iframe:
-              "https://rutube.ru/embed/6dd37fe11b947308fb9fe9797cf5e632?p=MuaiJvw3g0AYLEzGZ70AzQ",
+            iframe: "https://rutube.ru/embed/6dd37fe11b947308fb9fe9797cf5e632?p=MuaiJvw3g0AYLEzGZ70AzQ",
             docs: [
               {
                 id: 0,
@@ -102,8 +90,7 @@ export default function OlimpVuzContainer() {
             title: "Эксперт Сандал - Вариант 385",
             subtitle: "Разбор части по математике-логике",
             name: "Математика - 385 вариант",
-            iframe:
-              "https://rutube.ru/embed/41d20e34c85383f87b2325554689bcaa?p=M7RNHt7KwPSm5bs4DH-RFg",
+            iframe: "https://rutube.ru/embed/41d20e34c85383f87b2325554689bcaa?p=M7RNHt7KwPSm5bs4DH-RFg",
             docs: [
               {
                 id: 0,
@@ -117,8 +104,7 @@ export default function OlimpVuzContainer() {
             title: "Эксперт Сандал - Вариант 390",
             subtitle: "Разбор части по математике-логике",
             name: "Математика - 390 вариант",
-            iframe:
-              "https://rutube.ru/embed/e061b9ee7ee4500545acb1893c2ea877?p=6pUHuEDjuTFqmnVBKu3yWA",
+            iframe: "https://rutube.ru/embed/e061b9ee7ee4500545acb1893c2ea877?p=6pUHuEDjuTFqmnVBKu3yWA",
             docs: [
               {
                 id: 0,
@@ -130,12 +116,10 @@ export default function OlimpVuzContainer() {
         ],
         meeting: {
           name: "Встреча с представителем университета SDU",
-          iframe:
-            "https://rutube.ru/embed/0b4b7ebe05dc70fbc916c294769f19e8?p=O4ps6IGbJYJzZxn0FitW5A",
+          iframe: "https://rutube.ru/embed/0b4b7ebe05dc70fbc916c294769f19e8?p=O4ps6IGbJYJzZxn0FitW5A",
         },
         carousel: {
-          title:
-            "Ответы на вопросы и презентация со встречи с представителем университета SDU",
+          title: "Ответы на вопросы и презентация со встречи с представителем университета SDU",
           items: [
             { id: 0, link: "1.jpg" },
             { id: 1, link: "2.jpg" },
@@ -171,8 +155,8 @@ export default function OlimpVuzContainer() {
         title: "Условия олимпиады на грант от университета TURAN",
         subtitle: (
           <span>
-            Ниже вы найдете записи уроков/встреч, где мы разобрали сразу два
-            варианта тестов, обе части - английский язык и математика-логика.
+            Ниже вы найдете записи уроков/встреч, где мы разобрали сразу два варианта тестов, обе части - английский
+            язык и математика-логика.
             <br />
             Также вы можете скачать файлы с готовыми ответами.
           </span>
@@ -195,8 +179,7 @@ export default function OlimpVuzContainer() {
             title: "Эксперт Зухра - Вариант 390",
             subtitle: "Разбор части по английскому языку",
             name: "Англ. язык - 390 вариант",
-            iframe:
-              "https://rutube.ru/embed/0b7e2f8c1fb6959b74ac84c909111f0e?p=8idRz29y41uqZiNuHEopcQ",
+            iframe: "https://rutube.ru/embed/0b7e2f8c1fb6959b74ac84c909111f0e?p=8idRz29y41uqZiNuHEopcQ",
             docs: [
               {
                 id: 0,
@@ -215,8 +198,7 @@ export default function OlimpVuzContainer() {
             title: "Эксперт Зухра - Вариант 385",
             subtitle: "Разбор части по английскому языку",
             name: "Англ. язык - 385 вариант",
-            iframe:
-              "https://rutube.ru/embed/6dd37fe11b947308fb9fe9797cf5e632?p=MuaiJvw3g0AYLEzGZ70AzQ",
+            iframe: "https://rutube.ru/embed/6dd37fe11b947308fb9fe9797cf5e632?p=MuaiJvw3g0AYLEzGZ70AzQ",
             docs: [
               {
                 id: 0,
@@ -230,8 +212,7 @@ export default function OlimpVuzContainer() {
             title: "Эксперт Сандал - Вариант 385",
             subtitle: "Разбор части по математике-логике",
             name: "Математика - 385 вариант",
-            iframe:
-              "https://rutube.ru/embed/41d20e34c85383f87b2325554689bcaa?p=M7RNHt7KwPSm5bs4DH-RFg",
+            iframe: "https://rutube.ru/embed/41d20e34c85383f87b2325554689bcaa?p=M7RNHt7KwPSm5bs4DH-RFg",
             docs: [
               {
                 id: 0,
@@ -245,8 +226,7 @@ export default function OlimpVuzContainer() {
             title: "Эксперт Сандал - Вариант 390",
             subtitle: "Разбор части по математике-логике",
             name: "Математика - 390 вариант",
-            iframe:
-              "https://rutube.ru/embed/e061b9ee7ee4500545acb1893c2ea877?p=6pUHuEDjuTFqmnVBKu3yWA",
+            iframe: "https://rutube.ru/embed/e061b9ee7ee4500545acb1893c2ea877?p=6pUHuEDjuTFqmnVBKu3yWA",
             docs: [
               {
                 id: 0,

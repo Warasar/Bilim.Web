@@ -1,9 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import Modal from "../../modules/YaKIT.WEB.KIT/components/Modal/Modal";
 import Input from "../../modules/YaKIT.WEB.KIT/components/Input/Input";
+import { ITerms } from "./TourContainer";
+import Checkbox from "../../modules/YaKIT.WEB.KIT/components/Checkbox/Checkbox";
+import { Popover } from "antd";
 
 type Props = {
   sendMessage: (name: string, phone: string, mail: string) => void;
+  terms: ITerms;
 };
 
 export const useClickOutside = (handler: () => void) => {
@@ -25,16 +29,19 @@ export const useClickOutside = (handler: () => void) => {
   return ref;
 };
 
-export default function TourHeader({ sendMessage }: Props) {
+export default function TourHeader({ sendMessage, terms }: Props) {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [name, setName] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [mail, setMail] = useState<string>("");
+  const [checked, setChecked] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
   const headerClassName = !isScrolled ? "tour-header" : "tour-header-scrolled";
+
+  const refModal: any = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -185,7 +192,7 @@ export default function TourHeader({ sendMessage }: Props) {
           <div className="tour-text-medium tour-header-modal-title">Получите консультацию от наших специалистов</div>
         }
       >
-        <div className="tour-header-modal">
+        <div className="tour-header-modal" ref={refModal}>
           <div className="tour-text-default">
             Мы свяжемся с вами в ближайшее время, проконсультируем по всем вопросам и поможем подобрать наиболее
             подходящее вам решение.
@@ -220,13 +227,50 @@ export default function TourHeader({ sendMessage }: Props) {
               placeholder="99-ая школа, 10 класс"
             />
           </div>
+          {terms.short.length && terms.long.length ? (
+            <div className="tour-header-modal-item" key={`survey-item-name`}>
+              <div style={{ display: "flex", gap: "6px" }}>
+                <div style={{ width: "24px" }}>
+                  <Checkbox
+                    checked={checked}
+                    onChange={() => {
+                      setChecked(!checked);
+                    }}
+                  />
+                </div>
+
+                <span>
+                  <span className="tour-text-small" dangerouslySetInnerHTML={{ __html: terms.short }} />
+                  <Popover
+                    content={
+                      <div
+                        className="tour-text-small"
+                        dangerouslySetInnerHTML={{ __html: terms.long }}
+                        style={{ maxWidth: 600 }}
+                      />
+                    }
+                    title={false}
+                    trigger="click"
+                    getPopupContainer={() => refModal.current}
+                  >
+                    <span className="tour-text-small tour-text-red" style={{ cursor: "pointer" }}>
+                      {" "}
+                      Подробнее
+                    </span>
+                  </Popover>
+                </span>
+              </div>
+            </div>
+          ) : null}
           <div className="tour-text-default" style={{ paddingTop: "16px" }}>
             * - обязательные поля для заполнения
           </div>
           <div
-            className={`tour-header-modal-button${name.length && phone.length ? "" : "-disabled"}`}
+            className={`tour-header-modal-button${name.length && phone.length && checked ? "" : "-disabled"}`}
             onClick={() => {
-              sendMessage(name, phone, mail);
+              if (name.length && phone.length && checked) {
+                sendMessage(name, phone, mail);
+              }
             }}
           >
             Записаться на консультацию

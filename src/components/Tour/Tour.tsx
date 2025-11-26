@@ -4,11 +4,14 @@ import Input from "../../modules/YaKIT.WEB.KIT/components/Input/Input";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import _ from "lodash";
+import { ITerms } from "./TourContainer";
+import { Checkbox, Popover } from "antd";
 
 type Props = {
   data: any;
   dataFooter: any;
   sendMessage: (name: string, phone: string, mail: string) => void;
+  terms: ITerms;
 };
 
 interface Slide {
@@ -16,7 +19,7 @@ interface Slide {
   content: React.ReactNode;
 }
 
-export default function Tour({ data, dataFooter, sendMessage }: Props) {
+export default function Tour({ data, dataFooter, sendMessage, terms }: Props) {
   const [name, setName] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [mail, setMail] = useState<string>("");
@@ -32,6 +35,8 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
     { code: "prof", opened: false },
     { code: "rf", opened: false },
   ]);
+  const [checked, setChecked] = useState<boolean>(false);
+  const [checked1, setChecked1] = useState<boolean>(false);
 
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -216,9 +221,43 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                     placeholder="99-ая школа, 10 класс"
                   />
                 </div>
+                {terms.short.length && terms.long.length ? (
+                  <div className="tour-header-modal-item" key={`survey-item-name`}>
+                    <div style={{ display: "flex", gap: "6px" }}>
+                      <div style={{ width: "24px" }}>
+                        <Checkbox
+                          checked={checked}
+                          onChange={() => {
+                            setChecked(!checked);
+                          }}
+                        />
+                      </div>
+
+                      <span>
+                        <span className="tour-text-sosmall" dangerouslySetInnerHTML={{ __html: terms.short }} />
+                        <Popover
+                          content={
+                            <div
+                              className="tour-text-small"
+                              dangerouslySetInnerHTML={{ __html: terms.long }}
+                              style={{ maxWidth: 600 }}
+                            />
+                          }
+                          title={false}
+                          trigger="click"
+                        >
+                          <span className="tour-text-sosmall tour-text-red" style={{ cursor: "pointer" }}>
+                            {" "}
+                            Подробнее
+                          </span>
+                        </Popover>
+                      </span>
+                    </div>
+                  </div>
+                ) : null}
                 <div
-                  className={`tour-header-modal-button${name.length && phone.length ? "" : "-disabled"}`}
-                  onClick={() => (name.length && phone.length ? sendMessage(name, phone, mail) : null)}
+                  className={`tour-header-modal-button${name.length && phone.length && checked ? "" : "-disabled"}`}
+                  onClick={() => (name.length && phone.length && checked ? sendMessage(name, phone, mail) : null)}
                 >
                   Оставить заявку
                 </div>
@@ -764,9 +803,43 @@ export default function Tour({ data, dataFooter, sendMessage }: Props) {
                   placeholder="99-ая школа, 10 класс"
                 />
               </div>
+              {terms.short.length && terms.long.length ? (
+                <div className="tour-header-modal-item" key={`survey-item-name`}>
+                  <div style={{ display: "flex", gap: "6px" }}>
+                    <div style={{ width: "24px" }}>
+                      <Checkbox
+                        checked={checked1}
+                        onChange={() => {
+                          setChecked1(!checked1);
+                        }}
+                      />
+                    </div>
+
+                    <span>
+                      <span className="tour-text-sosmall" dangerouslySetInnerHTML={{ __html: terms.short }} />
+                      <Popover
+                        content={
+                          <div
+                            className="tour-text-small"
+                            dangerouslySetInnerHTML={{ __html: terms.long }}
+                            style={{ maxWidth: 600 }}
+                          />
+                        }
+                        title={false}
+                        trigger="click"
+                      >
+                        <span className="tour-text-sosmall tour-text-red" style={{ cursor: "pointer" }}>
+                          {" "}
+                          Подробнее
+                        </span>
+                      </Popover>
+                    </span>
+                  </div>
+                </div>
+              ) : null}
               <div
-                className={`tour-header-modal-button${name1.length && phone1.length ? "" : "-disabled"}`}
-                onClick={() => (name1.length && phone1.length ? sendMessage(name1, phone1, mail1) : null)}
+                className={`tour-header-modal-button${name1.length && phone1.length && checked1 ? "" : "-disabled"}`}
+                onClick={() => (name1.length && phone1.length && checked1 ? sendMessage(name1, phone1, mail1) : null)}
               >
                 Оставить заявку
               </div>

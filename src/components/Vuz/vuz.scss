@@ -73,6 +73,7 @@
     &-items {
       background-color: $colorWhite;
       animation: closeAnimation 0.3s ease-out forwards;
+      display: none;
 
       &-active {
         background-color: $colorWhite;

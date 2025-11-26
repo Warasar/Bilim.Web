@@ -257,6 +257,28 @@
       border-radius: 50%;
       transition: 0.2s;
     }
+
+    &-relative {
+      position: relative;
+
+      &-notification {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        font-size: 14px;
+        font-family: $fontMedium;
+        color: $colorWhite;
+        transition: 0.1s;
+        user-select: none;
+        background-color: $colorRed;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 18px;
+        min-width: 18px;
+      }
+    }
   }
 
   &-popoverParent {
@@ -433,6 +455,28 @@
         user-select: none;
         color: $colorRed;
       }
+    }
+  }
+
+  &-relative {
+    position: relative;
+
+    &-notification {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      font-size: 14px;
+      font-family: $fontMedium;
+      color: $colorWhite;
+      transition: 0.1s;
+      user-select: none;
+      background-color: $colorRed;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 18px;
+      min-width: 18px;
     }
   }
 }
