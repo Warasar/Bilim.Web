@@ -425,6 +425,23 @@
   &-table {
     max-width: 100%;
     padding-right: 12px;
+
+    &-cell {
+      /* Растягиваем на всю ширину и высоту родителя */
+      width: 100% !important;
+      height: 100% !important;
+
+      /* Полное удаление всех границ */
+      border: none !important;
+      box-shadow: none !important;
+      outline: none !important;
+
+      &-text {
+        white-space: normal;
+        word-break: break-word;
+        max-width: 150px;
+      }
+    }
   }
 
   &-notification {
