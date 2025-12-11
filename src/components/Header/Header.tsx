@@ -309,7 +309,7 @@ export default function Header({ data, whiteBg }: Props) {
                   </div>
                 )}
 
-                <div className={`header-popover-items`}>
+                {/* <div className={`header-popover-items`}>
                   <div className={`header-popover-items-title`}>Группы</div>
                   {data.groups.map((item: any) => {
                     return (
@@ -318,7 +318,7 @@ export default function Header({ data, whiteBg }: Props) {
                       </NavLink>
                     );
                   })}
-                </div>
+                </div> */}
 
                 <NavLink
                   className={`header-popover-exit`}

@@ -67,10 +67,24 @@ export const api = {
       .catch((err) => console.log(err));
   },
 
+  put(str: string, obj: any) {
+    return instance
+      .put(`${str}`, obj)
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+  },
+
   patch(str: string) {
     return instance
       .patch(`${str}`)
       .then((res) => res.data)
+      .catch((err) => console.log(err));
+  },
+
+  delete(str: string) {
+    return instance
+      .delete(`${str}`)
+      .then((res) => res)
       .catch((err) => console.log(err));
   },
 };

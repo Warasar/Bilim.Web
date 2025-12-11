@@ -12,10 +12,18 @@ export const requestPost = (str: string, obj: any) => {
   return api.post(str, obj);
 };
 
+export const requestPut = (str: string, obj: any) => {
+  return api.put(str, obj);
+};
+
 export const requestLogin = (login: string, password: string) => {
   return api.login(login, password);
 };
 
 export const requestPatch = (str: string) => {
   return api.patch(str);
+};
+
+export const requestDelete = (str: string) => {
+  return api.delete(str);
 };

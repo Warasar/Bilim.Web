@@ -303,7 +303,7 @@
     &-container {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      // gap: 12px;
     }
 
     &-user {
@@ -313,6 +313,7 @@
       align-items: center;
       border-bottom: 1px solid $colorSubtext;
       padding-bottom: 12px;
+      margin-bottom: 12px;
 
       &-icon {
         width: 48px;
@@ -350,8 +351,6 @@
     &-items {
       display: flex;
       flex-direction: column;
-      border-bottom: 1px solid $colorSubtext;
-      padding-bottom: 6px;
 
       &-item {
         display: grid;
