@@ -34,5 +34,9 @@ export default function HeaderContainer({ whiteBg, buttons }: Props) {
     }
   };
 
-  return !data ? <div style={{ height: "62px" }} /> : <Header data={data} whiteBg={whiteBg} />;
+  return !data ? (
+    <div className="header-container" />
+  ) : (
+    <Header data={data} whiteBg={whiteBg} />
+  );
 }

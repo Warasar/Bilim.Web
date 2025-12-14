@@ -11,6 +11,10 @@
   margin: auto;
   max-width: 1200px;
 
+  &-container {
+    height: 62px;
+  }
+
   &-bg {
     background-color: $colorDefault;
     top: 0;

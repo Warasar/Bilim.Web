@@ -12,7 +12,6 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   &-container {
     width: 100%;
@@ -23,98 +22,355 @@
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
+    margin: 0 auto;
   }
 
   &-title {
     font-family: $fontMedium;
     color: $colorDark;
     font-size: 24px;
-    padding: 12px 24px;
+    padding: 20px 24px;
     border-bottom: 1px solid $colorBorder;
     text-align: center;
   }
 
   &-items {
-    padding: 12px 24px;
+    padding: 24px;
     display: grid;
-    gap: 12px;
-    max-height: 600px;
-    overflow-y: auto;
-
-    &::-webkit-scrollbar {
-      width: 8px !important;
-      background-color: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-      padding: 2px;
-      background-color: $colorDark !important;
-      border-radius: 4px !important;
-      transition: 0.2s;
-    }
+    gap: 20px;
   }
 
   &-item {
-    display: grid;
-    gap: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 
     &-text {
       font-size: 16px;
       font-family: $fontMedium;
       color: $colorDark;
+      line-height: 1.4;
+    }
+  }
+
+  &-input,
+  &-select,
+  &-datepicker {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  &-submit-button,
+  &-accept-button {
+    font-size: 16px;
+    font-family: $fontRegular;
+    color: $colorWhite;
+    background-color: $colorDefault;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+    text-align: center;
+
+    &:hover {
+      background-color: $colorDark;
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &-unknown-type {
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    font-size: 14px;
+    color: $colorDark;
+  }
+
+  // Модальное окно
+  &-terms-modal {
+    .ant-modal-content {
+      border-radius: 16px;
+      overflow: hidden;
     }
   }
 
   &-modal {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    min-width: 600px;
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
 
     &-header {
-      padding: 12px 24px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 6px;
+      padding: 20px 24px;
       border-bottom: 1px solid $colorBorder;
+      flex-shrink: 0;
 
       &-text {
         font-size: 24px;
         font-family: $fontMedium;
         color: $colorDark;
+        text-align: center;
       }
     }
 
+    &-content {
+      flex: 1;
+      overflow: auto;
+    }
+
     &-acceptTerms {
-      padding: 12px 24px;
-      display: grid;
-      gap: 6px;
+      padding: 24px;
 
       &-text {
         font-size: 14px;
         font-family: $fontRegular;
         color: $colorDark;
+        line-height: 1.6;
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          margin-top: 0;
+          margin-bottom: 16px;
+        }
+
+        p {
+          margin-bottom: 16px;
+        }
+
+        ul,
+        ol {
+          padding-left: 20px;
+          margin-bottom: 16px;
+        }
       }
     }
 
     &-footer {
-      padding: 12px 24px;
-      display: grid;
-      grid-template-columns: 1fr auto;
+      padding: 20px 24px;
+      border-top: 1px solid $colorBorder;
+      display: flex;
+      justify-content: flex-end;
+      flex-shrink: 0;
+    }
+  }
 
-      &-button {
-        font-size: 16px;
-        font-family: $fontRegular;
-        color: $colorWhite;
-        background-color: $colorDefault;
-        padding: 6px 12px;
-        border-radius: 8px;
-        width: fit-content;
-        transition: 0.2s;
+  // Адаптивность
+  @media (max-width: 1024px) {
+    padding: 1rem;
 
-        &:hover {
-          background-color: $colorDark;
-          cursor: pointer;
+    &-container {
+      max-width: 90%;
+      margin: 0 auto;
+    }
+
+    &-title {
+      font-size: 22px;
+      padding: 18px 20px;
+    }
+
+    &-items {
+      padding: 20px;
+      gap: 18px;
+    }
+
+    &-item-text {
+      font-size: 15px;
+    }
+
+    &-submit-button,
+    &-accept-button {
+      padding: 10px 20px;
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    padding: 0.5rem;
+
+    &-container {
+      max-width: 95%;
+      border-radius: 12px;
+    }
+
+    &-title {
+      font-size: 20px;
+      padding: 16px;
+    }
+
+    &-items {
+      padding: 16px;
+      gap: 16px;
+    }
+
+    &-item {
+      gap: 6px;
+
+      &-text {
+        font-size: 14px;
+      }
+    }
+
+    &-input,
+    &-select,
+    &-datepicker {
+      min-height: 40px;
+    }
+
+    &-footer {
+      padding: 16px;
+    }
+
+    &-submit-button,
+    &-accept-button {
+      padding: 10px 20px;
+      font-size: 14px;
+      min-width: 110px;
+    }
+
+    // Модальное окно для мобильных
+    &-terms-modal {
+      .ant-modal-content {
+        max-width: 95vw;
+        margin: 0 auto;
+      }
+    }
+
+    &-modal {
+      min-width: unset;
+      max-height: 70vh;
+
+      &-header {
+        padding: 16px;
+
+        &-text {
+          font-size: 20px;
         }
       }
+
+      &-acceptTerms {
+        padding: 16px;
+
+        &-text {
+          font-size: 13px;
+          line-height: 1.5;
+        }
+      }
+
+      &-footer {
+        padding: 16px;
+      }
+    }
+  }
+
+  @media (max-width: 460px) {
+    min-height: calc(100vh - 2rem);
+    padding: 0.5rem 0.25rem;
+
+    &-container {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    &-title {
+      font-size: 18px;
+      padding: 14px 12px;
+    }
+
+    &-items {
+      padding: 12px;
+      gap: 14px;
+    }
+
+    &-item {
+      gap: 4px;
+
+      &-text {
+        font-size: 13px;
+      }
+    }
+
+    &-input,
+    &-select,
+    &-datepicker {
+      min-height: 36px;
+      font-size: 14px;
+    }
+
+    &-footer {
+      padding: 12px;
+    }
+
+    &-submit-button,
+    &-accept-button {
+      padding: 8px 16px;
+      font-size: 13px;
+      min-width: 100px;
+      border-radius: 6px;
+    }
+
+    // Модальное окно для самых маленьких экранов
+    &-terms-modal {
+      .ant-modal-content {
+        border-radius: 12px;
+      }
+    }
+
+    &-modal {
+      max-height: 65vh;
+
+      &-header {
+        padding: 14px 12px;
+
+        &-text {
+          font-size: 18px;
+        }
+      }
+
+      &-acceptTerms {
+        padding: 12px;
+
+        &-text {
+          font-size: 12px;
+          line-height: 1.4;
+        }
+      }
+
+      &-footer {
+        padding: 12px;
+      }
+    }
+  }
+
+  // Для очень маленьких устройств (до 360px)
+  @media (max-width: 360px) {
+    &-title {
+      font-size: 16px;
+      padding: 12px 10px;
+    }
+
+    &-items {
+      padding: 10px;
+      gap: 12px;
+    }
+
+    &-item-text {
+      font-size: 12px;
+    }
+
+    &-submit-button,
+    &-accept-button {
+      padding: 8px 14px;
+      font-size: 12px;
+      min-width: 90px;
     }
   }
 }

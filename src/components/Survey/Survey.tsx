@@ -68,7 +68,8 @@ export default function Survey() {
   const changedString = (code: string, e: any) => {
     const newData: any = _.cloneDeep(data);
 
-    newData.data.find((f: any) => f.questionCode === code).value = e.target.value;
+    newData.data.find((f: any) => f.questionCode === code).value =
+      e.target.value;
 
     setData(newData);
   };
@@ -118,7 +119,9 @@ export default function Survey() {
         win.location = `${window.location.origin}/accompaniment`;
       }, 2000);
     } else {
-      message.error("Произошла ошибка, пожайлуста попробуйте позже или обратитесь к администратору");
+      message.error(
+        "Произошла ошибка, пожайлуста попробуйте позже или обратитесь к администратору"
+      );
     }
 
     setLoader(false);
@@ -132,32 +135,51 @@ export default function Survey() {
 
         <div className="survey-items">
           {data?.data?.map((item: any) => {
-            return item.answerType === "string" || item.answerType === "phone" || item.answerType === "email" ? (
-              <div className="survey-item" key={`survey-item-${item.questionCode}`}>
+            return item.answerType === "string" ||
+              item.answerType === "phone" ||
+              item.answerType === "email" ? (
+              <div
+                className="survey-item"
+                key={`survey-item-${item.questionCode}`}
+              >
                 <div className="survey-item-text">{item.questionName}:</div>
                 <Input
                   value={item.value}
-                  style={{ height: "30px" }}
-                  onValueChanged={(e: any) => changedString(item.questionCode, e)}
+                  // className="survey-input"
+                  onValueChanged={(e: any) =>
+                    changedString(item.questionCode, e)
+                  }
                   type={item.answerType}
                 />
               </div>
             ) : item.answerType === "object" ? (
-              <div className="survey-item" key={`survey-item-${item.questionCode}`}>
+              <div
+                className="survey-item"
+                key={`survey-item-${item.questionCode}`}
+              >
                 <div className="survey-item-text">{item.questionName}:</div>
                 <Select
                   data={data.objects[item.answersSpr]}
                   value={item.value}
-                  onValueChanged={(e: any) => changedObject(item.questionCode, e)}
+                  // className="survey-select"
+                  onValueChanged={(e: any) =>
+                    changedObject(item.questionCode, e)
+                  }
                   dontShowClear
                 />
               </div>
             ) : item.answerType === "date" ? (
-              <div className="survey-item" key={`survey-item-${item.questionCode}`}>
+              <div
+                className="survey-item"
+                key={`survey-item-${item.questionCode}`}
+              >
                 <div className="survey-item-text">{item.questionName}:</div>
                 <ConfigProvider locale={locale}>
                   <DatePicker
-                    onChange={(value: any) => changedDate(item.questionCode, value)}
+                    className="survey-datepicker"
+                    onChange={(value: any) =>
+                      changedDate(item.questionCode, value)
+                    }
                     value={item.value ? item.value : null}
                     picker="date"
                     format={customFormatDate}
@@ -166,33 +188,41 @@ export default function Survey() {
                 </ConfigProvider>
               </div>
             ) : (
-              <div>{item.answerType}</div>
+              <div className="survey-unknown-type">{item.answerType}</div>
             );
           })}
         </div>
 
         <div className="survey-modal-footer">
           <div />
-          <div className="survey-modal-footer-button" onClick={() => sendSurvey()}>
+          <button className="survey-submit-button" onClick={() => sendSurvey()}>
             Отправить
-          </div>
+          </button>
         </div>
       </div>
 
       {/* пользовательское соглашение */}
-      <Modal open={showTermsModal} onCancel={() => {}} maxWidth="700px">
+      <Modal open={showTermsModal} onCancel={() => {}} width="90vw">
         <div className="survey-modal">
           <div className="survey-modal-header">
             <div className="survey-modal-header-text">Условия пользования</div>
           </div>
-          <div className="survey-modal-acceptTerms">
-            <div className="survey-modal-acceptTerms-text" dangerouslySetInnerHTML={{ __html: terms?.items?.data }} />
+          <div className="survey-modal-content">
+            <div className="survey-modal-acceptTerms">
+              <div
+                className="survey-modal-acceptTerms-text"
+                dangerouslySetInnerHTML={{ __html: terms?.items?.data }}
+              />
+            </div>
           </div>
           <div className="survey-modal-footer">
             <div />
-            <div className="survey-modal-footer-button" onClick={() => acceptTerms()}>
+            <button
+              className="survey-accept-button"
+              onClick={() => acceptTerms()}
+            >
               Принять
-            </div>
+            </button>
           </div>
         </div>
       </Modal>

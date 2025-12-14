@@ -206,7 +206,7 @@ export default function Header({ data, whiteBg }: Props) {
                   </div>
                 </div>
 
-                {data.user.role === "admin" ? (
+                {data.user.role !== "student" ? (
                   <div className={`header-popover-items`}>
                     <NavLink className="header-popover-items-item" key={"header-popover-items-item_0"} to={"/profile"}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -308,17 +308,6 @@ export default function Header({ data, whiteBg }: Props) {
                     </NavLink>
                   </div>
                 )}
-
-                {/* <div className={`header-popover-items`}>
-                  <div className={`header-popover-items-title`}>Группы</div>
-                  {data.groups.map((item: any) => {
-                    return (
-                      <NavLink className={`header-popover-items-text`} to={`/${item.link}`} key={`/${item.link}`}>
-                        {item.name}
-                      </NavLink>
-                    );
-                  })}
-                </div> */}
 
                 <NavLink
                   className={`header-popover-exit`}
