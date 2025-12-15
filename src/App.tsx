@@ -13,6 +13,7 @@ import MotivationLetterContainer from "./components/MotivationLetter/MotivationL
 import Survey from "./components/Survey/Survey";
 import TourContainer from "./components/Tour/TourContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import VideosContainer from "./components/Videos/VideosContainer";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -63,6 +64,11 @@ export default function App() {
     {
       path: `/profile`,
       element: <ProfileContainer />, // страница пользователя
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: `/videos`,
+      element: <VideosContainer />, // страница пользователя
       errorElement: <ErrorPage />,
     },
     {

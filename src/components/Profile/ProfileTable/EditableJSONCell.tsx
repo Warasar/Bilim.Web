@@ -33,7 +33,13 @@ export const EditableJSONCell: React.FC<{
   return (
     <div
       className={"profile-table-cell" + (col.isEdit ? "" : " profile-table-cell-disabled")}
-      style={{ display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: "6px" }}
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr auto",
+        alignItems: "center",
+        gap: "6px",
+        padding: "0px 12px",
+      }}
     >
       <div style={{ width: "100%" }}>
         <div
@@ -47,7 +53,7 @@ export const EditableJSONCell: React.FC<{
             display: "block",
             fontFamily: "monospace",
             backgroundColor: "#f6f8fa",
-            padding: "8px",
+            padding: "5px 12px",
             borderRadius: "4px",
             fontSize: "12px",
           }}

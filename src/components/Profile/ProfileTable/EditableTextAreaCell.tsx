@@ -50,7 +50,7 @@ export const EditableTextAreaCell: React.FC<{
     <div
       className={"profile-table-cell" + (col.isEdit ? "" : " profile-table-cell-disabled")}
       onClick={() => (col.isEdit ? handleEdit() : null)}
-      style={{ display: "block" }}
+      style={{ display: "block", padding: "0px 12px" }}
     >
       <div
         className="profile-table-cell-text"

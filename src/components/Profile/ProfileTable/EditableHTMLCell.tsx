@@ -41,7 +41,13 @@ export const EditableHTMLCell: React.FC<{
   return (
     <div
       className={"profile-table-cell" + (col.isEdit ? "" : " profile-table-cell-disabled")}
-      style={{ display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: "6px" }}
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr auto",
+        alignItems: "center",
+        gap: "6px",
+        padding: "0px 12px",
+      }}
     >
       <div>
         <div

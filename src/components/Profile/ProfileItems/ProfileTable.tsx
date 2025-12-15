@@ -1,30 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
-import {
-  requestDelete,
-  requestGet,
-  requestPost,
-  requestPut,
-} from "../../../actions/actions";
+import { requestDelete, requestGet, requestPost, requestPut } from "../../../actions/actions";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import dayjs from "dayjs";
-import {
-  Button,
-  ConfigProvider,
-  Input,
-  message,
-  Popconfirm,
-  Space,
-  Table,
-} from "antd";
+import { Button, ConfigProvider, Input, message, Popconfirm, Space, Table } from "antd";
 import { Locale } from "antd/es/locale";
 import ruRU from "antd/locale/ru_RU";
-import {
-  DeleteOutlined,
-  FilterOutlined,
-  PlusOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, FilterOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import { EditableNumberCell } from "../ProfileTable/EditableNumberCell";
 import { EditableVarcharCell } from "../ProfileTable/EditableVarcharCell";
 import { EditableTextAreaCell } from "../ProfileTable/EditableTextAreaCell";
@@ -34,6 +16,7 @@ import { EditableDateTimeCell } from "../ProfileTable/EditableDateTimeCell";
 import _ from "lodash";
 import { EditableHTMLCell } from "../ProfileTable/EditableHTMLCell";
 import { EditableJSONCell } from "../ProfileTable/EditableJSONCell";
+import { EditableSprCell } from "../ProfileTable/EditableSprCell";
 
 require("dayjs/locale/ru");
 dayjs.locale("ru");
@@ -78,6 +61,10 @@ export const ruLocale: Locale = {
     ...customTableLocale,
   },
 };
+export type IObj = {
+  value: any;
+  label: string;
+};
 
 type Props = {
   setLoader: (loader: boolean) => void;
@@ -88,6 +75,7 @@ type Props = {
 export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   const [data, setData] = useState<any>(null);
   const [tableColumns, setTableColumns] = useState<any>(null);
+  const [sprs, setSprs] = useState<any>(null);
   const [filteredInfo, setFilteredInfo] = useState<Record<string, any>>({});
   const [sortedInfo, setSortedInfo] = useState<Record<string, any>>({});
 
@@ -101,6 +89,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
 
     const table: any = await requestGet(`admin/table?id=${tableItem.id}`);
 
+    setSprs(table?.sprs);
     setTableColumns(table?.fields);
     setData(table?.data);
 
@@ -152,9 +141,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
       };
 
       // Генерация уникальных значений для фильтров
-      const uniqueValues = Array.from(
-        new Set(data.map((record: any) => record[item.field]).filter(Boolean))
-      ).sort();
+      const uniqueValues = Array.from(new Set(data.map((record: any) => record[item.field]).filter(Boolean))).sort();
 
       // Если значений меньше 10, показываем фильтр
       if (uniqueValues.length > 0 && uniqueValues.length < 10) {
@@ -185,19 +172,12 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
         };
       } else {
         // Для большого количества значений - поисковый фильтр
-        column.filterDropdown = ({
-          setSelectedKeys,
-          selectedKeys,
-          confirm,
-          clearFilters,
-        }: any) => (
+        column.filterDropdown = ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => (
           <div style={{ padding: 8 }}>
             <Input
               placeholder={`Поиск по ${item.fieldName || item.field}`}
               value={selectedKeys[0]}
-              onChange={(e) =>
-                setSelectedKeys(e.target.value ? [e.target.value] : [])
-              }
+              onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
               onPressEnter={() => confirm()}
               style={{ width: 188, marginBottom: 8, display: "block" }}
             />
@@ -211,11 +191,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
               >
                 Поиск
               </Button>
-              <Button
-                onClick={() => clearFilters && clearFilters()}
-                size="small"
-                style={{ width: 90 }}
-              >
+              <Button onClick={() => clearFilters && clearFilters()} size="small" style={{ width: 90 }}>
                 Сбросить
               </Button>
             </Space>
@@ -229,10 +205,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
         column.onFilter = (value: any, record: any) => {
           const fieldValue = record[item.field];
           if (!fieldValue) return false;
-          return fieldValue
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase());
+          return fieldValue.toString().toLowerCase().includes(value.toLowerCase());
         };
       }
 
@@ -243,11 +216,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   };
 
   const sorterCol = (a: any, b: any, item: any) => {
-    if (
-      item.dataType === "int4" ||
-      item.dataType === "decimal" ||
-      item.dataType === "bool"
-    ) {
+    if (item.dataType === "int4" || item.dataType === "decimal" || item.dataType === "bool") {
       return a[item.field] - b[item.field];
     } else if (item.dataType === "date" || item.dataType === "timestamp") {
       if (!a[item.field] && !b[item.field]) return 0;
@@ -271,102 +240,52 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   // ячейки по типам
   const renderCell = (value: any, record: any, col: any) => {
     if (col.dataType === "int4") {
-      return (
-        <EditableNumberCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableNumberCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "varchar") {
-      return (
-        <EditableVarcharCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableVarcharCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "text") {
-      return (
-        <EditableTextAreaCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableTextAreaCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "bool") {
-      return (
-        <EditableBoolCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableBoolCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "decimal") {
-      return (
-        <EditableNumberCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableNumberCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "date") {
-      return (
-        <EditableDateCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableDateCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "timestamp") {
-      return (
-        <EditableDateTimeCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableDateTimeCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "html") {
-      return (
-        <EditableHTMLCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableHTMLCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "json") {
-      return (
-        <EditableJSONCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableJSONCell value={value} record={record} col={col} onSave={onSaveTable} />;
+    }
+
+    if (col.dataType === "object") {
+      const obj: IObj[] = [];
+
+      sprs[col.spr].forEach((item: any) => {
+        obj.push({
+          value: item[col.sprCode],
+          label: item[col.sprName] + "",
+        });
+      });
+
+      return <EditableSprCell value={value} record={record} col={col} onSave={onSaveTable} obj={obj} />;
     }
 
     return <div>{value}</div>;
@@ -390,13 +309,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
           okText="Да"
           cancelText="Нет"
         >
-          <Button
-            type="text"
-            danger
-            icon={<DeleteOutlined />}
-            size="small"
-            title="Удалить"
-          />
+          <Button type="text" danger icon={<DeleteOutlined />} size="small" title="Удалить" />
         </Popconfirm>
       </div>
     );

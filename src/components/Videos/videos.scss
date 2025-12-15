@@ -1,0 +1,78 @@
+@import "../../styles/variables.scss";
+
+.videos {
+  background-color: $colorDefault;
+  display: flex;
+  justify-content: center;
+
+  &-main {
+    margin: auto;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 24px;
+    position: relative;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+
+  &-title {
+    margin-top: 20px;
+    width: 100%;
+    color: $colorDark;
+    font-family: $fontBold;
+    font-size: 54px;
+    color: $colorWhite;
+    text-align: center;
+  }
+
+  &-items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-item {
+    margin-top: 48px;
+    display: grid;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.4);
+
+    &-title {
+      background-color: $colorDark;
+      padding: 6px 12px;
+      text-align: center;
+      color: $colorWhite;
+      font-size: 42px;
+      font-family: $fontCormorantBoldItalic;
+    }
+
+    &-content {
+      padding: 24px;
+      display: grid;
+      gap: 24px;
+      background-color: $colorWhite;
+      width: 100%;
+    }
+
+    &-subtitle {
+      width: 100%;
+      font-family: $fontItalic;
+      font-size: 18px;
+      color: $colorDark;
+      text-align: center;
+    }
+  }
+
+  &-iframe {
+    margin-bottom: 24px;
+    height: 100%;
+    width: 100%;
+    max-width: 832px;
+    min-height: 468px;
+    border: none;
+    border-radius: 12px;
+  }
+}

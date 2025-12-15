@@ -306,6 +306,36 @@ export default function Header({ data, whiteBg }: Props) {
                       </svg>
                       <div className="header-popover-items-item-text">Домашние задания</div>
                     </NavLink>
+                    <NavLink className="header-popover-items-item" key={"header-popover-items-item_3"} to={"/videos"}>
+                      <svg
+                        version="1.0"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24px"
+                        height="24px"
+                        viewBox="0 0 48.000000 48.000000"
+                        className="header-popover-items-item-icon"
+                      >
+                        <g
+                          transform="translate(0.000000,48.000000) scale(0.100000,-0.100000)"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          fill="currentColor"
+                        >
+                          <path
+                            d="M47 392 c-14 -15 -17 -42 -17 -154 0 -118 2 -137 18 -151 16 -15 45
+                              -17 194 -17 157 0 177 2 191 18 14 15 17 42 17 154 0 118 -2 137 -18 151 -16
+                              15 -45 17 -194 17 -157 0 -177 -2 -191 -18z m368 -152 l0 -135 -175 0 -175 0
+                              -3 124 c-1 69 0 131 2 138 4 11 42 13 178 11 l173 -3 0 -135z"
+                          />
+                          <path
+                            d="M197 293 c-11 -10 -8 -101 3 -108 12 -7 100 41 100 55 0 8 -79 60
+                            -92 60 -2 0 -8 -3 -11 -7z"
+                          />
+                        </g>
+                      </svg>
+                      <div className="header-popover-items-item-text">Записи прошлых встреч</div>
+                    </NavLink>
                   </div>
                 )}
 
