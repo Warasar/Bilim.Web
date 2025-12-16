@@ -30,6 +30,7 @@
     overflow: hidden;
     margin-top: 24px;
     margin-bottom: 24px;
+    height: calc(100vh - 112px);
   }
 
   &-block {
@@ -149,6 +150,7 @@
     max-height: calc(100vh - 164px);
     overflow-y: auto;
     padding-right: 4px;
+    gap: 6px;
 
     &::-webkit-scrollbar {
       width: 8px !important;
@@ -159,6 +161,59 @@
       background-color: $colorScrollBar !important;
       border-radius: 4px !important;
       transition: 0.2s;
+    }
+
+    &-group {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 6px;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background-color: $colorDefault;
+
+      &-text {
+        color: $colorWhite;
+        font-size: 16px;
+        font-family: $fontMedium;
+      }
+
+      &-arrow {
+        width: 24px;
+        height: 24px;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("../../assets/icons/default/chevron-right.svg");
+        transition: 0.2s;
+
+        &:hover {
+          background-image: url("../../assets/icons/default/chevron-right_active.svg");
+          cursor: pointer;
+        }
+
+        &-active {
+          width: 24px;
+          height: 24px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/chevron-right.svg");
+          transition: 0.2s;
+          transform: rotate(90deg);
+
+          &:hover {
+            background-image: url("../../assets/icons/default/chevron-right_active.svg");
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    &-items {
+      padding-top: 6px;
+      padding-bottom: 6px;
+      padding-left: 12px;
     }
 
     &-item {

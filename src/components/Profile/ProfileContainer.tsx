@@ -30,7 +30,7 @@ export default function ProfileContainer() {
 
       <div className="profile">
         {userData ? (
-          userData.role === "admin" ? (
+          userData.role !== "student" ? (
             <ProfileAdmin setLoader={setLoader} loader={loader} />
           ) : (
             <Profile setLoader={setLoader} userData={userData} />
