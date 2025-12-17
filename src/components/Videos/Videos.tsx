@@ -18,7 +18,7 @@ export default function Videos({ data, setData }: Props) {
   return (
     <div className="videos">
       <div className="videos-main">
-        <div className="videos-title">Записи с прошлых встреч</div>
+        <div className="videos-title">Записи встреч</div>
 
         <div className="videos-items">
           {data
