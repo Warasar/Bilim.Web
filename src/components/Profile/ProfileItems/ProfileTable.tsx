@@ -1,12 +1,30 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { requestDelete, requestGet, requestPost, requestPut } from "../../../actions/actions";
+import {
+  requestDelete,
+  requestGet,
+  requestPost,
+  requestPut,
+} from "../../../actions/actions";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import dayjs from "dayjs";
-import { Button, ConfigProvider, Input, message, Popconfirm, Space, Table } from "antd";
+import {
+  Button,
+  ConfigProvider,
+  Input,
+  message,
+  Popconfirm,
+  Space,
+  Table,
+} from "antd";
 import { Locale } from "antd/es/locale";
 import ruRU from "antd/locale/ru_RU";
-import { DeleteOutlined, FilterOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  FilterOutlined,
+  PlusOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
 import { EditableNumberCell } from "../ProfileTable/EditableNumberCell";
 import { EditableVarcharCell } from "../ProfileTable/EditableVarcharCell";
 import { EditableTextAreaCell } from "../ProfileTable/EditableTextAreaCell";
@@ -21,6 +39,8 @@ import { EditableDownloadCell } from "../ProfileTable/EditableDownloadCell";
 
 require("dayjs/locale/ru");
 dayjs.locale("ru");
+
+const ExcelJS = require("exceljs");
 
 const customTableLocale = {
   // Пагинация
@@ -79,6 +99,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   const [sprs, setSprs] = useState<any>(null);
   const [filteredInfo, setFilteredInfo] = useState<Record<string, any>>({});
   const [sortedInfo, setSortedInfo] = useState<Record<string, any>>({});
+  const [filteredData, setFilteredData] = useState<any>(null);
 
   useEffect(() => {
     getData();
@@ -140,7 +161,9 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
       };
 
       // Генерация уникальных значений для фильтров
-      const uniqueValues = Array.from(new Set(data.map((record: any) => record[item.field]).filter(Boolean))).sort();
+      const uniqueValues = Array.from(
+        new Set(data.map((record: any) => record[item.field]).filter(Boolean))
+      ).sort();
 
       // Если значений меньше 10, показываем фильтр
       if (uniqueValues.length > 0 && uniqueValues.length < 10) {
@@ -170,12 +193,19 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
           return record[item.field] === value;
         };
       } else {
-        column.filterDropdown = ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => (
+        column.filterDropdown = ({
+          setSelectedKeys,
+          selectedKeys,
+          confirm,
+          clearFilters,
+        }: any) => (
           <div style={{ padding: 8 }}>
             <Input
               placeholder={`Поиск по ${item.fieldName?.toLowerCase() || item.field?.toLowerCase()}`}
               value={selectedKeys[0]}
-              onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+              onChange={(e) =>
+                setSelectedKeys(e.target.value ? [e.target.value] : [])
+              }
               onPressEnter={() => {
                 confirm();
               }}
@@ -247,7 +277,11 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   };
 
   const sorterCol = (a: any, b: any, item: any) => {
-    if (item.dataType === "int4" || item.dataType === "decimal" || item.dataType === "bool") {
+    if (
+      item.dataType === "int4" ||
+      item.dataType === "decimal" ||
+      item.dataType === "bool"
+    ) {
       return a[item.field] - b[item.field];
     } else if (item.dataType === "date" || item.dataType === "timestamp") {
       if (!a[item.field] && !b[item.field]) return 0;
@@ -275,7 +309,13 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   };
 
   // Обработчики фильтрации и сортировки
-  const handleChange = (pagination: any, filters: any, sorter: any) => {
+  const handleChange = (
+    pagination: any,
+    filters: any,
+    sorter: any,
+    extra: any
+  ) => {
+    setFilteredData(extra.currentDataSource);
     setFilteredInfo(filters);
     setSortedInfo({
       field: sorter.field,
@@ -286,39 +326,102 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   // ячейки по типам
   const renderCell = (value: any, record: any, col: any) => {
     if (col.dataType === "int4") {
-      return <EditableNumberCell value={value} record={record} col={col} onSave={onSaveTable} />;
+      return (
+        <EditableNumberCell
+          value={value}
+          record={record}
+          col={col}
+          onSave={onSaveTable}
+        />
+      );
     }
 
     if (col.dataType === "varchar") {
-      return <EditableVarcharCell value={value} record={record} col={col} onSave={onSaveTable} />;
+      return (
+        <EditableVarcharCell
+          value={value}
+          record={record}
+          col={col}
+          onSave={onSaveTable}
+        />
+      );
     }
 
     if (col.dataType === "text") {
-      return <EditableTextAreaCell value={value} record={record} col={col} onSave={onSaveTable} />;
+      return (
+        <EditableTextAreaCell
+          value={value}
+          record={record}
+          col={col}
+          onSave={onSaveTable}
+        />
+      );
     }
 
     if (col.dataType === "bool") {
-      return <EditableBoolCell value={value} record={record} col={col} onSave={onSaveTable} />;
+      return (
+        <EditableBoolCell
+          value={value}
+          record={record}
+          col={col}
+          onSave={onSaveTable}
+        />
+      );
     }
 
     if (col.dataType === "decimal") {
-      return <EditableNumberCell value={value} record={record} col={col} onSave={onSaveTable} />;
+      return (
+        <EditableNumberCell
+          value={value}
+          record={record}
+          col={col}
+          onSave={onSaveTable}
+        />
+      );
     }
 
     if (col.dataType === "date") {
-      return <EditableDateCell value={value} record={record} col={col} onSave={onSaveTable} />;
+      return (
+        <EditableDateCell
+          value={value}
+          record={record}
+          col={col}
+          onSave={onSaveTable}
+        />
+      );
     }
 
     if (col.dataType === "timestamp") {
-      return <EditableDateTimeCell value={value} record={record} col={col} onSave={onSaveTable} />;
+      return (
+        <EditableDateTimeCell
+          value={value}
+          record={record}
+          col={col}
+          onSave={onSaveTable}
+        />
+      );
     }
 
     if (col.dataType === "html") {
-      return <EditableHTMLCell value={value} record={record} col={col} onSave={onSaveTable} />;
+      return (
+        <EditableHTMLCell
+          value={value}
+          record={record}
+          col={col}
+          onSave={onSaveTable}
+        />
+      );
     }
 
     if (col.dataType === "json") {
-      return <EditableJSONCell value={value} record={record} col={col} onSave={onSaveTable} />;
+      return (
+        <EditableJSONCell
+          value={value}
+          record={record}
+          col={col}
+          onSave={onSaveTable}
+        />
+      );
     }
 
     if (col.dataType === "object") {
@@ -331,11 +434,26 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
         });
       });
 
-      return <EditableSprCell value={value} record={record} col={col} onSave={onSaveTable} obj={obj} />;
+      return (
+        <EditableSprCell
+          value={value}
+          record={record}
+          col={col}
+          onSave={onSaveTable}
+          obj={obj}
+        />
+      );
     }
 
     if (col.dataType === "download") {
-      return <EditableDownloadCell value={value} record={record} col={col} setLoader={setLoader} />;
+      return (
+        <EditableDownloadCell
+          value={value}
+          record={record}
+          col={col}
+          setLoader={setLoader}
+        />
+      );
     }
 
     return <div>{value}</div>;
@@ -359,7 +477,13 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
           okText="Да"
           cancelText="Нет"
         >
-          <Button type="text" danger icon={<DeleteOutlined />} size="small" title="Удалить" />
+          <Button
+            type="text"
+            danger
+            icon={<DeleteOutlined />}
+            size="small"
+            title="Удалить"
+          />
         </Popconfirm>
       </div>
     );
@@ -460,10 +584,17 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   const emptyRender = () => {
     return (
       <div className="profile-table-empty">
-        <div className="profile-table-empty-text">Нет данных для отображения :{`(`}</div>
+        <div className="profile-table-empty-text">
+          Нет данных для отображения :{`(`}
+        </div>
         {tableItem.isEdit ? (
           <div className="profile-table-empty-button">
-            <Button icon={<PlusOutlined />} type="primary" iconPosition="end" onClick={() => handleAddRow()}>
+            <Button
+              icon={<PlusOutlined />}
+              type="primary"
+              iconPosition="end"
+              onClick={() => handleAddRow()}
+            >
               Добавить пустую строку
             </Button>
           </div>
@@ -472,41 +603,206 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
     );
   };
 
+  // excel
+  const exportExcelFile = async () => {
+    //----начало----------------
+    const excelName = `${tableItem?.tableTitle}`;
+    const workbook = new ExcelJS.Workbook();
+    const sheet = workbook.addWorksheet(excelName);
+
+    //----стили-----------------
+    const borderStyleHeader = {
+      top: {
+        style: "thin",
+        color: { argb: "A9B6BD" },
+      },
+      left: {
+        style: "thin",
+        color: { argb: "A9B6BD" },
+      },
+      bottom: {
+        style: "thin",
+        color: { argb: "A9B6BD" },
+      },
+      right: {
+        style: "thin",
+        color: { argb: "A9B6BD" },
+      },
+    };
+    const fillHeader = {
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: "D3D3D3" },
+    };
+    const font = {
+      color: { argb: "333333" },
+    };
+
+    sheet.columns = getCols();
+
+    // -------добавляю хедер в ексель данные----
+    const header = getHeader();
+    sheet.getRow(1).values = header;
+
+    const row = sheet.getRow(1);
+    row.eachCell((cell: any) => {
+      cell.alignment = {
+        vertical: "middle",
+        horizontal: "center",
+        wrapText: "true",
+      };
+      cell.border = borderStyleHeader;
+      cell.fill = fillHeader;
+      cell.font = font;
+    });
+
+    //-------создание даты-----------------------
+    const mainData: any = filteredData?.length ? filteredData : data;
+
+    //-------добавление строк------------------
+    const excelData: any = [];
+
+    mainData.forEach((row: any) => {
+      const values: any = [];
+
+      tableColumns.forEach((col: any) => {
+        if (
+          col.dataType === "int4" ||
+          col.dataType === "varchar" ||
+          col.dataType === "text" ||
+          col.dataType === "decimal"
+        ) {
+          values.push(row[col.field]);
+        } else if (col.dataType === "bool") {
+          values.push(row[col.field] ? "Да" : "Нет");
+        } else if (col.dataType === "date") {
+          values.push(dayjs(row[col.field]).format("DD.MM.YYYY"));
+        } else if (col.dataType === "timestamp") {
+          values.push(dayjs(row[col.field]).format("DD.MM.YYYY HH:mm:ss"));
+        } else if (col.dataType === "html") {
+          // сюда байбалик
+        } else if (col.dataType === "json") {
+        } else if (col.dataType === "object") {
+          const obj: IObj[] = [];
+
+          sprs[col.spr].forEach((item: any) => {
+            obj.push({
+              value: item[col.sprCode],
+              label: item[col.sprName] + "",
+            });
+          });
+        } else if (col.dataType === "download") {
+        } else {
+          values.push(row[col.field]);
+        }
+      });
+
+      excelData.push(values);
+    });
+
+    excelData.forEach((item: any, index: number) => {
+      sheet.getRow(index + 1).values = excelData[index];
+      const row: any = sheet.getRow(index + 1);
+
+      row.eachCell((cell: any) => {
+        cell.alignment = {
+          vertical: "middle",
+          wrapText: "true",
+        };
+      });
+    });
+
+    //-----я хз че он делает--------------------
+    sheet.properties.outlineProperties = {
+      summaryBelow: false,
+      summaryRight: false,
+    };
+
+    //-----выгрузка-----------------------------
+    workbook.xlsx.writeBuffer().then(function (data: any) {
+      const blob = new Blob([data], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      });
+      const url = window.URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = `${excelName}.xlsx`;
+      anchor.click();
+      window.URL.revokeObjectURL(url);
+    });
+  };
+
+  const getCols = () => {
+    const newHead: any[] = [];
+
+    tableColumns.forEach((item: any) => {
+      newHead.push({
+        key: item.field,
+        width: item.width ? item.width / 8 : 15,
+      });
+    });
+
+    return newHead;
+  };
+
+  const getHeader = () => {
+    const newHead: any[] = [];
+
+    tableColumns.forEach((item: any) => {
+      newHead.push(item.fieldName);
+    });
+
+    return newHead;
+  };
+
   return (
-    <div className="profile-table">
-      <ConfigProvider locale={ruLocale}>
-        <Table
-          columns={columns}
-          dataSource={data}
-          bordered
-          locale={{
-            emptyText: emptyRender(),
-            triggerDesc: "",
-            triggerAsc: "",
-            cancelSort: "",
-          }}
-          rowClassName={() => "profile-table-row"}
-          onChange={handleChange}
-          loading={!tableColumns?.length || data?.length}
-          scroll={{
-            y: `calc(100vh - 210px)`, // Фиксированная высота
-          }}
-          pagination={false}
-          components={{
-            body: {
-              cell: (props: any) => (
-                <td
-                  {...props}
-                  style={{
-                    ...props.style,
-                    padding: "0px", // Кастомный padding для ячеек
-                  }}
-                />
-              ),
-            },
-          }}
+    <div className="profile-table-container">
+      <div className="profile-table-buttons">
+        <div />
+
+        <div
+          className="profile-table-button-excel"
+          title="Скачать Excel"
+          onClick={() => exportExcelFile()}
+          style={{ marginRight: "-0.25vw", width: "1.6vw", height: "1.6vw" }}
         />
-      </ConfigProvider>
+      </div>
+
+      <div className="profile-table">
+        <ConfigProvider locale={ruLocale}>
+          <Table
+            columns={columns}
+            dataSource={data}
+            bordered
+            locale={{
+              emptyText: emptyRender(),
+              triggerDesc: "",
+              triggerAsc: "",
+              cancelSort: "",
+            }}
+            rowClassName={() => "profile-table-row"}
+            onChange={handleChange}
+            loading={!tableColumns?.length || data?.length}
+            scroll={{
+              y: `calc(100vh - 240px)`, // Фиксированная высота
+            }}
+            pagination={false}
+            components={{
+              body: {
+                cell: (props: any) => (
+                  <td
+                    {...props}
+                    style={{
+                      ...props.style,
+                      padding: "0px", // Кастомный padding для ячеек
+                    }}
+                  />
+                ),
+              },
+            }}
+          />
+        </ConfigProvider>
+      </div>
     </div>
   );
 }

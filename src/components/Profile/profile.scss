@@ -482,6 +482,36 @@
     overflow-x: auto;
     padding-right: 12px;
 
+    &-container {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 6px;
+    }
+
+    &-buttons {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding-right: 12px;
+    }
+
+    &-button {
+      &-excel {
+        width: 24px;
+        height: 24px;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("../../assets/icons/default/excel.png");
+        transition: 0.2s;
+
+        &:hover {
+          transform: scale(1.1);
+          cursor: pointer;
+        }
+      }
+    }
+
     .ant-picker {
       padding: 0px !important;
     }

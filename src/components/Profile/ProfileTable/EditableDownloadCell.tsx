@@ -12,23 +12,24 @@ export const EditableDownloadCell: React.FC<{
     setLoader(true);
 
     try {
-      const response = await requestGetResponse(`/admin/downloadFile?filePath=${value}`, {
-        responseType: "arraybuffer",
-      });
+      const response = await requestGetResponse(
+        `/admin/downloadFile?filePath=${value}`,
+        {
+          responseType: "arraybuffer",
+        }
+      );
 
       if (response) {
         const fileData = response.data;
-        const contentType = response.headers?.["content-type"] || "application/pdf";
-        let fileName = response.headers?.["content-disposition"].split("filename=")[1]?.split(";")[0]?.trim();
-        if (fileName && fileName.startsWith('"') && fileName.endsWith('"')) {
-          fileName = fileName.slice(1, -1);
-        }
+        const contentType =
+          response.headers?.["content-type"] || "application/pdf";
+
+        const contentDisposition = response.headers?.["content-disposition"];
+        let fileName = getFilenameFromContentDisposition(contentDisposition);
 
         if (!fileName) {
           fileName = `${record[col.code]}`;
         }
-
-        debugger;
 
         const blob = new Blob([fileData], { type: contentType });
         const url = URL.createObjectURL(blob);
@@ -49,9 +50,59 @@ export const EditableDownloadCell: React.FC<{
     }
   };
 
+  const getFilenameFromContentDisposition = (contentDisposition: string) => {
+    if (!contentDisposition) return null;
+
+    // Регулярное выражение для парсинга всех форматов
+    const matches = contentDisposition.match(/filename\*?=([^;]+)/gi);
+
+    if (!matches) return null;
+
+    // Сортируем: сначала filename* (RFC 5987), потом filename
+    matches.sort((a, b) => (b.includes("filename*") ? 1 : -1));
+
+    for (const match of matches) {
+      if (match.includes("filename*=")) {
+        // RFC 5987 format: filename*=charset'lang'value
+        const parts = match.split("'");
+        if (parts.length >= 3) {
+          const encodedValue = parts.slice(2).join("'");
+          try {
+            return decodeURIComponent(encodedValue);
+          } catch (e) {
+            console.warn("Failed to decode filename:", e);
+          }
+        }
+      } else {
+        // Standard format: filename="value" or filename=value
+        const valueMatch = match.match(/filename=["']?([^"';]+)["']?/i);
+        if (valueMatch && valueMatch[1]) {
+          let filename = valueMatch[1];
+          // Убираем кавычки
+          if (filename.startsWith('"') && filename.endsWith('"')) {
+            filename = filename.slice(1, -1);
+          }
+          // Заменяем подчеркивания на пробелы
+          filename = filename.replace(/_/g, " ");
+          return filename;
+        }
+      }
+    }
+
+    return null;
+  };
+
   return (
-    <div className={"profile-table-cell" + (col.isEdit ? "" : " profile-table-cell-disabled")}>
-      <div className="profile-table-cell-download" onClick={() => downloadFile()}>
+    <div
+      className={
+        "profile-table-cell" +
+        (col.isEdit ? "" : " profile-table-cell-disabled")
+      }
+    >
+      <div
+        className="profile-table-cell-download"
+        onClick={() => downloadFile()}
+      >
         <DownloadOutlined />
         Скачать файл
       </div>

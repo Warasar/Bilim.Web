@@ -230,7 +230,7 @@
           background-position: 50%;
           background-repeat: no-repeat;
           background-size: cover;
-          background-image: url("../../assets/icons/brandIcon/star-blue.png");
+          background-image: url("../../assets/icons/brandIcon/star-yellow.png");
         }
 
         &-online {
@@ -239,7 +239,7 @@
           background-position: 50%;
           background-repeat: no-repeat;
           background-size: cover;
-          background-image: url("../../assets/icons/brandIcon/star-red.png");
+          background-image: url("../../assets/icons/brandIcon/star-blue.png");
         }
 
         &-event {
@@ -252,9 +252,12 @@
         }
 
         &-deadline {
-          font-size: 14px;
-          font-family: $fontItalic;
-          color: $colorRed;
+          width: 22px;
+          height: 22px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/brandIcon/star-red.png");
         }
       }
 
