@@ -34,7 +34,7 @@ export const EditableNumberCell: React.FC<{
       className={"profile-table-cell" + (col.isEdit ? "" : " profile-table-cell-disabled")}
       onClick={() => (col.isEdit ? handleEdit() : null)}
     >
-      <span>{new Intl.NumberFormat("ru-RU").format(value)}</span>
+      <span>{value ? new Intl.NumberFormat("ru-RU").format(value) : value}</span>
     </div>
   );
 };

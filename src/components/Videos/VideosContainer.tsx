@@ -19,6 +19,10 @@ export default function VideosContainer() {
 
     const newData = await requestGet(`recentRecordings`);
 
+    newData?.forEach((item: any) => {
+      item.opened = false;
+    });
+
     setData(newData);
     setLoader(false);
   };
@@ -28,7 +32,7 @@ export default function VideosContainer() {
       {loader ? <Loader absolute /> : null}
 
       <HeaderContainer />
-      {loader ? <div style={{ height: "calc(100vh - 62px)" }} /> : <Videos data={data} />}
+      {loader ? <div style={{ height: "calc(100vh - 62px)" }} /> : <Videos data={data} setData={setData} />}
       <FooterContainer />
     </div>
   );

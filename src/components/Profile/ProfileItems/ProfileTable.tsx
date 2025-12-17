@@ -17,6 +17,7 @@ import _ from "lodash";
 import { EditableHTMLCell } from "../ProfileTable/EditableHTMLCell";
 import { EditableJSONCell } from "../ProfileTable/EditableJSONCell";
 import { EditableSprCell } from "../ProfileTable/EditableSprCell";
+import { EditableDownloadCell } from "../ProfileTable/EditableDownloadCell";
 
 require("dayjs/locale/ru");
 dayjs.locale("ru");
@@ -93,8 +94,6 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
     setTableColumns(table?.fields);
     setData(table?.data);
 
-    console.log("table", table);
-
     setLoader(false);
   };
 
@@ -148,11 +147,11 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
         if (item.dataType === "bool") {
           column.filters = [
             {
-              text: "Виден",
+              text: "Да",
               value: true,
             },
             {
-              text: "Не виден",
+              text: "Нет",
               value: false,
             },
           ];
@@ -171,14 +170,15 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
           return record[item.field] === value;
         };
       } else {
-        // Для большого количества значений - поисковый фильтр
         column.filterDropdown = ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => (
           <div style={{ padding: 8 }}>
             <Input
-              placeholder={`Поиск по ${item.fieldName || item.field}`}
+              placeholder={`Поиск по ${item.fieldName?.toLowerCase() || item.field?.toLowerCase()}`}
               value={selectedKeys[0]}
               onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-              onPressEnter={() => confirm()}
+              onPressEnter={() => {
+                confirm();
+              }}
               style={{ width: 188, marginBottom: 8, display: "block" }}
             />
             <Space>
@@ -191,7 +191,16 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
               >
                 Поиск
               </Button>
-              <Button onClick={() => clearFilters && clearFilters()} size="small" style={{ width: 90 }}>
+              <Button
+                onClick={() => {
+                  if (clearFilters) {
+                    clearFilters();
+                    confirm();
+                  }
+                }}
+                size="small"
+                style={{ width: 90 }}
+              >
                 Сбросить
               </Button>
             </Space>
@@ -204,8 +213,30 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
 
         column.onFilter = (value: any, record: any) => {
           const fieldValue = record[item.field];
-          if (!fieldValue) return false;
-          return fieldValue.toString().toLowerCase().includes(value.toLowerCase());
+
+          if (item.dataType === "object" || Array.isArray(fieldValue)) {
+            const dictionary: any[] = [];
+
+            sprs[item.spr].forEach((sprItem: any) => {
+              dictionary.push({
+                value: sprItem[item.sprCode],
+                label: sprItem[item.sprName] + "",
+              });
+            });
+
+            const foundItem = dictionary.filter((item: any) =>
+              String(item.label || "")
+                .toLowerCase()
+                .includes(String(value).toLowerCase())
+            );
+
+            return foundItem.some((f) => f.value === fieldValue);
+          }
+
+          // Обычная логика для других типов
+          return String(fieldValue || "")
+            .toLowerCase()
+            .includes(String(value).toLowerCase());
         };
       }
 
@@ -222,7 +253,22 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
       if (!a[item.field] && !b[item.field]) return 0;
       if (!a[item.field]) return 1;
       if (!b[item.field]) return -1;
+
       return dayjs(a[item.field]).unix() - dayjs(b[item.field]).unix();
+    } else if (item.dataType === "object") {
+      const dictionary: any[] = [];
+
+      sprs[item.spr].forEach((sprItem: any) => {
+        dictionary.push({
+          value: sprItem[item.sprCode],
+          label: sprItem[item.sprName] + "",
+        });
+      });
+
+      const itemA = dictionary.find((f) => f.value === a[item.field]);
+      const itemB = dictionary.find((f) => f.value === b[item.field]);
+
+      return itemA.label?.localeCompare(itemB.label);
     }
 
     return a[item.field]?.localeCompare(b[item.field]);
@@ -286,6 +332,10 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
       });
 
       return <EditableSprCell value={value} record={record} col={col} onSave={onSaveTable} obj={obj} />;
+    }
+
+    if (col.dataType === "download") {
+      return <EditableDownloadCell value={value} record={record} col={col} setLoader={setLoader} />;
     }
 
     return <div>{value}</div>;
@@ -352,25 +402,47 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
     }
   };
 
-  const handleAddRow = async (row: any) => {
-    const newRow: any = _.cloneDeep(row);
-    const rowIndex = data.findIndex((f: any) => f.id === row.id);
+  const handleAddRow = async (row?: any) => {
+    if (row) {
+      const newRow: any = _.cloneDeep(row);
+      const rowIndex = data.findIndex((f: any) => f.id === row.id);
 
-    for (const key in newRow) {
-      newRow[key] = null;
-    }
+      for (const key in newRow) {
+        newRow[key] = null;
+      }
 
-    const newID = await requestPost(`admin/table?id=${tableItem.id}`, {});
+      const newID = await requestPost(`admin/table?id=${tableItem.id}`, {});
 
-    if (newID) {
-      newRow.id = newID;
+      if (newID) {
+        newRow.id = newID;
 
-      const newData: any = _.cloneDeep(data);
-      newData.splice(rowIndex + 1, 0, newRow);
+        const newData: any = _.cloneDeep(data);
+        newData.splice(rowIndex + 1, 0, newRow);
 
-      setData(newData);
+        setData(newData);
+      } else {
+        message.error("Произошла ошибка при создании строки");
+      }
     } else {
-      message.error("Произошла ошибка при создании строки");
+      const newRow: any = {};
+
+      tableColumns.forEach((col: any) => {
+        newRow[col.field] = null;
+      });
+
+      const newID = await requestPost(`admin/table?id=${tableItem.id}`, {});
+
+      if (newID) {
+        newRow.id = newID;
+
+        const newData: any = _.cloneDeep(data);
+
+        newData.push(newRow);
+
+        setData(newData);
+      } else {
+        message.error("Произошла ошибка при создании строки");
+      }
     }
   };
 
@@ -384,6 +456,22 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
     setData(newData);
   };
 
+  // render Пустой
+  const emptyRender = () => {
+    return (
+      <div className="profile-table-empty">
+        <div className="profile-table-empty-text">Нет данных для отображения :{`(`}</div>
+        {tableItem.isEdit ? (
+          <div className="profile-table-empty-button">
+            <Button icon={<PlusOutlined />} type="primary" iconPosition="end" onClick={() => handleAddRow()}>
+              Добавить пустую строку
+            </Button>
+          </div>
+        ) : null}
+      </div>
+    );
+  };
+
   return (
     <div className="profile-table">
       <ConfigProvider locale={ruLocale}>
@@ -392,11 +480,12 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
           dataSource={data}
           bordered
           locale={{
-            emptyText: "Нет данных для отображения",
+            emptyText: emptyRender(),
             triggerDesc: "",
             triggerAsc: "",
             cancelSort: "",
           }}
+          rowClassName={() => "profile-table-row"}
           onChange={handleChange}
           loading={!tableColumns?.length || data?.length}
           scroll={{

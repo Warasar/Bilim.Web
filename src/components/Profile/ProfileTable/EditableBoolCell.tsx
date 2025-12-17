@@ -21,8 +21,8 @@ export const EditableBoolCell: React.FC<{
         ref={inputRef}
         checked={cellValue}
         onChange={handleSwitchChange}
-        checkedChildren="Виден"
-        unCheckedChildren="Не виден"
+        checkedChildren="Да"
+        unCheckedChildren="Нет"
         disabled={!col.isEdit}
       />
     </div>

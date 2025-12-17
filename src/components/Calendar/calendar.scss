@@ -224,22 +224,37 @@
       align-items: center;
 
       &-icon {
-        &-starblue {
-          width: 24px;
-          height: 24px;
+        &-async {
+          width: 22px;
+          height: 22px;
           background-position: 50%;
           background-repeat: no-repeat;
           background-size: cover;
           background-image: url("../../assets/icons/brandIcon/star-blue.png");
         }
 
-        &-starred {
-          width: 24px;
-          height: 24px;
+        &-online {
+          width: 22px;
+          height: 22px;
           background-position: 50%;
           background-repeat: no-repeat;
           background-size: cover;
           background-image: url("../../assets/icons/brandIcon/star-red.png");
+        }
+
+        &-event {
+          width: 22px;
+          height: 22px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/brandIcon/star-darkblue.png");
+        }
+
+        &-deadline {
+          font-size: 14px;
+          font-family: $fontItalic;
+          color: $colorRed;
         }
       }
 
@@ -257,6 +272,32 @@
         font-size: 18px;
         font-family: $fontCormorantMedium;
       }
+    }
+  }
+
+  &-tooltip {
+    color: $colorWhite;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    &-header {
+      font-size: 16px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 6px;
+      font-weight: 600;
+    }
+
+    &-text {
+      font-size: 13px;
+      color: $colorWhite;
     }
   }
 }

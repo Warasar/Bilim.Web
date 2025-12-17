@@ -334,7 +334,7 @@ export default function Header({ data, whiteBg }: Props) {
                           />
                         </g>
                       </svg>
-                      <div className="header-popover-items-item-text">Записи прошлых встреч</div>
+                      <div className="header-popover-items-item-text">Записи встреч</div>
                     </NavLink>
                   </div>
                 )}

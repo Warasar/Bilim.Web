@@ -52,7 +52,6 @@ export const EditableJSONCell: React.FC<{
             lineHeight: "1.5em",
             display: "block",
             fontFamily: "monospace",
-            backgroundColor: "#f6f8fa",
             padding: "5px 12px",
             borderRadius: "4px",
             fontSize: "12px",
@@ -62,7 +61,7 @@ export const EditableJSONCell: React.FC<{
         </div>
 
         {isLongText && (
-          <div style={{ marginTop: 8, textAlign: "center" }}>
+          <div style={{ margin: "4px 0px", textAlign: "center" }}>
             <Button
               type="link"
               size="small"
@@ -71,6 +70,7 @@ export const EditableJSONCell: React.FC<{
               style={{
                 fontSize: "12px",
                 padding: 0,
+                outline: "none",
               }}
             >
               {isExpanded ? "Скрыть" : "Раскрыть"}

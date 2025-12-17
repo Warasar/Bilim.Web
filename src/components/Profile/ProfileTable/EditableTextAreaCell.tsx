@@ -50,7 +50,7 @@ export const EditableTextAreaCell: React.FC<{
     <div
       className={"profile-table-cell" + (col.isEdit ? "" : " profile-table-cell-disabled")}
       onClick={() => (col.isEdit ? handleEdit() : null)}
-      style={{ display: "block", padding: "0px 12px" }}
+      style={{ padding: "0px 12px", flexDirection: "column", alignItems: "start", justifyContent: "center" }}
     >
       <div
         className="profile-table-cell-text"
@@ -61,6 +61,7 @@ export const EditableTextAreaCell: React.FC<{
           wordBreak: "break-word",
           lineHeight: "1.5em",
           display: "block",
+          paddingTop: "8px",
         }}
       >
         {value}
@@ -68,7 +69,7 @@ export const EditableTextAreaCell: React.FC<{
       </div>
 
       {isLongText && (
-        <div style={{ marginTop: 8, textAlign: "center" }}>
+        <div style={{ margin: "4px 0px", textAlign: "center", width: "100%" }}>
           <Button
             type="link"
             size="small"
@@ -77,6 +78,7 @@ export const EditableTextAreaCell: React.FC<{
             style={{
               fontSize: "12px",
               padding: 0,
+              outline: "none",
             }}
           >
             {isExpanded ? "Скрыть" : "Раскрыть"}

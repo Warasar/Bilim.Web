@@ -7,6 +7,8 @@ import dayjs from "dayjs";
 
 export default function CalendarContainer() {
   const [data, setData] = useState<any>(null);
+  const [main, setMain] = useState<any>(null);
+  const [legends, setLegends] = useState<any>(null);
 
   useEffect(() => {
     getData();
@@ -26,21 +28,21 @@ export default function CalendarContainer() {
     const newData: any = await requestGet(`calendar`);
 
     if (newData) {
-      const sendData: any = _.cloneDeep(newData.data);
+      const sendData: any = _.cloneDeep(newData.data.events);
 
       sendData.forEach((item: any) => {
         item.eventDate = formattedDate(item.eventDate);
-
-        item.dates = item.dates.map((date: any) => {
-          return formattedDate(date);
-        });
+        if (item.startWhen) item.startWhen = formattedDate(item.startWhen);
+        if (item.endWhen) item.endWhen = formattedDate(item.endWhen);
       });
 
+      setLegends(newData.data.eventTypes);
+      setMain(newData?.items);
       setData(sendData);
     }
   };
 
   const mainDate: string = dayjs().format("DD-MM-YYYYTHH:mm:ss"); // первоначальная дата
 
-  return data ? <Calendar data={data} mainDate={mainDate} /> : null;
+  return data ? <Calendar data={data} mainDate={mainDate} main={main} legends={legends} /> : null;
 }

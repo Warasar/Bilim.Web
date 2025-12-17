@@ -12,7 +12,7 @@ export const EditableSprCell: React.FC<{
 }> = ({ value, record, col, onSave, obj }) => {
   const { value: cellValue, inputRef, handleChange } = useEditableCell(value, record, col, onSave);
 
-  return (
+  return col.isEdit ? (
     <Select
       showSearch
       placeholder="Выберите из списка"
@@ -27,7 +27,11 @@ export const EditableSprCell: React.FC<{
 
         onSave(value, record, col);
       }}
-      style={{ width: "100%" }}
+      style={{ width: "calc(100%)" }}
     />
+  ) : (
+    <div className={"profile-table-cell" + (col.isEdit ? "" : " profile-table-cell-disabled")}>
+      <span>{obj.find((f) => f.value === value)?.label}</span>
+    </div>
   );
 };

@@ -2,8 +2,6 @@
 
 .videos {
   background-color: $colorDefault;
-  display: flex;
-  justify-content: center;
 
   &-main {
     margin: auto;
@@ -15,6 +13,7 @@
     width: 100%;
     align-items: center;
     margin-bottom: 60px;
+    min-height: calc(100vh - 680px);
   }
 
   &-title {
@@ -28,29 +27,70 @@
   }
 
   &-items {
+    margin-top: 48px;
     display: flex;
     flex-direction: column;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 900px;
   }
 
   &-item {
-    margin-top: 48px;
     display: grid;
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid $colorWhite;
 
-    &-title {
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
       background-color: $colorDark;
       padding: 6px 12px;
-      text-align: center;
-      color: $colorWhite;
-      font-size: 42px;
-      font-family: $fontCormorantBoldItalic;
+
+      &-name {
+        font-size: 32px;
+        color: $colorWhite;
+        font-family: $fontCormorantBoldItalic;
+      }
+
+      &-arrow {
+        width: 36px;
+        height: 36px;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url("../../assets/icons/default/chevron-right.svg");
+        transition: 0.2s;
+
+        &:hover {
+          background-image: url("../../assets/icons/default/chevron-right_active.svg");
+          cursor: pointer;
+        }
+
+        &-active {
+          width: 36px;
+          height: 36px;
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("../../assets/icons/default/chevron-right.svg");
+          transition: 0.2s;
+          transform: rotate(90deg);
+
+          &:hover {
+            background-image: url("../../assets/icons/default/chevron-right_active.svg");
+            cursor: pointer;
+          }
+        }
+      }
     }
 
     &-content {
-      padding: 24px;
+      padding: 12px 24px;
       display: grid;
       gap: 24px;
       background-color: $colorWhite;

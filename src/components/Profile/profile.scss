@@ -501,7 +501,6 @@
       padding: 5px 12px;
 
       &-disabled {
-        cursor: no-drop;
         background-color: #eee;
       }
 
@@ -514,6 +513,22 @@
         min-height: 40px;
         padding: 6px 0px;
         transition: max-height 0.3s ease;
+      }
+
+      &-download {
+        display: flex;
+        gap: 6px;
+        background-color: $colorDefault;
+        padding: 3px 12px;
+        color: $colorWhite;
+        font-size: 14px;
+        border-radius: 6px;
+        transition: 0.2s;
+
+        &:hover {
+          background-color: $colorDark;
+          cursor: pointer;
+        }
       }
     }
 
@@ -536,6 +551,31 @@
         display: grid;
         grid-template-columns: 1fr auto auto;
         gap: 6px;
+      }
+    }
+
+    &-row {
+      .ant-table-cell {
+        height: 40px;
+      }
+    }
+
+    &-empty {
+      display: grid;
+      padding: 40px 0px;
+      position: sticky;
+      left: 0px;
+      max-width: calc(80vw - 14px);
+      gap: 6px;
+
+      &-text {
+        font-size: 14px;
+        color: $colorSubtext;
+      }
+
+      &-button {
+        display: flex;
+        justify-content: center;
       }
     }
   }

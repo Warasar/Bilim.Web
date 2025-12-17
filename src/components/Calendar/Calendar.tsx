@@ -4,6 +4,7 @@ import dayLocaleData from "dayjs/plugin/localeData";
 import { CalendarDay, CalendarType } from "./calendarType";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import _ from "lodash";
+import { Tooltip } from "antd";
 
 dayjs.extend(customParseFormat);
 dayjs.extend(dayLocaleData);
@@ -31,9 +32,11 @@ const formatDate = "DD-MM-YYYYTHH:mm:ss";
 type Props = {
   data: any;
   mainDate: string;
+  main: any;
+  legends: any;
 };
 
-export default function Calendar({ data, mainDate }: Props) {
+export default function Calendar({ data, mainDate, main, legends }: Props) {
   const ref: any = useRef(null);
   const [currentDate, setCurrentDate] = useState<any>(dayjs(mainDate, formatDate));
   const [isAnimating, setIsAnimating] = useState(false);
@@ -109,21 +112,37 @@ export default function Calendar({ data, mainDate }: Props) {
     }, 200);
   };
 
+  const isDateBetweenInclusive = (dateToCheck: string, startDate: string, endDate: string) => {
+    const getTime = (dateStr: string) => {
+      const [day, month, year] = dateStr.split("-").map(Number);
+      return new Date(year, month - 1, day).getTime();
+    };
+
+    const date = getTime(dateToCheck);
+    const start = getTime(startDate);
+    const end = getTime(endDate);
+
+    return date >= start && date <= end;
+  };
+
   const getStyleHeaderCell = (day: CalendarDay) => {
     const style: React.CSSProperties = {};
     let isChanged: boolean = false;
 
     data.forEach((item: any) => {
-      if (item.dates.some((f: any) => f.split("T")[0] === day.stringDate.split("T")[0]) && !isChanged) {
-        style.backgroundColor = "#FEE97D77"; //colorYellow
-        isChanged = true;
+      if (item.startWhen && item.endWhen && !isChanged) {
+        if (
+          isDateBetweenInclusive(day.stringDate.split("T")[0], item.startWhen.split("T")[0], item.endWhen.split("T")[0])
+        ) {
+          style.backgroundColor = "#FEE97D77"; //colorYellow
+          isChanged = true;
 
-        const index = item.dates.findIndex((f: any) => f.split("T")[0] === day.stringDate.split("T")[0]);
-        if (index === item.dates.length - 1) {
-          style.borderRight = "6px solid #0A304B";
-        }
-        if (index === 0) {
-          style.borderLeft = "5px solid #0A304B";
+          if (day.stringDate.split("T")[0] === item.endWhen.split("T")[0]) {
+            style.borderRight = "6px solid #0A304B";
+          }
+          if (day.stringDate.split("T")[0] === item.startWhen.split("T")[0]) {
+            style.borderLeft = "5px solid #0A304B";
+          }
         }
       }
     });
@@ -158,23 +177,44 @@ export default function Calendar({ data, mainDate }: Props) {
     return style;
   };
 
-  const renderIcon = (event: any, cmd: "eventType" | "moreType") => {
+  const renderIcon = (event: any) => {
     let jsx: any = null;
 
-    if (event[cmd] === "deadline") {
-      jsx = <div className={`${className}-cell-header-icon-text`}>(дедлайн)</div>;
-    } else if (event[cmd] === "parents") {
-      jsx = <div className={`${className}-cell-header-icon-text`}>(родители)</div>;
-    } else if (event[cmd] === "info") {
-      jsx = <div className={`${className}-cell-header-icon-red`} />;
-    } else if (event[cmd] === "meeting") {
-      jsx = <div className={`${className}-cell-header-icon-blue`} />;
+    if (event.eventType === "deadline") {
+      jsx = (
+        <div className={`${className}-legend-item-icon-${event.eventType}`} style={{ fontSize: "12px" }}>
+          (дедлайн)
+        </div>
+      );
+    } else {
+      jsx = (
+        <div className={`${className}-legend-item-icon-${event.eventType}`} style={{ width: "16px", height: "16px" }} />
+      );
     }
 
+    return <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>{jsx}</div>;
+  };
+
+  const renderTooltip = (day: any) => {
+    if (!day.events.length) return null;
+
     return (
-      <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-        {jsx}
-        {event.moreType && cmd !== "moreType" && renderIcon(event, "moreType")}
+      <div className={`${className}-tooltip`}>
+        {day.events.map((event: any) => {
+          return (
+            <div
+              key={event.id}
+              className={`${className}-tooltip-item`}
+              style={getStyleItemCell(event, day.events.length)}
+            >
+              <div className={`${className}-tooltip-header`}>
+                {event.eventText}
+                {renderIcon(event)}
+              </div>
+              <div className={`${className}-tooltip-text`} dangerouslySetInnerHTML={{ __html: event?.description }} />
+            </div>
+          );
+        })}
       </div>
     );
   };
@@ -182,9 +222,7 @@ export default function Calendar({ data, mainDate }: Props) {
   return (
     <div className={className} ref={ref}>
       <div className={`${className}-block`}>
-        <div className={`${className}-title`}>
-          Календарь встреч и дедлайнов по поступлению в Казахстан {dayjs(currentDate).format("YYYY")} год
-        </div>
+        <div className={`${className}-title`}>{main?.title}</div>
 
         {/* сам календарь */}
         <div className={`${className}-main`}>
@@ -263,60 +301,72 @@ export default function Calendar({ data, mainDate }: Props) {
             }
           >
             {calendarDays.map((day: any, index: number) => (
-              <div
-                key={index}
-                className={!day.isCurrentMonth ? `${className}-cell-disabled` : `${className}-cell `}
-                style={
-                  index % 7 === 6
-                    ? {
-                        borderRight: "none",
-                      }
-                    : {}
-                }
+              <Tooltip
+                placement="bottom"
+                title={renderTooltip(day)}
+                trigger="click"
+                color="#94a3b8"
+                style={{ maxWidth: "400px" }}
               >
-                <div className={`${className}-cell-header`} style={getStyleHeaderCell(day)}>
-                  <span
-                    className={`${className}-cell-header-text ${
-                      !day.isCurrentMonth ? `${className}-cell-header-text-disabled` : ""
-                    } ${index % 7 === 6 ? `${className}-cell-header-text-red` : ""}`}
-                  >
-                    {day.date}
-                  </span>
-                  {day.events.length === 1 && renderIcon(day.events[0], "eventType")}
-                </div>
+                <div
+                  key={index}
+                  className={!day.isCurrentMonth ? `${className}-cell-disabled` : `${className}-cell `}
+                  style={
+                    index % 7 === 6
+                      ? {
+                          borderRight: "none",
+                        }
+                      : {}
+                  }
+                >
+                  <div className={`${className}-cell-header`} style={getStyleHeaderCell(day)}>
+                    <span
+                      className={`${className}-cell-header-text ${
+                        !day.isCurrentMonth ? `${className}-cell-header-text-disabled` : ""
+                      } ${index % 7 === 6 ? `${className}-cell-header-text-red` : ""}`}
+                    >
+                      {day.date}
+                    </span>
+                    {day.events.length === 1 && renderIcon(day.events[0])}
+                  </div>
 
-                <div className={`${className}-cell-rows`} style={getStyleRowCell(day)}>
-                  {day.events.map((event: any) => {
-                    return (
-                      <div
-                        key={event.id}
-                        className={`${className}-cell-item`}
-                        style={getStyleItemCell(event, day.events.length)}
-                      >
-                        {day.events.length > 1 && renderIcon(event, "eventType")}
-                        {event.eventText}
-                      </div>
-                    );
-                  })}
+                  <div className={`${className}-cell-rows`} style={getStyleRowCell(day)}>
+                    {day.events.map((event: any) => {
+                      return (
+                        <div
+                          key={event.id}
+                          className={`${className}-cell-item`}
+                          style={getStyleItemCell(event, day.events.length)}
+                        >
+                          {day.events.length > 1 && renderIcon(event)}
+                          {event.eventText}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
+              </Tooltip>
             ))}
           </div>
         </div>
 
         <div className={`${className}-legend`}>
-          <div className={`${className}-legend-title`}>Обозначения:</div>
+          <div className={`${className}-legend-title`}>{main?.legendTitle}:</div>
 
           <div className={`${className}-legend-items`}>
-            <div className={`${className}-legend-item`}>
-              <div className={`${className}-legend-item-icon-starblue`} />
-              <div className={`${className}-legend-item-text`}>общие встречи для 1 и 2 групп</div>
-            </div>
+            {legends?.map((item: any) => {
+              return (
+                <div className={`${className}-legend-item`}>
+                  {item.code === "deadline" ? (
+                    <div className={`${className}-legend-item-icon-${item.code}`}>(дедлайн)</div>
+                  ) : (
+                    <div className={`${className}-legend-item-icon-${item.code}`} />
+                  )}
 
-            <div className={`${className}-legend-item`}>
-              <div className={`${className}-legend-item-icon-starred`} />
-              <div className={`${className}-legend-item-text`}>информация по олимпиадам/конкурсам на грант/скидки</div>
-            </div>
+                  <div className={`${className}-legend-item-text`}>{item.name}</div>
+                </div>
+              );
+            })}
 
             <div className={`${className}-legend-item`}>
               <div className={`${className}-legend-item-event`}>*встреча*</div>

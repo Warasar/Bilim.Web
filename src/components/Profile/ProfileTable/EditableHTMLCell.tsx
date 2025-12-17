@@ -66,7 +66,7 @@ export const EditableHTMLCell: React.FC<{
         />
 
         {isLongText && (
-          <div style={{ marginTop: 8, textAlign: "center" }}>
+          <div style={{ margin: "4px 0px", textAlign: "center" }}>
             <Button
               type="link"
               size="small"
@@ -75,6 +75,7 @@ export const EditableHTMLCell: React.FC<{
               style={{
                 fontSize: "12px",
                 padding: 0,
+                outline: "none",
               }}
             >
               {isExpanded ? "Скрыть" : "Раскрыть"}
