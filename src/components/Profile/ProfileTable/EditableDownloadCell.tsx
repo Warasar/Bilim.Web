@@ -12,17 +12,13 @@ export const EditableDownloadCell: React.FC<{
     setLoader(true);
 
     try {
-      const response = await requestGetResponse(
-        `/admin/downloadFile?filePath=${value}`,
-        {
-          responseType: "arraybuffer",
-        }
-      );
+      const response = await requestGetResponse(`/admin/downloadFile?filePath=${value}`, {
+        responseType: "arraybuffer",
+      });
 
       if (response) {
         const fileData = response.data;
-        const contentType =
-          response.headers?.["content-type"] || "application/pdf";
+        const contentType = response.headers?.["content-type"] || "application/pdf";
 
         const contentDisposition = response.headers?.["content-disposition"];
         let fileName = getFilenameFromContentDisposition(contentDisposition);
@@ -93,16 +89,8 @@ export const EditableDownloadCell: React.FC<{
   };
 
   return (
-    <div
-      className={
-        "profile-table-cell" +
-        (col.isEdit ? "" : " profile-table-cell-disabled")
-      }
-    >
-      <div
-        className="profile-table-cell-download"
-        onClick={() => downloadFile()}
-      >
+    <div className={"profile-table-cell" + (col.isEdit ? "" : " profile-table-cell-disabled")}>
+      <div className="profile-table-cell-download" onClick={() => downloadFile()}>
         <DownloadOutlined />
         Скачать файл
       </div>

@@ -25,7 +25,7 @@ export default function HeaderContainer({ whiteBg, buttons }: Props) {
       const newData = _.cloneDeep(headerData?.items);
 
       if (buttons) {
-        newData.buttons = buttons;
+        newData.buttons = _.cloneDeep(buttons);
       }
 
       newData.user = userData;
@@ -34,9 +34,5 @@ export default function HeaderContainer({ whiteBg, buttons }: Props) {
     }
   };
 
-  return !data ? (
-    <div className="header-container" />
-  ) : (
-    <Header data={data} whiteBg={whiteBg} />
-  );
+  return !data ? <div className="header-container" /> : <Header data={data} whiteBg={whiteBg} />;
 }

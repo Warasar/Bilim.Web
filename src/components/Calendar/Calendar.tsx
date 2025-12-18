@@ -38,14 +38,10 @@ type Props = {
 
 export default function Calendar({ data, mainDate, main, legends }: Props) {
   const ref: any = useRef(null);
-  const [currentDate, setCurrentDate] = useState<any>(
-    dayjs(mainDate, formatDate)
-  );
+  const [currentDate, setCurrentDate] = useState<any>(dayjs(mainDate, formatDate));
   const [isAnimating, setIsAnimating] = useState(false);
   const [isAnimatingEnd, setIsAnimatingEnd] = useState(false);
-  const [animationDirection, setAnimationDirection] = useState<
-    "left" | "right"
-  >("right");
+  const [animationDirection, setAnimationDirection] = useState<"left" | "right">("right");
 
   const getCalendarDays = () => {
     const year = currentDate.toDate().getFullYear();
@@ -66,12 +62,8 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
       const date = dayjs(currentDateIterator).format(formatDate);
       let events: CalendarType[] = [];
 
-      if (
-        data.some((f: any) => f.eventDate.split("T")[0] === date.split("T")[0])
-      ) {
-        events = _.cloneDeep(data).filter(
-          (f: any) => f.eventDate.split("T")[0] === date.split("T")[0]
-        );
+      if (data.some((f: any) => f.eventDate.split("T")[0] === date.split("T")[0])) {
+        events = _.cloneDeep(data).filter((f: any) => f.eventDate.split("T")[0] === date.split("T")[0]);
       }
 
       days.push({
@@ -120,11 +112,7 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
     }, 200);
   };
 
-  const isDateBetweenInclusive = (
-    dateToCheck: string,
-    startDate: string,
-    endDate: string
-  ) => {
+  const isDateBetweenInclusive = (dateToCheck: string, startDate: string, endDate: string) => {
     const getTime = (dateStr: string) => {
       const [day, month, year] = dateStr.split("-").map(Number);
       return new Date(year, month - 1, day).getTime();
@@ -144,11 +132,7 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
     data.forEach((item: any) => {
       if (item.startWhen && item.endWhen && !isChanged) {
         if (
-          isDateBetweenInclusive(
-            day.stringDate.split("T")[0],
-            item.startWhen.split("T")[0],
-            item.endWhen.split("T")[0]
-          )
+          isDateBetweenInclusive(day.stringDate.split("T")[0], item.startWhen.split("T")[0], item.endWhen.split("T")[0])
         ) {
           style.backgroundColor = "#FEE97D77"; //colorYellow
           isChanged = true;
@@ -195,17 +179,10 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
 
   const renderIcon = (event: any) => {
     let jsx: any = (
-      <div
-        className={`${className}-legend-item-icon-${event.eventType}`}
-        style={{ width: "16px", height: "16px" }}
-      />
+      <div className={`${className}-legend-item-icon-${event.eventType}`} style={{ width: "16px", height: "16px" }} />
     );
 
-    return (
-      <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-        {jsx}
-      </div>
-    );
+    return <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>{jsx}</div>;
   };
 
   const renderTooltip = (day: any) => {
@@ -224,10 +201,7 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
                 {event.eventText}
                 {renderIcon(event)}
               </div>
-              <div
-                className={`${className}-tooltip-text`}
-                dangerouslySetInnerHTML={{ __html: event?.description }}
-              />
+              <div className={`${className}-tooltip-text`} dangerouslySetInnerHTML={{ __html: event?.description }} />
             </div>
           );
         })}
@@ -244,10 +218,7 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
         <div className={`${className}-main`}>
           {/* шапка */}
           <div className={`${className}-header`}>
-            <div
-              className={`${className}-header-button`}
-              onClick={() => navigateMonth("prev")}
-            >
+            <div className={`${className}-header-button`} onClick={() => navigateMonth("prev")}>
               <div className={`${className}-header-button-left`} />
             </div>
 
@@ -276,14 +247,10 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
                     }
               }
             >
-              {MONTHS_RU[currentDate.toDate().getMonth()]}{" "}
-              {currentDate.toDate().getFullYear()}
+              {MONTHS_RU[currentDate.toDate().getMonth()]} {currentDate.toDate().getFullYear()}
             </div>
 
-            <div
-              className={`${className}-header-button`}
-              onClick={() => navigateMonth("next")}
-            >
+            <div className={`${className}-header-button`} onClick={() => navigateMonth("next")}>
               <div className={`${className}-header-button-right`} />
             </div>
           </div>
@@ -291,10 +258,7 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
           {/* дни в неделе */}
           <div className={`${className}-week`}>
             {DAYS_RU.map((day, index) => (
-              <div
-                key={day}
-                className={`${className}-week-item ${index === 6 ? `${className}-week-item-red` : ""}`}
-              >
+              <div key={day} className={`${className}-week-item ${index === 6 ? `${className}-week-item-red` : ""}`}>
                 {day}
               </div>
             ))}
@@ -336,11 +300,7 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
               >
                 <div
                   key={index}
-                  className={
-                    !day.isCurrentMonth
-                      ? `${className}-cell-disabled`
-                      : `${className}-cell `
-                  }
+                  className={!day.isCurrentMonth ? `${className}-cell-disabled` : `${className}-cell `}
                   style={
                     index % 7 === 6
                       ? {
@@ -349,15 +309,10 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
                       : {}
                   }
                 >
-                  <div
-                    className={`${className}-cell-header`}
-                    style={getStyleHeaderCell(day)}
-                  >
+                  <div className={`${className}-cell-header`} style={getStyleHeaderCell(day)}>
                     <span
                       className={`${className}-cell-header-text ${
-                        !day.isCurrentMonth
-                          ? `${className}-cell-header-text-disabled`
-                          : ""
+                        !day.isCurrentMonth ? `${className}-cell-header-text-disabled` : ""
                       } ${index % 7 === 6 ? `${className}-cell-header-text-red` : ""}`}
                     >
                       {day.date}
@@ -365,10 +320,7 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
                     {day.events.length === 1 && renderIcon(day.events[0])}
                   </div>
 
-                  <div
-                    className={`${className}-cell-rows`}
-                    style={getStyleRowCell(day)}
-                  >
+                  <div className={`${className}-cell-rows`} style={getStyleRowCell(day)}>
                     {day.events.map((event: any) => {
                       return (
                         <div
@@ -389,29 +341,21 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
         </div>
 
         <div className={`${className}-legend`}>
-          <div className={`${className}-legend-title`}>
-            {main?.legendTitle}:
-          </div>
+          <div className={`${className}-legend-title`}>{main?.legendTitle}:</div>
 
           <div className={`${className}-legend-items`}>
             {legends?.map((item: any) => {
               return (
                 <div className={`${className}-legend-item`}>
-                  <div
-                    className={`${className}-legend-item-icon-${item.code}`}
-                  />
-                  <div className={`${className}-legend-item-text`}>
-                    {item.name}
-                  </div>
+                  <div className={`${className}-legend-item-icon-${item.code}`} />
+                  <div className={`${className}-legend-item-text`}>{item.name}</div>
                 </div>
               );
             })}
 
             <div className={`${className}-legend-item`}>
               <div className={`${className}-legend-item-event`}>*встреча*</div>
-              <div className={`${className}-legend-item-text`}>
-                мероприятие, которое длится определенный срок
-              </div>
+              <div className={`${className}-legend-item-text`}>мероприятие, которое длится определенный срок</div>
             </div>
           </div>
         </div>

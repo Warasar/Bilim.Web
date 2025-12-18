@@ -14,6 +14,7 @@
     position: relative;
     width: 100%;
     align-items: center;
+    margin-bottom: 28px;
   }
 
   &-header {
@@ -24,8 +25,8 @@
     width: 100%;
 
     &-left {
-      display: grid;
-      grid-template-rows: auto 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 12px;
 
       &-title {
@@ -40,11 +41,6 @@
         font-family: $fontRegular;
         line-height: 140%;
       }
-
-      &-italic {
-        font-size: 22px;
-        font-family: $fontCormorantBoldItalic;
-      }
     }
 
     &-right {
@@ -55,7 +51,7 @@
     }
   }
 
-  &-fakultet {
+  &-item {
     margin-top: 40px;
     display: grid;
     width: 100%;
@@ -72,12 +68,19 @@
         font-size: 38px;
         font-family: $fontCormorantBoldItalic;
       }
-    }
 
-    &-content {
-      background-color: $colorWhite;
-      display: grid;
+      &-subtitle {
+        text-align: center;
+        color: $colorWhite;
+        font-size: 24px;
+        font-family: $fontCormorantMediumItalic;
+      }
     }
+  }
+
+  &-fakultet {
+    background-color: $colorWhite;
+    display: grid;
 
     &-item {
       border-bottom: 1px solid $colorDark;
@@ -325,25 +328,9 @@
   }
 
   &-steps {
-    margin-top: 40px;
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-
-    &-title {
-      background-color: $colorDark;
-      padding: 6px 12px;
-      text-align: center;
-      color: $colorWhite;
-      font-size: 38px;
-      font-family: $fontCormorantBoldItalic;
-    }
-
-    &-content {
-      padding: 12px;
-      display: grid;
-      background-color: $colorWhite;
-    }
+    padding: 12px;
+    display: grid;
+    background-color: $colorWhite;
 
     &-tabs {
       display: grid;
@@ -445,7 +432,7 @@
         gap: 36px;
         margin-left: auto;
         margin-right: auto;
-        max-width: 640px;
+        max-width: 660px;
       }
 
       &-block {
@@ -466,6 +453,15 @@
           display: flex;
           flex-direction: column;
           gap: 12px;
+
+          a {
+            color: $colorRed;
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
         }
 
         &-title {
@@ -486,34 +482,10 @@
   }
 
   &-dormitory {
-    margin-top: 40px;
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-
-    &-title {
-      background-color: $colorDark;
-      padding: 6px 12px;
-      text-align: center;
-      color: $colorWhite;
-      font-size: 38px;
-      font-family: $fontCormorantBoldItalic;
-    }
-
-    &-subtitle {
-      padding: 6px 12px;
-      text-align: center;
-      color: $colorSubtext;
-      font-size: 24px;
-      font-family: $fontCormorantBold;
-    }
-
-    &-content {
-      padding: 12px;
-      display: grid;
-      background-color: $colorWhite;
-      justify-content: center;
-    }
+    padding: 12px;
+    display: grid;
+    background-color: $colorWhite;
+    justify-content: center;
 
     &-items {
       margin-top: 20px;
@@ -522,14 +494,6 @@
       margin-right: auto;
       display: grid;
       gap: 24px;
-    }
-
-    &-text {
-      margin-top: 20px;
-      color: $colorDark;
-      font-size: 16px;
-      font-family: $fontRegular;
-      max-width: 640px;
     }
 
     &-iframe {
@@ -696,26 +660,9 @@
   }
 
   &-docs {
-    margin-top: 40px;
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 30px;
-
-    &-title {
-      background-color: $colorDark;
-      padding: 6px 12px;
-      text-align: center;
-      color: $colorWhite;
-      font-size: 38px;
-      font-family: $fontCormorantBoldItalic;
-    }
-
-    &-content {
-      padding: 12px;
-      display: grid;
-      background-color: $colorWhite;
-    }
+    padding: 12px;
+    display: grid;
+    background-color: $colorWhite;
 
     &-items {
       margin-top: 20px;

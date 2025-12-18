@@ -1,30 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
-import {
-  requestDelete,
-  requestGet,
-  requestPost,
-  requestPut,
-} from "../../../actions/actions";
+import { requestDelete, requestGet, requestPost, requestPut } from "../../../actions/actions";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import dayjs from "dayjs";
-import {
-  Button,
-  ConfigProvider,
-  Input,
-  message,
-  Popconfirm,
-  Space,
-  Table,
-} from "antd";
+import { Button, ConfigProvider, Input, message, Popconfirm, Space, Table } from "antd";
 import { Locale } from "antd/es/locale";
 import ruRU from "antd/locale/ru_RU";
-import {
-  DeleteOutlined,
-  FilterOutlined,
-  PlusOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, FilterOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import { EditableNumberCell } from "../ProfileTable/EditableNumberCell";
 import { EditableVarcharCell } from "../ProfileTable/EditableVarcharCell";
 import { EditableTextAreaCell } from "../ProfileTable/EditableTextAreaCell";
@@ -161,9 +143,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
       };
 
       // Генерация уникальных значений для фильтров
-      const uniqueValues = Array.from(
-        new Set(data.map((record: any) => record[item.field]).filter(Boolean))
-      ).sort();
+      const uniqueValues = Array.from(new Set(data.map((record: any) => record[item.field]).filter(Boolean))).sort();
 
       // Если значений меньше 10, показываем фильтр
       if (uniqueValues.length > 0 && uniqueValues.length < 10) {
@@ -178,6 +158,20 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
               value: false,
             },
           ];
+        } else if (item.dataType === "object") {
+          const obj: IObj[] = [];
+
+          sprs[item.spr].forEach((spr: any) => {
+            obj.push({
+              value: spr[item.sprCode],
+              label: spr[item.sprName] + "",
+            });
+          });
+
+          column.filters = uniqueValues.map((value) => ({
+            text: obj.find((f) => f.value === value)?.label,
+            value: value,
+          }));
         } else {
           column.filters = uniqueValues.map((value) => ({
             text: String(value),
@@ -193,19 +187,12 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
           return record[item.field] === value;
         };
       } else {
-        column.filterDropdown = ({
-          setSelectedKeys,
-          selectedKeys,
-          confirm,
-          clearFilters,
-        }: any) => (
+        column.filterDropdown = ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => (
           <div style={{ padding: 8 }}>
             <Input
               placeholder={`Поиск по ${item.fieldName?.toLowerCase() || item.field?.toLowerCase()}`}
               value={selectedKeys[0]}
-              onChange={(e) =>
-                setSelectedKeys(e.target.value ? [e.target.value] : [])
-              }
+              onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
               onPressEnter={() => {
                 confirm();
               }}
@@ -277,11 +264,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   };
 
   const sorterCol = (a: any, b: any, item: any) => {
-    if (
-      item.dataType === "int4" ||
-      item.dataType === "decimal" ||
-      item.dataType === "bool"
-    ) {
+    if (item.dataType === "int4" || item.dataType === "decimal" || item.dataType === "bool") {
       return a[item.field] - b[item.field];
     } else if (item.dataType === "date" || item.dataType === "timestamp") {
       if (!a[item.field] && !b[item.field]) return 0;
@@ -309,12 +292,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   };
 
   // Обработчики фильтрации и сортировки
-  const handleChange = (
-    pagination: any,
-    filters: any,
-    sorter: any,
-    extra: any
-  ) => {
+  const handleChange = (pagination: any, filters: any, sorter: any, extra: any) => {
     setFilteredData(extra.currentDataSource);
     setFilteredInfo(filters);
     setSortedInfo({
@@ -326,102 +304,39 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   // ячейки по типам
   const renderCell = (value: any, record: any, col: any) => {
     if (col.dataType === "int4") {
-      return (
-        <EditableNumberCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableNumberCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "varchar") {
-      return (
-        <EditableVarcharCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableVarcharCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "text") {
-      return (
-        <EditableTextAreaCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableTextAreaCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "bool") {
-      return (
-        <EditableBoolCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableBoolCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "decimal") {
-      return (
-        <EditableNumberCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableNumberCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "date") {
-      return (
-        <EditableDateCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableDateCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "timestamp") {
-      return (
-        <EditableDateTimeCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableDateTimeCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "html") {
-      return (
-        <EditableHTMLCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableHTMLCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "json") {
-      return (
-        <EditableJSONCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-        />
-      );
+      return <EditableJSONCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     if (col.dataType === "object") {
@@ -434,26 +349,11 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
         });
       });
 
-      return (
-        <EditableSprCell
-          value={value}
-          record={record}
-          col={col}
-          onSave={onSaveTable}
-          obj={obj}
-        />
-      );
+      return <EditableSprCell value={value} record={record} col={col} onSave={onSaveTable} obj={obj} />;
     }
 
     if (col.dataType === "download") {
-      return (
-        <EditableDownloadCell
-          value={value}
-          record={record}
-          col={col}
-          setLoader={setLoader}
-        />
-      );
+      return <EditableDownloadCell value={value} record={record} col={col} setLoader={setLoader} />;
     }
 
     return <div>{value}</div>;
@@ -477,13 +377,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
           okText="Да"
           cancelText="Нет"
         >
-          <Button
-            type="text"
-            danger
-            icon={<DeleteOutlined />}
-            size="small"
-            title="Удалить"
-          />
+          <Button type="text" danger icon={<DeleteOutlined />} size="small" title="Удалить" />
         </Popconfirm>
       </div>
     );
@@ -584,17 +478,10 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   const emptyRender = () => {
     return (
       <div className="profile-table-empty">
-        <div className="profile-table-empty-text">
-          Нет данных для отображения :{`(`}
-        </div>
+        <div className="profile-table-empty-text">Нет данных для отображения :{`(`}</div>
         {tableItem.isEdit ? (
           <div className="profile-table-empty-button">
-            <Button
-              icon={<PlusOutlined />}
-              type="primary"
-              iconPosition="end"
-              onClick={() => handleAddRow()}
-            >
+            <Button icon={<PlusOutlined />} type="primary" iconPosition="end" onClick={() => handleAddRow()}>
               Добавить пустую строку
             </Button>
           </div>
@@ -676,12 +563,13 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
         } else if (col.dataType === "bool") {
           values.push(row[col.field] ? "Да" : "Нет");
         } else if (col.dataType === "date") {
-          values.push(dayjs(row[col.field]).format("DD.MM.YYYY"));
+          values.push(row[col.field] ? dayjs(row[col.field]).format("DD.MM.YYYY") : null);
         } else if (col.dataType === "timestamp") {
-          values.push(dayjs(row[col.field]).format("DD.MM.YYYY HH:mm:ss"));
+          values.push(row[col.field] ? dayjs(row[col.field]).format("DD.MM.YYYY HH:mm:ss") : null);
         } else if (col.dataType === "html") {
-          // сюда байбалик
+          values.push(htmlToRichText(row[col.field]));
         } else if (col.dataType === "json") {
+          values.push(typeof row[col.field] === "object" ? JSON.stringify(row[col.field], null, 2) : row[col.field]);
         } else if (col.dataType === "object") {
           const obj: IObj[] = [];
 
@@ -691,7 +579,10 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
               label: item[col.sprName] + "",
             });
           });
+
+          values.push(obj.find((f) => f.value === row[col.field])?.label);
         } else if (col.dataType === "download") {
+          values.push(`"Файл"`);
         } else {
           values.push(row[col.field]);
         }
@@ -701,8 +592,8 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
     });
 
     excelData.forEach((item: any, index: number) => {
-      sheet.getRow(index + 1).values = excelData[index];
-      const row: any = sheet.getRow(index + 1);
+      sheet.getRow(index + 2).values = excelData[index];
+      const row: any = sheet.getRow(index + 2);
 
       row.eachCell((cell: any) => {
         cell.alignment = {
@@ -738,7 +629,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
     tableColumns.forEach((item: any) => {
       newHead.push({
         key: item.field,
-        width: item.width ? item.width / 8 : 15,
+        width: item.width ? item.width / 10 : 15,
       });
     });
 
@@ -753,6 +644,322 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
     });
 
     return newHead;
+  };
+
+  // Функция для преобразования HTML с поддержкой всех тегов
+  const htmlToRichText = (htmlString: string) => {
+    if (!htmlString || typeof htmlString !== "string") {
+      return htmlString;
+    }
+
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = htmlString;
+
+    const richText: any[] = [];
+    let listLevel = 0;
+    let listItemNumber = 0;
+    let isOrderedList = false;
+
+    const processNode = (node: any, currentStyle = {}) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const text = node.textContent.trim();
+        if (text) {
+          // Добавляем маркеры для списков
+          let prefix = "";
+          if (listLevel > 0 && node.parentElement?.tagName === "LI") {
+            if (isOrderedList) {
+              listItemNumber++;
+              prefix = `${listItemNumber}. `;
+            } else {
+              prefix = "• ";
+            }
+          }
+
+          richText.push({
+            text: prefix + text,
+            font: { ...currentStyle },
+          });
+        }
+        return;
+      }
+
+      if (node.nodeType !== Node.ELEMENT_NODE) return;
+
+      const tagName = node.tagName.toLowerCase();
+      const className = node.className || "";
+      const newStyle: any = { ...currentStyle };
+
+      // Обработка структурных тегов
+      switch (tagName) {
+        case "p":
+          processChildNodes(node, newStyle);
+          richText.push({ text: "\n", font: newStyle });
+          return;
+
+        case "br":
+          richText.push({ text: "\n", font: newStyle });
+          return;
+
+        case "div":
+          processChildNodes(node, newStyle);
+          richText.push({ text: "\n", font: newStyle });
+          return;
+
+        case "h1":
+        case "h2":
+        case "h3":
+        case "h4":
+        case "h5":
+        case "h6":
+          newStyle.bold = true;
+          newStyle.size = Math.max(12, 16 - parseInt(tagName[1]) * 2);
+          processChildNodes(node, newStyle);
+          richText.push({ text: "\n", font: newStyle });
+          return;
+
+        case "ul":
+        case "ol":
+          const wasInList = listLevel > 0;
+          listLevel++;
+          isOrderedList = tagName === "ol";
+          listItemNumber = 0;
+
+          if (!wasInList && richText.length > 0) {
+            richText.push({ text: "\n", font: newStyle });
+          }
+
+          processChildNodes(node, newStyle);
+
+          listLevel--;
+          // if (!wasInList) {
+          //   richText.push({ text: "\n", font: newStyle });
+          // }
+          return;
+
+        case "li":
+          processChildNodes(node, newStyle);
+          // if (node.nextElementSibling) {
+          //   richText.push({ text: "\n", font: newStyle });
+          // }
+          return;
+
+        case "hr":
+          let lineChar = "_"; // По умолчанию сплошная линия
+          let lineLength = 30;
+
+          // Определяем тип линии по классу
+          if (className.includes("__se__solid")) {
+            lineChar = "_"; // Сплошная линия
+          } else if (className.includes("__se__dashed")) {
+            lineChar = "‒"; // Пунктирная линия
+          } else if (className.includes("__se__dotted")) {
+            lineChar = "┄"; // Точечная линия
+          } else if (className.includes("__se__double")) {
+            lineChar = "═"; // Двойная линия
+          } else if (className.includes("__se__wave")) {
+            lineChar = "∿"; // Волнистая линия
+          }
+
+          // Определяем длину линии по стилям
+          if (node.style.width) {
+            const width = parseInt(node.style.width);
+            if (!isNaN(width)) {
+              lineLength = Math.min(width / 8, 100); // Примерная конвертация
+            }
+          }
+
+          // Определяем цвет линии
+          if (node.style.color) {
+            newStyle.color = { argb: cssColorToHex(node.style.color) };
+          } else if (node.style.borderColor) {
+            newStyle.color = { argb: cssColorToHex(node.style.borderColor) };
+          }
+
+          richText.push({ text: lineChar.repeat(lineLength) + "\n", font: newStyle });
+          return;
+
+        case "blockquote":
+          if (richText.length > 0) {
+            richText.push({ text: "\n", font: newStyle });
+          }
+          newStyle.italic = true;
+          richText.push({ text: "« ", font: newStyle });
+          processChildNodes(node, newStyle);
+          richText.push({ text: " »", font: newStyle });
+          richText.push({ text: "\n", font: newStyle });
+          return;
+
+        case "pre":
+          if (richText.length > 0) {
+            richText.push({ text: "\n", font: newStyle });
+          }
+          newStyle.name = "Courier New";
+          processChildNodes(node, newStyle);
+          richText.push({ text: "\n", font: newStyle });
+          return;
+      }
+
+      // Обработка текстового форматирования
+      switch (tagName) {
+        case "strong":
+        case "b":
+          newStyle.bold = true;
+          break;
+
+        case "em":
+        case "i":
+          newStyle.italic = true;
+          break;
+
+        case "u":
+          newStyle.underline = true;
+          break;
+
+        case "s":
+        case "strike":
+        case "del":
+          newStyle.strike = true;
+          break;
+
+        case "sup":
+          newStyle.vertAlign = "superscript";
+          break;
+
+        case "sub":
+          newStyle.vertAlign = "subscript";
+          break;
+
+        case "mark":
+          newStyle.color = { argb: "FFFFFF00" }; // Желтый фон
+          break;
+
+        case "small":
+          newStyle.size = (newStyle.size || 11) - 2;
+          break;
+
+        case "big":
+          newStyle.size = (newStyle.size || 11) + 2;
+          break;
+
+        case "code":
+          if (node.parentElement?.tagName !== "PRE") {
+            newStyle.name = "Courier New";
+          }
+          break;
+
+        case "span":
+          if (node.style.color) {
+            newStyle.color = { argb: cssColorToHex(node.style.color) };
+          }
+          if (node.style.fontWeight === "bold" || parseInt(node.style.fontWeight) >= 600) {
+            newStyle.bold = true;
+          }
+          if (node.style.fontStyle === "italic") {
+            newStyle.italic = true;
+          }
+          if (node.style.textDecoration.includes("underline")) {
+            newStyle.underline = true;
+          }
+          if (node.style.textDecoration.includes("line-through")) {
+            newStyle.strike = true;
+          }
+          if (node.style.verticalAlign === "super") {
+            newStyle.vertAlign = "superscript";
+          }
+          if (node.style.verticalAlign === "sub") {
+            newStyle.vertAlign = "subscript";
+          }
+          if (node.style.backgroundColor) {
+            newStyle.bgColor = { argb: cssColorToHex(node.style.backgroundColor) };
+          }
+          if (node.style.fontSize) {
+            const size = parseInt(node.style.fontSize);
+            if (!isNaN(size)) {
+              newStyle.size = size;
+            } else if (node.style.fontSize.includes("px")) {
+              const pxSize = parseInt(node.style.fontSize);
+              if (!isNaN(pxSize)) {
+                // Примерная конвертация px в pt (примерно 0.75 ratio)
+                newStyle.size = Math.round(pxSize * 0.75);
+              }
+            } else if (node.style.fontSize.includes("em")) {
+              const emSize = parseFloat(node.style.fontSize);
+              if (!isNaN(emSize)) {
+                // em в pt (базовый размер ~11pt)
+                newStyle.size = Math.round(11 * emSize);
+              }
+            } else if (node.style.fontSize.includes("rem")) {
+              const remSize = parseFloat(node.style.fontSize);
+              if (!isNaN(remSize)) {
+                // rem в pt (базовый размер ~11pt)
+                newStyle.size = Math.round(11 * remSize);
+              }
+            } else if (node.style.fontSize.includes("pt")) {
+              const ptSize = parseInt(node.style.fontSize);
+              if (!isNaN(ptSize)) {
+                newStyle.size = ptSize;
+              }
+            }
+          }
+
+          break;
+      }
+
+      processChildNodes(node, newStyle);
+    };
+
+    const processChildNodes = (parent: any, style: any) => {
+      Array.from(parent.childNodes).forEach((child) => {
+        processNode(child, style);
+      });
+    };
+
+    // Вспомогательная функция для преобразования цвета
+    const cssColorToHex = (color: string) => {
+      // Простая конвертация основных цветов
+      const colorMap: any = {
+        red: "FFFF0000",
+        blue: "FF0000FF",
+        green: "FF008000",
+        black: "FF000000",
+        white: "FFFFFFFF",
+        gray: "FF808080",
+        grey: "FF808080",
+        silver: "FFC0C0C0",
+        maroon: "FF800000",
+        purple: "FF800080",
+        fuchsia: "FFFF00FF",
+        lime: "FF00FF00",
+        olive: "FF808000",
+        yellow: "FFFFFF00",
+        navy: "FF000080",
+        teal: "FF008080",
+        aqua: "FF00FFFF",
+      };
+
+      if (colorMap[color.toLowerCase()]) {
+        return colorMap[color.toLowerCase()];
+      }
+
+      // Для hex и rgb цветов
+      const ctx: any = document.createElement("canvas").getContext("2d");
+      ctx.fillStyle = color;
+      const hex = ctx.fillStyle;
+      return "FF" + hex.slice(1); // Добавляем alpha канал
+    };
+
+    // Начальная обработка
+    processChildNodes(tempDiv, {});
+
+    // Убираем лишние переносы в начале и конце
+    while (richText.length > 0 && richText[0].text === "\n") {
+      richText.shift();
+    }
+    while (richText.length > 0 && richText[richText.length - 1].text === "\n") {
+      richText.pop();
+    }
+
+    return richText.length > 0 ? { richText } : tempDiv.textContent || "";
   };
 
   return (
@@ -784,9 +991,18 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
             onChange={handleChange}
             loading={!tableColumns?.length || data?.length}
             scroll={{
-              y: `calc(100vh - 240px)`, // Фиксированная высота
+              y: `calc(100vh - ${data.length > 20 ? "290px" : "240px"})`, // Фиксированная высота
             }}
-            pagination={false}
+            pagination={
+              data.length > 20
+                ? {
+                    pageSize: 20, // Количество строк на странице
+                    showSizeChanger: false, // Показывать выбор количества строк
+                    // pageSizeOptions: false ["10", "20", "50", "100"],
+                    showTotal: (total, range) => `${range[0]}-${range[1]} из ${total} записей`,
+                  }
+                : false
+            }
             components={{
               body: {
                 cell: (props: any) => (

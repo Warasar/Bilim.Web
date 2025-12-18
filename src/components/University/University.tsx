@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
 import _ from "lodash";
 import React, { Fragment, useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 type Props = {
   findData: any;
@@ -10,58 +11,59 @@ type Props = {
 export default function University({ findData, className }: Props) {
   const [data, setData] = useState<any>(null);
   const [activeTab, setActiveTab] = useState<number>(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
+  // const [isAnimating, setIsAnimating] = useState(false);
+  // const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     if (findData) {
       setData(findData);
+      setActiveTab(findData.find((f: any) => f.itemType === "steps")?.contents?.[0]?.id);
     }
   }, [findData]);
 
-  const clickFakultet = (id: number) => {
+  const clickContent = (item: any, content: any) => {
     const newData: any = _.cloneDeep(data);
 
-    newData.fakultet.data.find((f: any) => f.id === id).opened = !newData.fakultet.data.find((f: any) => f.id === id)
-      .opened;
+    newData.find((f: any) => f.id === item.id).contents.find((f: any) => f.id === content.id).opened = !content.opened;
 
     setData(newData);
   };
 
-  const clickChild = (id: number, child_id: number) => {
+  const clickDescription = (item: any, content: any, direction: any) => {
     const newData: any = _.cloneDeep(data);
 
-    newData.fakultet.data.find((f: any) => f.id === id).items.find((f: any) => f.id === child_id).opened =
-      !newData.fakultet.data.find((f: any) => f.id === id).items.find((f: any) => f.id === child_id).opened;
+    newData
+      .find((f: any) => f.id === item.id)
+      .contents.find((f: any) => f.id === content.id)
+      .directions.find((f: any) => f.id === direction.id).opened = !direction.opened;
 
     setData(newData);
   };
 
-  const renderTabItem = (activeItem: any) => {
-    return activeItem ? (
+  const renderActiveStep = (activeStep: any) => {
+    return activeStep ? (
       <div className={`${className}-steps-item`}>
-        <div className={`${className}-steps-item-title`}>{activeItem.title}</div>
-        <div className={`${className}-steps-item-subtitle`}>{activeItem.subtitle}</div>
+        <div className={`${className}-steps-item-title`}>{activeStep.stepTitle}</div>
+        <div className={`${className}-steps-item-subtitle`}>{activeStep.stepDescription}</div>
         <div className={`${className}-steps-item-grid`}>
-          {activeItem.items.map((item: any) => {
-            return item.content ? renderBlockItem(item) : null;
+          {activeStep.items.map((item: any) => {
+            return renderStepItem(item);
           })}
         </div>
       </div>
     ) : null;
   };
 
-  const renderBlockItem = (item: any, cmd?: "docs") => {
+  const renderStepItem = (item: any) => {
     return (
       <div className={`${className}-steps-item-block`} key={`${className}-steps-item-block_${item.id}`}>
-        {cmd === "docs" ? (
-          <div className={`${className}-docs-circle`}>{item.id + 1}</div>
-        ) : (
-          <div className={`${className}-steps-item-block-icon`} />
-        )}
+        <div className={`${className}-steps-item-block-icon`} />
         <div className={`${className}-steps-item-block-texts`}>
           {item.title?.length ? <div className={`${className}-steps-item-block-title`}>{item.title}</div> : null}
-          <div className={`${className}-steps-item-block-content`}>{item.content}</div>
+          <div
+            className={`${className}-steps-item-block-content`}
+            dangerouslySetInnerHTML={{ __html: item.contents }}
+          />
         </div>
       </div>
     );
@@ -98,272 +100,295 @@ export default function University({ findData, className }: Props) {
     return style;
   };
 
-  const goToSlide = (index: number) => {
-    if (isAnimating || index === currentSlide) return;
-    setIsAnimating(true);
-    setTimeout(() => {
-      setCurrentSlide(index);
-      setIsAnimating(false);
-    }, 150);
-  };
+  // const goToSlide = (index: number) => {
+  //   if (isAnimating || index === currentSlide) return;
+  //   setIsAnimating(true);
+  //   setTimeout(() => {
+  //     setCurrentSlide(index);
+  //     setIsAnimating(false);
+  //   }, 150);
+  // };
 
-  const nextSlide = () => {
-    if (isAnimating) return;
+  // const nextSlide = () => {
+  //   if (isAnimating) return;
 
-    setIsAnimating(true);
+  //   setIsAnimating(true);
 
-    setTimeout(() => {
-      setCurrentSlide((prev) => (prev + 1) % data.dormitory.imgs.length);
-      setIsAnimating(false);
-    }, 150);
-  };
+  //   setTimeout(() => {
+  //     setCurrentSlide((prev) => (prev + 1) % data.dormitory.imgs.length);
+  //     setIsAnimating(false);
+  //   }, 150);
+  // };
 
-  const prevSlide = () => {
-    if (isAnimating) return;
+  // const prevSlide = () => {
+  //   if (isAnimating) return;
 
-    setIsAnimating(true);
+  //   setIsAnimating(true);
 
-    setTimeout(() => {
-      setCurrentSlide((prev) => (prev - 1 + data.dormitory.imgs.length) % data.dormitory.imgs.length);
-      setIsAnimating(false);
-    }, 150);
-  };
+  //   setTimeout(() => {
+  //     setCurrentSlide((prev) => (prev - 1 + data.dormitory.imgs.length) % data.dormitory.imgs.length);
+  //     setIsAnimating(false);
+  //   }, 150);
+  // };
 
   return (
     <div className={className}>
-      {data ? (
+      {data?.length ? (
         <div className={`${className}-main`}>
-          <div className={`${className}-header`}>
-            <div className={`${className}-header-left`}>
-              <div className={`${className}-header-left-title`}>{data?.name}</div>
-              <div className={`${className}-header-left-text`}>{data?.content}</div>
-            </div>
+          {data.map((item: any) => {
+            if (item.itemType === "header") {
+              return (
+                <div className={`${className}-header`}>
+                  <div className={`${className}-header-left`}>
+                    <div className={`${className}-header-left-title`}>{item.contents.title}</div>
+                    {item.contents.subtitle?.length && (
+                      <div className={`${className}-header-left-text`}>{item.contents.subtitle}</div>
+                    )}
+                    {item.contents.description?.length && (
+                      <div
+                        className={`${className}-header-left-text`}
+                        dangerouslySetInnerHTML={{ __html: item.contents.description }}
+                      />
+                    )}
+                  </div>
 
-            <iframe
-              src={data?.iframe}
-              className={`${className}-header-right`}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-
-          {data.fakultet ? (
-            <div className={`${className}-fakultet`} id={"vuz_fakultet"}>
-              <div className={`${className}-fakultet-header`}>
-                <div className={`${className}-fakultet-header-title`}>{data?.fakultet?.title}</div>
-              </div>
-
-              <div className={`${className}-fakultet-content`}>
-                {data.fakultet.data.map((item: any) => {
-                  return (
-                    <div className={`${className}-fakultet-item`} key={`${className}-fakultet-item_${item.id}`}>
-                      <div className={`${className}-fakultet-item-grid`}>
-                        <div className={`${className}-fakultet-item-name`}>{item.name}</div>
-                        <div
-                          className={`${className}-fakultet-item-arrow${item.opened ? "-active" : ""}`}
-                          onClick={() => clickFakultet(item.id)}
-                        />
-                      </div>
-
-                      <div className={`${className}-fakultet-items${item.opened ? "-active" : ""}`}>
-                        {item.items.map((child: any) => {
-                          return (
-                            <div
-                              className={`${className}-fakultet-child`}
-                              key={`${className}-fakultet-child_${item.id}_${child.id}`}
-                            >
-                              <div />
-                              <div className={`${className}-fakultet-child-header`}>
-                                <div className={`${className}-fakultet-child-header-grid`}>
-                                  <div className={`${className}-fakultet-child-header-text`}>{child.name}</div>
-                                  <div
-                                    className={`${className}-fakultet-child-header-plus${
-                                      child.opened ? "-active" : ""
-                                    }`}
-                                    onClick={() => clickChild(item.id, child.id)}
-                                  />
-                                </div>
-
-                                <div className={`${className}-fakultet-child-content${child.opened ? "-active" : ""}`}>
-                                  <div className={`${className}-fakultet-child-content-text`}>{child.text}</div>
-                                  {child.price?.length ? (
-                                    <Fragment>
-                                      <div className={`${className}-fakultet-child-content-price`}>СТОИМОСТЬ</div>
-                                      <div className={`${className}-fakultet-child-content-text`}>{child.price}</div>
-                                    </Fragment>
-                                  ) : null}
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          ) : null}
-
-          {data.prices ? (
-            <div className={`${className}-prices`} id={"vuz_prices"}>
-              <div className={`${className}-prices-title`}>
-                {data.prices.title}
-                {data.prices.subtitle?.length ? (
-                  <div className={`${className}-prices-subtitle`}>{data.prices.subtitle}</div>
-                ) : null}
-              </div>
-              <div className={`${className}-prices-content`}>
-                <div className={`${className}-prices-items`}>
-                  {data.prices.items.map((item: any) => {
-                    return (
-                      <div className={`${className}-prices-item`}>
-                        <div className={`${className}-prices-item-names`}>
-                          {item.names.map((name: string) => {
-                            return <div className={`${className}-prices-item-names-text`}>{name}</div>;
-                          })}
-                        </div>
-                        <div className={`${className}-prices-item-price`}>{item.price}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          ) : null}
-
-          {data.steps ? (
-            <div className={`${className}-steps`} id={"vuz_steps"}>
-              <div className={`${className}-steps-title`}>{data.steps.title}</div>
-              <div className={`${className}-steps-content`}>
-                <div className={`${className}-steps-tabs`} style={getGrid(data.steps.tabs.length)}>
-                  <div className={`${className}-steps-tab-line`} style={getLine(data.steps.tabs.length)} />
-                  {data.steps.tabs.map((item: any, index: number) => {
-                    return (
-                      <div className={`${className}-steps-tab`} key={`${className}-steps-tab_${item.id}`}>
-                        <div className={`${className}-steps-tab-center`}>
-                          <div
-                            className={`${className}-steps-tab-circle${
-                              activeTab === index ? ` ${className}-steps-tab-circle-active` : ""
-                            }`}
-                            onClick={() => setActiveTab(index)}
-                          >
-                            <div className={`${className}-steps-tab-circle-number`}>{index + 1}</div>
-                          </div>
-                        </div>
-
-                        <div className={`${className}-steps-tab-title`}>{item.title}</div>
-                        <div className={`${className}-steps-tab-subtitle`}>{item.subtitle}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {renderTabItem(data.steps.tabs.find((f: any) => f.id === activeTab))}
-              </div>
-            </div>
-          ) : null}
-
-          {data.criteria ? (
-            <div className={`${className}-dormitory`} id={data.steps ? "vuz_criteria" : "vuz_steps"}>
-              <div className={`${className}-dormitory-title`}>{data.criteria.title}</div>
-              <div className={`${className}-dormitory-content`}>
-                <div className={`${className}-dormitory-items`}>
-                  {data.criteria.items.map((item: any) => {
-                    return renderBlockItem(item);
-                  })}
-                </div>
-              </div>
-            </div>
-          ) : null}
-
-          {data.dormitory ? (
-            <div className={`${className}-dormitory`} id={"vuz_dormitory"}>
-              <div className={`${className}-dormitory-title`}>
-                {data.dormitory.title}
-                {data.dormitory.subtitle?.length ? (
-                  <div className={`${className}-dormitory-subtitle`}>{data.dormitory.subtitle}</div>
-                ) : null}
-              </div>
-              <div className={`${className}-dormitory-content`}>
-                {data.dormitory.text ? (
-                  <div className={`${className}-dormitory-text`}>{data.dormitory.text}</div>
-                ) : null}
-                {data.dormitory.iframe ? (
                   <iframe
-                    src={data.dormitory.iframe}
-                    className={`${className}-dormitory-iframe`}
+                    src={item.contents.video}
+                    className={`${className}-header-right`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
-                ) : null}
-                <div className={`${className}-dormitory-items`}>
-                  {data.dormitory.items.map((item: any) => {
-                    return renderBlockItem(item);
-                  })}
                 </div>
-                {data.dormitory.imgs?.length ? (
-                  <div className={`${className}-dormitory-carousel`}>
-                    {/* влево вправо кнопки */}
-                    <div
-                      className={`${className}-dormitory-button-left`}
-                      onClick={() => (isAnimating ? null : prevSlide())}
-                    >
-                      <div className={`${className}-dormitory-button-left-icon`} />
+              );
+            }
+
+            return (
+              <div className={`${className}-item`} id={`vuz_${item.id}`}>
+                <div className={`${className}-item-header`}>
+                  <div className={`${className}-item-header-title`}>{item.title}</div>
+                  {item.subtitle ? <div className={`${className}-item-header-subtitle`}>{item.subtitle}</div> : null}
+                </div>
+
+                {item.itemType === "faculties" ? (
+                  <div className={`${className}-fakultet`}>
+                    {item.contents.map((content: any) => {
+                      return (
+                        <div className={`${className}-fakultet-item`} key={`${className}-fakultet-item_${content.id}`}>
+                          <div className={`${className}-fakultet-item-grid`}>
+                            <div className={`${className}-fakultet-item-name`}>
+                              <ReactMarkdown>{content.facultyName}</ReactMarkdown>
+                            </div>
+                            <div
+                              className={`${className}-fakultet-item-arrow${content.opened ? "-active" : ""}`}
+                              onClick={() => clickContent(item, content)}
+                            />
+                          </div>
+                          <div className={`${className}-fakultet-items${content.opened ? "-active" : ""}`}>
+                            {content.directions.map((direction: any) => {
+                              return (
+                                <div
+                                  className={`${className}-fakultet-child`}
+                                  key={`${className}-fakultet-child_${content.id}_${direction.id}`}
+                                >
+                                  <div />
+                                  <div className={`${className}-fakultet-child-header`}>
+                                    <div className={`${className}-fakultet-child-header-grid`}>
+                                      <div
+                                        className={`${className}-fakultet-child-header-text`}
+                                        style={{ textTransform: "uppercase" }}
+                                      >
+                                        <ReactMarkdown>{direction.directionName}</ReactMarkdown>
+                                      </div>
+                                      <div
+                                        className={`${className}-fakultet-child-header-plus${
+                                          direction.opened ? "-active" : ""
+                                        }`}
+                                        onClick={() => clickDescription(item, content, direction)}
+                                      />
+                                    </div>
+                                    <div
+                                      className={`${className}-fakultet-child-content${direction.opened ? "-active" : ""}`}
+                                    >
+                                      <div className={`${className}-fakultet-child-content-text`}>
+                                        {direction.description}
+                                      </div>
+                                      {direction.educationPrice?.length ? (
+                                        <Fragment>
+                                          <div className={`${className}-fakultet-child-content-price`}>СТОИМОСТЬ</div>
+                                          <div className={`${className}-fakultet-child-content-text`}>
+                                            {direction.educationPrice}
+                                          </div>
+                                        </Fragment>
+                                      ) : null}
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : item.itemType === "steps" ? (
+                  <div className={`${className}-steps`}>
+                    <div className={`${className}-steps-tabs`} style={getGrid(item.contents.length)}>
+                      <div className={`${className}-steps-tab-line`} style={getLine(item.contents.length)} />
+                      {item.contents.map((content: any) => {
+                        return (
+                          <div className={`${className}-steps-tab`} key={`${className}-steps-tab_${content.id}`}>
+                            <div className={`${className}-steps-tab-center`}>
+                              <div
+                                className={`${className}-steps-tab-circle${
+                                  activeTab === content.id ? ` ${className}-steps-tab-circle-active` : ""
+                                }`}
+                                onClick={() => setActiveTab(content.id)}
+                              >
+                                <div className={`${className}-steps-tab-circle-number`}>{content.stepNumber}</div>
+                              </div>
+                            </div>
+
+                            <div className={`${className}-steps-tab-title`}>{content.stepTitle}</div>
+                            <div className={`${className}-steps-tab-subtitle`}>{content.stepDescription}</div>
+                          </div>
+                        );
+                      })}
                     </div>
 
-                    <div
-                      className={`${className}-dormitory-button-right`}
-                      onClick={() => (isAnimating ? null : nextSlide())}
-                    >
-                      <div className={`${className}-dormitory-button-right-icon`} />
+                    {renderActiveStep(item.contents.find((f: any) => f.id === activeTab))}
+                  </div>
+                ) : item.itemType === "list" ? (
+                  <div className={`${className}-dormitory`}>
+                    <div className={`${className}-dormitory-items`}>
+                      {item.contents.map((content: any) => {
+                        return (
+                          <div
+                            className={`${className}-steps-item-block`}
+                            key={`${className}-steps-item-block_${content.id}`}
+                          >
+                            <div className={`${className}-steps-item-block-icon`} />
+                            <div className={`${className}-steps-item-block-texts`}>
+                              {content.title?.length ? (
+                                <div className={`${className}-steps-item-block-title`}>{content.title}</div>
+                              ) : null}
+                              {content.content?.length ? (
+                                <div
+                                  className={`${className}-steps-item-block-content`}
+                                  dangerouslySetInnerHTML={{ __html: content.content }}
+                                />
+                              ) : null}
+                              {content.video ? (
+                                <iframe
+                                  src={content.video}
+                                  className={`${className}-dormitory-iframe`}
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                  allowFullScreen
+                                />
+                              ) : null}
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
 
-                    {/* контент */}
-                    <div
-                      className={`${className}-dormitory-slide ${
-                        isAnimating ? `${className}-dormitory-slide-animate` : `${className}-dormitory-slide-nonAnimate`
-                      }`}
-                    >
-                      <img
-                        src={`/assets/caspianuniversity/${data.dormitory.imgs[currentSlide].link}`}
-                        alt=""
-                        className={`${className}-dormitory-slide-content`}
-                      />
-                    </div>
-
-                    {/* точки */}
-                    <div className={`${className}-dormitory-dots`}>
-                      {data.dormitory.imgs.map((img: any, index: number) => (
+                    {/* {data.dormitory.imgs?.length ? (
+                      <div className={`${className}-dormitory-carousel`}>
                         <div
-                          key={index}
-                          onClick={() => (isAnimating ? null : goToSlide(index))}
-                          className={`${className}-dormitory-dots-button ${
-                            index === currentSlide
-                              ? `${className}-dormitory-dots-button-current`
-                              : `${className}-dormitory-dots-button-nocurrent`
-                          } ${isAnimating ? "pointer-events-none" : ""}`}
-                        />
-                      ))}
+                          className={`${className}-dormitory-button-left`}
+                          onClick={() => (isAnimating ? null : prevSlide())}
+                        >
+                          <div className={`${className}-dormitory-button-left-icon`} />
+                        </div>
+
+                        <div
+                          className={`${className}-dormitory-button-right`}
+                          onClick={() => (isAnimating ? null : nextSlide())}
+                        >
+                          <div className={`${className}-dormitory-button-right-icon`} />
+                        </div>
+
+                        <div
+                          className={`${className}-dormitory-slide ${
+                            isAnimating
+                              ? `${className}-dormitory-slide-animate`
+                              : `${className}-dormitory-slide-nonAnimate`
+                          }`}
+                        >
+                          <img
+                            src={`/assets/caspianuniversity/${data.dormitory.imgs[currentSlide].link}`}
+                            alt=""
+                            className={`${className}-dormitory-slide-content`}
+                          />
+                        </div>
+
+                        <div className={`${className}-dormitory-dots`}>
+                          {data.dormitory.imgs.map((img: any, index: number) => (
+                            <div
+                              key={index}
+                              onClick={() => (isAnimating ? null : goToSlide(index))}
+                              className={`${className}-dormitory-dots-button ${
+                                index === currentSlide
+                                  ? `${className}-dormitory-dots-button-current`
+                                  : `${className}-dormitory-dots-button-nocurrent`
+                              } ${isAnimating ? "pointer-events-none" : ""}`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    ) : null} */}
+                  </div>
+                ) : item.itemType === "enum" ? (
+                  <div className={`${className}-docs`}>
+                    <div className={`${className}-docs-items`}>
+                      {item.contents.map((content: any) => {
+                        return (
+                          <div
+                            className={`${className}-steps-item-block`}
+                            key={`${className}-steps-item-block_${content.id}`}
+                          >
+                            <div className={`${className}-docs-circle`}>{content.pointNum}</div>
+                            <div className={`${className}-steps-item-block-texts`}>
+                              <div
+                                className={`${className}-steps-item-block-content`}
+                                dangerouslySetInnerHTML={{ __html: content.pointContent }}
+                              />
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 ) : null}
               </div>
-            </div>
-          ) : null}
+            );
+          })}
 
-          {data.docs ? (
-            <div className={`${className}-docs`} id={"vuz_docs"}>
-              <div className={`${className}-docs-title`}>{data.docs.title}</div>
-              <div className={`${className}-docs-content`}>
-                <div className={`${className}-docs-items`}>
-                  {data.docs.items.map((item: any) => {
-                    return renderBlockItem(item, "docs");
-                  })}
-                </div>
-              </div>
-            </div>
-          ) : null}
+          {/* //  {data.prices ? (
+          //   <div className={`${className}-prices`} id={"vuz_prices"}>
+          //     <div className={`${className}-prices-title`}>
+          //       {data.prices.title}
+          //       {data.prices.subtitle?.length ? (
+          //         <div className={`${className}-prices-subtitle`}>{data.prices.subtitle}</div>
+          //       ) : null}
+          //     </div>
+          //     <div className={`${className}-prices-content`}>
+          //       <div className={`${className}-prices-items`}>
+          //         {data.prices.items.map((item: any) => {
+          //           return (
+          //             <div className={`${className}-prices-item`}>
+          //               <div className={`${className}-prices-item-names`}>
+          //                 {item.names.map((name: string) => {
+          //                   return <div className={`${className}-prices-item-names-text`}>{name}</div>;
+          //                 })}
+          //               </div>
+          //               <div className={`${className}-prices-item-price`}>{item.price}</div>
+          //             </div>
+          //           );
+          //         })}
+          //       </div>
+          //     </div>
+          //   </div>
+          // ) : null}*/}
         </div>
       ) : null}
     </div>

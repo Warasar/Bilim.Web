@@ -10,6 +10,7 @@ const buttonSunEditor = [
   ["fontColor", "hiliteColor"],
   ["bold", "underline", "italic", "strike", "subscript", "superscript"],
   ["align", "horizontalRule", "list", "lineHeight"],
+  ["link"],
 ];
 
 export const EditableHTMLCell: React.FC<{
