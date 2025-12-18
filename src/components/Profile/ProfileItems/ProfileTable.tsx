@@ -991,10 +991,10 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
             onChange={handleChange}
             loading={!tableColumns?.length || data?.length}
             scroll={{
-              y: `calc(100vh - ${data.length > 20 ? "290px" : "240px"})`, // Фиксированная высота
+              y: `calc(100vh - ${data?.length > 20 ? "290px" : "240px"})`, // Фиксированная высота
             }}
             pagination={
-              data.length > 20
+              data?.length > 20
                 ? {
                     pageSize: 20, // Количество строк на странице
                     showSizeChanger: false, // Показывать выбор количества строк
