@@ -68,8 +68,7 @@ export default function Survey() {
   const changedString = (code: string, e: any) => {
     const newData: any = _.cloneDeep(data);
 
-    newData.data.find((f: any) => f.questionCode === code).value =
-      e.target.value;
+    newData.data.find((f: any) => f.questionCode === code).value = e.target.value;
 
     setData(newData);
   };
@@ -119,9 +118,7 @@ export default function Survey() {
         win.location = `${window.location.origin}/accompaniment`;
       }, 2000);
     } else {
-      message.error(
-        "Произошла ошибка, пожайлуста попробуйте позже или обратитесь к администратору"
-      );
+      message.error("Произошла ошибка, пожайлуста попробуйте позже или обратитесь к администратору");
     }
 
     setLoader(false);
@@ -134,63 +131,47 @@ export default function Survey() {
         <div className="survey-title">Анкета пользователя</div>
 
         <div className="survey-items">
-          {data?.data?.map((item: any) => {
-            return item.answerType === "string" ||
-              item.answerType === "phone" ||
-              item.answerType === "email" ? (
-              <div
-                className="survey-item"
-                key={`survey-item-${item.questionCode}`}
-              >
-                <div className="survey-item-text">{item.questionName}:</div>
-                <Input
-                  value={item.value}
-                  // className="survey-input"
-                  onValueChanged={(e: any) =>
-                    changedString(item.questionCode, e)
-                  }
-                  type={item.answerType}
-                />
-              </div>
-            ) : item.answerType === "object" ? (
-              <div
-                className="survey-item"
-                key={`survey-item-${item.questionCode}`}
-              >
-                <div className="survey-item-text">{item.questionName}:</div>
-                <Select
-                  data={data.objects[item.answersSpr]}
-                  value={item.value}
-                  // className="survey-select"
-                  onValueChanged={(e: any) =>
-                    changedObject(item.questionCode, e)
-                  }
-                  dontShowClear
-                />
-              </div>
-            ) : item.answerType === "date" ? (
-              <div
-                className="survey-item"
-                key={`survey-item-${item.questionCode}`}
-              >
-                <div className="survey-item-text">{item.questionName}:</div>
-                <ConfigProvider locale={locale}>
-                  <DatePicker
-                    className="survey-datepicker"
-                    onChange={(value: any) =>
-                      changedDate(item.questionCode, value)
-                    }
-                    value={item.value ? item.value : null}
-                    picker="date"
-                    format={customFormatDate}
-                    allowClear={false}
+          {data?.data
+            ?.filter((f: any) => f.isVisible)
+            ?.map((item: any) => {
+              return item.answerType === "string" || item.answerType === "phone" || item.answerType === "email" ? (
+                <div className="survey-item" key={`survey-item-${item.questionCode}`}>
+                  <div className="survey-item-text">{item.questionName}:</div>
+                  <Input
+                    value={item.value}
+                    // className="survey-input"
+                    onValueChanged={(e: any) => changedString(item.questionCode, e)}
+                    type={item.answerType}
                   />
-                </ConfigProvider>
-              </div>
-            ) : (
-              <div className="survey-unknown-type">{item.answerType}</div>
-            );
-          })}
+                </div>
+              ) : item.answerType === "object" ? (
+                <div className="survey-item" key={`survey-item-${item.questionCode}`}>
+                  <div className="survey-item-text">{item.questionName}:</div>
+                  <Select
+                    data={data.objects[item.answersSpr]?.filter((f: any) => f.isVisible)}
+                    value={item.value}
+                    onValueChanged={(e: any) => changedObject(item.questionCode, e)}
+                    dontShowClear
+                  />
+                </div>
+              ) : item.answerType === "date" ? (
+                <div className="survey-item" key={`survey-item-${item.questionCode}`}>
+                  <div className="survey-item-text">{item.questionName}:</div>
+                  <ConfigProvider locale={locale}>
+                    <DatePicker
+                      className="survey-datepicker"
+                      onChange={(value: any) => changedDate(item.questionCode, value)}
+                      value={item.value ? item.value : null}
+                      picker="date"
+                      format={customFormatDate}
+                      allowClear={false}
+                    />
+                  </ConfigProvider>
+                </div>
+              ) : (
+                <div className="survey-unknown-type">{item.answerType}</div>
+              );
+            })}
         </div>
 
         <div className="survey-modal-footer">
@@ -209,18 +190,12 @@ export default function Survey() {
           </div>
           <div className="survey-modal-content">
             <div className="survey-modal-acceptTerms">
-              <div
-                className="survey-modal-acceptTerms-text"
-                dangerouslySetInnerHTML={{ __html: terms?.items?.data }}
-              />
+              <div className="survey-modal-acceptTerms-text" dangerouslySetInnerHTML={{ __html: terms?.items?.data }} />
             </div>
           </div>
           <div className="survey-modal-footer">
             <div />
-            <button
-              className="survey-accept-button"
-              onClick={() => acceptTerms()}
-            >
+            <button className="survey-accept-button" onClick={() => acceptTerms()}>
               Принять
             </button>
           </div>

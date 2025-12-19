@@ -17,7 +17,9 @@ export default function University({ findData, className }: Props) {
   useEffect(() => {
     if (findData) {
       setData(findData);
-      setActiveTab(findData.find((f: any) => f.itemType === "steps")?.contents?.[0]?.id);
+      setActiveTab(
+        findData.find((f: any) => f.itemType === "steps")?.contents?.filter((f: any) => f.isVisible)?.[0]?.id
+      );
     }
   }, [findData]);
 
@@ -171,88 +173,105 @@ export default function University({ findData, className }: Props) {
 
                 {item.itemType === "faculties" ? (
                   <div className={`${className}-fakultet`}>
-                    {item.contents.map((content: any) => {
-                      return (
-                        <div className={`${className}-fakultet-item`} key={`${className}-fakultet-item_${content.id}`}>
-                          <div className={`${className}-fakultet-item-grid`}>
-                            <div className={`${className}-fakultet-item-name`}>
-                              <ReactMarkdown>{content.facultyName}</ReactMarkdown>
-                            </div>
-                            <div
-                              className={`${className}-fakultet-item-arrow${content.opened ? "-active" : ""}`}
-                              onClick={() => clickContent(item, content)}
-                            />
-                          </div>
-                          <div className={`${className}-fakultet-items${content.opened ? "-active" : ""}`}>
-                            {content.directions.map((direction: any) => {
-                              return (
-                                <div
-                                  className={`${className}-fakultet-child`}
-                                  key={`${className}-fakultet-child_${content.id}_${direction.id}`}
-                                >
-                                  <div />
-                                  <div className={`${className}-fakultet-child-header`}>
-                                    <div className={`${className}-fakultet-child-header-grid`}>
-                                      <div
-                                        className={`${className}-fakultet-child-header-text`}
-                                        style={{ textTransform: "uppercase" }}
-                                      >
-                                        <ReactMarkdown>{direction.directionName}</ReactMarkdown>
-                                      </div>
-                                      <div
-                                        className={`${className}-fakultet-child-header-plus${
-                                          direction.opened ? "-active" : ""
-                                        }`}
-                                        onClick={() => clickDescription(item, content, direction)}
-                                      />
-                                    </div>
-                                    <div
-                                      className={`${className}-fakultet-child-content${direction.opened ? "-active" : ""}`}
-                                    >
-                                      <div className={`${className}-fakultet-child-content-text`}>
-                                        {direction.description}
-                                      </div>
-                                      {direction.educationPrice?.length ? (
-                                        <Fragment>
-                                          <div className={`${className}-fakultet-child-content-price`}>СТОИМОСТЬ</div>
-                                          <div className={`${className}-fakultet-child-content-text`}>
-                                            {direction.educationPrice}
-                                          </div>
-                                        </Fragment>
-                                      ) : null}
-                                    </div>
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : item.itemType === "steps" ? (
-                  <div className={`${className}-steps`}>
-                    <div className={`${className}-steps-tabs`} style={getGrid(item.contents.length)}>
-                      <div className={`${className}-steps-tab-line`} style={getLine(item.contents.length)} />
-                      {item.contents.map((content: any) => {
+                    {item.contents
+                      .filter((f: any) => f.isVisible)
+                      .map((content: any) => {
                         return (
-                          <div className={`${className}-steps-tab`} key={`${className}-steps-tab_${content.id}`}>
-                            <div className={`${className}-steps-tab-center`}>
-                              <div
-                                className={`${className}-steps-tab-circle${
-                                  activeTab === content.id ? ` ${className}-steps-tab-circle-active` : ""
-                                }`}
-                                onClick={() => setActiveTab(content.id)}
-                              >
-                                <div className={`${className}-steps-tab-circle-number`}>{content.stepNumber}</div>
+                          <div
+                            className={`${className}-fakultet-item`}
+                            key={`${className}-fakultet-item_${content.id}`}
+                          >
+                            <div className={`${className}-fakultet-item-grid`}>
+                              <div className={`${className}-fakultet-item-name`}>
+                                <ReactMarkdown>{content.facultyName}</ReactMarkdown>
                               </div>
+                              <div
+                                className={`${className}-fakultet-item-arrow${content.opened ? "-active" : ""}`}
+                                onClick={() => clickContent(item, content)}
+                              />
                             </div>
-
-                            <div className={`${className}-steps-tab-title`}>{content.stepTitle}</div>
-                            <div className={`${className}-steps-tab-subtitle`}>{content.stepDescription}</div>
+                            <div className={`${className}-fakultet-items${content.opened ? "-active" : ""}`}>
+                              {content.directions
+                                .filter((f: any) => f.isVisible)
+                                .map((direction: any) => {
+                                  return (
+                                    <div
+                                      className={`${className}-fakultet-child`}
+                                      key={`${className}-fakultet-child_${content.id}_${direction.id}`}
+                                    >
+                                      <div />
+                                      <div className={`${className}-fakultet-child-header`}>
+                                        <div className={`${className}-fakultet-child-header-grid`}>
+                                          <div
+                                            className={`${className}-fakultet-child-header-text`}
+                                            style={{ textTransform: "uppercase" }}
+                                          >
+                                            <ReactMarkdown>{direction.directionName}</ReactMarkdown>
+                                          </div>
+                                          <div
+                                            className={`${className}-fakultet-child-header-plus${
+                                              direction.opened ? "-active" : ""
+                                            }`}
+                                            onClick={() => clickDescription(item, content, direction)}
+                                          />
+                                        </div>
+                                        <div
+                                          className={`${className}-fakultet-child-content${direction.opened ? "-active" : ""}`}
+                                        >
+                                          <div className={`${className}-fakultet-child-content-text`}>
+                                            {direction.description}
+                                          </div>
+                                          {direction.educationPrice?.length ? (
+                                            <Fragment>
+                                              <div className={`${className}-fakultet-child-content-price`}>
+                                                СТОИМОСТЬ
+                                              </div>
+                                              <div className={`${className}-fakultet-child-content-text`}>
+                                                {direction.educationPrice}
+                                              </div>
+                                            </Fragment>
+                                          ) : null}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  );
+                                })}
+                            </div>
                           </div>
                         );
                       })}
+                  </div>
+                ) : item.itemType === "steps" ? (
+                  <div className={`${className}-steps`}>
+                    <div
+                      className={`${className}-steps-tabs`}
+                      style={getGrid(item.contents.filter((f: any) => f.isVisible).length)}
+                    >
+                      <div
+                        className={`${className}-steps-tab-line`}
+                        style={getLine(item.contents.filter((f: any) => f.isVisible).length)}
+                      />
+                      {item.contents
+                        .filter((f: any) => f.isVisible)
+                        .map((content: any) => {
+                          return (
+                            <div className={`${className}-steps-tab`} key={`${className}-steps-tab_${content.id}`}>
+                              <div className={`${className}-steps-tab-center`}>
+                                <div
+                                  className={`${className}-steps-tab-circle${
+                                    activeTab === content.id ? ` ${className}-steps-tab-circle-active` : ""
+                                  }`}
+                                  onClick={() => setActiveTab(content.id)}
+                                >
+                                  <div className={`${className}-steps-tab-circle-number`}>{content.stepNumber}</div>
+                                </div>
+                              </div>
+
+                              <div className={`${className}-steps-tab-title`}>{content.stepTitle}</div>
+                              <div className={`${className}-steps-tab-subtitle`}>{content.stepDescription}</div>
+                            </div>
+                          );
+                        })}
                     </div>
 
                     {renderActiveStep(item.contents.find((f: any) => f.id === activeTab))}
@@ -260,35 +279,37 @@ export default function University({ findData, className }: Props) {
                 ) : item.itemType === "list" ? (
                   <div className={`${className}-dormitory`}>
                     <div className={`${className}-dormitory-items`}>
-                      {item.contents.map((content: any) => {
-                        return (
-                          <div
-                            className={`${className}-steps-item-block`}
-                            key={`${className}-steps-item-block_${content.id}`}
-                          >
-                            <div className={`${className}-steps-item-block-icon`} />
-                            <div className={`${className}-steps-item-block-texts`}>
-                              {content.title?.length ? (
-                                <div className={`${className}-steps-item-block-title`}>{content.title}</div>
-                              ) : null}
-                              {content.content?.length ? (
-                                <div
-                                  className={`${className}-steps-item-block-content`}
-                                  dangerouslySetInnerHTML={{ __html: content.content }}
-                                />
-                              ) : null}
-                              {content.video ? (
-                                <iframe
-                                  src={content.video}
-                                  className={`${className}-dormitory-iframe`}
-                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                  allowFullScreen
-                                />
-                              ) : null}
+                      {item.contents
+                        .filter((f: any) => f.isVisible)
+                        .map((content: any) => {
+                          return (
+                            <div
+                              className={`${className}-steps-item-block`}
+                              key={`${className}-steps-item-block_${content.id}`}
+                            >
+                              <div className={`${className}-steps-item-block-icon`} />
+                              <div className={`${className}-steps-item-block-texts`}>
+                                {content.title?.length ? (
+                                  <div className={`${className}-steps-item-block-title`}>{content.title}</div>
+                                ) : null}
+                                {content.content?.length ? (
+                                  <div
+                                    className={`${className}-steps-item-block-content`}
+                                    dangerouslySetInnerHTML={{ __html: content.content }}
+                                  />
+                                ) : null}
+                                {content.video ? (
+                                  <iframe
+                                    src={content.video}
+                                    className={`${className}-dormitory-iframe`}
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                  />
+                                ) : null}
+                              </div>
                             </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
                     </div>
 
                     {/* {data.dormitory.imgs?.length ? (
@@ -340,22 +361,24 @@ export default function University({ findData, className }: Props) {
                 ) : item.itemType === "enum" ? (
                   <div className={`${className}-docs`}>
                     <div className={`${className}-docs-items`}>
-                      {item.contents.map((content: any) => {
-                        return (
-                          <div
-                            className={`${className}-steps-item-block`}
-                            key={`${className}-steps-item-block_${content.id}`}
-                          >
-                            <div className={`${className}-docs-circle`}>{content.pointNum}</div>
-                            <div className={`${className}-steps-item-block-texts`}>
-                              <div
-                                className={`${className}-steps-item-block-content`}
-                                dangerouslySetInnerHTML={{ __html: content.pointContent }}
-                              />
+                      {item.contents
+                        .filter((f: any) => f.isVisible)
+                        .map((content: any) => {
+                          return (
+                            <div
+                              className={`${className}-steps-item-block`}
+                              key={`${className}-steps-item-block_${content.id}`}
+                            >
+                              <div className={`${className}-docs-circle`}>{content.pointNum}</div>
+                              <div className={`${className}-steps-item-block-texts`}>
+                                <div
+                                  className={`${className}-steps-item-block-content`}
+                                  dangerouslySetInnerHTML={{ __html: content.pointContent }}
+                                />
+                              </div>
                             </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
                     </div>
                   </div>
                 ) : null}

@@ -34,29 +34,31 @@ export default function UniversityContainer() {
       },
     ];
 
-    newData.forEach((item: any, index: number) => {
-      if (item.itemType !== "header") {
-        newButtons.push({
-          code: index + 1,
-          name: formatString(item.title),
-          link: `vuz_${item.id}`,
-          scroll: true,
-        });
-      }
-      
-      if (item.itemType === 'faculties'){
-        item.contents?.forEach((content: any) => {
-          content.opened = false
+    newData
+      .filter((f: any) => f.isVisible)
+      .forEach((item: any, index: number) => {
+        if (item.itemType !== "header") {
+          newButtons.push({
+            code: index + 1,
+            name: formatString(item.title),
+            link: `vuz_${item.id}`,
+            scroll: true,
+          });
+        }
 
-          content.directions?.forEach((direction: any) => {
-            direction.opend = false
-          })
-        })
-      }
-    });
+        if (item.itemType === "faculties") {
+          item.contents?.forEach((content: any) => {
+            content.opened = false;
+
+            content.directions?.forEach((direction: any) => {
+              direction.opend = false;
+            });
+          });
+        }
+      });
 
     setButtons(newButtons);
-    setData(newData);
+    setData(newData.filter((f: any) => f.isVisible));
   };
 
   const formatString = (name: any) => {

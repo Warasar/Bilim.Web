@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { requestDelete, requestGet, requestPost, requestPut } from "../../../actions/actions";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
@@ -18,6 +18,7 @@ import { EditableHTMLCell } from "../ProfileTable/EditableHTMLCell";
 import { EditableJSONCell } from "../ProfileTable/EditableJSONCell";
 import { EditableSprCell } from "../ProfileTable/EditableSprCell";
 import { EditableDownloadCell } from "../ProfileTable/EditableDownloadCell";
+import { Resizable } from "react-resizable";
 
 require("dayjs/locale/ru");
 dayjs.locale("ru");
@@ -68,6 +69,32 @@ export type IObj = {
   value: any;
   label: string;
 };
+const ResizableTitle = (props: any) => {
+  const { onResize, width, ...restProps } = props;
+
+  if (!width) {
+    return <th {...restProps} />;
+  }
+
+  return (
+    <Resizable
+      width={width}
+      height={0}
+      handle={
+        <span
+          className="react-resizable-handle"
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        />
+      }
+      onResize={onResize}
+      draggableOpts={{ enableUserSelectHack: false }}
+    >
+      <th {...restProps} />
+    </Resizable>
+  );
+};
 
 type Props = {
   setLoader: (loader: boolean) => void;
@@ -82,6 +109,9 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   const [filteredInfo, setFilteredInfo] = useState<Record<string, any>>({});
   const [sortedInfo, setSortedInfo] = useState<Record<string, any>>({});
   const [filteredData, setFilteredData] = useState<any>(null);
+  const [resizedWidths, setResizedWidths] = useState<Record<string, number>>({});
+
+  const lastResizeRef = useRef<{ field: string; width: number } | null>(null);
 
   useEffect(() => {
     getData();
@@ -94,174 +124,224 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
     const table: any = await requestGet(`admin/table?id=${tableItem.id}`);
 
     setSprs(table?.sprs);
-    setTableColumns(table?.fields);
+    setTableColumns(table?.fields?.filter((f: any) => f.isVisible));
     setData(table?.data);
 
     setLoader(false);
   };
 
-  const getColumns = (data: any[]) => {
-    const newColumns: any = [];
+  const handleResize = useCallback(
+    (field: string) =>
+      (e: any, { size }: any) => {
+        // Сразу обновляем визуальную ширину для отображения
+        setResizedWidths((prev) => ({
+          ...prev,
+          [field]: size.width,
+        }));
 
-    if (tableItem.isEdit) {
-      newColumns.push({
-        title: "",
-        dataIndex: "tools",
-        key: "tools",
-        width: 80,
-        render: (value: any, record: any) => renderTools(value, record),
-        defaultSortOrder: null,
-      });
-    }
+        // Сохраняем последнее изменение
+        lastResizeRef.current = { field, width: size.width };
 
-    tableColumns?.forEach((item: any) => {
-      const column: any = {
-        title: item.fieldName || item.field,
-        dataIndex: item.field,
-        key: item.field,
-        sorter: (a: any, b: any) => sorterCol(a, b, item),
-        filteredValue: filteredInfo[item.field] || null,
-        sortOrder: sortedInfo.field === item.field ? sortedInfo.order : null,
-        ellipsis: true,
-        render: (value: any, record: any) => renderCell(value, record, item),
-        width: item.width
-          ? item.width
-          : item.dataType === "html"
-            ? 300
-            : item.dataType === "json"
-              ? 600
-              : item.dataType === "text"
-                ? 300
-                : item.dataType === "timestamp"
-                  ? 170
-                  : 120, // Используем сохраненную ширину или дефолт
-        onHeaderCell: () => ({
-          style: {
-            padding: "12px",
-          },
-        }),
-      };
+        if (lastResizeRef.current) {
+          const { field, width } = lastResizeRef.current;
 
-      // Генерация уникальных значений для фильтров
-      const uniqueValues = Array.from(new Set(data.map((record: any) => record[item.field]).filter(Boolean))).sort();
-
-      // Если значений меньше 10, показываем фильтр
-      if (uniqueValues.length > 0 && uniqueValues.length < 10) {
-        if (item.dataType === "bool") {
-          column.filters = [
-            {
-              text: "Да",
-              value: true,
-            },
-            {
-              text: "Нет",
-              value: false,
-            },
-          ];
-        } else if (item.dataType === "object") {
-          const obj: IObj[] = [];
-
-          sprs[item.spr].forEach((spr: any) => {
-            obj.push({
-              value: spr[item.sprCode],
-              label: spr[item.sprName] + "",
-            });
+          setTableColumns((prev: any) => {
+            const newColumns = _.cloneDeep(prev);
+            const column = newColumns.find((f: any) => f.field === field);
+            if (column) {
+              column.width = width;
+            }
+            return newColumns;
           });
 
-          column.filters = uniqueValues.map((value) => ({
-            text: obj.find((f) => f.value === value)?.label,
-            value: value,
-          }));
-        } else {
-          column.filters = uniqueValues.map((value) => ({
-            text: String(value),
-            value: value,
-          }));
+          lastResizeRef.current = null;
         }
+      },
+    []
+  );
 
-        column.filterIcon = (filtered: boolean) => (
-          <FilterOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-        );
+  // Сохраняем ресайзнутые ширины при изменении tableColumns
+  useEffect(() => {
+    if (tableColumns) {
+      const widths: Record<string, number> = {};
+      tableColumns.forEach((col: any) => {
+        if (col.width) {
+          widths[col.field] = col.width;
+        }
+      });
+      setResizedWidths(widths);
+    }
+  }, [tableColumns]);
 
-        column.onFilter = (value: any, record: any) => {
-          return record[item.field] === value;
+  const getColumns = useCallback(
+    (data: any[]) => {
+      const newColumns: any = [];
+
+      if (tableItem.isEdit) {
+        const width = resizedWidths["tools"] || 80;
+
+        newColumns.push({
+          title: "",
+          dataIndex: "tools",
+          key: "tools",
+          width: width,
+          render: (value: any, record: any) => renderTools(value, record),
+          defaultSortOrder: null,
+          onHeaderCell: () => ({
+            style: {
+              padding: "12px",
+            },
+            width: width,
+            onResize: handleResize("tools"),
+          }),
+        });
+      }
+
+      tableColumns?.forEach((item: any) => {
+        const width = resizedWidths[item.field] || item.width || 120;
+
+        const column: any = {
+          title: item.fieldName || item.field,
+          dataIndex: item.field,
+          key: item.field,
+          sorter: (a: any, b: any) => sorterCol(a, b, item),
+          filteredValue: filteredInfo[item.field] || null,
+          sortOrder: sortedInfo.field === item.field ? sortedInfo.order : null,
+          ellipsis: true,
+          render: (value: any, record: any) => renderCell(value, record, item),
+          width: width,
+          onHeaderCell: () => ({
+            style: {
+              padding: "12px",
+            },
+            width: width,
+            onResize: handleResize(item.field),
+          }),
         };
-      } else {
-        column.filterDropdown = ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => (
-          <div style={{ padding: 8 }}>
-            <Input
-              placeholder={`Поиск по ${item.fieldName?.toLowerCase() || item.field?.toLowerCase()}`}
-              value={selectedKeys[0]}
-              onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-              onPressEnter={() => {
-                confirm();
-              }}
-              style={{ width: 188, marginBottom: 8, display: "block" }}
-            />
-            <Space>
-              <Button
-                type="primary"
-                onClick={() => confirm()}
-                icon={<SearchOutlined />}
-                size="small"
-                style={{ width: 90 }}
-              >
-                Поиск
-              </Button>
-              <Button
-                onClick={() => {
-                  if (clearFilters) {
-                    clearFilters();
-                    confirm();
-                  }
-                }}
-                size="small"
-                style={{ width: 90 }}
-              >
-                Сбросить
-              </Button>
-            </Space>
-          </div>
-        );
 
-        column.filterIcon = (filtered: boolean) => (
-          <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
-        );
+        // Генерация уникальных значений для фильтров
+        const uniqueValues = Array.from(new Set(data.map((record: any) => record[item.field]).filter(Boolean))).sort();
 
-        column.onFilter = (value: any, record: any) => {
-          const fieldValue = record[item.field];
+        // Если значений меньше 10, показываем фильтр
+        if (uniqueValues.length > 0 && uniqueValues.length < 10) {
+          if (item.dataType === "bool") {
+            column.filters = [
+              {
+                text: "Да",
+                value: true,
+              },
+              {
+                text: "Нет",
+                value: false,
+              },
+            ];
+          } else if (item.dataType === "object") {
+            const obj: IObj[] = [];
 
-          if (item.dataType === "object" || Array.isArray(fieldValue)) {
-            const dictionary: any[] = [];
-
-            sprs[item.spr].forEach((sprItem: any) => {
-              dictionary.push({
-                value: sprItem[item.sprCode],
-                label: sprItem[item.sprName] + "",
+            sprs[item.spr].forEach((spr: any) => {
+              obj.push({
+                value: spr[item.sprCode],
+                label: spr[item.sprName] + "",
               });
             });
 
-            const foundItem = dictionary.filter((item: any) =>
-              String(item.label || "")
-                .toLowerCase()
-                .includes(String(value).toLowerCase())
-            );
-
-            return foundItem.some((f) => f.value === fieldValue);
+            column.filters = uniqueValues.map((value) => ({
+              text: obj.find((f) => f.value === value)?.label,
+              value: value,
+            }));
+          } else {
+            column.filters = uniqueValues.map((value) => ({
+              text: String(value),
+              value: value,
+            }));
           }
 
-          // Обычная логика для других типов
-          return String(fieldValue || "")
-            .toLowerCase()
-            .includes(String(value).toLowerCase());
-        };
-      }
+          column.filterIcon = (filtered: boolean) => (
+            <FilterOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
+          );
 
-      newColumns.push(column);
-    });
+          column.onFilter = (value: any, record: any) => {
+            return record[item.field] === value;
+          };
+        } else {
+          column.filterDropdown = ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => (
+            <div style={{ padding: 8 }}>
+              <Input
+                placeholder={`Поиск по ${item.fieldName?.toLowerCase() || item.field?.toLowerCase()}`}
+                value={selectedKeys[0]}
+                onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                onPressEnter={() => {
+                  confirm();
+                }}
+                style={{ width: 188, marginBottom: 8, display: "block" }}
+              />
+              <Space>
+                <Button
+                  type="primary"
+                  onClick={() => confirm()}
+                  icon={<SearchOutlined />}
+                  size="small"
+                  style={{ width: 90 }}
+                >
+                  Поиск
+                </Button>
+                <Button
+                  onClick={() => {
+                    if (clearFilters) {
+                      clearFilters();
+                      confirm();
+                    }
+                  }}
+                  size="small"
+                  style={{ width: 90 }}
+                >
+                  Сбросить
+                </Button>
+              </Space>
+            </div>
+          );
 
-    return newColumns;
-  };
+          column.filterIcon = (filtered: boolean) => (
+            <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
+          );
+
+          column.onFilter = (value: any, record: any) => {
+            const fieldValue = record[item.field];
+
+            if (item.dataType === "object" || Array.isArray(fieldValue)) {
+              const dictionary: any[] = [];
+
+              sprs[item.spr].forEach((sprItem: any) => {
+                dictionary.push({
+                  value: sprItem[item.sprCode],
+                  label: sprItem[item.sprName] + "",
+                });
+              });
+
+              const foundItem = dictionary.filter((item: any) =>
+                String(item.label || "")
+                  .toLowerCase()
+                  .includes(String(value).toLowerCase())
+              );
+
+              return foundItem.some((f) => f.value === fieldValue);
+            }
+
+            // Обычная логика для других типов
+            return String(fieldValue || "")
+              .toLowerCase()
+              .includes(String(value).toLowerCase());
+          };
+        }
+
+        newColumns.push(column);
+      });
+
+      return newColumns;
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [handleResize, tableColumns, filteredInfo, sortedInfo, resizedWidths]
+  );
 
   const sorterCol = (a: any, b: any, item: any) => {
     if (item.dataType === "int4" || item.dataType === "decimal" || item.dataType === "bool") {
@@ -342,12 +422,14 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
     if (col.dataType === "object") {
       const obj: IObj[] = [];
 
-      sprs[col.spr].forEach((item: any) => {
-        obj.push({
-          value: item[col.sprCode],
-          label: item[col.sprName] + "",
+      sprs[col.spr]
+        .filter((f: any) => f.isVisible)
+        .forEach((item: any) => {
+          obj.push({
+            value: item[col.sprCode],
+            label: item[col.sprName] + "",
+          });
         });
-      });
 
       return <EditableSprCell value={value} record={record} col={col} onSave={onSaveTable} obj={obj} />;
     }
@@ -627,9 +709,11 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
     const newHead: any[] = [];
 
     tableColumns.forEach((item: any) => {
+      const width = resizedWidths[item.field] / 10 || item.width / 10 || 15;
+
       newHead.push({
         key: item.field,
-        width: item.width ? item.width / 10 : 15,
+        width: width,
       });
     });
 
@@ -989,20 +1073,19 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
             }}
             rowClassName={() => "profile-table-row"}
             onChange={handleChange}
-            loading={!tableColumns?.length || data?.length}
             scroll={{
-              y: `calc(100vh - ${data?.length > 20 ? "290px" : "240px"})`, // Фиксированная высота
+              y: `calc(100vh - ${data?.length > 20 ? "290px" : "240px"})`,
             }}
             pagination={
               data?.length > 20
                 ? {
-                    pageSize: 20, // Количество строк на странице
-                    showSizeChanger: false, // Показывать выбор количества строк
-                    // pageSizeOptions: false ["10", "20", "50", "100"],
+                    pageSize: 20,
+                    showSizeChanger: false,
                     showTotal: (total, range) => `${range[0]}-${range[1]} из ${total} записей`,
                   }
                 : false
             }
+            loading={data && columns ? false : true}
             components={{
               body: {
                 cell: (props: any) => (
@@ -1010,10 +1093,13 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
                     {...props}
                     style={{
                       ...props.style,
-                      padding: "0px", // Кастомный padding для ячеек
+                      padding: "0px",
                     }}
                   />
                 ),
+              },
+              header: {
+                cell: ResizableTitle,
               },
             }}
           />

@@ -25,13 +25,28 @@ export default function ProfileAdmin({ setLoader, loader }: Props) {
     const newSider: any = [];
     const newGroups: any = [];
 
+    const params = new URLSearchParams(window.location.search);
+    let searchId: any = null;
+
+    if (params.get("id")) {
+      searchId = params.get("id");
+    }
+
     table.tables?.forEach((item: any, index: number) => {
       if (item.isVisible) {
-        newSider.push({
-          isTable: true,
-          active: index ? false : true,
-          ...item,
-        });
+        if (searchId) {
+          newSider.push({
+            isTable: true,
+            active: searchId + "" === item.id + "",
+            ...item,
+          });
+        } else {
+          newSider.push({
+            isTable: true,
+            active: index ? false : true,
+            ...item,
+          });
+        }
       }
     });
 
@@ -61,6 +76,11 @@ export default function ProfileAdmin({ setLoader, loader }: Props) {
     });
 
     setSider(newSider);
+
+    // Добавляем id в URL
+    const params = new URLSearchParams(window.location.search);
+    params.set("id", clickId);
+    window.history.pushState({}, "", `${window.location.pathname}?${params}`);
   };
 
   const handleClickGroup = (clickedCode: string) => {
@@ -81,7 +101,7 @@ export default function ProfileAdmin({ setLoader, loader }: Props) {
         <div className="profile-siderAdmin">
           {groups?.map((group: any) => {
             return (
-              <div>
+              <div key={`group-${group.code}`}>
                 <div className="profile-siderAdmin-group" key={`profile-siderAdmin-group_${group.code}`}>
                   <div className="profile-siderAdmin-group-text">{group.name}</div>
                   <div
@@ -98,6 +118,7 @@ export default function ProfileAdmin({ setLoader, loader }: Props) {
                       ?.map((item: any) => {
                         return (
                           <div
+                            key={`sider-item-${item.id}`}
                             className={"profile-siderAdmin-item" + (item.active ? "-active" : "")}
                             onClick={() => handleClickSider(item.id)}
                           >

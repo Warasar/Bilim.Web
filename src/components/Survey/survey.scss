@@ -2,12 +2,7 @@
 
 .survey {
   min-height: 100vh;
-  background: linear-gradient(
-    135deg,
-    $colorDefault 0%,
-    #8bb8db 50%,
-    #73a6d1 100%
-  );
+  background: linear-gradient(135deg, $colorDefault 0%, #8bb8db 50%, #73a6d1 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,10 +49,14 @@
   }
 
   &-input,
-  &-select,
-  &-datepicker {
+  &-select {
     width: 100%;
     min-height: 44px;
+  }
+
+  &-datepicker {
+    width: 100%;
+    min-height: 30px;
   }
 
   &-submit-button,

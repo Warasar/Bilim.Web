@@ -61,6 +61,11 @@ export default function Profile({ setLoader, userData }: Props) {
     });
 
     setSider(newSider);
+
+    // Добавляем code в URL
+    const params = new URLSearchParams(window.location.search);
+    params.set("code", clickCode);
+    window.history.pushState({}, "", `${window.location.pathname}?${params}`);
   };
 
   return (
@@ -70,19 +75,11 @@ export default function Profile({ setLoader, userData }: Props) {
           {sider.map((item: any) => {
             return (
               <div
-                className={
-                  "profile-sider-item" + (item.active ? "-active" : "")
-                }
+                className={"profile-sider-item" + (item.active ? "-active" : "")}
                 onClick={() => handleClickSider(item.code)}
               >
                 <div className={`profile-sider-item-icon-${item.icon}`} />
-                <div
-                  className={
-                    "profile-sider-item-text" + (item.active ? "-active" : "")
-                  }
-                >
-                  {item.name}
-                </div>
+                <div className={"profile-sider-item-text" + (item.active ? "-active" : "")}>{item.name}</div>
               </div>
             );
           })}
@@ -92,8 +89,7 @@ export default function Profile({ setLoader, userData }: Props) {
           <ProfileUser setLoader={setLoader} />
         ) : sider?.find((f: any) => f.active === true)?.code === "docs" ? (
           <ProfileDocs setLoader={setLoader} />
-        ) : sider?.find((f: any) => f.active === true)?.code ===
-          "notification" ? (
+        ) : sider?.find((f: any) => f.active === true)?.code === "notification" ? (
           <ProfileNotification setLoader={setLoader} />
         ) : sider?.find((f: any) => f.active === true)?.code === "homework" ? (
           <ProfileHomework setLoader={setLoader} />

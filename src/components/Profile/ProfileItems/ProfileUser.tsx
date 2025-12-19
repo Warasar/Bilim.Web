@@ -240,68 +240,70 @@ export default function ProfileUser({ setLoader }: Props) {
       </div>
 
       <div className="profile-user-items" style={!isEdit ? { gap: "16px" } : {}}>
-        {surveyData.data.map((item: any) => {
-          if (!isEdit) {
+        {surveyData.data
+          ?.filter((f: any) => f.isVisible)
+          .map((item: any) => {
+            if (!isEdit) {
+              return item.answerType === "string" || item.answerType === "phone" || item.answerType === "email" ? (
+                <div className="profile-user-itemNoEdit" key={`profile-user-item-${item.questionCode}`}>
+                  <div className="profile-user-item-text">{item.questionName}:</div>
+                  <div className="profile-user-itemNoEdit-text">{item.value}</div>
+                </div>
+              ) : item.answerType === "object" ? (
+                <div className="profile-user-itemNoEdit" key={`profile-user-item-${item.questionCode}`}>
+                  <div className="profile-user-item-text">{item.questionName}:</div>
+                  <div className="profile-user-itemNoEdit-text">{item.value?.name}</div>
+                </div>
+              ) : item.answerType === "date" ? (
+                <div className="profile-user-itemNoEdit" key={`profile-user-item-${item.questionCode}`}>
+                  <div className="profile-user-item-text">{item.questionName}:</div>
+                  <div className="profile-user-itemNoEdit-text">
+                    {item.value ? dayjs(item.value).format(dateFormat) : null}
+                  </div>
+                </div>
+              ) : item.answerType !== "doc" ? (
+                <div>{item.answerType}</div>
+              ) : null;
+            }
+
             return item.answerType === "string" || item.answerType === "phone" || item.answerType === "email" ? (
-              <div className="profile-user-itemNoEdit" key={`profile-user-item-${item.questionCode}`}>
+              <div className="profile-user-item" key={`profile-user-item-${item.questionCode}`}>
                 <div className="profile-user-item-text">{item.questionName}:</div>
-                <div className="profile-user-itemNoEdit-text">{item.value}</div>
+                <Input
+                  value={item.value}
+                  style={{ height: "30px" }}
+                  onValueChanged={(e: any) => changedString(item.questionCode, e)}
+                  type={item.answerType}
+                />
               </div>
             ) : item.answerType === "object" ? (
-              <div className="profile-user-itemNoEdit" key={`profile-user-item-${item.questionCode}`}>
+              <div className="profile-user-item" key={`profile-user-item-${item.questionCode}`}>
                 <div className="profile-user-item-text">{item.questionName}:</div>
-                <div className="profile-user-itemNoEdit-text">{item.value?.name}</div>
+                <Select
+                  data={surveyData.objects[item.answersSpr]?.filter((f: any) => f.isVisible)}
+                  value={item.value}
+                  onValueChanged={(e: any) => changedObject(item.questionCode, e)}
+                  dontShowClear
+                  inputSize={"medium"}
+                />
               </div>
             ) : item.answerType === "date" ? (
-              <div className="profile-user-itemNoEdit" key={`profile-user-item-${item.questionCode}`}>
+              <div className="profile-user-item" key={`profile-user-item-${item.questionCode}`}>
                 <div className="profile-user-item-text">{item.questionName}:</div>
-                <div className="profile-user-itemNoEdit-text">
-                  {item.value ? dayjs(item.value).format(dateFormat) : null}
-                </div>
+                <ConfigProvider locale={locale}>
+                  <DatePicker
+                    onChange={(value: any) => changedDate(item.questionCode, value)}
+                    value={item.value ? item.value : null}
+                    picker="date"
+                    format={customFormatDate}
+                    allowClear={false}
+                  />
+                </ConfigProvider>
               </div>
             ) : item.answerType !== "doc" ? (
               <div>{item.answerType}</div>
             ) : null;
-          }
-
-          return item.answerType === "string" || item.answerType === "phone" || item.answerType === "email" ? (
-            <div className="profile-user-item" key={`profile-user-item-${item.questionCode}`}>
-              <div className="profile-user-item-text">{item.questionName}:</div>
-              <Input
-                value={item.value}
-                style={{ height: "30px" }}
-                onValueChanged={(e: any) => changedString(item.questionCode, e)}
-                type={item.answerType}
-              />
-            </div>
-          ) : item.answerType === "object" ? (
-            <div className="profile-user-item" key={`profile-user-item-${item.questionCode}`}>
-              <div className="profile-user-item-text">{item.questionName}:</div>
-              <Select
-                data={surveyData.objects[item.answersSpr]}
-                value={item.value}
-                onValueChanged={(e: any) => changedObject(item.questionCode, e)}
-                dontShowClear
-                inputSize={"medium"}
-              />
-            </div>
-          ) : item.answerType === "date" ? (
-            <div className="profile-user-item" key={`profile-user-item-${item.questionCode}`}>
-              <div className="profile-user-item-text">{item.questionName}:</div>
-              <ConfigProvider locale={locale}>
-                <DatePicker
-                  onChange={(value: any) => changedDate(item.questionCode, value)}
-                  value={item.value ? item.value : null}
-                  picker="date"
-                  format={customFormatDate}
-                  allowClear={false}
-                />
-              </ConfigProvider>
-            </div>
-          ) : item.answerType !== "doc" ? (
-            <div>{item.answerType}</div>
-          ) : null;
-        })}
+          })}
       </div>
 
       <div />

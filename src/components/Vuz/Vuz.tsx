@@ -240,85 +240,87 @@ export default function Vuz({ data, setLoader, filterData }: Props) {
                     </div>
 
                     <div className={`${className}-collapseFilter-items${openedFilter ? `-active` : ""}`}>
-                      {filterData.filters.map((item: any) => {
-                        if (item.field === "educationPrice") {
-                          return (
-                            <div className={`${className}-collapseFilter-item`}>
-                              <b className={`${className}-collapseFilter-item-text`}>Стоимость обучения:</b>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  gap: "24px",
-                                }}
-                              >
+                      {filterData.filters
+                        .filter((f: any) => f.isVisible)
+                        .map((item: any) => {
+                          if (item.field === "educationPrice") {
+                            return (
+                              <div className={`${className}-collapseFilter-item`}>
+                                <b className={`${className}-collapseFilter-item-text`}>Стоимость обучения:</b>
                                 <div
                                   style={{
-                                    width: "20vw",
-                                    marginLeft: "6px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "24px",
                                   }}
                                 >
-                                  <Slider
-                                    range
-                                    min={filterData.minPrice}
-                                    max={filterData.maxPrice}
-                                    value={priceRange}
-                                    onChange={(e: any) => {
-                                      setPriceRange(e);
+                                  <div
+                                    style={{
+                                      width: "20vw",
+                                      marginLeft: "6px",
                                     }}
-                                    trackStyle={[{ backgroundColor: "#294e6a", height: 12, top: 1 }]}
-                                    railStyle={{
-                                      backgroundColor: "#ddd",
-                                      height: 12,
-                                      top: 1,
-                                    }}
-                                    handleStyle={[
-                                      {
-                                        borderColor: "#0a304b",
-                                        height: 16,
-                                        width: 16,
-                                        top: 4,
-                                        backgroundColor: "#0a304b",
-                                        opacity: 1,
-                                      },
-                                      {
-                                        borderColor: "#0a304b",
-                                        height: 16,
-                                        width: 16,
-                                        top: 4,
-                                        backgroundColor: "#0a304b",
-                                        opacity: 1,
-                                      },
-                                    ]}
-                                  />
+                                  >
+                                    <Slider
+                                      range
+                                      min={filterData.minPrice}
+                                      max={filterData.maxPrice}
+                                      value={priceRange}
+                                      onChange={(e: any) => {
+                                        setPriceRange(e);
+                                      }}
+                                      trackStyle={[{ backgroundColor: "#294e6a", height: 12, top: 1 }]}
+                                      railStyle={{
+                                        backgroundColor: "#ddd",
+                                        height: 12,
+                                        top: 1,
+                                      }}
+                                      handleStyle={[
+                                        {
+                                          borderColor: "#0a304b",
+                                          height: 16,
+                                          width: 16,
+                                          top: 4,
+                                          backgroundColor: "#0a304b",
+                                          opacity: 1,
+                                        },
+                                        {
+                                          borderColor: "#0a304b",
+                                          height: 16,
+                                          width: 16,
+                                          top: 4,
+                                          backgroundColor: "#0a304b",
+                                          opacity: 1,
+                                        },
+                                      ]}
+                                    />
+                                  </div>
+                                  <b className={`${className}-collapseFilter-item-text`} style={{ textWrap: "nowrap" }}>
+                                    {priceRange[0]?.toLocaleString()}₸ - {priceRange[1]?.toLocaleString()}₸
+                                  </b>
                                 </div>
-                                <b className={`${className}-collapseFilter-item-text`} style={{ textWrap: "nowrap" }}>
-                                  {priceRange[0]?.toLocaleString()}₸ - {priceRange[1]?.toLocaleString()}₸
-                                </b>
                               </div>
+                            );
+                          }
+
+                          return (
+                            <div className={`${className}-collapseFilter-item`}>
+                              <b className={`${className}-collapseFilter-item-text`}>{item.name}:</b>
+                              <Select
+                                mode="multiple"
+                                placeholder="Выберите"
+                                onChange={(e: any) => {
+                                  changeSelect(item.field, e);
+                                }}
+                                style={{ width: "100%" }}
+                                options={item.possibleValues.map((f: any) => ({
+                                  value: f.name,
+                                  label: f.name,
+                                }))}
+                                value={filterValues[item.field]}
+                              />
                             </div>
                           );
-                        }
-
-                        return (
-                          <div className={`${className}-collapseFilter-item`}>
-                            <b className={`${className}-collapseFilter-item-text`}>{item.name}:</b>
-                            <Select
-                              mode="multiple"
-                              placeholder="Выберите"
-                              onChange={(e: any) => {
-                                changeSelect(item.field, e);
-                              }}
-                              style={{ width: "100%" }}
-                              options={item.possibleValues.map((f: any) => ({
-                                value: f.name,
-                                label: f.name,
-                              }))}
-                              value={filterValues[item.field]}
-                            />
-                          </div>
-                        );
-                      })}
+                        })}
 
                       <div className={`${className}-collapseFilter-footer`}>
                         <div />
@@ -335,150 +337,162 @@ export default function Vuz({ data, setLoader, filterData }: Props) {
 
                 {searchData ? (
                   <div className={`${className}-list`}>
-                    {searchData.map((item: any) => {
-                      return item.faculties?.length ? (
-                        <div className={`${className}-list-item`} key={`${className}-list-item_${item.code}`}>
-                          <div className={`${className}-list-item-header`}>
-                            <img
-                              src={`/assets/vuzes/${item.photo}`}
-                              alt=""
-                              className={`${className}-list-item-header-photo`}
-                            />
+                    {searchData
+                      .filter((f: any) => f.isVisible)
+                      .map((item: any) => {
+                        return item.faculties?.length ? (
+                          <div className={`${className}-list-item`} key={`${className}-list-item_${item.code}`}>
+                            <div className={`${className}-list-item-header`}>
+                              <img
+                                src={`/assets/vuzes/${item.photo}`}
+                                alt=""
+                                className={`${className}-list-item-header-photo`}
+                              />
 
-                            <div className={`${className}-list-item-header-column`}>
-                              <NavLink
-                                className={`${className}-list-item-header-text`}
-                                to={`${item.code}`}
-                                onClick={() => {
-                                  window.scrollTo({
-                                    top: 0,
-                                    behavior: "smooth", // для плавной прокрутки
-                                  });
-                                }}
-                              >
-                                {item.nameFull}
-                              </NavLink>
+                              <div className={`${className}-list-item-header-column`}>
+                                <NavLink
+                                  className={`${className}-list-item-header-text`}
+                                  to={`${item.code}`}
+                                  onClick={() => {
+                                    window.scrollTo({
+                                      top: 0,
+                                      behavior: "smooth", // для плавной прокрутки
+                                    });
+                                  }}
+                                >
+                                  {item.nameFull}
+                                </NavLink>
+                              </div>
+
+                              <div
+                                className={`${className}-list-item-header-arrow${item.collapse ? "-active" : ""}`}
+                                onClick={() => clickVuz(item.id)}
+                              />
                             </div>
 
-                            <div
-                              className={`${className}-list-item-header-arrow${item.collapse ? "-active" : ""}`}
-                              onClick={() => clickVuz(item.id)}
-                            />
-                          </div>
-
-                          {item.collapse ? (
-                            <div className={`${className}-list-block`}>
-                              {item.faculties?.map((faculties: any) => {
-                                return (
-                                  <div
-                                    className={`${classNameUniversity}-fakultet-item`}
-                                    key={`${classNameUniversity}-fakultet-item_${faculties.id}`}
-                                  >
-                                    <div className={`${classNameUniversity}-fakultet-item-grid`}>
-                                      <div className={`${classNameUniversity}-fakultet-item-name`}>
-                                        <ReactMarkdown>{faculties.facultyName}</ReactMarkdown>
-                                      </div>
+                            {item.collapse ? (
+                              <div className={`${className}-list-block`}>
+                                {item.faculties
+                                  ?.filter((f: any) => f.isVisible)
+                                  ?.map((faculties: any) => {
+                                    return (
                                       <div
-                                        className={`${classNameUniversity}-fakultet-item-arrow${
-                                          faculties.opened ? "-active" : ""
-                                        }`}
-                                        onClick={() => clickFakultet(item.id, faculties.id)}
-                                      />
-                                    </div>
-
-                                    <div
-                                      className={`${classNameUniversity}-fakultet-items1${
-                                        faculties.opened ? "-active" : ""
-                                      }`}
-                                    >
-                                      {faculties.directions.map((direct: any) => {
-                                        return (
-                                          <div
-                                            className={`${classNameUniversity}-fakultet-child`}
-                                            key={`${classNameUniversity}-fakultet-child_${item.id}_${direct.id}`}
-                                          >
-                                            <div />
-                                            <div className={`${classNameUniversity}-fakultet-child-header`}>
-                                              <div className={`${classNameUniversity}-fakultet-child-header-grid`}>
-                                                <div
-                                                  className={`${classNameUniversity}-fakultet-child-header-text`}
-                                                  style={{ textTransform: "uppercase" }}
-                                                >
-                                                  <ReactMarkdown>{direct.directionName}</ReactMarkdown>
-                                                </div>
-                                                <div
-                                                  className={`${classNameUniversity}-fakultet-child-header-plus${
-                                                    direct.opened ? "-active" : ""
-                                                  }`}
-                                                  onClick={() => clickDirection(item.id, faculties.id, direct.id)}
-                                                />
-                                              </div>
-
-                                              <div
-                                                className={`${classNameUniversity}-fakultet-child-content1${
-                                                  direct.opened ? "-active" : ""
-                                                }`}
-                                              >
-                                                <div className={`${classNameUniversity}-fakultet-child-content-text`}>
-                                                  <ReactMarkdown>{direct.description}</ReactMarkdown>
-                                                </div>
-                                                {direct.educationPrice?.length ? (
-                                                  <Fragment>
-                                                    <div
-                                                      className={`${classNameUniversity}-fakultet-child-content-price`}
-                                                    >
-                                                      СТОИМОСТЬ
-                                                    </div>
-                                                    <div
-                                                      className={`${classNameUniversity}-fakultet-child-content-text`}
-                                                    >
-                                                      {direct.educationPrice}
-                                                    </div>
-                                                  </Fragment>
-                                                ) : null}
-                                              </div>
-                                            </div>
+                                        className={`${classNameUniversity}-fakultet-item`}
+                                        key={`${classNameUniversity}-fakultet-item_${faculties.id}`}
+                                      >
+                                        <div className={`${classNameUniversity}-fakultet-item-grid`}>
+                                          <div className={`${classNameUniversity}-fakultet-item-name`}>
+                                            <ReactMarkdown>{faculties.facultyName}</ReactMarkdown>
                                           </div>
-                                        );
-                                      })}
-                                    </div>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          ) : null}
-                        </div>
-                      ) : null;
-                    })}
+                                          <div
+                                            className={`${classNameUniversity}-fakultet-item-arrow${
+                                              faculties.opened ? "-active" : ""
+                                            }`}
+                                            onClick={() => clickFakultet(item.id, faculties.id)}
+                                          />
+                                        </div>
+
+                                        <div
+                                          className={`${classNameUniversity}-fakultet-items1${
+                                            faculties.opened ? "-active" : ""
+                                          }`}
+                                        >
+                                          {faculties.directions
+                                            .filter((f: any) => f.isVisible)
+                                            .map((direct: any) => {
+                                              return (
+                                                <div
+                                                  className={`${classNameUniversity}-fakultet-child`}
+                                                  key={`${classNameUniversity}-fakultet-child_${item.id}_${direct.id}`}
+                                                >
+                                                  <div />
+                                                  <div className={`${classNameUniversity}-fakultet-child-header`}>
+                                                    <div
+                                                      className={`${classNameUniversity}-fakultet-child-header-grid`}
+                                                    >
+                                                      <div
+                                                        className={`${classNameUniversity}-fakultet-child-header-text`}
+                                                        style={{ textTransform: "uppercase" }}
+                                                      >
+                                                        <ReactMarkdown>{direct.directionName}</ReactMarkdown>
+                                                      </div>
+                                                      <div
+                                                        className={`${classNameUniversity}-fakultet-child-header-plus${
+                                                          direct.opened ? "-active" : ""
+                                                        }`}
+                                                        onClick={() => clickDirection(item.id, faculties.id, direct.id)}
+                                                      />
+                                                    </div>
+
+                                                    <div
+                                                      className={`${classNameUniversity}-fakultet-child-content1${
+                                                        direct.opened ? "-active" : ""
+                                                      }`}
+                                                    >
+                                                      <div
+                                                        className={`${classNameUniversity}-fakultet-child-content-text`}
+                                                      >
+                                                        <ReactMarkdown>{direct.description}</ReactMarkdown>
+                                                      </div>
+                                                      {direct.educationPrice?.length ? (
+                                                        <Fragment>
+                                                          <div
+                                                            className={`${classNameUniversity}-fakultet-child-content-price`}
+                                                          >
+                                                            СТОИМОСТЬ
+                                                          </div>
+                                                          <div
+                                                            className={`${classNameUniversity}-fakultet-child-content-text`}
+                                                          >
+                                                            {direct.educationPrice}
+                                                          </div>
+                                                        </Fragment>
+                                                      ) : null}
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              );
+                                            })}
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                              </div>
+                            ) : null}
+                          </div>
+                        ) : null;
+                      })}
                   </div>
                 ) : (
                   <div className={`${className}-vuzes`}>
-                    {item.data.map((child: any) => {
-                      return (
-                        <NavLink
-                          className={`${className}-vuzes-item`}
-                          key={`${className}-vuzes-item_${child.code}`}
-                          to={`${child.code}`}
-                          onClick={() => {
-                            window.scrollTo({
-                              top: 0,
-                              behavior: "smooth", // для плавной прокрутки
-                            });
-                          }}
-                        >
-                          <div className={`${className}-vuzes-item-container`}>
-                            <img
-                              src={`/assets/vuzes/${child.photo}`}
-                              alt=""
-                              className={`${className}-vuzes-item-photo`}
-                            />
-                          </div>
-                          <div className={`${className}-vuzes-item-bg`} />
-                          <div className={`${className}-vuzes-item-shortname`}>{child.nameShort}</div>
-                          <div className={`${className}-vuzes-item-name`}>{child.nameFull}</div>
-                        </NavLink>
-                      );
-                    })}
+                    {item.data
+                      .filter((f: any) => f.isVisible)
+                      .map((child: any) => {
+                        return (
+                          <NavLink
+                            className={`${className}-vuzes-item`}
+                            key={`${className}-vuzes-item_${child.code}`}
+                            to={`${child.code}`}
+                            onClick={() => {
+                              window.scrollTo({
+                                top: 0,
+                                behavior: "smooth", // для плавной прокрутки
+                              });
+                            }}
+                          >
+                            <div className={`${className}-vuzes-item-container`}>
+                              <img
+                                src={`/assets/vuzes/${child.photo}`}
+                                alt=""
+                                className={`${className}-vuzes-item-photo`}
+                              />
+                            </div>
+                            <div className={`${className}-vuzes-item-bg`} />
+                            <div className={`${className}-vuzes-item-shortname`}>{child.nameShort}</div>
+                            <div className={`${className}-vuzes-item-name`}>{child.nameFull}</div>
+                          </NavLink>
+                        );
+                      })}
                   </div>
                 )}
               </Fragment>

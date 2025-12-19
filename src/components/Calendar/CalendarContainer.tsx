@@ -28,7 +28,7 @@ export default function CalendarContainer() {
     const newData: any = await requestGet(`calendar`);
 
     if (newData) {
-      const sendData: any = _.cloneDeep(newData.data.events);
+      const sendData: any = _.cloneDeep(newData.data.events)?.filter((f: any) => f.isVisible);
 
       sendData.forEach((item: any) => {
         item.eventDate = formattedDate(item.eventDate);
@@ -36,7 +36,7 @@ export default function CalendarContainer() {
         if (item.endWhen) item.endWhen = formattedDate(item.endWhen);
       });
 
-      setLegends(newData.data.eventTypes);
+      setLegends(newData.data.eventTypes?.filter((f: any) => f.isVisible));
       setMain(newData?.items);
       setData(sendData);
     }

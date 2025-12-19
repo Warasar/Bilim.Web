@@ -109,8 +109,9 @@ export default function ProfileDocs({ setLoader }: Props) {
 
   return (
     <div className="profile-docs">
-      {docsList?.map((item: any) => {
-        return item.isVisible ? (
+      {docsList
+        ?.filter((f: any) => f.isVisible)
+        ?.map((item: any) => (
           <div className="profile-docs-flexColumn">
             <div className="profile-docs-item" key={`profile-docs-item-${item.code}`}>
               <div className="profile-docs-item-text">{item.title}:</div>
@@ -158,17 +159,18 @@ export default function ProfileDocs({ setLoader }: Props) {
               </Upload>
             )}
           </div>
-        ) : null;
-      })}
+        ))}
 
-      <div className="profile-user-footer">
-        <div />
-        <Fragment>
-          <div className="profile-user-footer-button" onClick={() => send()}>
-            Сохранить
-          </div>
-        </Fragment>
-      </div>
+      {docsList?.filter((f: any) => f.isVisible)?.length ? (
+        <div className="profile-user-footer">
+          <div />
+          <Fragment>
+            <div className="profile-user-footer-button" onClick={() => send()}>
+              Сохранить
+            </div>
+          </Fragment>
+        </div>
+      ) : null}
     </div>
   );
 }

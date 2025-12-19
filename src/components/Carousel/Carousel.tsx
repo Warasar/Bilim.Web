@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "antd";
+import dayjs from "dayjs";
 
 const className = "carousel";
 
@@ -472,7 +473,9 @@ export default function Carousel() {
       <div className={`${className}-block`}>
         {/* голова */}
         <div className={`${className}-header`}>
-          <h1 className={`${className}-header-title`}>Регламент работы Сопровождения 2025</h1>
+          <h1 className={`${className}-header-title`}>
+            Регламент работы Сопровождения {dayjs(new Date()).format("YYYY")}
+          </h1>
           <div className={`${className}-header-name`}>BILIM</div>
         </div>
 
