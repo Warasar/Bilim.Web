@@ -27,7 +27,9 @@ export default function MotivationLetter({ data }: Props) {
     setIsAnimating(true);
 
     setTimeout(() => {
-      setCurrentSlide((prev) => (prev + 1) % data.carousel.items.length);
+      setCurrentSlide(
+        (prev) => (prev + 1) % data.presentation.carousel1.items.length
+      );
       setIsAnimating(false);
     }, 150);
   };
@@ -38,7 +40,11 @@ export default function MotivationLetter({ data }: Props) {
     setIsAnimating(true);
 
     setTimeout(() => {
-      setCurrentSlide((prev) => (prev - 1 + data.carousel.items.length) % data.carousel.items.length);
+      setCurrentSlide(
+        (prev) =>
+          (prev - 1 + data.presentation.carousel1.items.length) %
+          data.presentation.carousel1.items.length
+      );
       setIsAnimating(false);
     }, 150);
   };
@@ -58,7 +64,9 @@ export default function MotivationLetter({ data }: Props) {
     setIsAnimating2(true);
 
     setTimeout(() => {
-      setCurrentSlide2((prev) => (prev + 1) % data.carouselSecond.items.length);
+      setCurrentSlide2(
+        (prev) => (prev + 1) % data.presentation.carousel2.items.length
+      );
       setIsAnimating2(false);
     }, 150);
   };
@@ -69,7 +77,11 @@ export default function MotivationLetter({ data }: Props) {
     setIsAnimating2(true);
 
     setTimeout(() => {
-      setCurrentSlide2((prev) => (prev - 1 + data.carouselSecond.items.length) % data.carouselSecond.items.length);
+      setCurrentSlide2(
+        (prev) =>
+          (prev - 1 + data.presentation.carousel2.items.length) %
+          data.presentation.carousel2.items.length
+      );
       setIsAnimating2(false);
     }, 150);
   };
@@ -77,23 +89,28 @@ export default function MotivationLetter({ data }: Props) {
   return (
     <div className={className}>
       <div className={`${className}-main`}>
-        <div className={`${className}-title`}>{data.title}</div>
-        <div className={`${className}-text`}>{data.text}</div>
+        {/* header */}
+        <div className={`${className}-title`}>{data.header.title}</div>
+        <div className={`${className}-text`}>
+          {data.header.list.map((item: any) => {
+            return <div>{item}</div>;
+          })}
+        </div>
         <iframe
-          src={data.iframe}
+          src={data.header.video}
           className={`${className}-iframe`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          title={data.title}
+          title={data.header.title}
         />
         <div className={`${className}-docs`}>
-          {data.docs.map((item: any) => {
+          {data.header.cards.map((item: any, index: number) => {
             return (
               <a
-                href={item.url}
+                href={item.link}
                 target="_blank"
                 rel="noreferrer"
-                key={`${className}-docs-item_${item.id}`}
+                key={`${className}-docs-item_${index}`}
                 className={`${className}-docs-item`}
               >
                 <div className={`${className}-docs-item-text`}>{item.name}</div>
@@ -103,71 +120,85 @@ export default function MotivationLetter({ data }: Props) {
           })}
         </div>
 
-        <div className={`${className}-title`}>{data.requirements}</div>
-        <div className={`${className}-text`}>{data.requirementsText}</div>
+        {/* requirements */}
+        <div className={`${className}-title`}>{data.requirements.title}</div>
+        <div
+          className={`${className}-text`}
+          dangerouslySetInnerHTML={{ __html: data.requirements.content }}
+        />
 
         <div className={`${className}-title`} style={{ marginTop: "60px" }}>
-          {data.howWriteText}
+          Презентация со встречи
         </div>
         <iframe
-          src={data.howIframe}
+          src={data.presentation.video}
           className={`${className}-iframe`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          title={data.howWriteText}
+          title={"Презентация со встречи"}
         />
 
         <div className={`${className}-carousel`}>
           <div className={`${className}-carousel-header`}>
-            <div className={`${className}-carousel-header-title`}>{data.carousel.title}</div>
+            <div className={`${className}-carousel-header-title`}>
+              {data.presentation.carousel1.title}
+            </div>
           </div>
 
-          {/* влево вправо кнопки */}
-          <div className={`${className}-carousel-button-left`} onClick={() => (isAnimating ? null : prevSlide())}>
+          <div
+            className={`${className}-carousel-button-left`}
+            onClick={() => (isAnimating ? null : prevSlide())}
+          >
             <div className={`${className}-carousel-button-left-icon`} />
           </div>
 
-          <div className={`${className}-carousel-button-right`} onClick={() => (isAnimating ? null : nextSlide())}>
+          <div
+            className={`${className}-carousel-button-right`}
+            onClick={() => (isAnimating ? null : nextSlide())}
+          >
             <div className={`${className}-carousel-button-right-icon`} />
           </div>
 
-          {/* контент */}
           <div className={`${className}-carousel-block`}>
             <div
               className={`${className}-carousel-slide ${
-                isAnimating ? `${className}-carousel-slide-animate` : `${className}-carousel-slide-nonAnimate`
+                isAnimating
+                  ? `${className}-carousel-slide-animate`
+                  : `${className}-carousel-slide-nonAnimate`
               }`}
             >
               <img
-                src={`/assets/mletter/presentation/${data.carousel.items[currentSlide].link}`}
+                src={`/assets/mletter/presentation/${data.presentation.carousel1.items[currentSlide].link}`}
                 alt=""
                 className={`${className}-carousel-slide-content`}
               />
             </div>
           </div>
 
-          {/* точки */}
           <div className={`${className}-carousel-dots`}>
-            {data.carousel.items.map((img: any, index: number) => (
-              <div
-                key={index}
-                onClick={() => (isAnimating ? null : goToSlide(index))}
-                className={`${className}-carousel-dots-button ${
-                  index === currentSlide
-                    ? `${className}-carousel-dots-button-current`
-                    : `${className}-carousel-dots-button-nocurrent`
-                } ${isAnimating ? "pointer-events-none" : ""}`}
-              />
-            ))}
+            {data.presentation.carousel1.items.map(
+              (img: any, index: number) => (
+                <div
+                  key={index}
+                  onClick={() => (isAnimating ? null : goToSlide(index))}
+                  className={`${className}-carousel-dots-button ${
+                    index === currentSlide
+                      ? `${className}-carousel-dots-button-current`
+                      : `${className}-carousel-dots-button-nocurrent`
+                  } ${isAnimating ? "pointer-events-none" : ""}`}
+                />
+              )
+            )}
           </div>
         </div>
 
         <div className={`${className}-carousel`}>
           <div className={`${className}-carousel-header`}>
-            <div className={`${className}-carousel-header-title`}>{data.carouselSecond.title}</div>
+            <div className={`${className}-carousel-header-title`}>
+              {data.presentation.carousel2.title}
+            </div>
           </div>
 
-          {/* влево вправо кнопки */}
           <div
             className={`${className}-carousel-button-left`}
             onClick={() => (isAnimating2 ? null : prevSlideSecond())}
@@ -182,34 +213,36 @@ export default function MotivationLetter({ data }: Props) {
             <div className={`${className}-carousel-button-right-icon`} />
           </div>
 
-          {/* контент */}
           <div className={`${className}-carousel-block`}>
             <div
               className={`${className}-carousel-slide ${
-                isAnimating2 ? `${className}-carousel-slide-animate` : `${className}-carousel-slide-nonAnimate`
+                isAnimating2
+                  ? `${className}-carousel-slide-animate`
+                  : `${className}-carousel-slide-nonAnimate`
               }`}
             >
               <img
-                src={`/assets/mletter/example/${data.carouselSecond.items[currentSlide2].link}`}
+                src={`/assets/mletter/example/${data.presentation.carousel2.items[currentSlide2].link}`}
                 alt=""
                 className={`${className}-carousel-slide-content`}
               />
             </div>
           </div>
 
-          {/* точки */}
           <div className={`${className}-carousel-dots`}>
-            {data.carouselSecond.items.map((img: any, index: number) => (
-              <div
-                key={index}
-                onClick={() => (isAnimating2 ? null : goToSlideSecond(index))}
-                className={`${className}-carousel-dots-button ${
-                  index === currentSlide2
-                    ? `${className}-carousel-dots-button-current`
-                    : `${className}-carousel-dots-button-nocurrent`
-                } ${isAnimating2 ? "pointer-events-none" : ""}`}
-              />
-            ))}
+            {data.presentation.carousel2.items.map(
+              (img: any, index: number) => (
+                <div
+                  key={index}
+                  onClick={() => (isAnimating2 ? null : goToSlideSecond(index))}
+                  className={`${className}-carousel-dots-button ${
+                    index === currentSlide2
+                      ? `${className}-carousel-dots-button-current`
+                      : `${className}-carousel-dots-button-nocurrent`
+                  } ${isAnimating2 ? "pointer-events-none" : ""}`}
+                />
+              )
+            )}
           </div>
         </div>
       </div>
