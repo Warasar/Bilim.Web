@@ -19,6 +19,7 @@ import { EditableJSONCell } from "../ProfileTable/EditableJSONCell";
 import { EditableSprCell } from "../ProfileTable/EditableSprCell";
 import { EditableDownloadCell } from "../ProfileTable/EditableDownloadCell";
 import { Resizable } from "react-resizable";
+import { EditableImageCell } from "../ProfileTable/EditableImageCell";
 
 require("dayjs/locale/ru");
 dayjs.locale("ru");
@@ -340,7 +341,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
       return newColumns;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [handleResize, tableColumns, filteredInfo, sortedInfo, resizedWidths]
+    [handleResize, tableColumns, filteredInfo, sortedInfo, resizedWidths, data]
   );
 
   const sorterCol = (a: any, b: any, item: any) => {
@@ -436,6 +437,10 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
 
     if (col.dataType === "download") {
       return <EditableDownloadCell value={value} record={record} col={col} setLoader={setLoader} />;
+    }
+
+    if (col.dataType === "image") {
+      return <EditableImageCell value={value} record={record} col={col} onSave={onSaveTable} />;
     }
 
     return <div>{value}</div>;
@@ -665,6 +670,8 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
           values.push(obj.find((f) => f.value === row[col.field])?.label);
         } else if (col.dataType === "download") {
           values.push(`"Файл"`);
+        } else if (col.dataType === "image") {
+          values.push(`"Тут картинка)"`);
         } else {
           values.push(row[col.field]);
         }

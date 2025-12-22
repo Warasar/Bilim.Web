@@ -30,12 +30,12 @@ const beforeUpload = (file: FileType) => {
   if (!isJpgOrPng) {
     message.error("Вы можете загрузить только формат JPG/PNG!");
   }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error("Изображение должно быть меньше 2МБ!");
+  const isLt4M = file.size / 1024 / 1024 < 4;
+  if (!isLt4M) {
+    message.error("Изображение должно быть меньше 4МБ!");
   }
 
-  return isJpgOrPng && isLt2M;
+  return isJpgOrPng && isLt4M;
 };
 
 type Props = {

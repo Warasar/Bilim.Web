@@ -560,6 +560,14 @@
           cursor: pointer;
         }
       }
+
+      &-img {
+        overflow: hidden;
+        border-radius: 6px;
+        max-width: 500px !important;
+        height: 200px !important;
+        object-fit: cover;
+      }
     }
 
     &-modal {

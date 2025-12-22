@@ -11,8 +11,6 @@ type Props = {
 export default function University({ findData, className }: Props) {
   const [data, setData] = useState<any>(null);
   const [activeTab, setActiveTab] = useState<number>(0);
-  // const [isAnimating, setIsAnimating] = useState(false);
-  // const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     if (findData) {
@@ -101,37 +99,6 @@ export default function University({ findData, className }: Props) {
 
     return style;
   };
-
-  // const goToSlide = (index: number) => {
-  //   if (isAnimating || index === currentSlide) return;
-  //   setIsAnimating(true);
-  //   setTimeout(() => {
-  //     setCurrentSlide(index);
-  //     setIsAnimating(false);
-  //   }, 150);
-  // };
-
-  // const nextSlide = () => {
-  //   if (isAnimating) return;
-
-  //   setIsAnimating(true);
-
-  //   setTimeout(() => {
-  //     setCurrentSlide((prev) => (prev + 1) % data.dormitory.imgs.length);
-  //     setIsAnimating(false);
-  //   }, 150);
-  // };
-
-  // const prevSlide = () => {
-  //   if (isAnimating) return;
-
-  //   setIsAnimating(true);
-
-  //   setTimeout(() => {
-  //     setCurrentSlide((prev) => (prev - 1 + data.dormitory.imgs.length) % data.dormitory.imgs.length);
-  //     setIsAnimating(false);
-  //   }, 150);
-  // };
 
   return (
     <div className={className}>
@@ -311,52 +278,6 @@ export default function University({ findData, className }: Props) {
                           );
                         })}
                     </div>
-
-                    {/* {data.dormitory.imgs?.length ? (
-                      <div className={`${className}-dormitory-carousel`}>
-                        <div
-                          className={`${className}-dormitory-button-left`}
-                          onClick={() => (isAnimating ? null : prevSlide())}
-                        >
-                          <div className={`${className}-dormitory-button-left-icon`} />
-                        </div>
-
-                        <div
-                          className={`${className}-dormitory-button-right`}
-                          onClick={() => (isAnimating ? null : nextSlide())}
-                        >
-                          <div className={`${className}-dormitory-button-right-icon`} />
-                        </div>
-
-                        <div
-                          className={`${className}-dormitory-slide ${
-                            isAnimating
-                              ? `${className}-dormitory-slide-animate`
-                              : `${className}-dormitory-slide-nonAnimate`
-                          }`}
-                        >
-                          <img
-                            src={`/assets/caspianuniversity/${data.dormitory.imgs[currentSlide].link}`}
-                            alt=""
-                            className={`${className}-dormitory-slide-content`}
-                          />
-                        </div>
-
-                        <div className={`${className}-dormitory-dots`}>
-                          {data.dormitory.imgs.map((img: any, index: number) => (
-                            <div
-                              key={index}
-                              onClick={() => (isAnimating ? null : goToSlide(index))}
-                              className={`${className}-dormitory-dots-button ${
-                                index === currentSlide
-                                  ? `${className}-dormitory-dots-button-current`
-                                  : `${className}-dormitory-dots-button-nocurrent`
-                              } ${isAnimating ? "pointer-events-none" : ""}`}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    ) : null} */}
                   </div>
                 ) : item.itemType === "enum" ? (
                   <div className={`${className}-docs`}>
@@ -385,33 +306,6 @@ export default function University({ findData, className }: Props) {
               </div>
             );
           })}
-
-          {/* //  {data.prices ? (
-          //   <div className={`${className}-prices`} id={"vuz_prices"}>
-          //     <div className={`${className}-prices-title`}>
-          //       {data.prices.title}
-          //       {data.prices.subtitle?.length ? (
-          //         <div className={`${className}-prices-subtitle`}>{data.prices.subtitle}</div>
-          //       ) : null}
-          //     </div>
-          //     <div className={`${className}-prices-content`}>
-          //       <div className={`${className}-prices-items`}>
-          //         {data.prices.items.map((item: any) => {
-          //           return (
-          //             <div className={`${className}-prices-item`}>
-          //               <div className={`${className}-prices-item-names`}>
-          //                 {item.names.map((name: string) => {
-          //                   return <div className={`${className}-prices-item-names-text`}>{name}</div>;
-          //                 })}
-          //               </div>
-          //               <div className={`${className}-prices-item-price`}>{item.price}</div>
-          //             </div>
-          //           );
-          //         })}
-          //       </div>
-          //     </div>
-          //   </div>
-          // ) : null}*/}
         </div>
       ) : null}
     </div>
