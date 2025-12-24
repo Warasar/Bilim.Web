@@ -136,6 +136,11 @@ export default function ProfileHomework({ setLoader }: Props) {
                     Оценка: {item.loadedFile.mark}
                   </div>
                 ) : null}
+                {item.loadedFile.feedbackHtml?.length ? (
+                  <div className="profile-docs-time" style={{ fontSize: "14px" }}>
+                    Отзыв: <span dangerouslySetInnerHTML={{ __html: item.loadedFile.feedbackHtml }} />
+                  </div>
+                ) : null}
                 <div className="profile-docs-flex">
                   <div>
                     <div className="profile-docs-doc1" onClick={() => downloadFile(item.code)}>
