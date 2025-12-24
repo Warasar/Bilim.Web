@@ -131,6 +131,11 @@ export default function ProfileHomework({ setLoader }: Props) {
                 <div className="profile-docs-time">
                   Добавлен: {dayjs(item.loadedFile.loadedWhen).format(dateFormat)}
                 </div>
+                {item.loadedFile.mark?.length ? (
+                  <div className="profile-docs-time" style={{ fontSize: "14px" }}>
+                    Оценка: {item.loadedFile.mark}
+                  </div>
+                ) : null}
                 <div className="profile-docs-flex">
                   <div>
                     <div className="profile-docs-doc1" onClick={() => downloadFile(item.code)}>
