@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
 import React, { Fragment, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import OlimpCarousel from "../Olimp/OlimpCarousel";
@@ -12,10 +13,8 @@ export default function OlimpVuz({ data }: Props) {
   const [activeTab, setActiveTab] = useState<any>(null);
 
   useEffect(() => {
-    if (data) {
-      setActiveTab(
-        data.find((f: any) => f.itemType === "multiwindow").contents[0]
-      );
+    if (data && data.some((f: any) => f.itemType === "multiwindow")) {
+      setActiveTab(data.find((f: any) => f.itemType === "multiwindow").contents[0]);
     }
   }, [data]);
 
@@ -28,11 +27,7 @@ export default function OlimpVuz({ data }: Props) {
               return (
                 <div className={`${className}-dop`}>
                   <div className={`${className}-dop-title`}>{block.title}</div>
-                  {block.text ? (
-                    <div className={`${className}-dop-subtitle`}>
-                      {block.text}
-                    </div>
-                  ) : null}
+                  {block.text ? <div className={`${className}-dop-subtitle`}>{block.text}</div> : null}
                 </div>
               );
             }
@@ -54,9 +49,7 @@ export default function OlimpVuz({ data }: Props) {
                             key={`${className}-docs-item_${item.id}`}
                             className={`${className}-docs-item`}
                           >
-                            <div className={`${className}-docs-item-text`}>
-                              {item.name}
-                            </div>
+                            <div className={`${className}-docs-item-text`}>{item.name}</div>
                             <div className={`${className}-docs-item-icon`} />
                           </a>
                         );
@@ -87,13 +80,9 @@ export default function OlimpVuz({ data }: Props) {
 
                   {activeTab ? (
                     <div className={`${className}-video-content`}>
-                      <div className={`${className}-video-title`}>
-                        {activeTab.title}
-                      </div>
+                      <div className={`${className}-video-title`}>{activeTab.title}</div>
                       {activeTab.subtitle ? (
-                        <div className={`${className}-video-subtitle`}>
-                          {activeTab.subtitle}
-                        </div>
+                        <div className={`${className}-video-subtitle`}>{activeTab.subtitle}</div>
                       ) : null}
 
                       <iframe
@@ -115,12 +104,8 @@ export default function OlimpVuz({ data }: Props) {
                                 key={`${className}-docs-item_${item.id}`}
                                 className={`${className}-docs-item`}
                               >
-                                <div className={`${className}-docs-item-text`}>
-                                  {item.name}
-                                </div>
-                                <div
-                                  className={`${className}-docs-item-icon`}
-                                />
+                                <div className={`${className}-docs-item-text`}>{item.name}</div>
+                                <div className={`${className}-docs-item-icon`} />
                               </a>
                             );
                           })}
@@ -136,9 +121,7 @@ export default function OlimpVuz({ data }: Props) {
               return (
                 <div className={`${className}-video`}>
                   <div className={`${className}-video-header`}>
-                    <div className={`${className}-video-header-title`}>
-                      {block.title}
-                    </div>
+                    <div className={`${className}-video-header-title`}>{block.title}</div>
                   </div>
                   <div className={`${className}-video-content`}>
                     <iframe
@@ -162,18 +145,60 @@ export default function OlimpVuz({ data }: Props) {
               );
             }
 
+            if (block.itemType === "list") {
+              return (
+                <div className={`university-item`}>
+                  <div className={`university-item-header`}>
+                    <div className={`university-item-header-title`}>{block.title}</div>
+                    {block.subtitle ? <div className={`university-item-header-subtitle`}>{block.subtitle}</div> : null}
+                  </div>
+                  <div className={`university-dormitory`}>
+                    <div className={`university-dormitory-items`}>
+                      {block.contents
+                        .filter((f: any) => f.isVisible)
+                        .map((content: any) => {
+                          return (
+                            <div
+                              className={`university-steps-item-block`}
+                              key={`university-steps-item-block_${content.id}`}
+                            >
+                              <div className={`university-steps-item-block-icon`} />
+                              <div className={`university-steps-item-block-texts`}>
+                                {content.title?.length ? (
+                                  <div className={`university-steps-item-block-title`}>{content.title}</div>
+                                ) : null}
+                                {content.content?.length ? (
+                                  <div
+                                    className={`university-steps-item-block-content`}
+                                    dangerouslySetInnerHTML={{ __html: content.content }}
+                                  />
+                                ) : null}
+                                {content.video ? (
+                                  <iframe
+                                    src={content.video}
+                                    className={`university-dormitory-iframe`}
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                  />
+                                ) : null}
+                              </div>
+                            </div>
+                          );
+                        })}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
             return null;
           })}
         </div>
       ) : (
         <div className={`${className}-empty`}>
-          <div className={`${className}-empty-text`}>
-            Страница находится еще в стадии разработки
-          </div>
+          <div className={`${className}-empty-text`}>Страница находится еще в стадии разработки</div>
           <NavLink to="/olimp" className={`${className}-empty-button`}>
-            <div className={`${className}-empty-button-text`}>
-              Вернуться назад
-            </div>
+            <div className={`${className}-empty-button-text`}>Вернуться назад</div>
           </NavLink>
         </div>
       )}

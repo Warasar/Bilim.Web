@@ -49,7 +49,10 @@ export default function Main({ data }: Props) {
         <div className={`${className}-main-service`}>
           <div className={`${className}-main-service-title`}>{data.buttonsTitle.title}</div>
           <div className={`${className}-main-service-subtitle`}>{data.buttonsTitle.subtitle}</div>
-          <div className={`${className}-main-service-buttons`}>
+          <div
+            className={`${className}-main-service-buttons`}
+            style={{ gridTemplateColumns: `repeat(${data.buttons.length > 3 ? 3 : data.buttons.length}, 1fr)` }}
+          >
             {data.buttons.map((item: any) => {
               return (
                 <NavLink
@@ -85,7 +88,7 @@ export default function Main({ data }: Props) {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="lucide lucide-mouse hidden h-7 w-7 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110 xl:block"
+            className="lucide lucide-mouse  h-7 w-7 cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110 xl:block"
             aria-hidden="true"
           >
             <rect x="5" y="2" width="14" height="20" rx="7" />
