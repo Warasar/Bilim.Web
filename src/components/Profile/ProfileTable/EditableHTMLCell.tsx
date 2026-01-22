@@ -2,9 +2,18 @@ import React, { useState } from "react";
 import { useEditableCell } from "./UseEditableCell";
 import { Button, Modal } from "antd";
 import { DownOutlined, EditOutlined, SaveOutlined, UpOutlined } from "@ant-design/icons";
-import Editor from "@monaco-editor/react";
+import SunEditor from "suneditor-react";
+import "suneditor/dist/css/suneditor.min.css";
 
-export const EditableJSONCell: React.FC<{
+const buttonSunEditor = [
+  ["font", "fontSize"],
+  ["fontColor", "hiliteColor"],
+  ["bold", "underline", "italic", "strike", "subscript", "superscript"],
+  ["align", "horizontalRule", "list", "lineHeight"],
+  ["link"],
+];
+
+const EditableHTMLCell: React.FC<{
   value: any;
   record: any;
   col: any;
@@ -41,7 +50,7 @@ export const EditableJSONCell: React.FC<{
         padding: "0px 12px",
       }}
     >
-      <div style={{ width: "100%" }}>
+      <div>
         <div
           className="profile-table-cell-text"
           style={{
@@ -51,14 +60,11 @@ export const EditableJSONCell: React.FC<{
             wordBreak: "break-word",
             lineHeight: "1.5em",
             display: "block",
-            fontFamily: "monospace",
-            padding: "5px 12px",
-            borderRadius: "4px",
-            fontSize: "12px",
           }}
-        >
-          {typeof value === "object" ? JSON.stringify(value, null, 2) : value}
-        </div>
+          dangerouslySetInnerHTML={{
+            __html: value,
+          }}
+        />
 
         {isLongText && (
           <div style={{ margin: "4px 0px", textAlign: "center" }}>
@@ -78,25 +84,20 @@ export const EditableJSONCell: React.FC<{
           </div>
         )}
       </div>
-
-      {col.isEdit && (
-        <Button
-          type="text"
-          icon={<EditOutlined />}
-          onClick={() => {
-            handleEdit();
-          }}
-          size="small"
-          title="Редактировать"
-        />
-      )}
+      <Button
+        type="text"
+        icon={<EditOutlined />}
+        onClick={() => handleEdit()}
+        size="small"
+        disabled={!col.isEdit}
+        title="Редактировать"
+      />
 
       <Modal
         open={editing}
         onCancel={() => handleCancel()}
         footer={false}
-        width={"80vw"}
-        centered
+        width={"70vw"}
         title={
           <>
             Редактор: {col.fieldName || col.field}, {record.id} ID
@@ -104,21 +105,22 @@ export const EditableJSONCell: React.FC<{
         }
       >
         <div className="profile-table-modal">
-          <Editor
-            height="80vh"
-            language="json"
-            value={cellValue}
-            theme="vs-dark"
-            onChange={(val) => {
-              handleChange(val);
+          <SunEditor
+            lang="ru"
+            setDefaultStyle="font-family: 'Roboto'; font-size: 16px;"
+            setContents={cellValue}
+            autoFocus={false}
+            setOptions={{
+              buttonList: buttonSunEditor,
+              font: ["Roboto", "Manrope"],
+              fontSizeUnit: "px",
+              height: "auto",
+              minHeight: "200",
+              maxHeight: "600",
+              resizingBar: false,
             }}
-            options={{
-              minimap: { enabled: true },
-              fontSize: 14,
-              automaticLayout: true,
-            }}
+            onChange={handleChange}
           />
-
           <div className="profile-table-modal-footer">
             <div />
             <Button onClick={() => handleCancel()} type="default">
@@ -133,3 +135,5 @@ export const EditableJSONCell: React.FC<{
     </div>
   );
 };
+
+export default EditableHTMLCell;

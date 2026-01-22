@@ -5,8 +5,8 @@ import HeaderContainer from "../../components/Header/HeaderContainer";
 import FooterContainer from "../../components/Footer/FooterContainer";
 import { requestGet } from "../../actions/actions";
 import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
-import { IFilterData } from "./IVuz";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
+import { IFilterData } from "../../types/vuz";
 
 export default function VuzContainer() {
   const [data, setData] = useState<any>(null);

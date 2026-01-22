@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Modal from "../../modules/YaKIT.WEB.KIT/components/Modal/Modal";
 import Input from "../../modules/YaKIT.WEB.KIT/components/Input/Input";
-import { ITerms } from "./TourContainer";
+import { ITerms } from "../../pages/Tour/TourContainer";
 import Checkbox from "../../modules/YaKIT.WEB.KIT/components/Checkbox/Checkbox";
 import { Popover } from "antd";
 

@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Vuz from "./University";
 import "./university.scss";
 import HeaderContainer from "../../components/Header/HeaderContainer";
 import FooterContainer from "../../components/Footer/FooterContainer";
 import { useParams } from "react-router";
-import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { requestGet } from "../../actions/actions";
-
-const className = "university";
+import Preloader from "../../components/Preloader/Preloader";
+import University from "./University";
 
 export default function UniversityContainer() {
   const [data, setData] = useState<any>(null);
@@ -69,13 +67,7 @@ export default function UniversityContainer() {
   return (
     <div>
       <HeaderContainer buttons={buttons} />
-      {data ? (
-        <Vuz findData={data} className={className} />
-      ) : (
-        <div className="loading">
-          <Loader absolute />
-        </div>
-      )}
+      {data ? <University findData={data} /> : <Preloader />}
       <FooterContainer />
     </div>
   );

@@ -7,19 +7,19 @@ import { Button, ConfigProvider, Input, message, Popconfirm, Space, Table } from
 import { Locale } from "antd/es/locale";
 import ruRU from "antd/locale/ru_RU";
 import { DeleteOutlined, FilterOutlined, PlusOutlined, SearchOutlined } from "@ant-design/icons";
-import { EditableNumberCell } from "../ProfileTable/EditableNumberCell";
-import { EditableVarcharCell } from "../ProfileTable/EditableVarcharCell";
-import { EditableTextAreaCell } from "../ProfileTable/EditableTextAreaCell";
-import { EditableBoolCell } from "../ProfileTable/EditableBoolCell";
-import { EditableDateCell } from "../ProfileTable/EditableDateCell";
-import { EditableDateTimeCell } from "../ProfileTable/EditableDateTimeCell";
+import EditableNumberCell from "../ProfileTable/EditableNumberCell";
+import EditableVarcharCell from "../ProfileTable/EditableVarcharCell";
+import EditableTextAreaCell from "../ProfileTable/EditableTextAreaCell";
+import EditableBoolCell from "../ProfileTable/EditableBoolCell";
+import EditableDateCell from "../ProfileTable/EditableDateCell";
+import EditableDateTimeCell from "../ProfileTable/EditableDateTimeCell";
 import _ from "lodash";
-import { EditableHTMLCell } from "../ProfileTable/EditableHTMLCell";
-import { EditableJSONCell } from "../ProfileTable/EditableJSONCell";
-import { EditableSprCell } from "../ProfileTable/EditableSprCell";
-import { EditableDownloadCell } from "../ProfileTable/EditableDownloadCell";
+import EditableHTMLCell from "../ProfileTable/EditableHTMLCell";
+import EditableJSONCell from "../ProfileTable/EditableJSONCell";
+import EditableSprCell from "../ProfileTable/EditableSprCell";
+import EditableDownloadCell from "../ProfileTable/EditableDownloadCell";
 import { Resizable } from "react-resizable";
-import { EditableImageCell } from "../ProfileTable/EditableImageCell";
+import EditableImageCell from "../ProfileTable/EditableImageCell";
 
 require("dayjs/locale/ru");
 dayjs.locale("ru");
@@ -158,7 +158,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
           lastResizeRef.current = null;
         }
       },
-    []
+    [],
   );
 
   // Сохраняем ресайзнутые ширины при изменении tableColumns
@@ -322,7 +322,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
               const foundItem = dictionary.filter((item: any) =>
                 String(item.label || "")
                   .toLowerCase()
-                  .includes(String(value).toLowerCase())
+                  .includes(String(value).toLowerCase()),
               );
 
               return foundItem.some((f) => f.value === fieldValue);
@@ -341,7 +341,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
       return newColumns;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [handleResize, tableColumns, filteredInfo, sortedInfo, resizedWidths, data]
+    [handleResize, tableColumns, filteredInfo, sortedInfo, resizedWidths, data],
   );
 
   const sorterCol = (a: any, b: any, item: any) => {
@@ -474,7 +474,7 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
   const columns: any = useMemo(
     () => getColumns(data),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [data, tableColumns, filteredInfo, sortedInfo]
+    [data, tableColumns, filteredInfo, sortedInfo],
   );
 
   // сохранение при изменении ячейки

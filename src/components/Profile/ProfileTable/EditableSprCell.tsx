@@ -3,7 +3,7 @@ import { Select } from "antd";
 import { useEditableCell } from "./UseEditableCell";
 import { IObj } from "../ProfileItems/ProfileTable";
 
-export const EditableSprCell: React.FC<{
+const EditableSprCell: React.FC<{
   value: any;
   record: any;
   col: any;
@@ -35,3 +35,5 @@ export const EditableSprCell: React.FC<{
     </div>
   );
 };
+
+export default EditableSprCell;

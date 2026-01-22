@@ -6,9 +6,9 @@ import locale from "antd/locale/ru_RU";
 
 require("dayjs/locale/ru");
 dayjs.locale("ru");
-const dateFormat = "DD.MM.YYYY";
+const timeFormat = "DD.MM.YYYY HH:mm:ss";
 
-export const EditableDateCell: React.FC<{
+const EditableDateTimeCell: React.FC<{
   value: any;
   record: any;
   col: any;
@@ -27,18 +27,21 @@ export const EditableDateCell: React.FC<{
       <ConfigProvider locale={locale}>
         <DatePicker
           onChange={(value: any) => {
-            handleDateChange(dayjs(value).format("YYYY-MM-DD"));
+            handleDateChange(dayjs(value).format("YYYY-MM-DDTHH:mm:ss"));
           }}
           ref={inputRef}
           value={cellValue ? dayjs(cellValue) : null}
           picker="date"
-          format={dateFormat}
+          format={timeFormat}
           allowClear={true}
           variant="borderless"
-          style={{ width: "calc(100%)" }}
+          style={{ width: "100%" }}
+          showTime
           disabled={!col.isEdit}
         />
       </ConfigProvider>
     </div>
   );
 };
+
+export default EditableDateTimeCell;

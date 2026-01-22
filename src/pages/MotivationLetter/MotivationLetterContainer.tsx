@@ -4,7 +4,7 @@ import "./mletter.scss";
 import HeaderContainer from "../../components/Header/HeaderContainer";
 import FooterContainer from "../../components/Footer/FooterContainer";
 import { requestGet } from "../../actions/actions";
-import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
+import Preloader from "../../components/Preloader/Preloader";
 
 export default function MotivationLetterContainer() {
   const [data, setData] = useState<any>(null);
@@ -14,7 +14,7 @@ export default function MotivationLetterContainer() {
   }, []);
 
   const getData = async () => {
-    const newData: any = await requestGet(`mLetter`);
+    const newData = await requestGet(`mLetter`);
 
     setData(newData);
   };
@@ -22,14 +22,7 @@ export default function MotivationLetterContainer() {
   return (
     <div>
       <HeaderContainer />
-      {data ? (
-        <MotivationLetter data={data} />
-      ) : (
-        <div>
-          <Loader absolute />
-          <div style={{ height: "calc(100vh)" }} />
-        </div>
-      )}
+      {data ? <MotivationLetter data={data} /> : <Preloader />}
       <FooterContainer />
     </div>
   );

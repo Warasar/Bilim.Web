@@ -9,13 +9,7 @@ export type CalendarType = {
   isImportant?: boolean | null;
 };
 
-export type CalendarTypes =
-  | "events"
-  | "meeting"
-  | "info"
-  | "deadline"
-  | "parents"
-  | null;
+export type CalendarTypes = "events" | "meeting" | "info" | "deadline" | "parents" | null;
 
 export type CalendarDay = {
   stringDate: string;

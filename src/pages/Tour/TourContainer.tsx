@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Tour from "./Tour";
 import "./tour.scss";
-import TourHeader from "./TourHeader";
+import TourHeader from "../../components/Tour/TourHeader";
 import { requestGet, requestPost } from "../../actions/actions";
 import { message } from "antd";
 import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";

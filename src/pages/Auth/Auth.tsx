@@ -5,7 +5,7 @@ import { useAuthForm } from "../../hooks/useAuthForm";
 import { useAuth } from "../../hooks/useAuth";
 import { redirectToApp } from "../../utils/auth";
 import "./auth.scss";
-import { EmailIcon, EyeIcon, EyeOffIcon, PasswordIcon, UserIcon } from "../../components/Icons/AuthIcons";
+import { EmailIcon, EyeIcon, EyeOffIcon, PasswordIcon, UserIcon } from "../../components/Icons/Icons";
 
 const Auth: React.FC = () => {
   const { formState, isFormValid, handleInputChange, togglePasswordVisibility, updateFormState } = useAuthForm();

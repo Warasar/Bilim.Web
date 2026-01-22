@@ -2,7 +2,7 @@ import React from "react";
 import { DownloadOutlined } from "@ant-design/icons";
 import { requestGetResponse } from "../../../actions/actions";
 
-export const EditableDownloadCell: React.FC<{
+const EditableDownloadCell: React.FC<{
   value: any;
   record: any;
   col: any;
@@ -97,3 +97,5 @@ export const EditableDownloadCell: React.FC<{
     </div>
   );
 };
+
+export default EditableDownloadCell;

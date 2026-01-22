@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import dayjs from "dayjs";
 import dayLocaleData from "dayjs/plugin/localeData";
-import { CalendarDay, CalendarType } from "./calendarType";
+import { CalendarDay, CalendarType } from "../../types/calendar";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import _ from "lodash";
 import { Tooltip } from "antd";
@@ -11,7 +11,6 @@ dayjs.extend(dayLocaleData);
 require("dayjs/locale/ru");
 dayjs.locale("ru");
 
-const className = "calendar";
 const MONTHS_RU = [
   "ЯНВАРЬ",
   "ФЕВРАЛЬ",
@@ -179,7 +178,7 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
 
   const renderIcon = (event: any) => {
     let jsx: any = (
-      <div className={`${className}-legend-item-icon-${event.eventType}`} style={{ width: "16px", height: "16px" }} />
+      <div className={`calendar-legend-item-icon-${event.eventType}`} style={{ width: "16px", height: "16px" }} />
     );
 
     return <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>{jsx}</div>;
@@ -189,19 +188,15 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
     if (!day.events.length) return null;
 
     return (
-      <div className={`${className}-tooltip`}>
+      <div className={`calendar-tooltip`}>
         {day.events.map((event: any) => {
           return (
-            <div
-              key={event.id}
-              className={`${className}-tooltip-item`}
-              style={getStyleItemCell(event, day.events.length)}
-            >
-              <div className={`${className}-tooltip-header`}>
+            <div key={event.id} className={`calendar-tooltip-item`} style={getStyleItemCell(event, day.events.length)}>
+              <div className={`calendar-tooltip-header`}>
                 {event.eventText}
                 {renderIcon(event)}
               </div>
-              <div className={`${className}-tooltip-text`} dangerouslySetInnerHTML={{ __html: event?.description }} />
+              <div className={`calendar-tooltip-text`} dangerouslySetInnerHTML={{ __html: event?.description }} />
             </div>
           );
         })}
@@ -210,20 +205,20 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
   };
 
   return (
-    <div className={className} ref={ref}>
-      <div className={`${className}-block`}>
-        <div className={`${className}-title`}>{main?.title}</div>
+    <div className="calendar" ref={ref}>
+      <div className="calendar-block">
+        <div className="calendar-title">{main?.title}</div>
 
         {/* сам календарь */}
-        <div className={`${className}-main`}>
+        <div className="calendar-main">
           {/* шапка */}
-          <div className={`${className}-header`}>
-            <div className={`${className}-header-button`} onClick={() => navigateMonth("prev")}>
-              <div className={`${className}-header-button-left`} />
+          <div className="calendar-header">
+            <div className="calendar-header-button" onClick={() => navigateMonth("prev")}>
+              <div className="calendar-header-button-left" />
             </div>
 
             <div
-              className={`${className}-header-text`}
+              className="calendar-header-text"
               style={
                 isAnimating
                   ? isAnimatingEnd
@@ -250,15 +245,15 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
               {MONTHS_RU[currentDate.toDate().getMonth()]} {currentDate.toDate().getFullYear()}
             </div>
 
-            <div className={`${className}-header-button`} onClick={() => navigateMonth("next")}>
-              <div className={`${className}-header-button-right`} />
+            <div className="calendar-header-button" onClick={() => navigateMonth("next")}>
+              <div className="calendar-header-button-right" />
             </div>
           </div>
 
           {/* дни в неделе */}
-          <div className={`${className}-week`}>
+          <div className="calendar-week">
             {DAYS_RU.map((day, index) => (
-              <div key={day} className={`${className}-week-item ${index === 6 ? `${className}-week-item-red` : ""}`}>
+              <div key={day} className={`calendar-week-item ${index === 6 ? `calendar-week-item-red` : ""}`}>
                 {day}
               </div>
             ))}
@@ -266,7 +261,7 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
 
           {/* сам grid календарь*/}
           <div
-            className={`${className}-rows`}
+            className="calendar-rows"
             style={
               isAnimating
                 ? isAnimatingEnd
@@ -297,10 +292,10 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
                 trigger="click"
                 color="#94a3b8"
                 style={{ maxWidth: "400px" }}
+                key={index}
               >
                 <div
-                  key={index}
-                  className={!day.isCurrentMonth ? `${className}-cell-disabled` : `${className}-cell `}
+                  className={!day.isCurrentMonth ? `calendar-cell-disabled` : `calendar-cell`}
                   style={
                     index % 7 === 6
                       ? {
@@ -309,23 +304,23 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
                       : {}
                   }
                 >
-                  <div className={`${className}-cell-header`} style={getStyleHeaderCell(day)}>
+                  <div className="calendar-cell-header" style={getStyleHeaderCell(day)}>
                     <span
-                      className={`${className}-cell-header-text ${
-                        !day.isCurrentMonth ? `${className}-cell-header-text-disabled` : ""
-                      } ${index % 7 === 6 ? `${className}-cell-header-text-red` : ""}`}
+                      className={`calendar-cell-header-text ${
+                        !day.isCurrentMonth ? `calendar-cell-header-text-disabled` : ""
+                      } ${index % 7 === 6 ? `calendar-cell-header-text-red` : ""}`}
                     >
                       {day.date}
                     </span>
                     {day.events.length === 1 && renderIcon(day.events[0])}
                   </div>
 
-                  <div className={`${className}-cell-rows`} style={getStyleRowCell(day)}>
+                  <div className="calendar-cell-rows" style={getStyleRowCell(day)}>
                     {day.events.map((event: any) => {
                       return (
                         <div
                           key={event.id}
-                          className={`${className}-cell-item`}
+                          className="calendar-cell-item"
                           style={getStyleItemCell(event, day.events.length)}
                         >
                           {day.events.length > 1 && renderIcon(event)}
@@ -340,22 +335,22 @@ export default function Calendar({ data, mainDate, main, legends }: Props) {
           </div>
         </div>
 
-        <div className={`${className}-legend`}>
-          <div className={`${className}-legend-title`}>{main?.legendTitle}:</div>
+        <div className="calendar-legend">
+          <div className="calendar-legend-title">{main?.legendTitle}:</div>
 
-          <div className={`${className}-legend-items`}>
+          <div className="calendar-legend-items">
             {legends?.map((item: any) => {
               return (
-                <div className={`${className}-legend-item`}>
-                  <div className={`${className}-legend-item-icon-${item.code}`} />
-                  <div className={`${className}-legend-item-text`}>{item.name}</div>
+                <div className={`calendar-legend-item`} key={`legend-item-${item.code}`}>
+                  <div className={`calendar-legend-item-icon-${item.code}`} />
+                  <div className="calendar-legend-item-text">{item.name}</div>
                 </div>
               );
             })}
 
-            <div className={`${className}-legend-item`}>
-              <div className={`${className}-legend-item-event`}>*встреча*</div>
-              <div className={`${className}-legend-item-text`}>мероприятие, которое длится определенный срок</div>
+            <div className="calendar-legend-item">
+              <div className="calendar-legend-item-event">*встреча*</div>
+              <div className="calendar-legend-item-text">мероприятие, которое длится определенный срок</div>
             </div>
           </div>
         </div>

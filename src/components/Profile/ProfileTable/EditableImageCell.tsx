@@ -27,7 +27,7 @@ const beforeUpload = (file: FileType) => {
   return isJpgOrPng && isLt4M;
 };
 
-export const EditableImageCell: React.FC<{
+const EditableImageCell: React.FC<{
   value: any;
   record: any;
   col: any;
@@ -88,3 +88,5 @@ export const EditableImageCell: React.FC<{
     </div>
   );
 };
+
+export default EditableImageCell;

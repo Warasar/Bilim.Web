@@ -2,7 +2,7 @@ import React from "react";
 import { Input } from "antd";
 import { useEditableCell } from "./UseEditableCell";
 
-export const EditableVarcharCell: React.FC<{
+const EditableVarcharCell: React.FC<{
   value: any;
   record: any;
   col: any;
@@ -36,3 +36,5 @@ export const EditableVarcharCell: React.FC<{
     </div>
   );
 };
+
+export default EditableVarcharCell;

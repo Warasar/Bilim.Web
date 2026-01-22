@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import OlimpCarousel from "./OlimpCarousel";
 
-const className = "olimp";
-
 type Props = {
   data: any;
 };
@@ -12,25 +10,21 @@ export default function Olimp({ data }: Props) {
   const [activeTab, setActiveTab] = useState<any>(data.find((f: any) => f.containerCode === "olimpVideos")?.data[0]);
 
   return (
-    <div className={className}>
-      <div className={`${className}-main`}>
+    <div className="olimp">
+      <div className={`olimp-main`}>
         {data.map((block: any) => {
           if (block.containerCode === "olimpHeader") {
-            return <div className={`${className}-title`}>{block.items.title}</div>;
+            return <div className={`olimp-title`}>{block.items.title}</div>;
           }
 
           if (block.containerCode === "olimpCards") {
             return (
-              <div className={`${className}-spisok`}>
+              <div className={`olimp-spisok`}>
                 {block.data
                   .filter((f: any) => f.isVisible)
                   .map((item: any) => {
                     return (
-                      <NavLink
-                        to={`${item.code}`}
-                        key={`${className}-spisok-item_${item.id}`}
-                        className={`${className}-spisok-item`}
-                      >
+                      <NavLink to={`${item.code}`} key={`olimp-spisok-item_${item.id}`} className={`olimp-spisok-item`}>
                         {item.name}
                       </NavLink>
                     );
@@ -45,15 +39,15 @@ export default function Olimp({ data }: Props) {
 
           if (block.containerCode === "olimpVideos") {
             return (
-              <div className={`${className}-video`}>
-                <div className={`${className}-video-tabs`}>
+              <div className={`olimp-video`}>
+                <div className={`olimp-video-tabs`}>
                   {block.data
                     .filter((f: any) => f.isVisible)
                     .map((item: any) => {
                       return (
                         <div
-                          className={`${className}-video-tabs-item${activeTab.id === item.id ? "-active" : ""}`}
-                          key={`${className}-video-tabs-item_${item.id}`}
+                          className={`olimp-video-tabs-item${activeTab.id === item.id ? "-active" : ""}`}
+                          key={`olimp-video-tabs-item_${item.id}`}
                           onClick={() => setActiveTab(item)}
                         >
                           {item.name}
@@ -63,11 +57,11 @@ export default function Olimp({ data }: Props) {
                 </div>
 
                 {activeTab ? (
-                  <div className={`${className}-video-content`}>
-                    <div className={`${className}-video-title`}>{activeTab.header}</div>
+                  <div className={`olimp-video-content`}>
+                    <div className={`olimp-video-title`}>{activeTab.header}</div>
                     {activeTab.title ? (
                       <div
-                        className={`${className}-video-subtitle`}
+                        className={`olimp-video-subtitle`}
                         dangerouslySetInnerHTML={{
                           __html: activeTab.title,
                         }}
@@ -75,14 +69,14 @@ export default function Olimp({ data }: Props) {
                     ) : null}
                     <iframe
                       src={activeTab.link}
-                      className={`${className}-video-iframe`}
+                      className={`olimp-video-iframe`}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                       title={activeTab.header}
                     />
                     {activeTab.description ? (
                       <div
-                        className={`${className}-video-text`}
+                        className={`olimp-video-text`}
                         dangerouslySetInnerHTML={{
                           __html: activeTab.description,
                         }}
@@ -96,7 +90,7 @@ export default function Olimp({ data }: Props) {
 
           if (block.containerCode === "olimpPlates") {
             return (
-              <div className={`${className}-docs`}>
+              <div className={`olimp-docs`}>
                 {block.data
                   .filter((f: any) => f.isVisible)
                   .map((item: any) => {
@@ -105,11 +99,11 @@ export default function Olimp({ data }: Props) {
                         href={item.link}
                         target="_blank"
                         rel="noreferrer"
-                        key={`${className}-docs-item_${item.id}`}
-                        className={`${className}-docs-item`}
+                        key={`olimp-docs-item_${item.id}`}
+                        className={`olimp-docs-item`}
                       >
-                        <div className={`${className}-docs-item-text`}>{item.name}</div>
-                        <div className={`${className}-docs-item-icon`} />
+                        <div className={`olimp-docs-item-text`}>{item.name}</div>
+                        <div className={`olimp-docs-item-icon`} />
                       </a>
                     );
                   })}

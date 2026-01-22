@@ -4,9 +4,9 @@ import HeaderContainer from "../../components/Header/HeaderContainer";
 import FooterContainer from "../../components/Footer/FooterContainer";
 import OlimpVuz from "./OlimpVuz";
 import { useParams } from "react-router";
-import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { requestGet } from "../../actions/actions";
+import Preloader from "../../components/Preloader/Preloader";
 
 export default function OlimpVuzContainer() {
   const [data, setData] = useState<any>(null);
@@ -32,14 +32,7 @@ export default function OlimpVuzContainer() {
   return (
     <div>
       <HeaderContainer />
-      {!loader ? (
-        <OlimpVuz data={data} />
-      ) : (
-        <div>
-          <Loader absolute />
-          <div style={{ height: "calc(100vh)" }} />
-        </div>
-      )}
+      {!loader ? <OlimpVuz data={data} /> : <Preloader />}
       <FooterContainer />
     </div>
   );

@@ -4,7 +4,7 @@ import TextArea from "antd/es/input/TextArea";
 import { Button } from "antd";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
-export const EditableTextAreaCell: React.FC<{
+const EditableTextAreaCell: React.FC<{
   value: any;
   record: any;
   col: any;
@@ -88,3 +88,5 @@ export const EditableTextAreaCell: React.FC<{
     </div>
   );
 };
+
+export default EditableTextAreaCell;

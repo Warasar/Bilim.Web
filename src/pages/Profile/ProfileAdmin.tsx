@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import { requestGet } from "../../actions/actions";
-import ProfileTable from "./ProfileItems/ProfileTable";
+import ProfileTable from "../../components/Profile/ProfileItems/ProfileTable";
 
 type Props = {
   setLoader: (loader: boolean) => void;

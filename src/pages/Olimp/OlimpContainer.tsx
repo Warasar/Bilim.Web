@@ -5,7 +5,7 @@ import HeaderContainer from "../../components/Header/HeaderContainer";
 import FooterContainer from "../../components/Footer/FooterContainer";
 import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { requestGet } from "../../actions/actions";
-import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
+import Preloader from "../../components/Preloader/Preloader";
 
 export default function OlimpContainer() {
   const [data, setData] = useState<any>(null);
@@ -25,14 +25,7 @@ export default function OlimpContainer() {
   return (
     <div>
       <HeaderContainer />
-      {data ? (
-        <Olimp data={data} />
-      ) : (
-        <div>
-          <Loader absolute />
-          <div style={{ height: "calc(100vh)" }} />
-        </div>
-      )}
+      {data ? <Olimp data={data} /> : <Preloader />}
       <FooterContainer />
     </div>
   );

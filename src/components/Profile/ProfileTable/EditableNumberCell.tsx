@@ -2,7 +2,7 @@ import React from "react";
 import { InputNumber } from "antd";
 import { useEditableCell } from "./UseEditableCell";
 
-export const EditableNumberCell: React.FC<{
+const EditableNumberCell: React.FC<{
   value: any;
   record: any;
   col: any;
@@ -38,3 +38,5 @@ export const EditableNumberCell: React.FC<{
     </div>
   );
 };
+
+export default EditableNumberCell;

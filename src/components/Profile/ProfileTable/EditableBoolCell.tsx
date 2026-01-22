@@ -2,7 +2,7 @@ import React from "react";
 import { Switch } from "antd";
 import { useEditableCell } from "./UseEditableCell";
 
-export const EditableBoolCell: React.FC<{
+const EditableBoolCell: React.FC<{
   value: any;
   record: any;
   col: any;
@@ -28,3 +28,5 @@ export const EditableBoolCell: React.FC<{
     </div>
   );
 };
+
+export default EditableBoolCell;

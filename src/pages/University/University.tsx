@@ -5,10 +5,9 @@ import ReactMarkdown from "react-markdown";
 
 type Props = {
   findData: any;
-  className: string;
 };
 
-export default function University({ findData, className }: Props) {
+export default function University({ findData }: Props) {
   const [data, setData] = useState<any>(null);
   const [activeTab, setActiveTab] = useState<number>(0);
 
@@ -16,7 +15,7 @@ export default function University({ findData, className }: Props) {
     if (findData) {
       setData(findData);
       setActiveTab(
-        findData.find((f: any) => f.itemType === "steps")?.contents?.filter((f: any) => f.isVisible)?.[0]?.id
+        findData.find((f: any) => f.itemType === "steps")?.contents?.filter((f: any) => f.isVisible)?.[0]?.id,
       );
     }
   }, [findData]);
@@ -42,10 +41,10 @@ export default function University({ findData, className }: Props) {
 
   const renderActiveStep = (activeStep: any) => {
     return activeStep ? (
-      <div className={`${className}-steps-item`}>
-        <div className={`${className}-steps-item-title`}>{activeStep.stepTitle}</div>
-        <div className={`${className}-steps-item-subtitle`}>{activeStep.stepDescription}</div>
-        <div className={`${className}-steps-item-grid`}>
+      <div className={`university-steps-item`}>
+        <div className={`university-steps-item-title`}>{activeStep.stepTitle}</div>
+        <div className={`university-steps-item-subtitle`}>{activeStep.stepDescription}</div>
+        <div className={`university-steps-item-grid`}>
           {activeStep.items.map((item: any) => {
             return renderStepItem(item);
           })}
@@ -56,14 +55,11 @@ export default function University({ findData, className }: Props) {
 
   const renderStepItem = (item: any) => {
     return (
-      <div className={`${className}-steps-item-block`} key={`${className}-steps-item-block_${item.id}`}>
-        <div className={`${className}-steps-item-block-icon`} />
-        <div className={`${className}-steps-item-block-texts`}>
-          {item.title?.length ? <div className={`${className}-steps-item-block-title`}>{item.title}</div> : null}
-          <div
-            className={`${className}-steps-item-block-content`}
-            dangerouslySetInnerHTML={{ __html: item.contents }}
-          />
+      <div className={`university-steps-item-block`} key={`university-steps-item-block_${item.id}`}>
+        <div className={`university-steps-item-block-icon`} />
+        <div className={`university-steps-item-block-texts`}>
+          {item.title?.length ? <div className={`university-steps-item-block-title`}>{item.title}</div> : null}
+          <div className={`university-steps-item-block-content`} dangerouslySetInnerHTML={{ __html: item.contents }} />
         </div>
       </div>
     );
@@ -101,21 +97,21 @@ export default function University({ findData, className }: Props) {
   };
 
   return (
-    <div className={className}>
+    <div className="university">
       {data?.length ? (
-        <div className={`${className}-main`}>
+        <div className={`university-main`}>
           {data.map((item: any) => {
             if (item.itemType === "header") {
               return (
-                <div className={`${className}-header`}>
-                  <div className={`${className}-header-left`}>
-                    <div className={`${className}-header-left-title`}>{item.contents.title}</div>
+                <div className={`university-header`}>
+                  <div className={`university-header-left`}>
+                    <div className={`university-header-left-title`}>{item.contents.title}</div>
                     {item.contents.subtitle?.length && (
-                      <div className={`${className}-header-left-text`}>{item.contents.subtitle}</div>
+                      <div className={`university-header-left-text`}>{item.contents.subtitle}</div>
                     )}
                     {item.contents.description?.length && (
                       <div
-                        className={`${className}-header-left-text`}
+                        className={`university-header-left-text`}
                         dangerouslySetInnerHTML={{ __html: item.contents.description }}
                       />
                     )}
@@ -123,7 +119,7 @@ export default function University({ findData, className }: Props) {
 
                   <iframe
                     src={item.contents.video}
-                    className={`${className}-header-right`}
+                    className={`university-header-right`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
@@ -132,68 +128,63 @@ export default function University({ findData, className }: Props) {
             }
 
             return (
-              <div className={`${className}-item`} id={`vuz_${item.id}`}>
-                <div className={`${className}-item-header`}>
-                  <div className={`${className}-item-header-title`}>{item.title}</div>
-                  {item.subtitle ? <div className={`${className}-item-header-subtitle`}>{item.subtitle}</div> : null}
+              <div className={`university-item`} id={`vuz_${item.id}`}>
+                <div className={`university-item-header`}>
+                  <div className={`university-item-header-title`}>{item.title}</div>
+                  {item.subtitle ? <div className={`university-item-header-subtitle`}>{item.subtitle}</div> : null}
                 </div>
 
                 {item.itemType === "faculties" ? (
-                  <div className={`${className}-fakultet`}>
+                  <div className={`university-fakultet`}>
                     {item.contents
                       .filter((f: any) => f.isVisible)
                       .map((content: any) => {
                         return (
-                          <div
-                            className={`${className}-fakultet-item`}
-                            key={`${className}-fakultet-item_${content.id}`}
-                          >
-                            <div className={`${className}-fakultet-item-grid`}>
-                              <div className={`${className}-fakultet-item-name`}>
+                          <div className={`university-fakultet-item`} key={`university-fakultet-item_${content.id}`}>
+                            <div className={`university-fakultet-item-grid`}>
+                              <div className={`university-fakultet-item-name`}>
                                 <ReactMarkdown>{content.facultyName}</ReactMarkdown>
                               </div>
                               <div
-                                className={`${className}-fakultet-item-arrow${content.opened ? "-active" : ""}`}
+                                className={`university-fakultet-item-arrow${content.opened ? "-active" : ""}`}
                                 onClick={() => clickContent(item, content)}
                               />
                             </div>
-                            <div className={`${className}-fakultet-items${content.opened ? "-active" : ""}`}>
+                            <div className={`university-fakultet-items${content.opened ? "-active" : ""}`}>
                               {content.directions
                                 .filter((f: any) => f.isVisible)
                                 .map((direction: any) => {
                                   return (
                                     <div
-                                      className={`${className}-fakultet-child`}
-                                      key={`${className}-fakultet-child_${content.id}_${direction.id}`}
+                                      className={`university-fakultet-child`}
+                                      key={`university-fakultet-child_${content.id}_${direction.id}`}
                                     >
                                       <div />
-                                      <div className={`${className}-fakultet-child-header`}>
-                                        <div className={`${className}-fakultet-child-header-grid`}>
+                                      <div className={`university-fakultet-child-header`}>
+                                        <div className={`university-fakultet-child-header-grid`}>
                                           <div
-                                            className={`${className}-fakultet-child-header-text`}
+                                            className={`university-fakultet-child-header-text`}
                                             style={{ textTransform: "uppercase" }}
                                           >
                                             <ReactMarkdown>{direction.directionName}</ReactMarkdown>
                                           </div>
                                           <div
-                                            className={`${className}-fakultet-child-header-plus${
+                                            className={`university-fakultet-child-header-plus${
                                               direction.opened ? "-active" : ""
                                             }`}
                                             onClick={() => clickDescription(item, content, direction)}
                                           />
                                         </div>
                                         <div
-                                          className={`${className}-fakultet-child-content${direction.opened ? "-active" : ""}`}
+                                          className={`university-fakultet-child-content${direction.opened ? "-active" : ""}`}
                                         >
-                                          <div className={`${className}-fakultet-child-content-text`}>
+                                          <div className={`university-fakultet-child-content-text`}>
                                             {direction.description}
                                           </div>
                                           {direction.educationPrice?.length ? (
                                             <Fragment>
-                                              <div className={`${className}-fakultet-child-content-price`}>
-                                                СТОИМОСТЬ
-                                              </div>
-                                              <div className={`${className}-fakultet-child-content-text`}>
+                                              <div className={`university-fakultet-child-content-price`}>СТОИМОСТЬ</div>
+                                              <div className={`university-fakultet-child-content-text`}>
                                                 {direction.educationPrice}
                                               </div>
                                             </Fragment>
@@ -209,33 +200,33 @@ export default function University({ findData, className }: Props) {
                       })}
                   </div>
                 ) : item.itemType === "steps" ? (
-                  <div className={`${className}-steps`}>
+                  <div className={`university-steps`}>
                     <div
-                      className={`${className}-steps-tabs`}
+                      className={`university-steps-tabs`}
                       style={getGrid(item.contents.filter((f: any) => f.isVisible).length)}
                     >
                       <div
-                        className={`${className}-steps-tab-line`}
+                        className={`university-steps-tab-line`}
                         style={getLine(item.contents.filter((f: any) => f.isVisible).length)}
                       />
                       {item.contents
                         .filter((f: any) => f.isVisible)
                         .map((content: any) => {
                           return (
-                            <div className={`${className}-steps-tab`} key={`${className}-steps-tab_${content.id}`}>
-                              <div className={`${className}-steps-tab-center`}>
+                            <div className={`university-steps-tab`} key={`university-steps-tab_${content.id}`}>
+                              <div className={`university-steps-tab-center`}>
                                 <div
-                                  className={`${className}-steps-tab-circle${
-                                    activeTab === content.id ? ` ${className}-steps-tab-circle-active` : ""
+                                  className={`university-steps-tab-circle${
+                                    activeTab === content.id ? ` university-steps-tab-circle-active` : ""
                                   }`}
                                   onClick={() => setActiveTab(content.id)}
                                 >
-                                  <div className={`${className}-steps-tab-circle-number`}>{content.stepNumber}</div>
+                                  <div className={`university-steps-tab-circle-number`}>{content.stepNumber}</div>
                                 </div>
                               </div>
 
-                              <div className={`${className}-steps-tab-title`}>{content.stepTitle}</div>
-                              <div className={`${className}-steps-tab-subtitle`}>{content.stepDescription}</div>
+                              <div className={`university-steps-tab-title`}>{content.stepTitle}</div>
+                              <div className={`university-steps-tab-subtitle`}>{content.stepDescription}</div>
                             </div>
                           );
                         })}
@@ -244,31 +235,31 @@ export default function University({ findData, className }: Props) {
                     {renderActiveStep(item.contents.find((f: any) => f.id === activeTab))}
                   </div>
                 ) : item.itemType === "list" ? (
-                  <div className={`${className}-dormitory`}>
-                    <div className={`${className}-dormitory-items`}>
+                  <div className={`university-dormitory`}>
+                    <div className={`university-dormitory-items`}>
                       {item.contents
                         .filter((f: any) => f.isVisible)
                         .map((content: any) => {
                           return (
                             <div
-                              className={`${className}-steps-item-block`}
-                              key={`${className}-steps-item-block_${content.id}`}
+                              className={`university-steps-item-block`}
+                              key={`university-steps-item-block_${content.id}`}
                             >
-                              <div className={`${className}-steps-item-block-icon`} />
-                              <div className={`${className}-steps-item-block-texts`}>
+                              <div className={`university-steps-item-block-icon`} />
+                              <div className={`university-steps-item-block-texts`}>
                                 {content.title?.length ? (
-                                  <div className={`${className}-steps-item-block-title`}>{content.title}</div>
+                                  <div className={`university-steps-item-block-title`}>{content.title}</div>
                                 ) : null}
                                 {content.content?.length ? (
                                   <div
-                                    className={`${className}-steps-item-block-content`}
+                                    className={`university-steps-item-block-content`}
                                     dangerouslySetInnerHTML={{ __html: content.content }}
                                   />
                                 ) : null}
                                 {content.video ? (
                                   <iframe
                                     src={content.video}
-                                    className={`${className}-dormitory-iframe`}
+                                    className={`university-dormitory-iframe`}
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowFullScreen
                                   />
@@ -280,20 +271,20 @@ export default function University({ findData, className }: Props) {
                     </div>
                   </div>
                 ) : item.itemType === "enum" ? (
-                  <div className={`${className}-docs`}>
-                    <div className={`${className}-docs-items`}>
+                  <div className={`university-docs`}>
+                    <div className={`university-docs-items`}>
                       {item.contents
                         .filter((f: any) => f.isVisible)
                         .map((content: any) => {
                           return (
                             <div
-                              className={`${className}-steps-item-block`}
-                              key={`${className}-steps-item-block_${content.id}`}
+                              className={`university-steps-item-block`}
+                              key={`university-steps-item-block_${content.id}`}
                             >
-                              <div className={`${className}-docs-circle`}>{content.pointNum}</div>
-                              <div className={`${className}-steps-item-block-texts`}>
+                              <div className={`university-docs-circle`}>{content.pointNum}</div>
+                              <div className={`university-steps-item-block-texts`}>
                                 <div
-                                  className={`${className}-steps-item-block-content`}
+                                  className={`university-steps-item-block-content`}
                                   dangerouslySetInnerHTML={{ __html: content.pointContent }}
                                 />
                               </div>

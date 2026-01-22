@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
-import ProfileUser from "./ProfileItems/ProfileUser";
+import ProfileUser from "../../components/Profile/ProfileItems/ProfileUser";
 import { useSearchParams } from "react-router-dom";
-import ProfileDocs from "./ProfileItems/ProfileDocs";
-import ProfileNotification from "./ProfileItems/ProfileNotification";
-import ProfileHomework from "./ProfileItems/ProfileHomework";
+import ProfileDocs from "../../components/Profile/ProfileItems/ProfileDocs";
+import ProfileNotification from "../../components/Profile/ProfileItems/ProfileNotification";
+import ProfileHomework from "../../components/Profile/ProfileItems/ProfileHomework";
 
 type Props = {
   setLoader: (loader: boolean) => void;

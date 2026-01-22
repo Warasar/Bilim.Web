@@ -1,5 +1,5 @@
 import React, { ChangeEvent, InputHTMLAttributes } from "react";
-import { EmailIcon, PasswordIcon } from "../Icons/AuthIcons";
+import { EmailIcon, PasswordIcon } from "../Icons/Icons";
 
 interface InputFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange"> {
   label: string;
