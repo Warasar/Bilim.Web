@@ -12,11 +12,11 @@ let globalCurrentUser: ICurrentUser | null = null; // сохраняет дан�
 let hasFetched: boolean = false; // смотрит брался ли запрос уже
 
 export const useCurrentUser = (without?: boolean) => {
-  const [tvIds, setTvIds] = useState<ICurrentUser | null>(globalCurrentUser);
+  const [currentUser, setCurrentUser] = useState<ICurrentUser | null>(globalCurrentUser);
 
   useEffect(() => {
     if (hasFetched) {
-      setTvIds(globalCurrentUser);
+      setCurrentUser(globalCurrentUser);
       return;
     }
 
@@ -29,7 +29,7 @@ export const useCurrentUser = (without?: boolean) => {
           win.location = `${window.location.origin}/survey`;
         } else {
           globalCurrentUser = newCurrentUser;
-          setTvIds(newCurrentUser);
+          setCurrentUser(newCurrentUser);
           hasFetched = true;
         }
       } catch (error) {
@@ -41,5 +41,5 @@ export const useCurrentUser = (without?: boolean) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [without]);
 
-  return tvIds;
+  return currentUser;
 };

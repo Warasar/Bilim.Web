@@ -1,86 +1,30 @@
-import React from "react";
-import { RouterProvider } from "react-router";
-import MainContainer from "./components/Main/MainContainer";
-import ErrorPage from "./components/ErrorPage/ErrorPage";
+// src/App.tsx
+import React, { useMemo } from "react";
+import { RouterProvider } from "react-router-dom";
 import { createBrowserRouter } from "react-router-dom";
+import { routesConfig } from "./config/routes";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import "./styles/style.scss";
-import VuzContainer from "./components/Vuz/VuzContainer";
-import OlimpContainer from "./components/Olimp/OlimpContainer";
-import UniversityContainer from "./components/University/UniversityContainer";
-import OlimpVuzContainer from "./components/OlimpVuz/OlimpVuzContainer";
-import Auth from "./components/Auth/Auth";
-import MotivationLetterContainer from "./components/MotivationLetter/MotivationLetterContainer";
-import Survey from "./components/Survey/Survey";
-import TourContainer from "./components/Tour/TourContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
-import VideosContainer from "./components/Videos/VideosContainer";
 
-export default function App() {
-  const router = createBrowserRouter([
-    {
-      path: `/accompaniment`,
-      element: <MainContainer />, // основная страница(сопровождение 2025)
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: "*", // Этот путь ловит все несуществующие маршруты
-      element: <ErrorPage />,
-    },
-    {
-      path: `/vuz`,
-      element: <VuzContainer />, // онлайн профтур
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: `/vuz/:code`,
-      element: <UniversityContainer />, // отдельные страницы для каждого вуза
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: `/olimp`,
-      element: <OlimpContainer />, // подготовка к олимпиадам
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: `/olimp/:code`,
-      element: <OlimpVuzContainer />, // подготовка к олимпиадам
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: `/motivation_letter`,
-      element: <MotivationLetterContainer />, // авторизация
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: `/auth`,
-      element: <Auth />, // авторизация
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: `/survey`,
-      element: <Survey />, // опросник страница
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: `/profile`,
-      element: <ProfileContainer />, // страница пользователя
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: `/videos`,
-      element: <VideosContainer />, // страница пользователя
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: ``,
-      element: <TourContainer />, // страница с прайсами
-      errorElement: <ErrorPage />,
-    },
-  ]);
+const App: React.FC = () => {
+  const router = useMemo(() => {
+    const routesWithProtection = routesConfig.map((route) => ({
+      ...route,
+      element: route.isProtected ? (
+        <ProtectedRoute isProtected={route.isProtected}>{route.element}</ProtectedRoute>
+      ) : (
+        route.element
+      ),
+    }));
+
+    return createBrowserRouter(routesWithProtection);
+  }, []);
 
   return (
     <div className="app">
       <RouterProvider router={router} />
     </div>
   );
-}
+};
+
+export default App;

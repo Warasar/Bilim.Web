@@ -2,13 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import Typewriter from "typewriter-effect";
 
-const className = "main";
+const className = "accopointment";
 
 type Props = {
   data: any;
 };
 
-export default function Main({ data }: Props) {
+export default function Accopointment({ data }: Props) {
   const scrollFunc = () => {
     window.scrollTo({
       top: window.innerHeight - 62,
