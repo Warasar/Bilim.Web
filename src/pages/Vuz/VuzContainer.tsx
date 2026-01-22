@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Vuz from "./Vuz";
 import "./vuz.scss";
-import HeaderContainer from "../Header/HeaderContainer";
-import FooterContainer from "../Footer/FooterContainer";
+import HeaderContainer from "../../components/Header/HeaderContainer";
+import FooterContainer from "../../components/Footer/FooterContainer";
 import { requestGet } from "../../actions/actions";
 import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
 import { IFilterData } from "./IVuz";

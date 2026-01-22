@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Vuz from "./University";
 import "./university.scss";
-import HeaderContainer from "../Header/HeaderContainer";
-import FooterContainer from "../Footer/FooterContainer";
+import HeaderContainer from "../../components/Header/HeaderContainer";
+import FooterContainer from "../../components/Footer/FooterContainer";
 import { useParams } from "react-router";
 import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
 import { useCurrentUser } from "../../hooks/useCurrentUser";

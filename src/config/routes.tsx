@@ -3,17 +3,17 @@ import { RouteConfig, RoutePaths } from "../types/routes";
 
 // Импорты компонентов
 import AccopointmentContainer from "../pages/Accopointment/AccopointmentContainer";
-import ErrorPage from "../components/ErrorPage/ErrorPage";
-import VuzContainer from "../components/Vuz/VuzContainer";
-import OlimpContainer from "../components/Olimp/OlimpContainer";
-import UniversityContainer from "../components/University/UniversityContainer";
-import OlimpVuzContainer from "../components/OlimpVuz/OlimpVuzContainer";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import VuzContainer from "../pages/Vuz/VuzContainer";
+import OlimpContainer from "../pages/Olimp/OlimpContainer";
+import UniversityContainer from "../pages/University/UniversityContainer";
+import OlimpVuzContainer from "../pages/OlimpVuz/OlimpVuzContainer";
 import Auth from "../pages/Auth/Auth";
-import MotivationLetterContainer from "../components/MotivationLetter/MotivationLetterContainer";
-import Survey from "../components/Survey/Survey";
-import TourContainer from "../components/Tour/TourContainer";
-import ProfileContainer from "../components/Profile/ProfileContainer";
-import VideosContainer from "../components/Videos/VideosContainer";
+import MotivationLetterContainer from "../pages/MotivationLetter/MotivationLetterContainer";
+import Survey from "../pages/Survey/Survey";
+import TourContainer from "../pages/Tour/TourContainer";
+import ProfileContainer from "../pages/Profile/ProfileContainer";
+import VideosContainer from "../pages/Videos/VideosContainer";
 
 export const routesConfig: RouteConfig[] = [
   {

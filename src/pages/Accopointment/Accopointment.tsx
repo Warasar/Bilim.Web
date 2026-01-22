@@ -1,11 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import Typewriter from "typewriter-effect";
+import { ContainerItem } from "../../types/accopointment";
 
 const className = "accopointment";
 
 type Props = {
-  data: any;
+  data: ContainerItem;
 };
 
 export default function Accopointment({ data }: Props) {

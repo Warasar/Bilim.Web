@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./videos.scss";
-import HeaderContainer from "../Header/HeaderContainer";
-import FooterContainer from "../Footer/FooterContainer";
+import HeaderContainer from "../../components/Header/HeaderContainer";
+import FooterContainer from "../../components/Footer/FooterContainer";
 import Videos from "./Videos";
 import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
 import { requestGet } from "../../actions/actions";

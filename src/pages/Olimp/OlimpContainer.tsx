@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
-import MotivationLetter from "./MotivationLetter";
-import "./mletter.scss";
-import HeaderContainer from "../Header/HeaderContainer";
-import FooterContainer from "../Footer/FooterContainer";
+import Olimp from "./Olimp";
+import "./olimp.scss";
+import HeaderContainer from "../../components/Header/HeaderContainer";
+import FooterContainer from "../../components/Footer/FooterContainer";
+import { useCurrentUser } from "../../hooks/useCurrentUser";
 import { requestGet } from "../../actions/actions";
 import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
 
-export default function MotivationLetterContainer() {
+export default function OlimpContainer() {
   const [data, setData] = useState<any>(null);
+
+  useCurrentUser();
 
   useEffect(() => {
     getData();
   }, []);
 
   const getData = async () => {
-    const newData: any = await requestGet(`mLetter`);
+    const newData: any = await requestGet(`olimp`);
 
     setData(newData);
   };
@@ -23,7 +26,7 @@ export default function MotivationLetterContainer() {
     <div>
       <HeaderContainer />
       {data ? (
-        <MotivationLetter data={data} />
+        <Olimp data={data} />
       ) : (
         <div>
           <Loader absolute />

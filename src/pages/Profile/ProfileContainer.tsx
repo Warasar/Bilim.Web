@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loader from "../../modules/YaKIT.WEB.KIT/components/Loader/Loader";
-import HeaderContainer from "../Header/HeaderContainer";
+import HeaderContainer from "../../components/Header/HeaderContainer";
 import { requestGet } from "../../actions/actions";
 import Profile from "./Profile";
 import "./profile.scss";

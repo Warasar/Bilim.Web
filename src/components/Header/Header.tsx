@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import cookie from "js-cookie";
-import { INotification } from "../Profile/ProfileItems/ProfileNotification";
+import { INotification } from "../../pages/Profile/ProfileItems/ProfileNotification";
 import { requestGet } from "../../actions/actions";
 
 export const useClickOutside = (handler: () => void) => {

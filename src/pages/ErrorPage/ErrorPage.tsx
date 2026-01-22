@@ -1,5 +1,5 @@
 import React, { NavLink, useRouteError } from "react-router-dom";
-import HeaderContainer from "../Header/HeaderContainer";
+import HeaderContainer from "../../components/Header/HeaderContainer";
 import "./error.scss";
 
 const classNameError = "error";
