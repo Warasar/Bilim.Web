@@ -1,5 +1,5 @@
 import axios from "axios";
-import { url } from "../constants/constants";
+import { url } from "../config/constants";
 import cookie from "js-cookie";
 
 const instance = axios.create({
@@ -17,7 +17,7 @@ instance.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 instance.interceptors.response.use(
   (response) => {
@@ -28,7 +28,7 @@ instance.interceptors.response.use(
       const win: Window = window;
       win.location = `${window.location.origin}/auth`;
     }
-  }
+  },
 );
 
 export const api = {
