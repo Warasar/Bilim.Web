@@ -4,6 +4,7 @@
   background-color: $colorDefault;
   display: flex;
   justify-content: center;
+  width: 100%;
 
   &-container {
     width: 100%;
@@ -16,10 +17,12 @@
     overflow: hidden;
     margin-top: 24px;
     margin-bottom: 24px;
+    margin-left: 12px;
+    margin-right: 12px;
   }
 
   &-admin {
-    width: 100%;
+    width: calc(100% - 48px);
     margin-right: 24px;
     margin-left: 24px;
     background-color: #fdfdfd;
@@ -186,10 +189,10 @@
         background-size: cover;
         background-image: url("../../assets/icons/default/chevron-right.svg");
         transition: 0.2s;
+        cursor: pointer;
 
         &:hover {
           background-image: url("../../assets/icons/default/chevron-right_active.svg");
-          cursor: pointer;
         }
 
         &-active {
@@ -201,10 +204,10 @@
           background-image: url("../../assets/icons/default/chevron-right.svg");
           transition: 0.2s;
           transform: rotate(90deg);
+          cursor: pointer;
 
           &:hover {
             background-image: url("../../assets/icons/default/chevron-right_active.svg");
-            cursor: pointer;
           }
         }
       }
@@ -291,10 +294,10 @@
         color: $colorDark;
         font-size: 14px;
         transition: 0.2s;
+        cursor: pointer;
 
         &:hover {
           color: $colorRed;
-          cursor: pointer;
         }
       }
     }
@@ -359,9 +362,9 @@
         border: 1px solid $colorDefault;
         display: flex;
         align-items: center;
+        cursor: pointer;
 
         &:hover {
-          cursor: pointer;
           background-color: $colorDark;
           color: $colorWhite;
         }
@@ -375,9 +378,9 @@
           background-color: #eee;
           border-radius: 8px;
           transition: 0.2s;
+          cursor: pointer;
 
           &:hover {
-            cursor: pointer;
             background-color: $colorRed;
             color: $colorWhite;
           }
@@ -446,9 +449,9 @@
       display: flex;
       gap: 6px;
       align-items: center;
+      cursor: pointer;
 
       &:hover {
-        cursor: pointer;
         background-color: $colorDark;
       }
     }
@@ -465,9 +468,9 @@
       display: flex;
       gap: 6px;
       align-items: center;
+      cursor: pointer;
 
       &:hover {
-        cursor: pointer;
         background-color: $colorDark;
       }
     }
@@ -504,10 +507,10 @@
         background-size: cover;
         background-image: url("../../assets/icons/default/excel.png");
         transition: 0.2s;
+        cursor: pointer;
 
         &:hover {
           transform: scale(1.1);
-          cursor: pointer;
         }
       }
     }
@@ -522,7 +525,6 @@
     }
 
     &-cell {
-      /* Растягиваем на всю ширину и высоту родителя */
       width: 100% !important;
       height: 100% !important;
       min-height: 40px;
@@ -554,10 +556,10 @@
         font-size: 14px;
         border-radius: 6px;
         transition: 0.2s;
+        cursor: pointer;
 
         &:hover {
           background-color: $colorDark;
-          cursor: pointer;
         }
       }
 
@@ -582,7 +584,7 @@
       }
 
       li {
-        list-style-type: disc; /*  меняем на точки */
+        list-style-type: disc;
       }
 
       &-footer {
@@ -672,4 +674,1214 @@
   width: 10px;
   height: 100%;
   cursor: col-resize;
+}
+
+/* ========== МЕДИА-ЗАПРОСЫ ========== */
+
+/* Планшеты: 1240px - 1024px */
+@media (max-width: 1240px) {
+  .profile {
+    &-container {
+      max-width: 1000px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    &-admin {
+      width: calc(100% - 40px);
+      margin-left: 20px;
+      margin-right: 20px;
+      height: calc(100vh - 100px);
+    }
+
+    &-block {
+      gap: 36px;
+      padding: 20px 0px;
+    }
+
+    &-sider {
+      padding-left: 20px;
+
+      &-item {
+        padding: 10px;
+
+        &:hover {
+          padding: 10px;
+        }
+
+        &-active {
+          padding: 10px;
+        }
+
+        &-text {
+          font-size: 15px;
+
+          &-active {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+
+    &-siderAdmin {
+      &-group {
+        &-text {
+          font-size: 15px;
+        }
+
+        &-arrow {
+          width: 22px;
+          height: 22px;
+
+          &-active {
+            width: 22px;
+            height: 22px;
+          }
+        }
+      }
+
+      &-item {
+        &-text {
+          font-size: 13px;
+
+          &-active {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+
+    &-user {
+      gap: 36px;
+      row-gap: 20px;
+
+      &-avatar {
+        width: 90px !important;
+        height: 90px !important;
+
+        &-here {
+          width: 90px !important;
+          height: 90px !important;
+        }
+      }
+
+      &-items {
+        gap: 10px;
+      }
+
+      &-item {
+        &-text {
+          font-size: 15px;
+        }
+      }
+
+      &-itemNoEdit {
+        &-text {
+          font-size: 15px;
+        }
+      }
+    }
+
+    &-docs {
+      &-item {
+        &-text {
+          font-size: 17px;
+        }
+      }
+    }
+
+    &-table {
+      width: 75vw;
+
+      &-empty {
+        max-width: calc(75vw - 14px);
+      }
+    }
+
+    &-notification {
+      &-item {
+        &-title {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+/* Планшеты: 1023px - 900px */
+@media (max-width: 1023px) {
+  .profile {
+    &-container {
+      max-width: 900px;
+      margin-top: 18px;
+      margin-bottom: 18px;
+    }
+
+    &-admin {
+      width: calc(100% - 36px);
+      margin-left: 18px;
+      margin-right: 18px;
+      height: calc(100vh - 90px);
+    }
+
+    &-block {
+      gap: 30px;
+      padding: 18px 0px;
+      grid-template-columns: 1fr 3fr;
+    }
+
+    &-sider {
+      padding-left: 18px;
+
+      &-item {
+        padding: 8px;
+
+        &:hover {
+          padding: 8px;
+        }
+
+        &-active {
+          padding: 8px;
+        }
+
+        &-text {
+          font-size: 14px;
+
+          &-active {
+            font-size: 14px;
+          }
+        }
+
+        &-icon {
+          &-profile,
+          &-docs,
+          &-notification,
+          &-homework {
+            width: 22px;
+            height: 22px;
+          }
+        }
+      }
+    }
+
+    &-siderAdmin {
+      &-group {
+        padding: 5px 10px;
+
+        &-text {
+          font-size: 14px;
+        }
+      }
+
+      &-items {
+        padding-left: 10px;
+      }
+
+      &-item {
+        padding: 5px 10px;
+
+        &:hover {
+          padding: 5px 10px;
+        }
+
+        &-active {
+          padding: 5px 10px;
+        }
+      }
+    }
+
+    &-user {
+      gap: 30px;
+      row-gap: 18px;
+
+      &-avatar {
+        width: 80px !important;
+        height: 80px !important;
+
+        &-here {
+          width: 80px !important;
+          height: 80px !important;
+        }
+      }
+
+      &-items {
+        gap: 8px;
+      }
+
+      &-item {
+        &-text {
+          font-size: 14px;
+        }
+      }
+
+      &-itemNoEdit {
+        &-text {
+          font-size: 14px;
+        }
+      }
+
+      &-footer {
+        &-button {
+          font-size: 13px;
+          padding: 5px 10px;
+
+          &-decline {
+            font-size: 13px;
+            padding: 5px 10px;
+          }
+        }
+      }
+    }
+
+    &-docs {
+      &-item {
+        &-text {
+          font-size: 16px;
+        }
+
+        &-html,
+        &-deadline {
+          font-size: 13px;
+        }
+      }
+
+      &-time {
+        font-size: 13px;
+      }
+
+      &-doc,
+      &-doc1 {
+        font-size: 13px;
+        padding: 5px 10px;
+      }
+    }
+
+    &-table {
+      width: 70vw;
+
+      &-button {
+        &-excel {
+          width: 22px;
+          height: 22px;
+        }
+      }
+
+      &-cell {
+        min-height: 36px;
+        padding: 4px 10px;
+
+        &-download {
+          font-size: 13px;
+          padding: 2px 10px;
+        }
+
+        &-img {
+          max-width: 400px !important;
+          height: 180px !important;
+        }
+      }
+
+      &-empty {
+        max-width: calc(70vw - 14px);
+
+        &-text {
+          font-size: 13px;
+        }
+      }
+    }
+
+    &-notification {
+      margin-right: 18px;
+
+      &-item {
+        padding: 5px 10px;
+        gap: 10px;
+
+        &-title {
+          font-size: 14px;
+        }
+
+        &-description {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
+/* Планшеты: 899px - 768px */
+@media (max-width: 899px) {
+  .profile {
+    &-container {
+      max-width: 800px;
+      margin-top: 16px;
+      margin-bottom: 16px;
+      margin-left: 10px;
+      margin-right: 10px;
+      border-radius: 12px;
+    }
+
+    &-admin {
+      width: calc(100% - 32px);
+      margin-left: 16px;
+      margin-right: 16px;
+      height: calc(100vh - 80px);
+      border-radius: 12px;
+    }
+
+    &-block {
+      gap: 24px;
+      padding: 16px 0px;
+      grid-template-columns: 1fr;
+    }
+
+    &-sider {
+      padding-left: 16px;
+      padding-right: 16px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 16px;
+
+      &-item {
+        min-width: 140px;
+        justify-content: center;
+        text-align: center;
+
+        &-text {
+          text-align: center;
+        }
+      }
+    }
+
+    &-siderAdmin {
+      padding-left: 0;
+      max-height: 200px;
+      margin-bottom: 16px;
+
+      &-group {
+        margin: 0 16px;
+      }
+
+      &-items {
+        padding-left: 24px;
+      }
+    }
+
+    &-user {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      row-gap: 16px;
+      padding: 0 16px;
+
+      &-avatar {
+        justify-self: center;
+        width: 120px !important;
+        height: 120px !important;
+
+        &-here {
+          width: 120px !important;
+          height: 120px !important;
+        }
+      }
+
+      &-items {
+        margin-right: 0;
+        padding-right: 0;
+        max-height: none;
+      }
+
+      &-footer {
+        padding-right: 0;
+      }
+    }
+
+    &-docs {
+      padding: 0 16px;
+    }
+
+    &-table {
+      width: calc(100vw - 120px);
+      padding-right: 0;
+
+      &-container {
+        padding: 0 16px;
+      }
+
+      &-buttons {
+        padding-right: 0;
+      }
+
+      &-cell {
+        &-img {
+          max-width: 300px !important;
+          height: 150px !important;
+        }
+      }
+
+      &-empty {
+        max-width: 100%;
+        left: 0;
+      }
+    }
+
+    &-notification {
+      margin-right: 16px;
+      margin-left: 16px;
+    }
+  }
+}
+
+/* Мобильные: 767px - 600px */
+@media (max-width: 767px) {
+  .profile {
+    &-container {
+      max-width: 700px;
+      margin-top: 14px;
+      margin-bottom: 14px;
+      margin-left: 8px;
+      margin-right: 8px;
+      border-radius: 10px;
+    }
+
+    &-admin {
+      width: calc(100% - 28px);
+      margin-left: 14px;
+      margin-right: 14px;
+      height: calc(100vh - 70px);
+      border-radius: 10px;
+    }
+
+    &-block {
+      gap: 20px;
+      padding: 14px 0px;
+    }
+
+    &-sider {
+      padding-left: 14px;
+      padding-right: 14px;
+      gap: 6px;
+
+      &-item {
+        min-width: 120px;
+        padding: 8px;
+
+        &:hover {
+          padding: 8px;
+        }
+
+        &-active {
+          padding: 8px;
+        }
+
+        &-text {
+          font-size: 13px;
+
+          &-active {
+            font-size: 13px;
+          }
+        }
+
+        &-icon {
+          &-profile,
+          &-docs,
+          &-notification,
+          &-homework {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+    }
+
+    &-siderAdmin {
+      &-group {
+        margin: 0 14px;
+        padding: 4px 8px;
+
+        &-text {
+          font-size: 13px;
+        }
+
+        &-arrow {
+          width: 20px;
+          height: 20px;
+
+          &-active {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+
+      &-items {
+        padding-left: 20px;
+      }
+
+      &-item {
+        padding: 4px 8px;
+
+        &:hover {
+          padding: 4px 8px;
+        }
+
+        &-active {
+          padding: 4px 8px;
+        }
+
+        &-text {
+          font-size: 12px;
+
+          &-active {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    &-user {
+      gap: 20px;
+      row-gap: 14px;
+      padding: 0 14px;
+
+      &-avatar {
+        width: 100px !important;
+        height: 100px !important;
+
+        &-here {
+          width: 100px !important;
+          height: 100px !important;
+        }
+      }
+
+      &-items {
+        gap: 6px;
+      }
+
+      &-item {
+        &-text {
+          font-size: 13px;
+        }
+      }
+
+      &-itemNoEdit {
+        &-text {
+          font-size: 13px;
+        }
+      }
+
+      &-footer {
+        gap: 10px;
+
+        &-button {
+          font-size: 12px;
+          padding: 4px 8px;
+
+          &-decline {
+            font-size: 12px;
+            padding: 4px 8px;
+          }
+        }
+      }
+    }
+
+    &-docs {
+      padding: 0 14px;
+
+      &-item {
+        &-text {
+          font-size: 15px;
+        }
+
+        &-html,
+        &-deadline {
+          font-size: 12px;
+        }
+      }
+
+      &-time {
+        font-size: 12px;
+      }
+
+      &-doc,
+      &-doc1 {
+        font-size: 12px;
+        padding: 4px 8px;
+      }
+
+      &-flex {
+        flex-wrap: wrap;
+      }
+    }
+
+    &-table {
+      width: calc(100vw - 100px);
+
+      &-container {
+        padding: 0 14px;
+      }
+
+      &-button {
+        &-excel {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      &-cell {
+        min-height: 32px;
+        padding: 3px 8px;
+
+        &-download {
+          font-size: 12px;
+          padding: 2px 8px;
+        }
+
+        &-img {
+          max-width: 250px !important;
+          height: 120px !important;
+        }
+      }
+
+      &-empty {
+        padding: 30px 0px;
+
+        &-text {
+          font-size: 12px;
+        }
+      }
+    }
+
+    &-notification {
+      margin-right: 14px;
+      margin-left: 14px;
+      gap: 10px;
+
+      &-item {
+        padding: 4px 8px;
+        gap: 8px;
+        border-radius: 10px;
+
+        &-title {
+          font-size: 13px;
+        }
+
+        &-description {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+/* Мобильные: 599px - 480px */
+@media (max-width: 599px) {
+  .profile {
+    &-container {
+      max-width: 100%;
+      margin-top: 12px;
+      margin-bottom: 12px;
+      margin-left: 6px;
+      margin-right: 6px;
+      border-radius: 8px;
+    }
+
+    &-admin {
+      width: calc(100% - 24px);
+      margin-left: 12px;
+      margin-right: 12px;
+      height: calc(100vh - 60px);
+      border-radius: 8px;
+    }
+
+    &-block {
+      gap: 16px;
+      padding: 12px 0px;
+    }
+
+    &-sider {
+      padding-left: 12px;
+      padding-right: 12px;
+
+      &-item {
+        min-width: 100px;
+        padding: 6px;
+
+        &:hover {
+          padding: 6px;
+        }
+
+        &-active {
+          padding: 6px;
+        }
+
+        &-text {
+          font-size: 12px;
+
+          &-active {
+            font-size: 12px;
+          }
+        }
+
+        &-icon {
+          &-profile,
+          &-docs,
+          &-notification,
+          &-homework {
+            width: 18px;
+            height: 18px;
+          }
+        }
+      }
+    }
+
+    &-siderAdmin {
+      &-group {
+        margin: 0 12px;
+        padding: 3px 6px;
+
+        &-text {
+          font-size: 12px;
+        }
+      }
+
+      &-items {
+        padding-left: 16px;
+      }
+
+      &-item {
+        padding: 3px 6px;
+
+        &:hover {
+          padding: 3px 6px;
+        }
+
+        &-active {
+          padding: 3px 6px;
+        }
+      }
+    }
+
+    &-user {
+      gap: 16px;
+      row-gap: 12px;
+      padding: 0 12px;
+
+      &-avatar {
+        width: 80px !important;
+        height: 80px !important;
+
+        &-here {
+          width: 80px !important;
+          height: 80px !important;
+        }
+      }
+
+      &-items {
+        gap: 4px;
+      }
+
+      &-item {
+        &-text {
+          font-size: 12px;
+        }
+      }
+
+      &-itemNoEdit {
+        &-text {
+          font-size: 12px;
+        }
+      }
+
+      &-footer {
+        gap: 8px;
+
+        &-button {
+          font-size: 11px;
+          padding: 3px 6px;
+
+          &-decline {
+            font-size: 11px;
+            padding: 3px 6px;
+          }
+        }
+      }
+    }
+
+    &-docs {
+      padding: 0 12px;
+
+      &-item {
+        &-text {
+          font-size: 14px;
+        }
+
+        &-html,
+        &-deadline {
+          font-size: 11px;
+        }
+      }
+
+      &-time {
+        font-size: 11px;
+      }
+
+      &-doc,
+      &-doc1 {
+        font-size: 11px;
+        padding: 3px 6px;
+      }
+    }
+
+    &-table {
+      width: calc(100vw - 80px);
+
+      &-container {
+        padding: 0 12px;
+      }
+
+      &-cell {
+        min-height: 28px;
+        padding: 2px 6px;
+
+        &-download {
+          font-size: 11px;
+          padding: 1px 6px;
+        }
+
+        &-img {
+          max-width: 200px !important;
+          height: 100px !important;
+        }
+      }
+
+      &-empty {
+        padding: 20px 0px;
+
+        &-text {
+          font-size: 11px;
+        }
+      }
+    }
+
+    &-notification {
+      margin-right: 12px;
+      margin-left: 12px;
+      gap: 8px;
+
+      &-item {
+        padding: 3px 6px;
+        gap: 6px;
+        border-radius: 8px;
+
+        &-title {
+          font-size: 12px;
+        }
+
+        &-description {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+}
+
+/* Маленькие мобильные: 479px и меньше */
+@media (max-width: 479px) {
+  .profile {
+    &-container {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      margin-left: 4px;
+      margin-right: 4px;
+      border-radius: 6px;
+    }
+
+    &-admin {
+      width: calc(100% - 20px);
+      margin-left: 10px;
+      margin-right: 10px;
+      height: calc(100vh - 50px);
+      border-radius: 6px;
+    }
+
+    &-block {
+      gap: 12px;
+      padding: 10px 0px;
+    }
+
+    &-sider {
+      padding-left: 10px;
+      padding-right: 10px;
+      gap: 4px;
+
+      &-item {
+        min-width: 80px;
+        padding: 4px;
+        grid-template-columns: 1fr;
+        gap: 2px;
+
+        &:hover {
+          padding: 4px;
+          grid-template-columns: 1fr;
+          gap: 2px;
+        }
+
+        &-active {
+          padding: 4px;
+          grid-template-columns: 1fr;
+          gap: 2px;
+        }
+
+        &-text {
+          font-size: 11px;
+
+          &-active {
+            font-size: 11px;
+          }
+        }
+
+        &-icon {
+          &-profile,
+          &-docs,
+          &-notification,
+          &-homework {
+            width: 16px;
+            height: 16px;
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+
+    &-siderAdmin {
+      &-group {
+        margin: 0 10px;
+        padding: 2px 4px;
+
+        &-text {
+          font-size: 11px;
+        }
+
+        &-arrow {
+          width: 18px;
+          height: 18px;
+
+          &-active {
+            width: 18px;
+            height: 18px;
+          }
+        }
+      }
+
+      &-items {
+        padding-left: 12px;
+      }
+
+      &-item {
+        padding: 2px 4px;
+
+        &:hover {
+          padding: 2px 4px;
+        }
+
+        &-active {
+          padding: 2px 4px;
+        }
+
+        &-text {
+          font-size: 10px;
+
+          &-active {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+
+    &-user {
+      gap: 12px;
+      row-gap: 10px;
+      padding: 0 10px;
+
+      &-avatar {
+        width: 70px !important;
+        height: 70px !important;
+
+        &-here {
+          width: 70px !important;
+          height: 70px !important;
+        }
+      }
+
+      &-item {
+        &-text {
+          font-size: 11px;
+        }
+      }
+
+      &-itemNoEdit {
+        &-text {
+          font-size: 11px;
+        }
+      }
+
+      &-footer {
+        gap: 6px;
+
+        &-button {
+          font-size: 10px;
+          padding: 2px 4px;
+
+          &-decline {
+            font-size: 10px;
+            padding: 2px 4px;
+          }
+        }
+      }
+    }
+
+    &-docs {
+      padding: 0 10px;
+
+      &-item {
+        &-text {
+          font-size: 13px;
+        }
+
+        &-html,
+        &-deadline {
+          font-size: 10px;
+        }
+      }
+
+      &-time {
+        font-size: 10px;
+      }
+
+      &-doc,
+      &-doc1 {
+        font-size: 10px;
+        padding: 2px 4px;
+      }
+    }
+
+    &-table {
+      width: calc(100vw - 60px);
+
+      &-container {
+        padding: 0 10px;
+      }
+
+      &-buttons {
+        gap: 8px;
+      }
+
+      &-button {
+        &-excel {
+          width: 18px;
+          height: 18px;
+        }
+      }
+
+      &-cell {
+        min-height: 24px;
+        padding: 1px 4px;
+
+        &-download {
+          font-size: 10px;
+          padding: 1px 4px;
+        }
+
+        &-img {
+          max-width: 150px !important;
+          height: 80px !important;
+        }
+      }
+
+      &-empty {
+        padding: 15px 0px;
+
+        &-text {
+          font-size: 10px;
+        }
+      }
+    }
+
+    &-notification {
+      margin-right: 10px;
+      margin-left: 10px;
+      gap: 6px;
+
+      &-item {
+        padding: 2px 4px;
+        gap: 4px;
+        border-radius: 6px;
+        border-width: 1px;
+
+        &-title {
+          font-size: 11px;
+        }
+
+        &-description {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
+
+/* Очень маленькие экраны: 359px и меньше */
+@media (max-width: 359px) {
+  .profile {
+    &-container {
+      margin-top: 8px;
+      margin-bottom: 8px;
+      margin-left: 2px;
+      margin-right: 2px;
+    }
+
+    &-admin {
+      width: calc(100% - 16px);
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+
+    &-sider {
+      &-item {
+        min-width: 70px;
+      }
+    }
+
+    &-user {
+      &-avatar {
+        width: 60px !important;
+        height: 60px !important;
+
+        &-here {
+          width: 60px !important;
+          height: 60px !important;
+        }
+      }
+    }
+
+    &-docs {
+      &-flex {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    &-table {
+      width: calc(100vw - 40px);
+
+      &-cell {
+        &-img {
+          max-width: 120px !important;
+          height: 60px !important;
+        }
+      }
+    }
+  }
 }

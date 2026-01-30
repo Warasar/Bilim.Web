@@ -33,6 +33,7 @@
         color: $colorRed;
         font-size: 42px;
         font-family: $fontCormorantBoldItalic;
+        line-height: 1.2;
       }
 
       &-text {
@@ -60,13 +61,14 @@
 
     &-header {
       background-color: $colorDark;
-      padding: 6px 12px;
+      padding: 12px;
 
       &-title {
         text-align: center;
         color: $colorWhite;
         font-size: 38px;
         font-family: $fontCormorantBoldItalic;
+        line-height: 1.1;
       }
 
       &-subtitle {
@@ -74,6 +76,8 @@
         color: $colorWhite;
         font-size: 24px;
         font-family: $fontCormorantMediumItalic;
+        line-height: 1.1;
+        margin-top: 4px;
       }
     }
   }
@@ -93,13 +97,14 @@
         display: grid;
         grid-template-columns: 1fr auto;
         align-items: center;
-        padding: 6px 12px;
+        padding: 12px;
       }
 
       &-name {
         font-size: 22px;
         color: $colorDark;
         font-family: $fontMedium;
+        line-height: 1.3;
       }
 
       &-arrow {
@@ -110,10 +115,10 @@
         background-size: cover;
         background-image: url("../../assets/icons/default/chevron-right_black.svg");
         transition: 0.2s;
+        cursor: pointer;
 
         &:hover {
           background-image: url("../../assets/icons/default/chevron-right_active.svg");
-          cursor: pointer;
         }
 
         &-active {
@@ -125,10 +130,10 @@
           background-image: url("../../assets/icons/default/chevron-right_black.svg");
           transition: 0.2s;
           transform: rotate(90deg);
+          cursor: pointer;
 
           &:hover {
             background-image: url("../../assets/icons/default/chevron-right_active.svg");
-            cursor: pointer;
           }
         }
       }
@@ -181,6 +186,7 @@
           color: $colorDark;
           font-size: 18px;
           font-family: $fontMediumItalic;
+          line-height: 1.3;
         }
 
         &-plus {
@@ -191,10 +197,10 @@
           background-size: cover;
           background-image: url("../../assets/icons/default/plus.svg");
           transition: 0.3s;
+          cursor: pointer;
 
           &:hover {
             background-image: url("../../assets/icons/default/plus_active.svg");
-            cursor: pointer;
           }
 
           &-active {
@@ -206,11 +212,10 @@
             background-image: url("../../assets/icons/default/plus.svg");
             transition: 0.3s;
             transform: rotate(-45deg);
+            cursor: pointer;
 
             &:hover {
               background-image: url("../../assets/icons/default/plus_active.svg");
-              transform: rotate(-45deg);
-              cursor: pointer;
             }
           }
         }
@@ -266,19 +271,21 @@
 
     &-title {
       background-color: $colorDark;
-      padding: 6px 12px;
+      padding: 12px;
       text-align: center;
       color: $colorWhite;
       font-size: 38px;
       font-family: $fontCormorantBoldItalic;
+      line-height: 1.1;
     }
 
     &-subtitle {
-      padding: 6px 12px;
+      padding: 12px;
       text-align: center;
       color: $colorSubtext;
       font-size: 24px;
       font-family: $fontCormorantBold;
+      line-height: 1.1;
     }
 
     &-content {
@@ -316,6 +323,7 @@
           font-size: 16px;
           font-family: $fontRegular;
           color: $colorDark;
+          line-height: 1.4;
         }
       }
 
@@ -369,10 +377,10 @@
         align-items: center;
         justify-content: center;
         transition: 0.2s;
+        cursor: pointer;
 
         &:hover {
           transform: scale(1.1);
-          cursor: pointer;
           background-color: $colorRed;
         }
 
@@ -394,6 +402,7 @@
         color: $colorDark;
         font-family: $fontMediumItalic;
         text-align: center;
+        line-height: 1.2;
       }
 
       &-subtitle {
@@ -401,6 +410,7 @@
         color: $colorDark;
         font-family: $fontItalic;
         text-align: center;
+        line-height: 1.2;
       }
     }
 
@@ -416,6 +426,7 @@
         font-size: 24px;
         font-family: $fontBold;
         text-align: center;
+        line-height: 1.2;
       }
 
       &-subtitle {
@@ -423,6 +434,7 @@
         font-size: 18px;
         font-family: $fontItalic;
         text-align: center;
+        line-height: 1.3;
       }
 
       &-grid {
@@ -468,7 +480,7 @@
           font-size: 24px;
           font-family: $fontCormorantBold;
           color: $colorDark;
-          line-height: 100%;
+          line-height: 1.2;
         }
 
         &-content {
@@ -532,9 +544,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
 
         &:hover {
-          cursor: pointer;
           background-color: rgba(0, 0, 0, 0.8);
         }
 
@@ -564,9 +576,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
 
         &:hover {
-          cursor: pointer;
           background-color: rgba(0, 0, 0, 0.8);
         }
 
@@ -606,15 +618,16 @@
           font-size: 24px;
           font-family: $fontMedium;
           color: $colorWhite;
+          line-height: 1.2;
         }
       }
 
       &-content {
         margin-top: 12px;
         margin-bottom: 8px;
-        width: 100%; /* или конкретное значение, например 100px */
-        height: 100%; /* сохраняет пропорции */
-        max-width: 640px; /* предотвращает выход за границы контейнера */
+        width: 100%;
+        height: 100%;
+        max-width: 640px;
         max-height: 400px;
         z-index: 2;
         object-fit: contain;
@@ -686,6 +699,7 @@
       color: $colorDark;
       font-family: $fontCormorantBold;
       font-size: 24px;
+      line-height: 1;
     }
   }
 
@@ -706,7 +720,7 @@
 
   &-list {
     li {
-      list-style-type: disc; /*  меняем на точки */
+      list-style-type: disc;
     }
   }
 }
@@ -729,5 +743,1677 @@
   to {
     max-height: 0;
     opacity: 0;
+  }
+}
+
+/* ========== МЕДИА-ЗАПРОСЫ ========== */
+
+/* Планшеты: 1240px - 1024px */
+@media (max-width: 1240px) {
+  .university {
+    &-main {
+      max-width: 1000px;
+      padding: 12px 20px;
+    }
+
+    &-header {
+      margin-top: 20px;
+      gap: 36px;
+
+      &-left {
+        &-title {
+          font-size: 38px;
+        }
+
+        &-text {
+          font-size: 15px;
+        }
+      }
+
+      &-right {
+        height: 280px;
+      }
+    }
+
+    &-item {
+      margin-top: 32px;
+
+      &-header {
+        &-title {
+          font-size: 34px;
+        }
+
+        &-subtitle {
+          font-size: 22px;
+        }
+      }
+    }
+
+    &-fakultet {
+      &-item {
+        &-name {
+          font-size: 20px;
+        }
+
+        &-arrow {
+          width: 32px;
+          height: 32px;
+
+          &-active {
+            width: 32px;
+            height: 32px;
+          }
+        }
+      }
+
+      &-child {
+        grid-template-columns: 35% 1fr;
+
+        &-header {
+          &-text {
+            font-size: 17px;
+          }
+
+          &-plus {
+            width: 32px;
+            height: 32px;
+
+            &-active {
+              width: 32px;
+              height: 32px;
+            }
+          }
+        }
+      }
+    }
+
+    &-prices {
+      margin-top: 32px;
+
+      &-title {
+        font-size: 34px;
+      }
+
+      &-subtitle {
+        font-size: 22px;
+      }
+
+      &-item {
+        gap: 36px;
+        padding: 20px 12px;
+      }
+    }
+
+    &-steps {
+      &-tab {
+        &-circle {
+          width: 32px;
+          height: 32px;
+
+          &-number {
+            font-size: 16px;
+          }
+        }
+
+        &-title {
+          font-size: 15px;
+        }
+
+        &-subtitle {
+          font-size: 13px;
+        }
+      }
+
+      &-item {
+        margin-top: 32px;
+
+        &-title {
+          font-size: 22px;
+        }
+
+        &-subtitle {
+          font-size: 17px;
+        }
+
+        &-grid {
+          gap: 30px;
+          max-width: 600px;
+        }
+
+        &-block {
+          gap: 20px;
+
+          &-title {
+            font-size: 22px;
+          }
+
+          &-content {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+
+    &-dormitory {
+      &-items {
+        max-width: 580px;
+        gap: 20px;
+      }
+
+      &-iframe {
+        max-width: 580px;
+        height: 326px;
+      }
+
+      &-carousel {
+        min-height: 360px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 580px;
+          max-height: 360px;
+        }
+      }
+    }
+
+    &-docs {
+      &-circle {
+        width: 32px;
+        height: 32px;
+        font-size: 22px;
+      }
+    }
+  }
+}
+
+/* Планшеты: 1023px - 900px */
+@media (max-width: 1023px) {
+  .university {
+    &-main {
+      max-width: 900px;
+      padding: 12px 16px;
+    }
+
+    &-header {
+      margin-top: 18px;
+      gap: 30px;
+
+      &-left {
+        &-title {
+          font-size: 34px;
+        }
+
+        &-text {
+          font-size: 14px;
+        }
+      }
+
+      &-right {
+        height: 250px;
+      }
+    }
+
+    &-item {
+      margin-top: 28px;
+
+      &-header {
+        &-title {
+          font-size: 30px;
+        }
+
+        &-subtitle {
+          font-size: 20px;
+        }
+      }
+    }
+
+    &-fakultet {
+      &-item {
+        &-name {
+          font-size: 18px;
+        }
+
+        &-arrow {
+          width: 30px;
+          height: 30px;
+
+          &-active {
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+
+      &-child {
+        grid-template-columns: 1fr;
+
+        &-header {
+          padding: 10px;
+          gap: 10px;
+
+          &-text {
+            font-size: 16px;
+          }
+
+          &-plus {
+            width: 30px;
+            height: 30px;
+
+            &-active {
+              width: 30px;
+              height: 30px;
+            }
+          }
+        }
+      }
+    }
+
+    &-prices {
+      margin-top: 28px;
+
+      &-title {
+        font-size: 30px;
+      }
+
+      &-subtitle {
+        font-size: 20px;
+      }
+
+      &-item {
+        gap: 30px;
+        padding: 18px 10px;
+      }
+    }
+
+    &-steps {
+      &-tab {
+        &-circle {
+          width: 30px;
+          height: 30px;
+
+          &-number {
+            font-size: 15px;
+          }
+        }
+
+        &-title {
+          font-size: 14px;
+        }
+
+        &-subtitle {
+          font-size: 12px;
+        }
+      }
+
+      &-item {
+        margin-top: 28px;
+
+        &-title {
+          font-size: 20px;
+        }
+
+        &-subtitle {
+          font-size: 16px;
+        }
+
+        &-grid {
+          gap: 26px;
+          max-width: 550px;
+        }
+
+        &-block {
+          gap: 18px;
+
+          &-title {
+            font-size: 20px;
+          }
+
+          &-content {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    &-dormitory {
+      &-items {
+        max-width: 520px;
+        gap: 18px;
+      }
+
+      &-iframe {
+        max-width: 520px;
+        height: 293px;
+      }
+
+      &-carousel {
+        min-height: 320px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 520px;
+          max-height: 320px;
+        }
+      }
+    }
+
+    &-docs {
+      &-circle {
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+/* Планшеты: 899px - 768px */
+@media (max-width: 899px) {
+  .university {
+    &-main {
+      padding: 12px 14px;
+    }
+
+    &-header {
+      margin-top: 16px;
+      grid-template-columns: 1fr;
+      gap: 24px;
+
+      &-left {
+        order: 2;
+
+        &-title {
+          font-size: 32px;
+          text-align: center;
+        }
+
+        &-text {
+          font-size: 14px;
+          text-align: center;
+        }
+      }
+
+      &-right {
+        order: 1;
+        height: 300px;
+      }
+    }
+
+    &-item {
+      margin-top: 24px;
+      border-radius: 8px;
+
+      &-header {
+        border-radius: 8px 8px 0 0;
+        padding: 10px;
+
+        &-title {
+          font-size: 28px;
+        }
+
+        &-subtitle {
+          font-size: 18px;
+        }
+      }
+    }
+
+    &-fakultet {
+      border-radius: 0 0 8px 8px;
+
+      &-item {
+        &-grid {
+          padding: 10px;
+        }
+
+        &-name {
+          font-size: 17px;
+        }
+
+        &-arrow {
+          width: 28px;
+          height: 28px;
+
+          &-active {
+            width: 28px;
+            height: 28px;
+          }
+        }
+      }
+
+      &-child {
+        &-header {
+          padding: 8px 10px;
+
+          &-grid {
+            gap: 10px;
+          }
+
+          &-text {
+            font-size: 15px;
+          }
+
+          &-plus {
+            width: 28px;
+            height: 28px;
+
+            &-active {
+              width: 28px;
+              height: 28px;
+            }
+          }
+        }
+
+        &-content {
+          &-text {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+
+    &-prices {
+      margin-top: 24px;
+      border-radius: 8px;
+
+      &-title {
+        font-size: 28px;
+        padding: 10px;
+      }
+
+      &-subtitle {
+        font-size: 18px;
+        padding: 10px;
+      }
+
+      &-content {
+        padding: 10px;
+      }
+
+      &-item {
+        gap: 24px;
+        padding: 16px 10px;
+        grid-template-columns: 1fr;
+        gap: 8px;
+
+        &-names {
+          &-text {
+            font-size: 15px;
+          }
+        }
+
+        &-price {
+          font-size: 15px;
+        }
+      }
+    }
+
+    &-steps {
+      padding: 10px;
+      border-radius: 0 0 8px 8px;
+
+      &-tabs {
+        margin-top: 10px;
+        gap: 10px;
+      }
+
+      &-tab {
+        gap: 10px;
+
+        &-line {
+          top: 16px;
+        }
+
+        &-circle {
+          width: 28px;
+          height: 28px;
+
+          &-number {
+            font-size: 14px;
+          }
+        }
+
+        &-title {
+          font-size: 13px;
+        }
+
+        &-subtitle {
+          font-size: 11px;
+        }
+      }
+
+      &-item {
+        margin-top: 24px;
+
+        &-title {
+          font-size: 18px;
+        }
+
+        &-subtitle {
+          font-size: 15px;
+        }
+
+        &-grid {
+          gap: 24px;
+          max-width: 100%;
+          margin-top: 16px;
+        }
+
+        &-block {
+          gap: 16px;
+
+          &-title {
+            font-size: 18px;
+          }
+
+          &-content {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    &-dormitory {
+      padding: 10px;
+      border-radius: 0 0 8px 8px;
+
+      &-items {
+        margin-top: 16px;
+        max-width: 100%;
+        gap: 16px;
+      }
+
+      &-iframe {
+        margin-top: 16px;
+        max-width: 100%;
+        height: 250px;
+      }
+
+      &-carousel {
+        margin-top: 16px;
+        min-height: 280px;
+        border-radius: 8px;
+      }
+
+      &-button {
+        &-left,
+        &-right {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      &-slide {
+        &-title {
+          margin-bottom: 16px;
+          gap: 8px;
+
+          &-text {
+            font-size: 22px;
+          }
+        }
+
+        &-content {
+          max-width: 100%;
+          max-height: 280px;
+        }
+      }
+    }
+
+    &-docs {
+      padding: 10px;
+      border-radius: 0 0 8px 8px;
+
+      &-items {
+        margin-top: 16px;
+        max-width: 100%;
+        gap: 16px;
+      }
+
+      &-circle {
+        width: 28px;
+        height: 28px;
+        font-size: 18px;
+        top: -6px;
+      }
+    }
+  }
+}
+
+/* Мобильные: 767px - 600px */
+@media (max-width: 767px) {
+  .university {
+    &-main {
+      padding: 12px 12px;
+    }
+
+    &-header {
+      margin-top: 14px;
+      gap: 20px;
+
+      &-left {
+        &-title {
+          font-size: 28px;
+        }
+
+        &-text {
+          font-size: 13px;
+        }
+      }
+
+      &-right {
+        height: 250px;
+      }
+    }
+
+    &-item {
+      margin-top: 20px;
+
+      &-header {
+        padding: 8px;
+
+        &-title {
+          font-size: 24px;
+        }
+
+        &-subtitle {
+          font-size: 16px;
+        }
+      }
+    }
+
+    &-fakultet {
+      &-item {
+        &-grid {
+          padding: 8px;
+        }
+
+        &-name {
+          font-size: 16px;
+        }
+
+        &-arrow {
+          width: 26px;
+          height: 26px;
+
+          &-active {
+            width: 26px;
+            height: 26px;
+          }
+        }
+      }
+
+      &-child {
+        &-header {
+          padding: 6px 8px;
+
+          &-grid {
+            gap: 8px;
+          }
+
+          &-text {
+            font-size: 14px;
+          }
+
+          &-plus {
+            width: 26px;
+            height: 26px;
+
+            &-active {
+              width: 26px;
+              height: 26px;
+            }
+          }
+        }
+
+        &-content {
+          &-text {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    &-prices {
+      margin-top: 20px;
+
+      &-title {
+        font-size: 24px;
+        padding: 8px;
+      }
+
+      &-subtitle {
+        font-size: 16px;
+        padding: 8px;
+      }
+
+      &-content {
+        padding: 8px;
+      }
+
+      &-item {
+        padding: 12px 8px;
+
+        &-names {
+          &-text {
+            font-size: 14px;
+          }
+        }
+
+        &-price {
+          font-size: 14px;
+        }
+      }
+    }
+
+    &-steps {
+      padding: 8px;
+
+      &-tabs {
+        margin-top: 8px;
+        gap: 8px;
+      }
+
+      &-tab {
+        gap: 8px;
+
+        &-line {
+          top: 14px;
+        }
+
+        &-circle {
+          width: 26px;
+          height: 26px;
+
+          &-number {
+            font-size: 13px;
+          }
+        }
+
+        &-title {
+          font-size: 12px;
+        }
+
+        &-subtitle {
+          font-size: 10px;
+        }
+      }
+
+      &-item {
+        margin-top: 20px;
+
+        &-title {
+          font-size: 16px;
+        }
+
+        &-subtitle {
+          font-size: 14px;
+        }
+
+        &-grid {
+          gap: 20px;
+        }
+
+        &-block {
+          gap: 14px;
+
+          &-icon {
+            width: 24px;
+            height: 24px;
+          }
+
+          &-title {
+            font-size: 16px;
+          }
+
+          &-content {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+
+    &-dormitory {
+      padding: 8px;
+
+      &-items {
+        gap: 14px;
+      }
+
+      &-iframe {
+        height: 220px;
+      }
+
+      &-carousel {
+        min-height: 240px;
+      }
+
+      &-button {
+        &-left {
+          left: 16px;
+          width: 36px;
+          height: 36px;
+        }
+
+        &-right {
+          right: 16px;
+          width: 36px;
+          height: 36px;
+        }
+      }
+
+      &-slide {
+        &-title {
+          margin-bottom: 12px;
+
+          &-text {
+            font-size: 20px;
+          }
+        }
+
+        &-content {
+          max-height: 240px;
+        }
+      }
+
+      &-dots {
+        padding: 16px;
+      }
+    }
+
+    &-docs {
+      padding: 8px;
+
+      &-items {
+        gap: 14px;
+      }
+
+      &-circle {
+        width: 26px;
+        height: 26px;
+        font-size: 16px;
+        top: -4px;
+      }
+    }
+  }
+}
+
+/* Мобильные: 599px - 480px */
+@media (max-width: 599px) {
+  .university {
+    &-main {
+      padding: 10px 10px;
+    }
+
+    &-header {
+      margin-top: 12px;
+      gap: 16px;
+
+      &-left {
+        &-title {
+          font-size: 24px;
+        }
+
+        &-text {
+          font-size: 12px;
+        }
+      }
+
+      &-right {
+        height: 200px;
+      }
+    }
+
+    &-item {
+      margin-top: 16px;
+
+      &-header {
+        padding: 6px;
+
+        &-title {
+          font-size: 22px;
+        }
+
+        &-subtitle {
+          font-size: 14px;
+        }
+      }
+    }
+
+    &-fakultet {
+      &-item {
+        &-grid {
+          padding: 6px;
+        }
+
+        &-name {
+          font-size: 15px;
+        }
+
+        &-arrow {
+          width: 24px;
+          height: 24px;
+
+          &-active {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+
+      &-child {
+        &-header {
+          padding: 4px 6px;
+
+          &-grid {
+            gap: 6px;
+          }
+
+          &-text {
+            font-size: 13px;
+          }
+
+          &-plus {
+            width: 24px;
+            height: 24px;
+
+            &-active {
+              width: 24px;
+              height: 24px;
+            }
+          }
+        }
+
+        &-content {
+          &-text {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+
+    &-prices {
+      margin-top: 16px;
+
+      &-title {
+        font-size: 22px;
+        padding: 6px;
+      }
+
+      &-subtitle {
+        font-size: 14px;
+        padding: 6px;
+      }
+
+      &-content {
+        padding: 6px;
+      }
+
+      &-item {
+        padding: 10px 6px;
+
+        &-names {
+          &-text {
+            font-size: 13px;
+          }
+        }
+
+        &-price {
+          font-size: 13px;
+        }
+      }
+    }
+
+    &-steps {
+      padding: 6px;
+
+      &-tabs {
+        margin-top: 6px;
+        gap: 6px;
+      }
+
+      &-tab {
+        gap: 6px;
+
+        &-line {
+          top: 12px;
+        }
+
+        &-circle {
+          width: 24px;
+          height: 24px;
+
+          &-number {
+            font-size: 12px;
+          }
+        }
+
+        &-title {
+          font-size: 11px;
+        }
+
+        &-subtitle {
+          font-size: 9px;
+        }
+      }
+
+      &-item {
+        margin-top: 16px;
+
+        &-title {
+          font-size: 15px;
+        }
+
+        &-subtitle {
+          font-size: 13px;
+        }
+
+        &-grid {
+          gap: 16px;
+        }
+
+        &-block {
+          gap: 12px;
+
+          &-icon {
+            width: 22px;
+            height: 22px;
+          }
+
+          &-title {
+            font-size: 15px;
+          }
+
+          &-content {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    &-dormitory {
+      padding: 6px;
+
+      &-items {
+        gap: 12px;
+      }
+
+      &-iframe {
+        height: 180px;
+        border-radius: 8px;
+      }
+
+      &-carousel {
+        min-height: 200px;
+      }
+
+      &-button {
+        &-left {
+          left: 12px;
+          width: 32px;
+          height: 32px;
+        }
+
+        &-right {
+          right: 12px;
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      &-slide {
+        &-title {
+          margin-bottom: 10px;
+
+          &-text {
+            font-size: 18px;
+          }
+        }
+
+        &-content {
+          max-height: 200px;
+          border-radius: 8px;
+        }
+      }
+
+      &-dots {
+        padding: 12px;
+      }
+    }
+
+    &-docs {
+      padding: 6px;
+
+      &-items {
+        gap: 12px;
+      }
+
+      &-circle {
+        width: 24px;
+        height: 24px;
+        font-size: 15px;
+        top: -3px;
+      }
+    }
+  }
+}
+
+/* Маленькие мобильные: 479px и меньше */
+@media (max-width: 479px) {
+  .university {
+    &-main {
+      padding: 8px 8px;
+    }
+
+    &-header {
+      margin-top: 10px;
+      gap: 14px;
+
+      &-left {
+        &-title {
+          font-size: 20px;
+        }
+
+        &-text {
+          font-size: 11px;
+        }
+      }
+
+      &-right {
+        height: 180px;
+        border-radius: 8px;
+      }
+    }
+
+    &-item {
+      margin-top: 14px;
+      border-radius: 6px;
+
+      &-header {
+        border-radius: 6px 6px 0 0;
+        padding: 5px;
+
+        &-title {
+          font-size: 20px;
+        }
+
+        &-subtitle {
+          font-size: 12px;
+        }
+      }
+    }
+
+    &-fakultet {
+      border-radius: 0 0 6px 6px;
+
+      &-item {
+        &-grid {
+          padding: 5px;
+        }
+
+        &-name {
+          font-size: 14px;
+        }
+
+        &-arrow {
+          width: 22px;
+          height: 22px;
+
+          &-active {
+            width: 22px;
+            height: 22px;
+          }
+        }
+      }
+
+      &-child {
+        &-header {
+          padding: 3px 5px;
+
+          &-grid {
+            gap: 5px;
+          }
+
+          &-text {
+            font-size: 12px;
+          }
+
+          &-plus {
+            width: 22px;
+            height: 22px;
+
+            &-active {
+              width: 22px;
+              height: 22px;
+            }
+          }
+        }
+
+        &-content {
+          &-text {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    &-prices {
+      margin-top: 14px;
+      border-radius: 6px;
+
+      &-title {
+        font-size: 20px;
+        padding: 5px;
+      }
+
+      &-subtitle {
+        font-size: 12px;
+        padding: 5px;
+      }
+
+      &-content {
+        padding: 5px;
+      }
+
+      &-item {
+        padding: 8px 5px;
+
+        &-names {
+          &-text {
+            font-size: 12px;
+          }
+        }
+
+        &-price {
+          font-size: 12px;
+        }
+      }
+    }
+
+    &-steps {
+      padding: 5px;
+      border-radius: 0 0 6px 6px;
+
+      &-tabs {
+        margin-top: 5px;
+        gap: 5px;
+      }
+
+      &-tab {
+        gap: 5px;
+
+        &-line {
+          top: 10px;
+        }
+
+        &-circle {
+          width: 22px;
+          height: 22px;
+
+          &-number {
+            font-size: 11px;
+          }
+        }
+
+        &-title {
+          font-size: 10px;
+        }
+
+        &-subtitle {
+          font-size: 8px;
+        }
+      }
+
+      &-item {
+        margin-top: 14px;
+
+        &-title {
+          font-size: 14px;
+        }
+
+        &-subtitle {
+          font-size: 12px;
+        }
+
+        &-grid {
+          gap: 14px;
+        }
+
+        &-block {
+          gap: 10px;
+
+          &-icon {
+            width: 20px;
+            height: 20px;
+          }
+
+          &-title {
+            font-size: 14px;
+          }
+
+          &-content {
+            font-size: 11px;
+          }
+        }
+      }
+    }
+
+    &-dormitory {
+      padding: 5px;
+      border-radius: 0 0 6px 6px;
+
+      &-items {
+        gap: 10px;
+      }
+
+      &-iframe {
+        height: 160px;
+      }
+
+      &-carousel {
+        min-height: 180px;
+        border-radius: 6px;
+      }
+
+      &-button {
+        &-left {
+          left: 10px;
+          width: 28px;
+          height: 28px;
+        }
+
+        &-right {
+          right: 10px;
+          width: 28px;
+          height: 28px;
+        }
+      }
+
+      &-slide {
+        &-title {
+          margin-bottom: 8px;
+
+          &-text {
+            font-size: 16px;
+          }
+        }
+
+        &-content {
+          max-height: 180px;
+          border-radius: 6px;
+        }
+      }
+
+      &-dots {
+        padding: 10px;
+      }
+    }
+
+    &-docs {
+      padding: 5px;
+      border-radius: 0 0 6px 6px;
+
+      &-items {
+        gap: 10px;
+      }
+
+      &-circle {
+        width: 22px;
+        height: 22px;
+        font-size: 14px;
+        top: -2px;
+      }
+    }
+  }
+}
+
+/* Очень маленькие экраны: 359px и меньше */
+@media (max-width: 359px) {
+  .university {
+    &-main {
+      padding: 6px 6px;
+    }
+
+    &-header {
+      margin-top: 8px;
+      gap: 12px;
+
+      &-left {
+        &-title {
+          font-size: 18px;
+        }
+
+        &-text {
+          font-size: 10px;
+        }
+      }
+
+      &-right {
+        height: 150px;
+      }
+    }
+
+    &-item {
+      margin-top: 12px;
+
+      &-header {
+        padding: 4px;
+
+        &-title {
+          font-size: 18px;
+        }
+
+        &-subtitle {
+          font-size: 11px;
+        }
+      }
+    }
+
+    &-fakultet {
+      &-item {
+        &-grid {
+          padding: 4px;
+        }
+
+        &-name {
+          font-size: 13px;
+        }
+
+        &-arrow {
+          width: 20px;
+          height: 20px;
+
+          &-active {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+
+      &-child {
+        &-header {
+          padding: 2px 4px;
+
+          &-grid {
+            gap: 4px;
+          }
+
+          &-text {
+            font-size: 11px;
+          }
+
+          &-plus {
+            width: 20px;
+            height: 20px;
+
+            &-active {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+
+        &-content {
+          &-text {
+            font-size: 11px;
+          }
+        }
+      }
+    }
+
+    &-prices {
+      margin-top: 12px;
+
+      &-title {
+        font-size: 18px;
+        padding: 4px;
+      }
+
+      &-subtitle {
+        font-size: 11px;
+        padding: 4px;
+      }
+
+      &-content {
+        padding: 4px;
+      }
+
+      &-item {
+        padding: 6px 4px;
+
+        &-names {
+          &-text {
+            font-size: 11px;
+          }
+        }
+
+        &-price {
+          font-size: 11px;
+        }
+      }
+    }
+
+    &-steps {
+      padding: 4px;
+
+      &-tabs {
+        margin-top: 4px;
+        gap: 4px;
+      }
+
+      &-tab {
+        gap: 4px;
+
+        &-line {
+          top: 8px;
+        }
+
+        &-circle {
+          width: 20px;
+          height: 20px;
+
+          &-number {
+            font-size: 10px;
+          }
+        }
+
+        &-title {
+          font-size: 9px;
+        }
+
+        &-subtitle {
+          font-size: 7px;
+        }
+      }
+
+      &-item {
+        margin-top: 12px;
+
+        &-title {
+          font-size: 13px;
+        }
+
+        &-subtitle {
+          font-size: 11px;
+        }
+
+        &-grid {
+          gap: 12px;
+        }
+
+        &-block {
+          gap: 8px;
+
+          &-icon {
+            width: 18px;
+            height: 18px;
+          }
+
+          &-title {
+            font-size: 13px;
+          }
+
+          &-content {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+
+    &-dormitory {
+      padding: 4px;
+
+      &-items {
+        gap: 8px;
+      }
+
+      &-iframe {
+        height: 140px;
+      }
+
+      &-carousel {
+        min-height: 160px;
+      }
+
+      &-button {
+        &-left,
+        &-right {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      &-slide {
+        &-title {
+          &-text {
+            font-size: 14px;
+          }
+        }
+
+        &-content {
+          max-height: 160px;
+        }
+      }
+
+      &-dots {
+        padding: 8px;
+      }
+    }
+
+    &-docs {
+      padding: 4px;
+
+      &-items {
+        gap: 8px;
+      }
+
+      &-circle {
+        width: 20px;
+        height: 20px;
+        font-size: 13px;
+        top: -1px;
+      }
+    }
   }
 }

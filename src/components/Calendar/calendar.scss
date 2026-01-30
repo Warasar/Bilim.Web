@@ -303,4 +303,576 @@
       color: $colorWhite;
     }
   }
+
+  &-mobile {
+    display: none; // Скрыт на десктопе
+  }
+}
+
+/* ========== МЕДИА-ЗАПРОСЫ ========== */
+
+/* Планшеты: 1240px - 1024px */
+@media (max-width: 1240px) {
+  .calendar {
+    &-block {
+      max-width: 1000px;
+    }
+
+    &-title {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    &-cell,
+    &-cell-disabled {
+      min-height: 80px;
+    }
+
+    &-legend {
+      margin-top: 20px;
+      padding: 10px;
+
+      &-items {
+        gap: 10px;
+      }
+
+      &-item {
+        &-text {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
+/* Планшеты: 1023px - 900px */
+@media (max-width: 1023px) {
+  .calendar {
+    &-block {
+      max-width: 900px;
+      padding: 12px 20px;
+    }
+
+    &-title {
+      font-size: 26px;
+      margin-bottom: 18px;
+    }
+
+    &-cell,
+    &-cell-disabled {
+      min-height: 70px;
+    }
+
+    &-cell-header-text {
+      font-size: 13px;
+    }
+
+    &-cell-item {
+      font-size: 11px;
+    }
+
+    &-legend {
+      &-title {
+        font-size: 16px;
+      }
+
+      &-items {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 12px;
+      }
+
+      &-item {
+        flex: 0 0 calc(50% - 6px);
+      }
+    }
+  }
+}
+
+/* Планшеты: 899px - 768px */
+@media (max-width: 899px) {
+  .calendar {
+    &-desktop {
+      display: none; // Скрываем десктопную версию
+    }
+
+    &-mobile {
+      display: block; // Показываем мобильную версию
+    }
+
+    &-block {
+      max-width: 100%;
+      padding: 12px 16px;
+    }
+
+    &-title {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    &-mobile {
+      &-header {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        background-color: $colorDark;
+        padding: 10px 16px;
+        border-radius: 8px 8px 0 0;
+
+        &-button {
+          width: 32px;
+          height: 32px;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: 0.2s;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+          }
+
+          &-left {
+            width: 16px;
+            height: 16px;
+            background-image: url("../../assets/icons/default/chevron-left.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+          }
+
+          &-right {
+            width: 16px;
+            height: 16px;
+            background-image: url("../../assets/icons/default/chevron-right.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+          }
+        }
+
+        &-text {
+          color: $colorWhite;
+          font-family: $fontMedium;
+          font-size: 16px;
+          text-align: center;
+        }
+      }
+
+      &-current-day {
+        background-color: $colorWhite;
+        padding: 16px;
+        border-bottom: 1px solid $colorBorder;
+
+        &-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 12px;
+
+          &-date {
+            font-family: $fontBold;
+            font-size: 20px;
+            color: $colorDark;
+          }
+
+          &-day {
+            font-family: $fontMedium;
+            font-size: 14px;
+            color: $colorSubtext;
+          }
+        }
+
+        &-events {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          &-empty {
+            text-align: center;
+            color: $colorSubtext;
+            font-family: $fontMediumItalic;
+            font-size: 14px;
+            padding: 10px 0;
+          }
+        }
+
+        &-event {
+          padding: 12px;
+          border-radius: 8px;
+          background-color: rgba($colorYellow, 0.1);
+          border-left: 4px solid $colorYellow;
+
+          &-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px;
+
+            &-title {
+              font-family: $fontMedium;
+              font-size: 14px;
+              color: $colorDark;
+              flex: 1;
+            }
+
+            &-icon {
+              width: 16px;
+              height: 16px;
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: contain;
+              margin-left: 8px;
+
+              &-blue {
+                background-image: url("../../assets/icons/brandIcon/star-blue.png");
+              }
+
+              &-red {
+                background-image: url("../../assets/icons/brandIcon/star-red.png");
+              }
+
+              &-yellow {
+                background-image: url("../../assets/icons/brandIcon/star-yellow.png");
+              }
+
+              &-darkblue {
+                background-image: url("../../assets/icons/brandIcon/star-darkblue.png");
+              }
+            }
+          }
+
+          &-description {
+            font-size: 13px;
+            color: $colorDark;
+            line-height: 1.4;
+          }
+
+          &-time {
+            display: inline-block;
+            margin-top: 4px;
+            font-size: 12px;
+            color: $colorSubtext;
+            background-color: rgba($colorDefault, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+          }
+        }
+      }
+
+      &-calendar {
+        background-color: $colorWhite;
+        padding: 16px;
+
+        &-week {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          margin-bottom: 12px;
+
+          &-day {
+            text-align: center;
+            font-family: $fontMedium;
+            font-size: 12px;
+            color: $colorDark;
+            padding: 4px 0;
+
+            &-red {
+              color: $colorRed;
+            }
+          }
+        }
+
+        &-days {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          gap: 2px;
+        }
+
+        &-day {
+          aspect-ratio: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          border-radius: 4px;
+          transition: 0.2s;
+          position: relative;
+
+          &:hover {
+            background-color: rgba($colorDefault, 0.1);
+            cursor: pointer;
+          }
+
+          &-number {
+            font-family: $fontMedium;
+            font-size: 14px;
+            color: $colorDark;
+            margin-bottom: 2px;
+
+            &-other {
+              color: $colorSubtext;
+              opacity: 0.6;
+            }
+
+            &-today {
+              background-color: $colorDefault;
+              color: $colorWhite;
+              border-radius: 50%;
+              width: 24px;
+              height: 24px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+
+            &-weekend {
+              color: $colorRed;
+            }
+          }
+
+          &-events {
+            display: flex;
+            gap: 2px;
+            justify-content: center;
+
+            &-dot {
+              width: 6px;
+              height: 6px;
+              border-radius: 50%;
+              background-color: $colorDefault;
+
+              &-blue {
+                background-color: #3b82f6;
+              }
+
+              &-red {
+                background-color: #ef4444;
+              }
+
+              &-yellow {
+                background-color: #f59e0b;
+              }
+
+              &-darkblue {
+                background-color: #1e40af;
+              }
+            }
+          }
+
+          &-active {
+            background-color: rgba($colorYellow, 0.2);
+            border: 2px solid $colorYellow;
+          }
+        }
+      }
+    }
+
+    &-legend {
+      margin-top: 16px;
+      padding: 12px;
+
+      &-items {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      &-item {
+        flex: 0 0 auto;
+
+        &-text {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+/* Мобильные: 767px - 600px */
+@media (max-width: 767px) {
+  .calendar {
+    &-block {
+      padding: 12px 14px;
+    }
+
+    &-title {
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    &-mobile {
+      &-header {
+        padding: 8px 12px;
+
+        &-text {
+          font-size: 15px;
+        }
+      }
+
+      &-current-day {
+        padding: 12px;
+
+        &-header {
+          &-date {
+            font-size: 18px;
+          }
+        }
+
+        &-event {
+          padding: 10px;
+
+          &-header {
+            &-title {
+              font-size: 13px;
+            }
+          }
+
+          &-description {
+            font-size: 12px;
+          }
+        }
+      }
+
+      &-calendar {
+        padding: 12px;
+
+        &-week {
+          &-day {
+            font-size: 11px;
+          }
+        }
+
+        &-day {
+          &-number {
+            font-size: 13px;
+
+            &-today {
+              width: 22px;
+              height: 22px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Мобильные: 599px - 480px */
+@media (max-width: 599px) {
+  .calendar {
+    &-block {
+      padding: 10px 12px;
+    }
+
+    &-title {
+      font-size: 20px;
+    }
+
+    &-mobile {
+      &-calendar {
+        &-day {
+          &-number {
+            font-size: 12px;
+
+            &-today {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Маленькие мобильные: 479px и меньше */
+@media (max-width: 479px) {
+  .calendar {
+    &-block {
+      padding: 8px 10px;
+    }
+
+    &-title {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    &-mobile {
+      &-header {
+        padding: 6px 10px;
+
+        &-button {
+          width: 28px;
+          height: 28px;
+
+          &-left,
+          &-right {
+            width: 14px;
+            height: 14px;
+          }
+        }
+
+        &-text {
+          font-size: 14px;
+        }
+      }
+
+      &-current-day {
+        padding: 10px;
+
+        &-header {
+          &-date {
+            font-size: 16px;
+          }
+
+          &-day {
+            font-size: 12px;
+          }
+        }
+      }
+
+      &-calendar {
+        padding: 10px;
+
+        &-week {
+          &-day {
+            font-size: 10px;
+          }
+        }
+
+        &-day {
+          &-number {
+            font-size: 11px;
+
+            &-today {
+              width: 18px;
+              height: 18px;
+            }
+          }
+
+          &-events {
+            &-dot {
+              width: 4px;
+              height: 4px;
+            }
+          }
+        }
+      }
+    }
+
+    &-legend {
+      padding: 10px;
+
+      &-title {
+        font-size: 14px;
+      }
+
+      &-item {
+        &-text {
+          font-size: 11px;
+        }
+      }
+    }
+  }
 }

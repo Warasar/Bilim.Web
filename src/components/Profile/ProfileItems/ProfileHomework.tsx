@@ -142,11 +142,9 @@ export default function ProfileHomework({ setLoader }: Props) {
                   </div>
                 ) : null}
                 <div className="profile-docs-flex">
-                  <div>
-                    <div className="profile-docs-doc1" onClick={() => downloadFile(item.code)}>
-                      <DownloadOutlined />
-                      Скачать файл
-                    </div>
+                  <div className="profile-docs-doc1" onClick={() => downloadFile(item.code)}>
+                    <DownloadOutlined />
+                    Скачать файл
                   </div>
                   <Upload
                     className="profile-docs-upload"

@@ -270,3 +270,745 @@
     }
   }
 }
+
+/* ========== МЕДИА-ЗАПРОСЫ ДЛЯ MOTIVATION LETTER ========== */
+
+/* Планшеты: 1240px - 1024px */
+@media (max-width: 1240px) {
+  .mletter {
+    &-main {
+      max-width: 1000px;
+      padding: 12px 20px;
+      margin-bottom: 50px;
+    }
+
+    &-title {
+      font-size: 34px;
+      margin-top: 16px;
+    }
+
+    &-text {
+      font-size: 17px;
+      max-width: 600px;
+      margin-top: 16px;
+    }
+
+    &-iframe {
+      max-width: 750px;
+      min-height: 422px;
+      margin-top: 16px;
+    }
+
+    &-docs {
+      max-width: 600px;
+      column-gap: 20px;
+      row-gap: 10px;
+      margin-bottom: 35px;
+
+      &-item {
+        padding: 10px;
+        gap: 10px;
+
+        &-text {
+          font-size: 15px;
+        }
+
+        &-icon {
+          width: 22px;
+          height: 22px;
+        }
+      }
+    }
+
+    &-carousel {
+      margin-top: 50px;
+
+      &-header {
+        padding: 10px;
+
+        &-title {
+          font-size: 28px;
+        }
+      }
+
+      &-button {
+        &-left,
+        &-right {
+          width: 44px;
+          height: 44px;
+
+          &-icon {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+
+      &-block {
+        height: 500px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 800px;
+          max-height: 480px;
+        }
+      }
+    }
+  }
+}
+
+/* Планшеты: 1023px - 900px */
+@media (max-width: 1023px) {
+  .mletter {
+    &-main {
+      max-width: 900px;
+      padding: 12px 16px;
+      margin-bottom: 40px;
+    }
+
+    &-title {
+      font-size: 30px;
+      margin-top: 14px;
+    }
+
+    &-text {
+      font-size: 16px;
+      max-width: 550px;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    &-iframe {
+      max-width: 650px;
+      min-height: 366px;
+      margin-top: 14px;
+    }
+
+    &-docs {
+      max-width: 550px;
+      column-gap: 16px;
+      row-gap: 8px;
+      margin-bottom: 30px;
+
+      &-item {
+        padding: 9px;
+        gap: 8px;
+
+        &-text {
+          font-size: 14px;
+        }
+
+        &-icon {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+
+    &-carousel {
+      margin-top: 40px;
+
+      &-header {
+        padding: 8px;
+
+        &-title {
+          font-size: 26px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 12px;
+        }
+
+        &-right {
+          right: 12px;
+        }
+
+        &-left,
+        &-right {
+          width: 40px;
+          height: 40px;
+
+          &-icon {
+            width: 14px;
+            height: 14px;
+          }
+        }
+      }
+
+      &-block {
+        height: 450px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 740px;
+          max-height: 430px;
+        }
+
+        &-title {
+          margin-bottom: 20px;
+
+          &-text {
+            font-size: 22px;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 20px;
+      }
+    }
+  }
+}
+
+/* Планшеты: 899px - 768px */
+@media (max-width: 899px) {
+  .mletter {
+    &-main {
+      max-width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 35px;
+    }
+
+    &-title {
+      font-size: 28px;
+      margin-top: 12px;
+    }
+
+    &-text {
+      font-size: 15px;
+      max-width: 500px;
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    &-iframe {
+      max-width: 100%;
+      min-height: 300px;
+      margin-top: 12px;
+      height: 300px;
+    }
+
+    &-docs {
+      max-width: 500px;
+      column-gap: 12px;
+      row-gap: 8px;
+      margin-bottom: 25px;
+
+      &-item {
+        padding: 8px;
+        gap: 6px;
+        border-radius: 8px;
+
+        &-text {
+          font-size: 13px;
+        }
+
+        &-icon {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+
+    &-carousel {
+      margin-top: 35px;
+
+      &-header {
+        padding: 8px;
+
+        &-title {
+          font-size: 24px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 10px;
+        }
+
+        &-right {
+          right: 10px;
+        }
+
+        &-left,
+        &-right {
+          width: 36px;
+          height: 36px;
+
+          &-icon {
+            width: 12px;
+            height: 12px;
+          }
+        }
+      }
+
+      &-block {
+        height: 400px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 650px;
+          max-height: 380px;
+        }
+
+        &-title {
+          margin-bottom: 16px;
+
+          &-text {
+            font-size: 20px;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 16px;
+      }
+    }
+  }
+}
+
+/* Мобильные: 767px - 600px */
+@media (max-width: 767px) {
+  .mletter {
+    &-main {
+      padding: 10px 12px;
+      margin-bottom: 30px;
+    }
+
+    &-title {
+      font-size: 26px;
+      margin-top: 10px;
+    }
+
+    &-text {
+      font-size: 14px;
+      max-width: 450px;
+      margin-top: 10px;
+      padding: 0 10px;
+    }
+
+    &-iframe {
+      min-height: 250px;
+      height: 250px;
+      margin-top: 10px;
+    }
+
+    &-docs {
+      max-width: 450px;
+      column-gap: 10px;
+      row-gap: 6px;
+      margin-bottom: 20px;
+
+      &-item {
+        padding: 7px;
+        gap: 5px;
+
+        &-text {
+          font-size: 12px;
+        }
+
+        &-icon {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+
+    &-carousel {
+      margin-top: 30px;
+
+      &-header {
+        padding: 6px;
+
+        &-title {
+          font-size: 22px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 8px;
+        }
+
+        &-right {
+          right: 8px;
+        }
+
+        &-left,
+        &-right {
+          width: 32px;
+          height: 32px;
+
+          &-icon {
+            width: 10px;
+            height: 10px;
+          }
+        }
+      }
+
+      &-block {
+        height: 320px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 500px;
+          max-height: 300px;
+        }
+
+        &-title {
+          margin-bottom: 14px;
+
+          &-text {
+            font-size: 18px;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 14px;
+
+        &-button {
+          width: 8px;
+          height: 8px;
+        }
+      }
+    }
+  }
+}
+
+/* Мобильные: 599px - 480px */
+@media (max-width: 599px) {
+  .mletter {
+    &-main {
+      padding: 8px 10px;
+      margin-bottom: 25px;
+    }
+
+    &-title {
+      font-size: 24px;
+      margin-top: 8px;
+      padding: 0 10px;
+    }
+
+    &-text {
+      font-size: 13px;
+      max-width: 400px;
+      margin-top: 8px;
+      padding: 0 15px;
+    }
+
+    &-iframe {
+      min-height: 220px;
+      height: 220px;
+      margin-top: 8px;
+      border-radius: 8px;
+    }
+
+    &-docs {
+      max-width: 400px;
+      column-gap: 8px;
+      row-gap: 6px;
+      margin-bottom: 18px;
+
+      &-item {
+        padding: 6px;
+        gap: 4px;
+        border-radius: 6px;
+
+        &-text {
+          font-size: 11px;
+        }
+
+        &-icon {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+
+    &-carousel {
+      margin-top: 25px;
+      border-radius: 8px;
+
+      &-header {
+        padding: 6px;
+
+        &-title {
+          font-size: 20px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 6px;
+        }
+
+        &-right {
+          right: 6px;
+        }
+
+        &-left,
+        &-right {
+          width: 28px;
+          height: 28px;
+
+          &-icon {
+            width: 9px;
+            height: 9px;
+          }
+        }
+      }
+
+      &-block {
+        height: 260px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 400px;
+          max-height: 240px;
+          border-radius: 8px;
+        }
+
+        &-title {
+          margin-bottom: 12px;
+          padding: 0 10px;
+
+          &-text {
+            font-size: 16px;
+            text-align: center;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 12px;
+        gap: 5px;
+
+        &-button {
+          width: 7px;
+          height: 7px;
+        }
+      }
+    }
+  }
+}
+
+/* Маленькие мобильные: 479px и меньше */
+@media (max-width: 479px) {
+  .mletter {
+    &-main {
+      padding: 6px 8px;
+      margin-bottom: 20px;
+    }
+
+    &-title {
+      font-size: 22px;
+      margin-top: 6px;
+      padding: 0 8px;
+    }
+
+    &-text {
+      font-size: 12px;
+      max-width: 350px;
+      margin-top: 6px;
+      padding: 0 10px;
+    }
+
+    &-iframe {
+      min-height: 200px;
+      height: 200px;
+      margin-top: 6px;
+      border-radius: 6px;
+    }
+
+    &-docs {
+      max-width: 350px;
+      column-gap: 6px;
+      row-gap: 5px;
+      margin-bottom: 15px;
+
+      &-item {
+        padding: 5px;
+        gap: 3px;
+        border-radius: 5px;
+
+        &-text {
+          font-size: 10px;
+        }
+
+        &-icon {
+          width: 12px;
+          height: 12px;
+        }
+      }
+    }
+
+    &-carousel {
+      margin-top: 20px;
+
+      &-header {
+        padding: 5px;
+
+        &-title {
+          font-size: 18px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 5px;
+        }
+
+        &-right {
+          right: 5px;
+        }
+
+        &-left,
+        &-right {
+          width: 24px;
+          height: 24px;
+
+          &-icon {
+            width: 8px;
+            height: 8px;
+          }
+        }
+      }
+
+      &-block {
+        height: 200px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 300px;
+          max-height: 180px;
+        }
+
+        &-title {
+          margin-bottom: 10px;
+          padding: 0 8px;
+
+          &-text {
+            font-size: 14px;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 10px;
+        gap: 4px;
+
+        &-button {
+          width: 6px;
+          height: 6px;
+        }
+      }
+    }
+  }
+}
+
+/* Очень маленькие экраны: 359px и меньше */
+@media (max-width: 359px) {
+  .mletter {
+    &-title {
+      font-size: 20px;
+    }
+
+    &-text {
+      font-size: 11px;
+      max-width: 300px;
+    }
+
+    &-iframe {
+      min-height: 180px;
+      height: 180px;
+    }
+
+    &-docs {
+      max-width: 300px;
+
+      &-item {
+        &-text {
+          font-size: 9px;
+        }
+      }
+    }
+
+    &-carousel {
+      &-header {
+        &-title {
+          font-size: 16px;
+        }
+      }
+
+      &-block {
+        height: 180px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 240px;
+          max-height: 160px;
+        }
+
+        &-title {
+          &-text {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Ландшафтная ориентация на мобильных */
+@media (max-width: 899px) and (orientation: landscape) {
+  .mletter {
+    &-iframe {
+      height: 350px;
+      min-height: 350px;
+    }
+
+    &-carousel {
+      &-block {
+        height: 450px;
+      }
+
+      &-slide {
+        &-content {
+          max-height: 400px;
+        }
+      }
+    }
+  }
+}
+
+/* Для очень высоких экранов */
+@media (min-height: 1000px) {
+  .mletter {
+    &-iframe {
+      min-height: 600px;
+      height: 600px;
+    }
+
+    &-carousel {
+      &-block {
+        height: 700px;
+      }
+
+      &-slide {
+        &-content {
+          max-height: 650px;
+        }
+      }
+    }
+  }
+}

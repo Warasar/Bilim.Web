@@ -144,7 +144,11 @@ export default function Vuz({ data, setLoader, filterData }: Props) {
       <div className={`vuz-main`}>
         {data?.map((item: any) => {
           if (item.containerCode === "proftourTitle") {
-            return <ReactMarkdown key={"proftourTitle"}>{item.items.data.markdownText}</ReactMarkdown>;
+            return (
+              <div className="vuz-title" key={"proftourTitle"}>
+                <ReactMarkdown>{item.items.data.markdownText}</ReactMarkdown>
+              </div>
+            );
           }
 
           if (item.containerCode === "proftourVideo") {

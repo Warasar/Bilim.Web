@@ -93,6 +93,14 @@
       gap: 12px;
       align-items: center;
 
+      &:first-child {
+        padding-top: 24px;
+      }
+
+      &:last-child {
+        padding-bottom: 24px;
+      }
+
       &-text {
         font-size: 16px;
         color: $colorDark;
@@ -141,6 +149,7 @@
         background-size: cover;
         background-image: url("../../assets/icons/default/chevron-right.svg");
         transition: 0.2s;
+        cursor: pointer;
 
         &:hover {
           background-image: url("../../assets/icons/default/chevron-right_active.svg");
@@ -156,6 +165,7 @@
           background-image: url("../../assets/icons/default/chevron-right.svg");
           transition: 0.2s;
           transform: rotate(90deg);
+          cursor: pointer;
 
           &:hover {
             background-image: url("../../assets/icons/default/chevron-right_active.svg");
@@ -185,11 +195,11 @@
       font-family: $fontRegular;
       padding: 4px 12px;
       transition: 0.2s;
+      cursor: pointer;
 
       &:hover {
         background-color: $colorDark;
         color: $colorWhite;
-        cursor: pointer;
       }
 
       &-bold {
@@ -205,6 +215,7 @@
     color: $colorDark;
     max-width: 860px;
     text-align: center;
+    line-height: 1.5;
   }
 
   &-search {
@@ -224,6 +235,7 @@
       &-text {
         font-size: 16px;
         color: $colorDark;
+        white-space: nowrap;
       }
     }
 
@@ -234,9 +246,15 @@
       font-size: 16px;
       color: $colorWhite;
       transition: 0.2s;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 80px;
 
       &:hover {
-        cursor: pointer;
         background-color: $colorRed;
       }
     }
@@ -247,22 +265,31 @@
       background-color: $colorDark;
       border-radius: 6px;
       transition: 0.2s;
+      cursor: pointer;
+      position: relative;
 
       &:hover {
         background-color: $colorRed;
-        cursor: pointer;
       }
 
       &-active {
-        background-image: url("../../assets/icons/default/check.svg");
-        width: 24px;
-        height: 24px;
-        background-position: 50%;
-        background-repeat: no-repeat;
-        background-size: cover;
         background-color: $colorRed;
         border-radius: 6px;
         transition: 0.2s;
+
+        &::after {
+          content: "";
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          width: 16px;
+          height: 16px;
+          background-image: url("../../assets/icons/default/check.svg");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
       }
     }
   }
@@ -272,6 +299,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
+    width: 100%;
     margin-bottom: 40px;
 
     &-item {
@@ -285,13 +313,12 @@
       align-items: end;
       height: 180px;
       text-decoration: none;
+      transition: transform 0.2s ease;
 
       &:hover {
         cursor: pointer;
-      }
-
-      &:hover &-photo {
-        transform: scale(1.1);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       }
 
       &-container {
@@ -304,15 +331,16 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        pointer-events: none;
       }
 
       &-photo {
-        width: auto; /* или конкретное значение, например 100px */
-        height: auto; /* сохраняет пропорции */
-        max-width: 100%; /* предотвращает выход за границы контейнера */
-        z-index: 2;
-        object-fit: contain;
-        transition: 0.2s;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        object-fit: cover;
+        transition: transform 0.2s ease;
+        pointer-events: none;
       }
 
       &-bg {
@@ -331,6 +359,7 @@
         color: $colorWhite;
         font-size: 32px;
         font-family: $fontCormorantMediumItalic;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
       }
 
       &-name {
@@ -339,6 +368,8 @@
         color: $colorWhite;
         font-size: 16px;
         font-family: $fontMediumItalic;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        line-height: 1.3;
       }
     }
   }
@@ -354,6 +385,8 @@
       position: relative;
       border-radius: 12px;
       overflow: hidden;
+      background-color: $colorWhite;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
       &-header {
         display: grid;
@@ -362,15 +395,14 @@
         gap: 12px;
         background-color: $colorDark;
         padding: 12px 24px;
+        min-height: 80px;
 
         &-photo {
-          width: 64px; /* или конкретное значение, например 100px */
-          height: 64px; /* сохраняет пропорции */
-          max-width: 100%; /* предотвращает выход за границы контейнера */
-          z-index: 2;
+          width: 64px;
+          height: 64px;
           object-fit: cover;
-          transition: 0.2s;
           border-radius: 50%;
+          border: 2px solid $colorWhite;
         }
 
         &-column {
@@ -385,7 +417,7 @@
           font-family: $fontMedium;
           text-decoration: none;
           transition: 0.2s;
-          width: fit-content;
+          display: inline-block;
 
           &:hover {
             color: $colorRed;
@@ -401,10 +433,10 @@
           background-size: cover;
           background-image: url("../../assets/icons/default/chevron-right.svg");
           transition: 0.2s;
+          cursor: pointer;
 
           &:hover {
             background-image: url("../../assets/icons/default/chevron-right_active.svg");
-            cursor: pointer;
           }
 
           &-active {
@@ -416,20 +448,40 @@
             background-image: url("../../assets/icons/default/chevron-right.svg");
             transition: 0.2s;
             transform: rotate(90deg);
+            cursor: pointer;
 
             &:hover {
               background-image: url("../../assets/icons/default/chevron-right_active.svg");
-              cursor: pointer;
             }
           }
         }
       }
-    }
 
-    &-block {
-      display: grid;
-      background-color: $colorWhite;
+      &-block {
+        display: grid;
+        background-color: $colorWhite;
+      }
     }
+  }
+}
+
+/* Стили для фильтров с Select */
+.vuz-collapseFilter-item {
+  .ant-select {
+    width: 100%;
+  }
+
+  .ant-select-selector {
+    border-radius: 8px !important;
+    border: 1px solid #d9d9d9 !important;
+    min-height: 40px;
+  }
+}
+
+/* Стили для слайдера */
+.vuz-collapseFilter-item {
+  .rc-slider {
+    margin: 8px 0;
   }
 }
 
@@ -439,10 +491,11 @@
     opacity: 0;
   }
   to {
-    max-height: 100%;
+    max-height: 1000px;
     opacity: 1;
   }
 }
+
 @keyframes closeAnimation {
   from {
     max-height: 1000px;
@@ -451,5 +504,583 @@
   to {
     max-height: 0;
     opacity: 0;
+  }
+}
+
+/* ========== МЕДИА-ЗАПРОСЫ ========== */
+
+/* Планшеты: 1240px - 1024px */
+@media (max-width: 1240px) {
+  .vuz {
+    &-main {
+      max-width: 1000px;
+      padding: 12px 20px;
+    }
+
+    &-video {
+      width: 80%;
+      height: 400px;
+    }
+
+    &-collapse {
+      width: 80%;
+    }
+
+    &-vuzes {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+
+      &-item {
+        height: 160px;
+
+        &-shortname {
+          font-size: 28px;
+        }
+      }
+    }
+
+    &-list {
+      &-item {
+        &-header {
+          &-text {
+            font-size: 22px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Планшеты: 1023px - 900px */
+@media (max-width: 1023px) {
+  .vuz {
+    &-main {
+      max-width: 900px;
+    }
+
+    &-title {
+      font-size: 42px;
+    }
+
+    &-subtitle {
+      font-size: 32px;
+    }
+
+    &-video {
+      width: 85%;
+      height: 350px;
+    }
+
+    &-collapse {
+      width: 85%;
+    }
+
+    &-collapseFilter {
+      &-item {
+        grid-template-columns: 1fr 2fr;
+        gap: 10px;
+
+        &-text {
+          font-size: 15px;
+        }
+      }
+
+      &-footer {
+        gap: 10px;
+      }
+    }
+
+    &-vuzes {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+
+      &-item {
+        height: 180px;
+
+        &-shortname {
+          font-size: 28px;
+        }
+      }
+    }
+
+    &-list {
+      &-item {
+        &-header {
+          &-text {
+            font-size: 20px;
+          }
+
+          &-photo {
+            width: 56px;
+            height: 56px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Планшеты: 899px - 768px */
+@media (max-width: 899px) {
+  .vuz {
+    &-main {
+      padding: 12px 16px;
+    }
+
+    &-title {
+      font-size: 32px;
+      padding-top: 12px;
+    }
+
+    &-subtitle {
+      font-size: 28px;
+    }
+
+    &-video {
+      width: 90%;
+      height: 300px;
+      margin-top: 20px;
+    }
+
+    &-collapse {
+      width: 90%;
+      margin-top: 20px;
+    }
+
+    &-collapseFilter {
+      margin-top: 36px;
+      margin-bottom: -16px;
+
+      &-header {
+        padding: 10px;
+      }
+
+      &-item {
+        padding: 10px;
+        grid-template-columns: 1fr;
+        gap: 8px;
+
+        &-text {
+          text-align: left;
+          font-size: 14px;
+        }
+
+        &:first-child {
+          padding-top: 16px;
+        }
+
+        &:last-child {
+          padding-bottom: 16px;
+        }
+      }
+
+      &-footer {
+        padding: 10px;
+        gap: 8px;
+      }
+    }
+
+    &-text {
+      margin-top: 30px;
+      font-size: 13px;
+    }
+
+    &-vuzes {
+      margin-top: 30px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 30px;
+
+      &-item {
+        height: 160px;
+        padding: 10px;
+
+        &-shortname {
+          font-size: 24px;
+        }
+
+        &-name {
+          font-size: 14px;
+        }
+      }
+    }
+
+    &-list {
+      margin-top: 30px;
+      gap: 10px;
+      margin-bottom: 30px;
+
+      &-item {
+        &-header {
+          padding: 12px 16px;
+          gap: 10px;
+          min-height: 70px;
+
+          &-text {
+            font-size: 18px;
+          }
+
+          &-photo {
+            width: 50px;
+            height: 50px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Мобильные: 767px - 600px */
+@media (max-width: 767px) {
+  .vuz {
+    &-main {
+      padding: 12px 14px;
+    }
+
+    &-title {
+      font-size: 24px;
+    }
+
+    &-subtitle {
+      font-size: 22px;
+    }
+
+    &-video {
+      width: 100%;
+      height: 250px;
+    }
+
+    &-collapse {
+      width: 100%;
+
+      &-header {
+        padding: 10px;
+
+        &-text {
+          font-size: 15px;
+        }
+      }
+    }
+
+    &-collapseFilter {
+      margin-top: 30px;
+    }
+
+    &-text {
+      margin-top: 24px;
+      font-size: 12px;
+    }
+
+    &-vuzes {
+      grid-template-columns: 1fr;
+      gap: 14px;
+
+      &-item {
+        height: 140px;
+
+        &-shortname {
+          font-size: 22px;
+        }
+      }
+    }
+
+    &-list {
+      &-item {
+        &-header {
+          grid-template-columns: auto 1fr auto;
+          padding: 10px 14px;
+
+          &-text {
+            font-size: 16px;
+          }
+
+          &-photo {
+            width: 44px;
+            height: 44px;
+          }
+        }
+      }
+    }
+
+    &-search {
+      &-button {
+        padding: 6px 12px;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+/* Мобильные: 599px - 480px */
+@media (max-width: 599px) {
+  .vuz {
+    &-main {
+      padding: 10px 12px;
+    }
+
+    &-title {
+      font-size: 28px;
+      padding-top: 8px;
+    }
+
+    &-subtitle {
+      font-size: 22px;
+    }
+
+    &-video {
+      height: 220px;
+      margin-top: 16px;
+    }
+
+    &-collapse {
+      margin-top: 16px;
+
+      &-header {
+        padding: 8px;
+
+        &-text {
+          font-size: 14px;
+        }
+      }
+    }
+
+    &-collapseFilter {
+      margin-top: 24px;
+      margin-bottom: -8px;
+
+      &-header {
+        padding: 8px;
+      }
+
+      &-item {
+        padding: 8px;
+
+        &-text {
+          font-size: 13px;
+        }
+      }
+    }
+
+    &-vuzes {
+      margin-top: 24px;
+      gap: 12px;
+      margin-bottom: 24px;
+
+      &-item {
+        height: 120px;
+        padding: 8px;
+
+        &-shortname {
+          font-size: 20px;
+        }
+
+        &-name {
+          font-size: 13px;
+        }
+      }
+    }
+
+    &-list {
+      margin-top: 24px;
+      gap: 8px;
+      margin-bottom: 24px;
+
+      &-item {
+        &-header {
+          padding: 8px 12px;
+          min-height: 60px;
+
+          &-text {
+            font-size: 15px;
+          }
+
+          &-photo {
+            width: 40px;
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Маленькие мобильные: 479px и меньше */
+@media (max-width: 479px) {
+  .vuz {
+    &-main {
+      padding: 8px 10px;
+    }
+
+    &-title {
+      font-size: 24px;
+    }
+
+    &-subtitle {
+      font-size: 20px;
+    }
+
+    &-video {
+      height: 180px;
+      border-radius: 8px;
+    }
+
+    &-collapse {
+      border-radius: 8px;
+
+      &-header {
+        border-radius: 8px;
+        padding: 6px 8px;
+
+        &-text {
+          font-size: 13px;
+        }
+      }
+
+      &-item {
+        padding: 2px 8px;
+        font-size: 13px;
+      }
+    }
+
+    &-collapseFilter {
+      border-radius: 8px;
+
+      &-header {
+        border-radius: 8px;
+        padding: 6px 8px;
+      }
+    }
+
+    &-text {
+      margin-top: 20px;
+      font-size: 11px;
+    }
+
+    &-vuzes {
+      gap: 10px;
+
+      &-item {
+        height: 100px;
+        border-radius: 8px;
+
+        &-shortname {
+          font-size: 18px;
+        }
+
+        &-name {
+          font-size: 12px;
+        }
+      }
+    }
+
+    &-list {
+      gap: 6px;
+
+      &-item {
+        border-radius: 8px;
+
+        &-header {
+          padding: 6px 10px;
+          min-height: 55px;
+
+          &-text {
+            font-size: 14px;
+          }
+
+          &-photo {
+            width: 36px;
+            height: 36px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Очень маленькие экраны: 359px и меньше */
+@media (max-width: 359px) {
+  .vuz {
+    &-main {
+      padding: 6px 8px;
+    }
+
+    &-title {
+      font-size: 22px;
+    }
+
+    &-subtitle {
+      font-size: 18px;
+    }
+
+    &-video {
+      height: 160px;
+      margin-top: 12px;
+    }
+
+    &-collapse {
+      margin-top: 12px;
+    }
+
+    &-collapseFilter {
+      margin-top: 20px;
+    }
+
+    &-text {
+      margin-top: 16px;
+    }
+
+    &-vuzes {
+      margin-top: 20px;
+
+      &-item {
+        height: 90px;
+
+        &-shortname {
+          font-size: 16px;
+        }
+
+        &-name {
+          font-size: 11px;
+        }
+      }
+    }
+
+    &-list {
+      margin-top: 20px;
+
+      &-item {
+        &-header {
+          &-text {
+            font-size: 13px;
+          }
+
+          &-photo {
+            width: 32px;
+            height: 32px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Адаптация для Ant Design Select в мобильной версии */
+@media (max-width: 767px) {
+  .vuz-collapseFilter-item {
+    .ant-select {
+      .ant-select-selector {
+        min-height: 36px;
+        font-size: 14px;
+      }
+
+      .ant-select-selection-overflow {
+        flex-wrap: wrap;
+      }
+
+      .ant-select-selection-item {
+        font-size: 12px;
+        margin-bottom: 2px;
+      }
+    }
   }
 }

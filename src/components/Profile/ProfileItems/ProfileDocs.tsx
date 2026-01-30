@@ -124,12 +124,11 @@ export default function ProfileDocs({ setLoader }: Props) {
                   Добавлен: {dayjs(item.loadedFile.loadedWhen).format(dateFormat)}
                 </div>
                 <div className="profile-docs-flex">
-                  <div>
-                    <div className="profile-docs-doc1" onClick={() => downloadFile(item.code)}>
-                      <DownloadOutlined />
-                      Скачать файл
-                    </div>
+                  <div className="profile-docs-doc1" onClick={() => downloadFile(item.code)}>
+                    <DownloadOutlined />
+                    Скачать файл
                   </div>
+
                   <Upload
                     className="profile-docs-upload"
                     name="file"

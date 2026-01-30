@@ -1266,3 +1266,1458 @@
     }
   }
 }
+
+/* ========== МЕДИА-ЗАПРОСЫ ДЛЯ CAROUSEL (ПРОДОЛЖЕНИЕ) ========== */
+/* Планшеты: 1240px - 1024px */
+@media (max-width: 1240px) {
+  .carousel {
+    padding-top: 40px;
+    padding-bottom: 60px;
+
+    &-block {
+      max-width: 952px;
+    }
+
+    &-content {
+      padding: 20px 70px;
+      height: 450px;
+    }
+
+    &-header {
+      &-title {
+        font-size: 24px;
+      }
+
+      &-name {
+        font-size: 16px;
+      }
+    }
+
+    // Адаптация для всех слайдов
+    &-item0 {
+      &-title {
+        font-size: 48px;
+      }
+
+      &-subtitle {
+        font-size: 30px;
+        padding-bottom: 50px;
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item3,
+    &-item4,
+    &-item5,
+    &-item6,
+    &-item7,
+    &-item8,
+    &-item9,
+    &-item10,
+    &-item11 {
+      &-title {
+        font-size: 42px;
+      }
+
+      &-whatsapp,
+      &-telegram,
+      &-gmail {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item6,
+    &-item8 {
+      &-bignumber {
+        font-size: 700px;
+      }
+    }
+
+    &-item1 {
+      &-bignumber {
+        top: 15%;
+      }
+    }
+
+    &-item2 {
+      &-bignumber {
+        top: 17%;
+      }
+    }
+
+    &-item3 {
+      &-bignumber {
+        font-size: 560px;
+        top: 5%;
+      }
+    }
+
+    &-item6 {
+      &-bignumber {
+        font-size: 560px;
+        top: 10%;
+      }
+    }
+
+    &-item8 {
+      &-bignumber {
+        font-size: 500px;
+        top: 18%;
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item3,
+    &-item6,
+    &-item8 {
+      &-main {
+        width: 500px;
+        padding: 14px 20px;
+
+        &-text {
+          font-size: 22px;
+        }
+      }
+    }
+
+    &-item4 {
+      &-content {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 0;
+      }
+
+      &-photo {
+        width: 400px;
+        height: 200px;
+        margin: 0 auto;
+      }
+
+      &-flex {
+        text-align: center;
+      }
+    }
+
+    &-item5 {
+      &-content {
+        gap: 20px;
+      }
+
+      &-text {
+        width: 300px;
+        font-size: 16px;
+      }
+    }
+
+    &-item7 {
+      &-main {
+        width: 500px;
+      }
+
+      &-photo {
+        width: 200px;
+        height: 125%;
+      }
+    }
+
+    &-item9 {
+      &-main {
+        width: 750px;
+
+        &-text {
+          font-size: 22px;
+        }
+      }
+    }
+
+    &-item10 {
+      &-main {
+        width: 700px;
+
+        &-text {
+          font-size: 22px;
+        }
+      }
+    }
+
+    &-item11 {
+      &-main-text {
+        text-align: center;
+      }
+    }
+  }
+}
+
+/* Планшеты: 1023px - 900px */
+@media (max-width: 1023px) {
+  .carousel {
+    &-block {
+      max-width: 860px;
+    }
+
+    &-content {
+      padding: 15px 70px;
+      height: 400px;
+    }
+
+    &-header {
+      padding: 10px;
+
+      &-title {
+        font-size: 22px;
+      }
+
+      &-name {
+        font-size: 15px;
+      }
+    }
+
+    &-button-left,
+    &-button-right {
+      width: 40px;
+      height: 40px;
+
+      &-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    &-item0 {
+      &-title {
+        font-size: 42px;
+      }
+
+      &-subtitle {
+        font-size: 26px;
+        padding-bottom: 40px;
+      }
+
+      &-description {
+        font-size: 13px;
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item3,
+    &-item4,
+    &-item5,
+    &-item6,
+    &-item7,
+    &-item8,
+    &-item9,
+    &-item10,
+    &-item11 {
+      &-title {
+        font-size: 38px;
+      }
+
+      &-whatsapp,
+      &-telegram,
+      &-gmail {
+        width: 45px;
+        height: 45px;
+      }
+    }
+
+    &-item1 {
+      &-main {
+        &-emojis {
+          &-item {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item3 {
+      &-bignumber {
+        font-size: 700px;
+      }
+    }
+
+    &-item6 {
+      &-bignumber {
+        font-size: 500px;
+      }
+    }
+
+    &-item8 {
+      &-bignumber {
+        font-size: 450px;
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item3,
+    &-item6,
+    &-item8 {
+      &-main {
+        width: 450px;
+
+        &-text {
+          font-size: 20px;
+        }
+      }
+    }
+
+    &-item3 {
+      &-bignumber {
+        font-size: 500px;
+      }
+    }
+
+    &-item4 {
+      &-photo {
+        width: 350px;
+        height: 200px;
+      }
+
+      &-text {
+        font-size: 18px;
+      }
+    }
+
+    &-item5 {
+      &-content {
+        grid-template-columns: 1fr auto 1fr;
+        gap: 15px;
+      }
+
+      &-text {
+        width: 250px;
+        font-size: 15px;
+        padding: 12px 16px;
+      }
+
+      &-pdf {
+        &-icon {
+          width: 50px;
+          height: 50px;
+        }
+
+        &-accept,
+        &-cancel {
+          width: 70px;
+          height: 70px;
+        }
+
+        &-text {
+          width: 100px;
+          font-size: 15px;
+        }
+      }
+    }
+
+    &-item7 {
+      &-photo {
+        width: 180px;
+      }
+
+      &-main {
+        width: 450px;
+
+        &-text {
+          font-size: 20px;
+        }
+      }
+    }
+
+    &-item9 {
+      &-main {
+        width: 700px;
+        grid-template-columns: 220px 1fr;
+
+        &-text {
+          font-size: 20px;
+        }
+      }
+    }
+
+    &-item10 {
+      &-main {
+        width: 600px;
+
+        &-text {
+          font-size: 20px;
+        }
+      }
+    }
+
+    &-item11 {
+      &-bilim {
+        width: 65px;
+        height: 65px;
+      }
+    }
+  }
+}
+
+/* Планшеты: 899px - 768px */
+@media (max-width: 899px) {
+  .carousel {
+    padding-top: 30px;
+    padding-bottom: 50px;
+
+    &-block {
+      width: calc(100% - 32px);
+      margin: 0px 16px;
+    }
+
+    &-content {
+      padding: 15px 70px;
+      height: 350px;
+    }
+
+    &-header {
+      &-title {
+        font-size: 20px;
+      }
+
+      &-name {
+        font-size: 14px;
+      }
+    }
+
+    &-item0 {
+      &-title {
+        font-size: 36px;
+      }
+
+      &-subtitle {
+        font-size: 22px;
+        padding-bottom: 30px;
+      }
+
+      &-description {
+        font-size: 12px;
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item3,
+    &-item4,
+    &-item5,
+    &-item6,
+    &-item7,
+    &-item8,
+    &-item9,
+    &-item10,
+    &-item11 {
+      &-title {
+        font-size: 32px;
+      }
+
+      &-main {
+        &-link {
+          font-size: 16px;
+        }
+
+        &-subtext {
+          font-size: 16px;
+        }
+
+        &-text-centered {
+          font-size: 16px;
+        }
+      }
+
+      &-whatsapp,
+      &-telegram,
+      &-gmail {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    &-item1 {
+      &-bignumber {
+        font-size: 500px;
+      }
+
+      &-main {
+        width: 400px;
+
+        &-text {
+          font-size: 18px;
+        }
+
+        &-emojis {
+          padding: 2px 10px 4px 10px;
+
+          &-item {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
+    &-item2,
+    &-item3,
+    &-item8 {
+      &-bignumber {
+        font-size: 500px;
+      }
+
+      &-main {
+        width: 400px;
+
+        &-text {
+          font-size: 18px;
+        }
+      }
+    }
+
+    &-item3 {
+      &-bignumber {
+        font-size: 400px;
+      }
+
+      &-main {
+        &-text {
+          line-height: 130%;
+        }
+      }
+    }
+
+    &-item4 {
+      &-content {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 20px;
+        padding: 0;
+      }
+
+      &-photo {
+        width: 300px;
+        height: 180px;
+      }
+
+      &-text {
+        font-size: 16px;
+        text-align: center;
+      }
+    }
+
+    &-item6 {
+      &-bignumber {
+        font-size: 320px;
+      }
+
+      &-main {
+        width: 460px;
+
+        &-text {
+          line-height: 100%;
+        }
+      }
+    }
+
+    &-item7 {
+      &-photo {
+        width: 150px;
+        left: 3%;
+      }
+
+      &-main {
+        width: 70%;
+
+        &-text {
+          font-size: 18px;
+        }
+      }
+    }
+
+    &-item8 {
+      &-bignumber {
+        font-size: 380px;
+      }
+
+      &-main {
+        width: 420px;
+      }
+    }
+
+    &-item9 {
+      &-main {
+        width: 95%;
+        grid-template-columns: 170px 1fr;
+
+        &-photo {
+          width: 180px;
+        }
+
+        &-text {
+          font-size: 18px;
+        }
+      }
+    }
+
+    &-item10 {
+      &-main {
+        width: 500px;
+
+        &-text {
+          font-size: 18px;
+        }
+      }
+    }
+
+    &-item11 {
+      &-bilim {
+        width: 60px;
+        height: 60px;
+      }
+
+      &-main {
+        width: 280px;
+
+        &-text {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+/* Мобильные: 767px - 600px */
+@media (max-width: 767px) {
+  .carousel {
+    padding-top: 20px;
+    padding-bottom: 40px;
+
+    &-block {
+      max-width: calc(100% - 32px);
+    }
+
+    &-content {
+      padding: 10px 60px;
+      height: 300px;
+    }
+
+    &-header {
+      padding: 8px;
+
+      &-title {
+        font-size: 18px;
+      }
+
+      &-name {
+        font-size: 13px;
+      }
+    }
+
+    &-button-left,
+    &-button-right {
+      width: 32px;
+      height: 32px;
+
+      &-icon {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    &-item0 {
+      &-title {
+        font-size: 30px;
+      }
+
+      &-subtitle {
+        font-size: 19px;
+        padding-bottom: 25px;
+      }
+
+      &-description {
+        font-size: 11px;
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item3,
+    &-item4,
+    &-item5,
+    &-item6,
+    &-item7,
+    &-item8,
+    &-item9,
+    &-item10,
+    &-item11 {
+      &-title {
+        font-size: 28px;
+      }
+
+      &-whatsapp,
+      &-telegram,
+      &-gmail {
+        width: 35px;
+        height: 35px;
+      }
+
+      &-main {
+        &-link {
+          font-size: 14px;
+        }
+
+        &-subtext {
+          font-size: 14px;
+        }
+
+        &-text-centered {
+          font-size: 14px;
+        }
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item3,
+    &-item6,
+    &-item8 {
+      &-bignumber {
+        display: none; // Скрываем большие цифры на мобильных
+      }
+
+      &-main {
+        width: 100%;
+        max-width: 450px;
+        padding: 12px 16px;
+
+        &-text {
+          font-size: 16px;
+          line-height: 140%;
+        }
+      }
+    }
+
+    &-item1 {
+      &-main {
+        &-emojis {
+          padding: 2px 8px 3px 8px;
+
+          &-item {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    &-item3 {
+      &-main {
+        width: 500px;
+      }
+    }
+
+    &-item4 {
+      &-photo {
+        width: 350px;
+        height: 120px;
+      }
+
+      &-text {
+        font-size: 14px;
+      }
+    }
+
+    &-item5 {
+      &-content {
+        padding: 15px;
+      }
+
+      &-text {
+        font-size: 14px;
+        padding: 10px 14px;
+      }
+
+      &-pdf {
+        &-icon {
+          width: 45px;
+          height: 45px;
+        }
+
+        &-accept,
+        &-cancel {
+          width: 60px;
+          height: 60px;
+        }
+
+        &-text {
+          font-size: 13px;
+          width: 90px;
+        }
+      }
+    }
+
+    &-item6 {
+      &-main {
+        width: 90%;
+
+        &-text {
+          line-height: 120%;
+        }
+      }
+    }
+
+    &-item7 {
+      &-photo {
+        display: none; // Скрываем фото на маленьких экранах
+      }
+
+      &-main {
+        width: 90%;
+
+        &-text {
+          font-size: 16px;
+        }
+      }
+    }
+
+    &-item9 {
+      &-main {
+        width: 100%;
+        max-width: 400px;
+        grid-template-columns: 1fr;
+
+        &-photo {
+          display: none; // Скрываем фото
+        }
+
+        &-text {
+          font-size: 16px;
+        }
+      }
+    }
+
+    &-item10 {
+      &-main {
+        width: 100%;
+        max-width: 350px;
+
+        &-text {
+          font-size: 16px;
+        }
+      }
+    }
+
+    &-item11 {
+      &-bilim {
+        width: 50px;
+        height: 50px;
+      }
+
+      &-main {
+        width: 250px;
+
+        &-text {
+          font-size: 18px;
+        }
+      }
+    }
+
+    &-dots {
+      padding: 20px;
+
+      &-button {
+        width: 8px;
+        height: 8px;
+      }
+    }
+
+    &-tail {
+      display: none; // Скрываем хвостики на мобильных
+    }
+  }
+}
+
+/* Мобильные: 599px - 480px */
+@media (max-width: 599px) {
+  .carousel {
+    padding-top: 15px;
+    padding-bottom: 30px;
+
+    &-content {
+      padding: 10px 55px;
+      height: 250px;
+    }
+
+    &-header {
+      &-title {
+        font-size: 16px;
+      }
+
+      &-name {
+        font-size: 12px;
+      }
+    }
+
+    &-button-left,
+    &-button-right {
+      width: 28px;
+      height: 28px;
+
+      &-icon {
+        width: 10px;
+        height: 10px;
+      }
+    }
+
+    &-item0 {
+      &-title {
+        font-size: 24px;
+        line-height: 1.3;
+      }
+
+      &-subtitle {
+        font-size: 16px;
+        padding-bottom: 20px;
+      }
+
+      &-description {
+        font-size: 10px;
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item3,
+    &-item4,
+    &-item5,
+    &-item6,
+    &-item7,
+    &-item8,
+    &-item9,
+    &-item10,
+    &-item11 {
+      &-title {
+        font-size: 24px;
+      }
+
+      &-main {
+        &-link {
+          font-size: 13px;
+        }
+
+        &-subtext {
+          font-size: 13px;
+        }
+
+        &-text-centered {
+          font-size: 13px;
+        }
+      }
+
+      &-whatsapp,
+      &-telegram,
+      &-gmail,
+      &-zoom,
+      &-googledrive,
+      &-rutube {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item3,
+    &-item6,
+    &-item8 {
+      &-main {
+        max-width: 300px;
+        padding: 10px 12px;
+        border-radius: 16px;
+
+        &-text {
+          font-size: 14px;
+          line-height: 135%;
+        }
+      }
+    }
+
+    &-item1 {
+      &-main {
+        &-emojis {
+          gap: 4px;
+
+          &-item {
+            font-size: 14px;
+          }
+
+          &-plus {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+
+    &-item4 {
+      &-content {
+        gap: 0px;
+      }
+
+      &-photo {
+        width: 200px;
+        height: 100px;
+      }
+
+      &-text {
+        font-size: 12px;
+      }
+    }
+
+    &-item5 {
+      &-content {
+        padding: 10px;
+        gap: 6px;
+      }
+
+      &-text {
+        font-size: 12px;
+        padding: 8px 12px;
+        width: 100%;
+      }
+
+      &-pdf {
+        gap: 8px;
+
+        &-icon {
+          width: 30px;
+          height: 30px;
+        }
+
+        &-accept,
+        &-cancel {
+          width: 30px;
+          height: 30px;
+        }
+
+        &-text {
+          font-size: 10px;
+          width: 60px;
+        }
+      }
+    }
+
+    &-item6,
+    &-item7 {
+      &-main {
+        &-text {
+          font-size: 14px;
+          line-height: 110%;
+        }
+      }
+    }
+
+    &-item9,
+    &-item10 {
+      &-main {
+        &-text {
+          font-size: 14px;
+        }
+      }
+    }
+
+    &-item11 {
+      &-bilim {
+        width: 45px;
+        height: 45px;
+      }
+
+      &-main {
+        width: 220px;
+        padding: 12px 16px;
+
+        &-text {
+          font-size: 14px;
+        }
+      }
+    }
+
+    &-dots {
+      padding: 15px;
+
+      &-button {
+        width: 7px;
+        height: 7px;
+      }
+    }
+  }
+}
+
+/* Маленькие мобильные: 479px и меньше */
+@media (max-width: 479px) {
+  .carousel {
+    padding-top: 10px;
+    padding-bottom: 25px;
+
+    &-content {
+      padding: 8px 35px;
+      height: 220px;
+    }
+
+    &-header {
+      padding: 6px;
+
+      &-title {
+        font-size: 14px;
+      }
+
+      &-name {
+        font-size: 11px;
+      }
+    }
+
+    &-button-left {
+      left: 6px;
+    }
+
+    &-button-right {
+      right: 6px;
+    }
+
+    &-button-left,
+    &-button-right {
+      width: 24px;
+      height: 24px;
+
+      &-icon {
+        width: 8px;
+        height: 8px;
+      }
+    }
+
+    &-item0 {
+      &-title {
+        font-size: 20px;
+      }
+
+      &-subtitle {
+        font-size: 14px;
+        padding-bottom: 15px;
+      }
+
+      &-description {
+        font-size: 9px;
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item3,
+    &-item4,
+    &-item5,
+    &-item6,
+    &-item7,
+    &-item8,
+    &-item9,
+    &-item10,
+    &-item11 {
+      &-title {
+        font-size: 20px;
+      }
+
+      &-main {
+        &-link {
+          font-size: 12px;
+        }
+
+        &-subtext {
+          font-size: 12px;
+        }
+
+        &-text-centered {
+          font-size: 12px;
+        }
+      }
+
+      &-whatsapp,
+      &-telegram,
+      &-gmail,
+      &-zoom,
+      &-googledrive,
+      &-rutube {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item3,
+    &-item6,
+    &-item8 {
+      &-main {
+        max-width: 250px;
+        padding: 8px 10px;
+
+        &-text {
+          font-size: 12px;
+          line-height: 130%;
+        }
+
+        &-link {
+          font-size: 12px;
+        }
+      }
+    }
+
+    &-item1 {
+      &-main {
+        &-emojis {
+          gap: 3px;
+
+          &-item {
+            font-size: 12px;
+          }
+
+          &-plus {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+
+    &-item4 {
+      &-photo {
+        width: 180px;
+        height: 100px;
+      }
+
+      &-text {
+        font-size: 11px;
+      }
+    }
+
+    &-item5 {
+      &-content {
+        grid-template-columns: 1fr;
+      }
+
+      &-text {
+        font-size: 11px;
+        padding: 6px 10px;
+        width: 100%;
+      }
+
+      &-pdf {
+        display: none;
+      }
+    }
+
+    &-item6 {
+      &-content {
+        grid-template-columns: 1fr;
+      }
+
+      &-main {
+        max-width: none;
+        width: 100%;
+
+        &-text {
+          line-height: 110%;
+        }
+      }
+    }
+
+    &-item8 {
+      &-icon {
+        display: none;
+      }
+    }
+
+    &-item7,
+    &-item9,
+    &-item10 {
+      &-main {
+        width: 100%;
+        max-width: none;
+
+        &-text {
+          font-size: 12px;
+        }
+      }
+    }
+
+    &-item9 {
+      &-main {
+        &-item {
+          padding: 10px 12px;
+        }
+      }
+    }
+
+    &-item11 {
+      &-bilim {
+        width: 40px;
+        height: 40px;
+      }
+
+      &-main {
+        width: 200px;
+        padding: 10px 12px;
+
+        &-text {
+          font-size: 14px;
+        }
+      }
+    }
+
+    &-dots {
+      padding: 12px;
+      gap: 4px;
+
+      &-button {
+        width: 6px;
+        height: 6px;
+      }
+    }
+  }
+}
+
+/* Очень маленькие экраны: 359px и меньше */
+@media (max-width: 359px) {
+  .carousel {
+    &-content {
+      height: auto;
+      padding: 6px 32px;
+    }
+
+    &-block {
+      margin: 0px 8px;
+      width: calc(100% - 16px);
+      max-width: calc(100% - 16px);
+    }
+
+    &-header {
+      &-title {
+        padding-top: 6px;
+        font-size: 13px;
+      }
+    }
+
+    &-item0 {
+      &-title {
+        font-size: 18px;
+      }
+
+      &-subtitle {
+        font-size: 13px;
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item3,
+    &-item4,
+    &-item5,
+    &-item6,
+    &-item7,
+    &-item8,
+    &-item9,
+    &-item10,
+    &-item11 {
+      gap: 6px;
+
+      &-title {
+        font-size: 18px;
+      }
+
+      &-main {
+        padding: 6px 10px;
+        max-width: 220px;
+
+        &-link {
+          font-size: 10px;
+        }
+
+        &-subtext {
+          font-size: 10px;
+        }
+
+        &-text-centered {
+          font-size: 10px;
+        }
+      }
+    }
+
+    &-item1,
+    &-item2,
+    &-item3,
+    &-item6,
+    &-item8 {
+      &-main {
+        &-text {
+          font-size: 11px;
+        }
+      }
+    }
+
+    &-item4 {
+      &-photo {
+        width: 160px;
+        height: 90px;
+      }
+    }
+
+    &-item11 {
+      &-main {
+        width: 180px;
+
+        &-text {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
+/* Для модального окна с фото */
+@media (max-width: 767px) {
+  .ant-modal {
+    max-width: 90vw;
+
+    &-content {
+      padding: 16px;
+    }
+  }
+
+  .carousel-item4-photoBig {
+    height: 50vh;
+  }
+}
+
+@media (max-width: 599px) {
+  .carousel-item4-photoBig {
+    height: 40vh;
+  }
+}
+
+/* Вертикальная ориентация на очень маленьких экранах */
+@media (max-height: 600px) and (orientation: landscape) {
+  .carousel {
+    &-content {
+      height: 250px;
+    }
+
+    &-item0 {
+      &-title {
+        font-size: 24px;
+      }
+
+      &-subtitle {
+        font-size: 18px;
+      }
+    }
+  }
+}

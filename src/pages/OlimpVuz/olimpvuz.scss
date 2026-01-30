@@ -424,3 +424,1279 @@
     }
   }
 }
+
+/* ========== МЕДИА-ЗАПРОСЫ ДЛЯ OLIMPVUZ ========== */
+
+/* Планшеты: 1240px - 1024px */
+@media (max-width: 1240px) {
+  .olimpvuz {
+    &-main {
+      max-width: 1000px;
+      padding: 12px 20px;
+      margin-bottom: 35px;
+    }
+
+    &-dop {
+      padding: 20px;
+      margin-bottom: 35px;
+
+      &-title {
+        font-size: 34px;
+      }
+
+      &-subtitle {
+        font-size: 15px;
+        margin-top: 16px;
+        max-width: 600px;
+      }
+    }
+
+    &-title {
+      font-size: 42px;
+      margin-top: 16px;
+    }
+
+    &-subtitle {
+      font-size: 17px;
+      margin-top: 16px;
+      max-width: 640px;
+    }
+
+    &-docs {
+      margin-top: 16px;
+      column-gap: 20px;
+      row-gap: 10px;
+
+      &-item {
+        padding: 10px;
+        gap: 10px;
+
+        &-text {
+          font-size: 15px;
+        }
+
+        &-icon {
+          width: 22px;
+          height: 22px;
+        }
+      }
+    }
+
+    &-video {
+      margin-top: 50px;
+
+      &-header {
+        padding: 10px;
+
+        &-title {
+          font-size: 28px;
+        }
+      }
+
+      &-tabs {
+        gap: 10px;
+
+        &-item,
+        &-item-active {
+          padding: 10px;
+          font-size: 15px;
+        }
+      }
+
+      &-title {
+        font-size: 22px;
+      }
+
+      &-subtitle {
+        font-size: 28px;
+      }
+
+      &-iframe {
+        max-width: 600px;
+        min-height: 338px;
+        margin-top: 35px;
+      }
+
+      &-docs {
+        margin-top: 35px;
+        column-gap: 20px;
+        row-gap: 10px;
+      }
+    }
+
+    &-carousel {
+      margin-top: 50px;
+
+      &-header {
+        padding: 10px;
+
+        &-title {
+          font-size: 28px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 20px;
+          width: 44px;
+          height: 44px;
+
+          &-icon {
+            width: 16px;
+            height: 16px;
+          }
+        }
+
+        &-right {
+          right: 20px;
+          width: 44px;
+          height: 44px;
+
+          &-icon {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+
+      &-block {
+        padding: 0 60px;
+        min-height: 580px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 900px;
+          max-height: 540px;
+        }
+      }
+
+      &-dots {
+        padding: 20px;
+      }
+    }
+
+    &-empty {
+      min-height: calc(100dvh - 580px);
+
+      &-text {
+        font-size: 42px;
+      }
+
+      &-button {
+        padding: 10px 20px;
+
+        &-text {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+/* Планшеты: 1023px - 900px */
+@media (max-width: 1023px) {
+  .olimpvuz {
+    &-main {
+      max-width: 900px;
+      padding: 12px 16px;
+      margin-bottom: 30px;
+    }
+
+    &-dop {
+      padding: 18px;
+      margin-bottom: 30px;
+
+      &-title {
+        font-size: 30px;
+      }
+
+      &-subtitle {
+        font-size: 14px;
+        margin-top: 14px;
+        max-width: 550px;
+        line-height: 1.5;
+      }
+    }
+
+    &-title {
+      font-size: 38px;
+      margin-top: 14px;
+    }
+
+    &-subtitle {
+      font-size: 16px;
+      margin-top: 14px;
+      max-width: 600px;
+    }
+
+    &-docs {
+      margin-top: 14px;
+      column-gap: 16px;
+      row-gap: 8px;
+
+      &-item {
+        padding: 9px;
+        gap: 8px;
+
+        &-text {
+          font-size: 14px;
+        }
+
+        &-icon {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+
+    &-video {
+      margin-top: 40px;
+
+      &-header {
+        padding: 8px;
+
+        &-title {
+          font-size: 26px;
+        }
+      }
+
+      &-tabs {
+        gap: 8px;
+
+        &-item,
+        &-item-active {
+          padding: 8px;
+          font-size: 14px;
+        }
+      }
+
+      &-title {
+        font-size: 20px;
+      }
+
+      &-subtitle {
+        font-size: 26px;
+      }
+
+      &-iframe {
+        max-width: 550px;
+        min-height: 309px;
+        margin-top: 30px;
+      }
+
+      &-docs {
+        margin-top: 30px;
+        column-gap: 16px;
+        row-gap: 8px;
+      }
+    }
+
+    &-carousel {
+      margin-top: 40px;
+
+      &-header {
+        padding: 8px;
+
+        &-title {
+          font-size: 26px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 15px;
+          width: 40px;
+          height: 40px;
+
+          &-icon {
+            width: 14px;
+            height: 14px;
+          }
+        }
+
+        &-right {
+          right: 15px;
+          width: 40px;
+          height: 40px;
+
+          &-icon {
+            width: 14px;
+            height: 14px;
+          }
+        }
+      }
+
+      &-block {
+        padding: 0 50px;
+        min-height: 520px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 800px;
+          max-height: 480px;
+        }
+
+        &-title {
+          margin-bottom: 20px;
+
+          &-text {
+            font-size: 22px;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 16px;
+      }
+    }
+
+    &-empty {
+      min-height: calc(100dvh - 540px);
+
+      &-text {
+        font-size: 38px;
+      }
+
+      &-button {
+        padding: 9px 18px;
+
+        &-text {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+/* Планшеты: 899px - 768px */
+@media (max-width: 899px) {
+  .olimpvuz {
+    &-main {
+      max-width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 25px;
+    }
+
+    &-dop {
+      padding: 16px;
+      margin-bottom: 25px;
+      border-radius: 16px;
+
+      &-title {
+        font-size: 28px;
+      }
+
+      &-subtitle {
+        font-size: 13px;
+        margin-top: 12px;
+        max-width: 500px;
+      }
+    }
+
+    &-title {
+      font-size: 34px;
+      margin-top: 12px;
+    }
+
+    &-subtitle {
+      font-size: 15px;
+      margin-top: 12px;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    &-docs {
+      margin-top: 12px;
+      column-gap: 12px;
+      row-gap: 8px;
+      justify-content: center;
+
+      &-item {
+        padding: 8px;
+        gap: 6px;
+        border-radius: 8px;
+
+        &-text {
+          font-size: 13px;
+        }
+
+        &-icon {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+
+    &-video {
+      margin-top: 35px;
+      border-radius: 10px;
+
+      &-header {
+        padding: 6px;
+
+        &-title {
+          font-size: 24px;
+        }
+      }
+
+      &-tabs {
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        &-item,
+        &-item-active {
+          padding: 6px;
+          font-size: 13px;
+          border-radius: 8px;
+        }
+      }
+
+      &-title {
+        font-size: 18px;
+        padding: 0 10px;
+      }
+
+      &-subtitle {
+        font-size: 24px;
+        padding: 0 10px;
+      }
+
+      &-iframe {
+        max-width: 100%;
+        min-height: 280px;
+        height: 280px;
+        margin-top: 25px;
+      }
+
+      &-docs {
+        margin-top: 25px;
+        column-gap: 12px;
+        row-gap: 8px;
+        justify-content: center;
+      }
+    }
+
+    &-carousel {
+      margin-top: 35px;
+
+      &-header {
+        padding: 6px;
+
+        &-title {
+          font-size: 24px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 10px;
+          width: 36px;
+          height: 36px;
+
+          &-icon {
+            width: 12px;
+            height: 12px;
+          }
+        }
+
+        &-right {
+          right: 10px;
+          width: 36px;
+          height: 36px;
+
+          &-icon {
+            width: 12px;
+            height: 12px;
+          }
+        }
+      }
+
+      &-block {
+        padding: 0 40px;
+        min-height: 460px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 650px;
+          max-height: 420px;
+        }
+
+        &-title {
+          margin-bottom: 16px;
+          padding: 0 10px;
+
+          &-text {
+            font-size: 20px;
+            text-align: center;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 12px;
+      }
+    }
+
+    &-empty {
+      min-height: calc(100dvh - 500px);
+
+      &-text {
+        font-size: 32px;
+        text-align: center;
+        padding: 0 20px;
+      }
+
+      &-button {
+        padding: 8px 16px;
+        border-radius: 10px;
+
+        &-text {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+/* Мобильные: 767px - 600px */
+@media (max-width: 767px) {
+  .olimpvuz {
+    &-main {
+      padding: 10px 12px;
+      margin-bottom: 20px;
+    }
+
+    &-dop {
+      padding: 14px;
+      margin-bottom: 20px;
+      border-radius: 14px;
+
+      &-title {
+        font-size: 26px;
+      }
+
+      &-subtitle {
+        font-size: 12px;
+        margin-top: 10px;
+        max-width: 450px;
+      }
+    }
+
+    &-title {
+      font-size: 30px;
+      margin-top: 10px;
+      padding: 0 10px;
+    }
+
+    &-subtitle {
+      font-size: 14px;
+      margin-top: 10px;
+      max-width: 450px;
+      padding: 0 10px;
+    }
+
+    &-docs {
+      margin-top: 10px;
+      column-gap: 10px;
+      row-gap: 6px;
+
+      &-item {
+        padding: 7px;
+        gap: 5px;
+
+        &-text {
+          font-size: 12px;
+        }
+
+        &-icon {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+
+    &-video {
+      margin-top: 30px;
+
+      &-header {
+        padding: 5px;
+
+        &-title {
+          font-size: 22px;
+        }
+      }
+
+      &-tabs {
+        gap: 5px;
+
+        &-item,
+        &-item-active {
+          padding: 5px;
+          font-size: 12px;
+        }
+      }
+
+      &-title {
+        font-size: 16px;
+        padding: 0 8px;
+      }
+
+      &-subtitle {
+        font-size: 22px;
+        padding: 0 8px;
+      }
+
+      &-iframe {
+        min-height: 240px;
+        height: 240px;
+        margin-top: 20px;
+      }
+
+      &-docs {
+        margin-top: 20px;
+        column-gap: 10px;
+        row-gap: 6px;
+      }
+    }
+
+    &-carousel {
+      margin-top: 30px;
+
+      &-header {
+        padding: 5px;
+
+        &-title {
+          font-size: 22px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 8px;
+          width: 32px;
+          height: 32px;
+
+          &-icon {
+            width: 10px;
+            height: 10px;
+          }
+        }
+
+        &-right {
+          right: 8px;
+          width: 32px;
+          height: 32px;
+
+          &-icon {
+            width: 10px;
+            height: 10px;
+          }
+        }
+      }
+
+      &-block {
+        padding: 0 30px;
+        min-height: 400px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 500px;
+          max-height: 360px;
+        }
+
+        &-title {
+          margin-bottom: 14px;
+
+          &-text {
+            font-size: 18px;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 10px;
+
+        &-button {
+          width: 8px;
+          height: 8px;
+        }
+      }
+    }
+
+    &-empty {
+      min-height: calc(100dvh - 460px);
+
+      &-text {
+        font-size: 28px;
+        padding: 0 15px;
+      }
+
+      &-button {
+        padding: 7px 14px;
+
+        &-text {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+/* Мобильные: 599px - 480px */
+@media (max-width: 599px) {
+  .olimpvuz {
+    &-main {
+      padding: 8px 10px;
+      margin-bottom: 16px;
+    }
+
+    &-dop {
+      padding: 12px;
+      margin-bottom: 16px;
+      border-radius: 12px;
+
+      &-title {
+        font-size: 24px;
+        padding: 0 10px;
+      }
+
+      &-subtitle {
+        font-size: 11px;
+        margin-top: 8px;
+        max-width: 400px;
+        padding: 0 10px;
+      }
+    }
+
+    &-title {
+      font-size: 26px;
+      margin-top: 8px;
+      padding: 0 8px;
+    }
+
+    &-subtitle {
+      font-size: 13px;
+      margin-top: 8px;
+      max-width: 400px;
+      padding: 0 8px;
+    }
+
+    &-docs {
+      margin-top: 8px;
+      column-gap: 8px;
+      row-gap: 6px;
+
+      &-item {
+        padding: 6px;
+        gap: 4px;
+        border-radius: 6px;
+
+        &-text {
+          font-size: 11px;
+        }
+
+        &-icon {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+
+    &-video {
+      margin-top: 25px;
+      border-radius: 8px;
+
+      &-header {
+        padding: 4px;
+
+        &-title {
+          font-size: 20px;
+        }
+      }
+
+      &-tabs {
+        gap: 4px;
+
+        &-item,
+        &-item-active {
+          padding: 4px;
+          font-size: 11px;
+          border-radius: 6px;
+        }
+      }
+
+      &-title {
+        font-size: 14px;
+        padding: 0 6px;
+      }
+
+      &-subtitle {
+        font-size: 20px;
+        padding: 0 6px;
+      }
+
+      &-iframe {
+        min-height: 200px;
+        height: 200px;
+        margin-top: 16px;
+        border-radius: 8px;
+      }
+
+      &-docs {
+        margin-top: 16px;
+        column-gap: 8px;
+        row-gap: 6px;
+      }
+    }
+
+    &-carousel {
+      margin-top: 25px;
+      border-radius: 8px;
+
+      &-header {
+        padding: 4px;
+
+        &-title {
+          font-size: 20px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 6px;
+          width: 28px;
+          height: 28px;
+
+          &-icon {
+            width: 9px;
+            height: 9px;
+          }
+        }
+
+        &-right {
+          right: 6px;
+          width: 28px;
+          height: 28px;
+
+          &-icon {
+            width: 9px;
+            height: 9px;
+          }
+        }
+      }
+
+      &-block {
+        padding: 0 25px;
+        min-height: 350px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 400px;
+          max-height: 300px;
+          border-radius: 8px;
+        }
+
+        &-title {
+          margin-bottom: 12px;
+          padding: 0 8px;
+
+          &-text {
+            font-size: 16px;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 8px;
+        gap: 5px;
+
+        &-button {
+          width: 7px;
+          height: 7px;
+        }
+      }
+    }
+
+    &-empty {
+      min-height: calc(100dvh - 420px);
+      gap: 16px;
+
+      &-text {
+        font-size: 24px;
+        padding: 0 10px;
+      }
+
+      &-button {
+        padding: 6px 12px;
+        border-radius: 8px;
+
+        &-text {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+/* Маленькие мобильные: 479px и меньше */
+@media (max-width: 479px) {
+  .olimpvuz {
+    &-main {
+      padding: 6px 8px;
+      margin-bottom: 12px;
+    }
+
+    &-dop {
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 10px;
+
+      &-title {
+        font-size: 22px;
+        padding: 0 8px;
+      }
+
+      &-subtitle {
+        font-size: 10px;
+        margin-top: 6px;
+        max-width: 350px;
+        padding: 0 8px;
+      }
+    }
+
+    &-title {
+      font-size: 22px;
+      margin-top: 6px;
+      padding: 0 6px;
+    }
+
+    &-subtitle {
+      font-size: 12px;
+      margin-top: 6px;
+      max-width: 350px;
+      padding: 0 6px;
+    }
+
+    &-docs {
+      margin-top: 6px;
+      column-gap: 6px;
+      row-gap: 5px;
+
+      &-item {
+        padding: 5px;
+        gap: 3px;
+        border-radius: 5px;
+
+        &-text {
+          font-size: 10px;
+        }
+
+        &-icon {
+          width: 12px;
+          height: 12px;
+        }
+      }
+    }
+
+    &-video {
+      margin-top: 20px;
+
+      &-header {
+        padding: 3px;
+
+        &-title {
+          font-size: 18px;
+        }
+      }
+
+      &-tabs {
+        gap: 3px;
+
+        &-item,
+        &-item-active {
+          padding: 3px;
+          font-size: 10px;
+          border-radius: 4px;
+        }
+      }
+
+      &-title {
+        font-size: 13px;
+        padding: 0 4px;
+      }
+
+      &-subtitle {
+        font-size: 18px;
+        padding: 0 4px;
+      }
+
+      &-iframe {
+        min-height: 180px;
+        height: 180px;
+        margin-top: 12px;
+        border-radius: 6px;
+      }
+
+      &-docs {
+        margin-top: 12px;
+        column-gap: 6px;
+        row-gap: 5px;
+      }
+    }
+
+    &-carousel {
+      margin-top: 20px;
+
+      &-header {
+        padding: 3px;
+
+        &-title {
+          font-size: 18px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 5px;
+          width: 24px;
+          height: 24px;
+
+          &-icon {
+            width: 8px;
+            height: 8px;
+          }
+        }
+
+        &-right {
+          right: 5px;
+          width: 24px;
+          height: 24px;
+
+          &-icon {
+            width: 8px;
+            height: 8px;
+          }
+        }
+      }
+
+      &-block {
+        padding: 0 20px;
+        min-height: 280px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 320px;
+          max-height: 240px;
+        }
+
+        &-title {
+          margin-bottom: 10px;
+          padding: 0 6px;
+
+          &-text {
+            font-size: 14px;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 6px;
+        gap: 4px;
+
+        &-button {
+          width: 6px;
+          height: 6px;
+        }
+      }
+    }
+
+    &-empty {
+      min-height: calc(100dvh - 380px);
+      gap: 12px;
+
+      &-text {
+        font-size: 20px;
+        padding: 0 8px;
+      }
+
+      &-button {
+        padding: 5px 10px;
+        border-radius: 6px;
+
+        &-text {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
+/* Очень маленькие экраны: 359px и меньше */
+@media (max-width: 359px) {
+  .olimpvuz {
+    &-dop {
+      &-title {
+        font-size: 20px;
+      }
+
+      &-subtitle {
+        font-size: 9px;
+        max-width: 300px;
+      }
+    }
+
+    &-title {
+      font-size: 20px;
+    }
+
+    &-subtitle {
+      font-size: 11px;
+      max-width: 300px;
+    }
+
+    &-carousel {
+      &-header {
+        &-title {
+          font-size: 16px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 4px;
+          width: 22px;
+          height: 22px;
+
+          &-icon {
+            width: 7px;
+            height: 7px;
+          }
+        }
+
+        &-right {
+          right: 4px;
+          width: 22px;
+          height: 22px;
+
+          &-icon {
+            width: 7px;
+            height: 7px;
+          }
+        }
+      }
+
+      &-block {
+        padding: 0 15px;
+        min-height: 240px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 280px;
+          max-height: 200px;
+        }
+
+        &-title {
+          &-text {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+
+    &-video {
+      &-header {
+        &-title {
+          font-size: 16px;
+        }
+      }
+
+      &-tabs {
+        &-item,
+        &-item-active {
+          font-size: 9px;
+        }
+      }
+
+      &-iframe {
+        min-height: 160px;
+        height: 160px;
+      }
+    }
+
+    &-empty {
+      &-text {
+        font-size: 18px;
+      }
+
+      &-button {
+        &-text {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+/* Ландшафтная ориентация на мобильных */
+@media (max-width: 899px) and (orientation: landscape) {
+  .olimpvuz {
+    &-carousel {
+      &-block {
+        min-height: 500px;
+      }
+
+      &-slide {
+        &-content {
+          max-height: 400px;
+        }
+      }
+    }
+
+    &-video {
+      &-iframe {
+        height: 300px;
+        min-height: 300px;
+      }
+    }
+
+    &-empty {
+      min-height: calc(100dvh - 400px);
+    }
+  }
+}
+
+/* Для очень высоких экранов */
+@media (min-height: 1000px) {
+  .olimpvuz {
+    &-carousel {
+      &-block {
+        min-height: 800px;
+      }
+
+      &-slide {
+        &-content {
+          max-height: 700px;
+        }
+      }
+    }
+
+    &-video {
+      &-iframe {
+        min-height: 600px;
+        height: 600px;
+      }
+    }
+
+    &-empty {
+      min-height: calc(100dvh - 700px);
+    }
+  }
+}

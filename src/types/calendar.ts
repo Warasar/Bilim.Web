@@ -1,12 +1,13 @@
 export type CalendarType = {
-  dataType: string;
   id: string;
   eventDate: string;
-  eventType: CalendarTypes;
   eventText: string;
-  dates: string[];
-  moretype?: CalendarTypes;
-  isImportant?: boolean | null;
+  eventType: "online" | "deadline" | "async" | "event";
+  description?: string;
+  isImportant?: boolean;
+  startWhen?: string;
+  endWhen?: string;
+  eventTime?: string;
 };
 
 export type CalendarTypes = "events" | "meeting" | "info" | "deadline" | "parents" | null;

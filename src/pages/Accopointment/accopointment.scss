@@ -214,3 +214,494 @@
     }
   }
 }
+
+/* ========== МЕДИА-ЗАПРОСЫ ========== */
+
+/* Планшеты: 1240px - 1024px */
+@media (max-width: 1240px) {
+  .accopointment {
+    &-main {
+      max-width: 1000px;
+      gap: 32px;
+      min-height: calc(100dvh - 62px);
+
+      &-tizer {
+        gap: 20px;
+        padding-top: 16px;
+
+        &-title {
+          &-text {
+            font-size: 52px;
+            margin-bottom: -24px;
+          }
+
+          &-welcome {
+            margin-top: 14px;
+            font-size: 28px;
+            margin-bottom: -10px;
+          }
+
+          &-subtext {
+            font-size: 22px;
+          }
+        }
+      }
+
+      &-service {
+        padding-bottom: 50px;
+
+        &-title {
+          font-size: 32px;
+        }
+
+        &-subtitle {
+          font-size: 18px;
+          margin-bottom: 16px;
+        }
+
+        &-buttons {
+          gap: 20px;
+
+          &-item {
+            padding: 20px;
+
+            &-icon {
+              width: 44px;
+              height: 44px;
+            }
+
+            &-name {
+              font-size: 22px;
+            }
+
+            &-text {
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Планшеты: 1023px - 900px */
+@media (max-width: 1023px) {
+  .accopointment {
+    &-main {
+      max-width: 900px;
+      gap: 28px;
+
+      &-tizer {
+        &-title {
+          &-text {
+            font-size: 46px;
+            margin-bottom: -20px;
+          }
+
+          &-welcome {
+            font-size: 26px;
+            margin-bottom: -8px;
+          }
+
+          &-subtext {
+            font-size: 20px;
+          }
+        }
+      }
+
+      &-service {
+        &-title {
+          font-size: 30px;
+        }
+
+        &-subtitle {
+          font-size: 17px;
+          margin-bottom: 14px;
+        }
+
+        &-buttons {
+          gap: 18px;
+          grid-template-columns: repeat(3, 1fr) !important;
+
+          &-item {
+            padding: 18px;
+            gap: 10px;
+
+            &-name {
+              font-size: 20px;
+            }
+
+            &-text {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Планшеты: 899px - 768px */
+@media (max-width: 899px) {
+  .accopointment {
+    &-main {
+      padding: 12px 20px;
+      gap: 24px;
+      min-height: auto;
+      padding-bottom: 40px;
+
+      &-tizer {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding-top: 0;
+
+        &-title {
+          align-items: center;
+          text-align: center;
+          gap: 10px;
+
+          &-text {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: -18px;
+          }
+
+          &-welcome {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: -6px;
+          }
+
+          &-subtext {
+            font-size: 18px;
+            text-align: center;
+            line-height: 1.4;
+          }
+        }
+
+        &-block {
+          order: -1;
+          height: 300px;
+          max-width: 500px;
+          margin: 0 auto;
+
+          &-colorFullBg {
+            transform: rotate(3deg);
+          }
+        }
+      }
+
+      &-service {
+        padding-bottom: 40px;
+
+        &-title {
+          font-size: 28px;
+          text-align: center;
+        }
+
+        &-subtitle {
+          font-size: 16px;
+          text-align: center;
+          margin-bottom: 20px;
+        }
+
+        &-buttons {
+          gap: 16px;
+          grid-template-columns: repeat(2, 1fr) !important;
+
+          &-item {
+            padding: 16px;
+            gap: 8px;
+
+            &-icon {
+              width: 40px;
+              height: 40px;
+            }
+
+            &-name {
+              font-size: 18px;
+            }
+
+            &-text {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+
+      &-mouse {
+        display: none; // Скрываем мышку на мобильных
+      }
+    }
+  }
+}
+
+/* Мобильные: 767px - 600px */
+@media (max-width: 767px) {
+  .accopointment {
+    &-main {
+      padding: 12px 16px;
+      gap: 20px;
+
+      &-tizer {
+        gap: 24px;
+
+        &-title {
+          &-text {
+            font-size: 36px;
+            margin-bottom: -14px;
+          }
+
+          &-welcome {
+            font-size: 22px;
+            margin-bottom: -4px;
+          }
+
+          &-subtext {
+            font-size: 16px;
+          }
+        }
+
+        &-block {
+          height: 250px;
+          max-width: 400px;
+        }
+      }
+
+      &-service {
+        padding-bottom: 30px;
+
+        &-title {
+          font-size: 26px;
+        }
+
+        &-subtitle {
+          font-size: 15px;
+          margin-bottom: 18px;
+        }
+
+        &-buttons {
+          gap: 14px;
+          grid-template-columns: repeat(2, 1fr) !important;
+
+          &-item {
+            padding: 14px;
+
+            &-icon {
+              width: 36px;
+              height: 36px;
+              padding: 10px;
+            }
+
+            &-name {
+              font-size: 17px;
+            }
+
+            &-text {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Мобильные: 599px - 480px */
+@media (max-width: 599px) {
+  .accopointment {
+    &-main {
+      padding: 12px 14px;
+      gap: 18px;
+
+      &-tizer {
+        gap: 20px;
+
+        &-title {
+          &-text {
+            font-size: 32px;
+            margin-bottom: -12px;
+          }
+
+          &-welcome {
+            font-size: 20px;
+          }
+
+          &-subtext {
+            font-size: 15px;
+          }
+        }
+
+        &-block {
+          height: 220px;
+          max-width: 350px;
+        }
+      }
+
+      &-service {
+        &-title {
+          font-size: 24px;
+        }
+
+        &-subtitle {
+          font-size: 14px;
+          margin-bottom: 16px;
+        }
+
+        &-buttons {
+          gap: 12px;
+          grid-template-columns: 1fr !important; // Одна колонка на маленьких экранах
+          max-width: 300px;
+          margin: 0 auto;
+
+          &-item {
+            padding: 16px 12px;
+            gap: 8px;
+
+            &-icon {
+              width: 34px;
+              height: 34px;
+            }
+
+            &-name {
+              font-size: 16px;
+            }
+
+            &-text {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Маленькие мобильные: 479px и меньше */
+@media (max-width: 479px) {
+  .accopointment {
+    &-main {
+      padding: 12px 12px;
+      gap: 16px;
+
+      &-tizer {
+        gap: 18px;
+
+        &-title {
+          gap: 8px;
+
+          &-text {
+            font-size: 28px;
+            margin-bottom: -10px;
+          }
+
+          &-welcome {
+            font-size: 18px;
+            margin-bottom: 0;
+          }
+
+          &-subtext {
+            font-size: 14px;
+          }
+        }
+
+        &-block {
+          height: 200px;
+          max-width: 300px;
+        }
+      }
+
+      &-service {
+        padding-bottom: 25px;
+
+        &-title {
+          font-size: 22px;
+        }
+
+        &-subtitle {
+          font-size: 13px;
+          margin-bottom: 14px;
+        }
+
+        &-buttons {
+          gap: 10px;
+
+          &-item {
+            padding: 14px 10px;
+
+            &-icon {
+              width: 32px;
+              height: 32px;
+              padding: 8px;
+            }
+
+            &-name {
+              font-size: 15px;
+            }
+
+            &-text {
+              font-size: 11px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Очень маленькие экраны: 359px и меньше */
+@media (max-width: 359px) {
+  .accopointment {
+    &-main {
+      padding: 10px 8px;
+
+      &-tizer {
+        gap: 16px;
+
+        &-title {
+          &-text {
+            font-size: 24px;
+            margin-bottom: -8px;
+          }
+
+          &-welcome {
+            font-size: 16px;
+          }
+
+          &-subtext {
+            font-size: 13px;
+          }
+        }
+
+        &-block {
+          height: 180px;
+          max-width: 280px;
+        }
+      }
+
+      &-service {
+        &-title {
+          font-size: 20px;
+        }
+
+        &-subtitle {
+          font-size: 12px;
+        }
+
+        &-buttons {
+          &-item {
+            padding: 12px 8px;
+
+            &-name {
+              font-size: 14px;
+            }
+
+            &-text {
+              font-size: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

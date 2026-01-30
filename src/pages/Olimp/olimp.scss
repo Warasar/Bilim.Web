@@ -364,3 +364,1027 @@
     }
   }
 }
+
+/* ========== МЕДИА-ЗАПРОСЫ ДЛЯ OLIMP ========== */
+
+/* Планшеты: 1240px - 1024px */
+@media (max-width: 1240px) {
+  .olimp {
+    &-main {
+      max-width: 1000px;
+      padding: 12px 20px;
+    }
+
+    &-title {
+      font-size: 56px;
+    }
+
+    &-spisok {
+      margin-top: 35px;
+      grid-template-columns: repeat(4, 1fr);
+      column-gap: 20px;
+      row-gap: 10px;
+
+      &-item {
+        font-size: 22px;
+        padding: 10px;
+        border-radius: 14px;
+      }
+    }
+
+    &-carousel {
+      margin-top: 35px;
+
+      &-header {
+        padding: 10px;
+
+        &-title {
+          font-size: 28px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 20px;
+          width: 44px;
+          height: 44px;
+
+          &-icon {
+            width: 16px;
+            height: 16px;
+          }
+        }
+
+        &-right {
+          right: 20px;
+          width: 44px;
+          height: 44px;
+
+          &-icon {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+
+      &-block {
+        padding: 0 60px;
+        min-height: 580px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 850px;
+          max-height: 540px;
+        }
+      }
+
+      &-dots {
+        padding: 20px;
+      }
+    }
+
+    &-video {
+      margin-top: 35px;
+
+      &-tabs {
+        padding: 10px;
+        gap: 20px;
+
+        &-item,
+        &-item-active {
+          font-size: 22px;
+          padding: 6px 10px;
+        }
+      }
+
+      &-iframe {
+        max-width: 700px;
+        min-height: 394px;
+      }
+
+      &-subtitle {
+        font-size: 28px;
+      }
+    }
+
+    &-docs {
+      margin-top: 35px;
+      margin-bottom: 35px;
+      column-gap: 20px;
+      row-gap: 10px;
+
+      &-item {
+        padding: 10px;
+        gap: 10px;
+
+        &-text {
+          font-size: 15px;
+        }
+
+        &-icon {
+          width: 22px;
+          height: 22px;
+        }
+      }
+    }
+  }
+}
+
+/* Планшеты: 1023px - 900px */
+@media (max-width: 1023px) {
+  .olimp {
+    &-main {
+      max-width: 900px;
+      padding: 12px 16px;
+    }
+
+    &-title {
+      font-size: 48px;
+    }
+
+    &-spisok {
+      margin-top: 30px;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 16px;
+      row-gap: 8px;
+
+      &-item {
+        font-size: 20px;
+        padding: 9px;
+        border-radius: 12px;
+      }
+    }
+
+    &-carousel {
+      margin-top: 30px;
+
+      &-header {
+        padding: 8px;
+
+        &-title {
+          font-size: 26px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 15px;
+          width: 40px;
+          height: 40px;
+
+          &-icon {
+            width: 14px;
+            height: 14px;
+          }
+        }
+
+        &-right {
+          right: 15px;
+          width: 40px;
+          height: 40px;
+
+          &-icon {
+            width: 14px;
+            height: 14px;
+          }
+        }
+      }
+
+      &-block {
+        padding: 0 50px;
+        min-height: 520px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 750px;
+          max-height: 480px;
+        }
+
+        &-title {
+          margin-bottom: 20px;
+
+          &-text {
+            font-size: 22px;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 16px;
+      }
+    }
+
+    &-video {
+      margin-top: 30px;
+
+      &-tabs {
+        padding: 8px;
+        gap: 16px;
+
+        &-item,
+        &-item-active {
+          font-size: 20px;
+          padding: 5px 9px;
+        }
+      }
+
+      &-iframe {
+        max-width: 600px;
+        min-height: 338px;
+      }
+
+      &-title {
+        font-size: 22px;
+      }
+
+      &-subtitle {
+        font-size: 26px;
+      }
+
+      &-text {
+        font-size: 15px;
+        margin-top: 16px;
+      }
+    }
+
+    &-docs {
+      margin-top: 30px;
+      margin-bottom: 30px;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 16px;
+      row-gap: 8px;
+
+      &-item {
+        padding: 9px;
+        gap: 8px;
+
+        &-text {
+          font-size: 14px;
+        }
+
+        &-icon {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+}
+
+/* Планшеты: 899px - 768px */
+@media (max-width: 899px) {
+  .olimp {
+    &-main {
+      max-width: 100%;
+      padding: 12px 14px;
+    }
+
+    &-title {
+      font-size: 42px;
+    }
+
+    &-spisok {
+      margin-top: 25px;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 12px;
+      row-gap: 8px;
+
+      &-item {
+        font-size: 18px;
+        padding: 8px;
+        border-radius: 10px;
+        text-align: center;
+      }
+    }
+
+    &-carousel {
+      margin-top: 25px;
+
+      &-header {
+        padding: 6px;
+
+        &-title {
+          font-size: 24px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 10px;
+          width: 36px;
+          height: 36px;
+
+          &-icon {
+            width: 12px;
+            height: 12px;
+          }
+        }
+
+        &-right {
+          right: 10px;
+          width: 36px;
+          height: 36px;
+
+          &-icon {
+            width: 12px;
+            height: 12px;
+          }
+        }
+      }
+
+      &-block {
+        padding: 0 40px;
+        min-height: 460px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 650px;
+          max-height: 420px;
+        }
+
+        &-title {
+          margin-bottom: 16px;
+          padding: 0 10px;
+
+          &-text {
+            font-size: 20px;
+            text-align: center;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 12px;
+      }
+    }
+
+    &-video {
+      margin-top: 25px;
+
+      &-tabs {
+        padding: 6px;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        &-item,
+        &-item-active {
+          font-size: 18px;
+          padding: 4px 8px;
+        }
+      }
+
+      &-iframe {
+        max-width: 100%;
+        min-height: 280px;
+        height: 280px;
+      }
+
+      &-title {
+        font-size: 20px;
+        padding: 0 10px;
+      }
+
+      &-subtitle {
+        font-size: 24px;
+        padding: 0 10px;
+      }
+
+      &-text {
+        font-size: 14px;
+        margin-top: 12px;
+        padding: 0 10px;
+        text-align: center;
+      }
+    }
+
+    &-docs {
+      margin-top: 25px;
+      margin-bottom: 25px;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 12px;
+      row-gap: 8px;
+
+      &-item {
+        padding: 8px;
+        gap: 6px;
+        border-radius: 8px;
+
+        &-text {
+          font-size: 13px;
+        }
+
+        &-icon {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+}
+
+/* Мобильные: 767px - 600px */
+@media (max-width: 767px) {
+  .olimp {
+    &-main {
+      padding: 10px 12px;
+    }
+
+    &-title {
+      font-size: 36px;
+    }
+
+    &-spisok {
+      margin-top: 20px;
+      column-gap: 10px;
+      row-gap: 6px;
+
+      &-item {
+        font-size: 16px;
+        padding: 7px;
+      }
+    }
+
+    &-carousel {
+      margin-top: 20px;
+
+      &-header {
+        padding: 5px;
+
+        &-title {
+          font-size: 22px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 8px;
+          width: 32px;
+          height: 32px;
+
+          &-icon {
+            width: 10px;
+            height: 10px;
+          }
+        }
+
+        &-right {
+          right: 8px;
+          width: 32px;
+          height: 32px;
+
+          &-icon {
+            width: 10px;
+            height: 10px;
+          }
+        }
+      }
+
+      &-block {
+        padding: 0 30px;
+        min-height: 400px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 500px;
+          max-height: 360px;
+        }
+
+        &-title {
+          margin-bottom: 14px;
+
+          &-text {
+            font-size: 18px;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 10px;
+
+        &-button {
+          width: 8px;
+          height: 8px;
+        }
+      }
+    }
+
+    &-video {
+      margin-top: 20px;
+
+      &-tabs {
+        padding: 5px;
+        gap: 10px;
+
+        &-item,
+        &-item-active {
+          font-size: 16px;
+          padding: 3px 6px;
+        }
+      }
+
+      &-iframe {
+        min-height: 240px;
+        height: 240px;
+      }
+
+      &-title {
+        font-size: 18px;
+      }
+
+      &-subtitle {
+        font-size: 22px;
+      }
+
+      &-text {
+        font-size: 13px;
+        margin-top: 10px;
+      }
+    }
+
+    &-docs {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      column-gap: 10px;
+      row-gap: 6px;
+
+      &-item {
+        padding: 7px;
+        gap: 5px;
+
+        &-text {
+          font-size: 12px;
+        }
+
+        &-icon {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+}
+
+/* Мобильные: 599px - 480px */
+@media (max-width: 599px) {
+  .olimp {
+    &-main {
+      padding: 8px 10px;
+    }
+
+    &-title {
+      font-size: 32px;
+      padding: 0 10px;
+    }
+
+    &-spisok {
+      margin-top: 16px;
+      grid-template-columns: 1fr;
+      column-gap: 0;
+      row-gap: 8px;
+
+      &-item {
+        font-size: 18px;
+        padding: 10px;
+        text-align: center;
+      }
+    }
+
+    &-carousel {
+      margin-top: 16px;
+      border-radius: 8px;
+
+      &-header {
+        padding: 4px;
+
+        &-title {
+          font-size: 20px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 6px;
+          width: 28px;
+          height: 28px;
+
+          &-icon {
+            width: 9px;
+            height: 9px;
+          }
+        }
+
+        &-right {
+          right: 6px;
+          width: 28px;
+          height: 28px;
+
+          &-icon {
+            width: 9px;
+            height: 9px;
+          }
+        }
+      }
+
+      &-block {
+        padding: 0 25px;
+        min-height: 350px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 400px;
+          max-height: 300px;
+          border-radius: 8px;
+        }
+
+        &-title {
+          margin-bottom: 12px;
+          padding: 0 8px;
+
+          &-text {
+            font-size: 16px;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 8px;
+        gap: 5px;
+
+        &-button {
+          width: 7px;
+          height: 7px;
+        }
+      }
+    }
+
+    &-video {
+      margin-top: 16px;
+      border-radius: 8px;
+
+      &-tabs {
+        padding: 4px;
+        gap: 8px;
+
+        &-item,
+        &-item-active {
+          font-size: 14px;
+          padding: 3px 5px;
+          border-radius: 6px;
+        }
+      }
+
+      &-iframe {
+        min-height: 200px;
+        height: 200px;
+        margin-top: 12px;
+        border-radius: 8px;
+      }
+
+      &-title {
+        font-size: 16px;
+        padding: 0 8px;
+      }
+
+      &-subtitle {
+        font-size: 20px;
+        padding: 0 8px;
+      }
+
+      &-text {
+        font-size: 12px;
+        margin-top: 8px;
+        padding: 0 8px;
+      }
+    }
+
+    &-docs {
+      margin-top: 16px;
+      margin-bottom: 16px;
+      grid-template-columns: 1fr;
+      column-gap: 0;
+      row-gap: 8px;
+
+      &-item {
+        padding: 6px;
+        gap: 4px;
+        border-radius: 6px;
+
+        &-text {
+          font-size: 14px;
+          text-align: center;
+        }
+
+        &-icon {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+}
+
+/* Маленькие мобильные: 479px и меньше */
+@media (max-width: 479px) {
+  .olimp {
+    &-main {
+      padding: 6px 8px;
+    }
+
+    &-title {
+      font-size: 28px;
+      padding: 0 8px;
+    }
+
+    &-spisok {
+      margin-top: 12px;
+      row-gap: 6px;
+
+      &-item {
+        font-size: 16px;
+        padding: 8px;
+      }
+    }
+
+    &-carousel {
+      margin-top: 12px;
+
+      &-header {
+        padding: 3px;
+
+        &-title {
+          font-size: 18px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 5px;
+          width: 24px;
+          height: 24px;
+
+          &-icon {
+            width: 8px;
+            height: 8px;
+          }
+        }
+
+        &-right {
+          right: 5px;
+          width: 24px;
+          height: 24px;
+
+          &-icon {
+            width: 8px;
+            height: 8px;
+          }
+        }
+      }
+
+      &-block {
+        padding: 0 20px;
+        min-height: 280px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 320px;
+          max-height: 240px;
+        }
+
+        &-title {
+          margin-bottom: 10px;
+          padding: 0 6px;
+
+          &-text {
+            font-size: 14px;
+          }
+        }
+      }
+
+      &-dots {
+        padding: 6px;
+        gap: 4px;
+
+        &-button {
+          width: 6px;
+          height: 6px;
+        }
+      }
+    }
+
+    &-video {
+      margin-top: 12px;
+
+      &-tabs {
+        padding: 3px;
+        gap: 6px;
+
+        &-item,
+        &-item-active {
+          font-size: 13px;
+          padding: 2px 4px;
+        }
+      }
+
+      &-iframe {
+        min-height: 180px;
+        height: 180px;
+        margin-top: 8px;
+        border-radius: 6px;
+      }
+
+      &-title {
+        font-size: 15px;
+      }
+
+      &-subtitle {
+        font-size: 18px;
+      }
+
+      &-text {
+        font-size: 11px;
+        margin-top: 6px;
+      }
+    }
+
+    &-docs {
+      margin-top: 12px;
+      margin-bottom: 12px;
+      row-gap: 6px;
+
+      &-item {
+        padding: 5px;
+        gap: 3px;
+        border-radius: 5px;
+
+        &-text {
+          font-size: 12px;
+        }
+
+        &-icon {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+  }
+}
+
+/* Очень маленькие экраны: 359px и меньше */
+@media (max-width: 359px) {
+  .olimp {
+    &-title {
+      font-size: 24px;
+    }
+
+    &-spisok {
+      &-item {
+        font-size: 14px;
+        padding: 6px;
+      }
+    }
+
+    &-carousel {
+      &-header {
+        &-title {
+          font-size: 16px;
+        }
+      }
+
+      &-button {
+        &-left {
+          left: 4px;
+          width: 22px;
+          height: 22px;
+
+          &-icon {
+            width: 7px;
+            height: 7px;
+          }
+        }
+
+        &-right {
+          right: 4px;
+          width: 22px;
+          height: 22px;
+
+          &-icon {
+            width: 7px;
+            height: 7px;
+          }
+        }
+      }
+
+      &-block {
+        padding: 0 15px;
+        min-height: 240px;
+      }
+
+      &-slide {
+        &-content {
+          max-width: 280px;
+          max-height: 200px;
+        }
+
+        &-title {
+          &-text {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+
+    &-video {
+      &-tabs {
+        &-item,
+        &-item-active {
+          font-size: 12px;
+        }
+      }
+
+      &-iframe {
+        min-height: 160px;
+        height: 160px;
+      }
+
+      &-title {
+        font-size: 14px;
+      }
+
+      &-subtitle {
+        font-size: 16px;
+      }
+    }
+
+    &-docs {
+      &-item {
+        &-text {
+          font-size: 11px;
+        }
+
+        &-icon {
+          width: 12px;
+          height: 12px;
+        }
+      }
+    }
+  }
+}
+
+/* Ландшафтная ориентация на мобильных */
+@media (max-width: 899px) and (orientation: landscape) {
+  .olimp {
+    &-carousel {
+      &-block {
+        min-height: 500px;
+      }
+
+      &-slide {
+        &-content {
+          max-height: 400px;
+        }
+      }
+    }
+
+    &-video {
+      &-iframe {
+        height: 300px;
+        min-height: 300px;
+      }
+    }
+
+    &-spisok {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+/* Для очень высоких экранов */
+@media (min-height: 1000px) {
+  .olimp {
+    &-carousel {
+      &-block {
+        min-height: 800px;
+      }
+
+      &-slide {
+        &-content {
+          max-height: 700px;
+        }
+      }
+    }
+
+    &-video {
+      &-iframe {
+        min-height: 600px;
+        height: 600px;
+      }
+    }
+  }
+}
