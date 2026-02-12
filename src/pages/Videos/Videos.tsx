@@ -36,15 +36,15 @@ export default function Videos({ data, setData }: Props) {
 
                   {item.opened ? (
                     <div className="videos-item-content">
-                      <div className="videos-item-subtitle">{item.subtitle}</div>
+                      {item.subtitle?.length ? <div className="videos-item-subtitle">{item.subtitle}</div> : null}
 
                       <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
                         <iframe
-                          src={data.iframe}
+                          src={item.video}
                           className="videos-iframe"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
-                          title={item.video}
+                          title={item.title}
                         />
                       </div>
                     </div>
