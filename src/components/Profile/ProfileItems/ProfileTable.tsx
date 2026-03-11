@@ -223,8 +223,11 @@ export default function ProfileTable({ setLoader, tableItem, loader }: Props) {
         // Генерация уникальных значений для фильтров
         const uniqueValues = Array.from(new Set(data.map((record: any) => record[item.field]).filter(Boolean))).sort();
 
-        // Если значений меньше 10, показываем фильтр
-        if (uniqueValues.length > 0 && uniqueValues.length < 10) {
+        // Если значений меньше 10, показываем фильтр, или же показываем фильтр если это колонка названия ДЗ
+        if (
+          (uniqueValues.length > 0 && uniqueValues.length < 10) ||
+          (item.field === "code" && item.spr === "homeworkDescriptions")
+        ) {
           if (item.dataType === "bool") {
             column.filters = [
               {
