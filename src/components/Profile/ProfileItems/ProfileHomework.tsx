@@ -138,7 +138,11 @@ export default function ProfileHomework({ setLoader }: Props) {
                 ) : null}
                 {item.loadedFile.feedbackHtml?.length ? (
                   <div className="profile-docs-time" style={{ fontSize: "14px" }}>
-                    Отзыв: <span dangerouslySetInnerHTML={{ __html: item.loadedFile.feedbackHtml }} />
+                    Отзыв:{" "}
+                    <span
+                      className="profile-docs-item-html"
+                      dangerouslySetInnerHTML={{ __html: item.loadedFile.feedbackHtml }}
+                    />
                   </div>
                 ) : null}
                 <div className="profile-docs-flex">
@@ -178,7 +182,7 @@ export default function ProfileHomework({ setLoader }: Props) {
         ))}
 
       {homeworkList?.filter((f: any) => f.isVisible)?.length ? (
-        <div className="profile-user-footer">
+        <div className="profile-user-footer" style={{ paddingRight: "0px" }}>
           <div />
           <Fragment>
             <div className="profile-user-footer-button" onClick={() => send()}>
